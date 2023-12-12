@@ -1,0 +1,3532 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[6];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    private static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    private static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    // Function to generate the list of powers of 6 and 9
+    List<Integer> f(int n) {
+      List<Integer> L = new ArrayList<>();
+      L.add(1);
+      int c = 1;
+      while (Math.pow(6, c) <= n) {
+        L.add((int) Math.pow(6, c));
+        c++;
+      }
+      c = 1;
+      while (Math.pow(9, c) <= n) {
+        L.add((int) Math.pow(9, c));
+        c++;
+      }
+      return L;
+    }
+
+    // DP array
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    // Loop through each number from 1 to N
+    for (int i = 1; i <= N; i++) {
+      List<Integer> L = f(i + 1);
+
+      // Find the maximum value in the DP array for the previous numbers
+      int temp = dp[i + 1 - L.get(0)];
+      for (int j = 1; j < L.size(); j++) {
+        if (temp < dp[i + 1 - L.get(j)]) {
+          temp = dp[i + 1 - L.get(j)];
+        }
+      }
+
+      // Update the DP array
+      dp[i + 1] = temp + 1;
+    }
+
+    // Print the final answer
+    System.out.println(dp[N]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[n];
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L = append(L, (int) Math.pow(6, c));
+      c++;
+    }
+
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L = append(L, (int) Math.pow(9, c));
+      c++;
+    }
+
+    return L;
+  }
+
+  public static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < arr.length; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[arr.length] = val;
+    return newArr;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    // Function to calculate the number of ways to reach N
+    int[] f = new int[N];
+    for (int i = 1; i <= N; i++) {
+      f[i] = 0;
+    }
+    f[1] = 1;
+    for (int i = 2; i <= N; i++) {
+      int temp = 0;
+      for (int j = 1; j < i; j++) {
+        if (f[i - j] > temp) {
+          temp = f[i - j];
+        }
+      }
+      f[i] = temp + 1;
+    }
+
+    // Print the number of ways to reach N
+    System.out.println(f[N]);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The code uses a similar approach to calculate the number of ways to reach N, but it uses arrays and a for loop to iterate over the values. The code also includes an executable main method that takes an input from the user and prints the number of ways to reach N.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L = append(L, (int) Math.pow(6, c));
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L = append(L, (int) Math.pow(9, c));
+            c++;
+        }
+        return L;
+    }
+
+    public static int[] append(int[] L, int x) {
+        int[] result = new int[L.length + 1];
+        for (int i = 0; i < L.length; i++) {
+            result[i] = L[i];
+        }
+        result[L.length] = x;
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        L[0] = 1;
+
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        L[0] = 1;
+
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    int c = 1;
+
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+
+    c = 1;
+
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[64];
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[6];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L = Arrays.copyOf(L, L.length + 1);
+            L[L.length - 1] = (int) Math.pow(6, c);
+            c++;
+        }
+
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L = Arrays.copyOf(L, L.length + 1);
+            L[L.length - 1] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c - 1] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c - 1] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = getL(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  private static int[] getL(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (6 ** c <= n) {
+      L = append(L, 6 ** c);
+      c++;
+    }
+    c = 1;
+    while (9 ** c <= n) {
+      L = append(L, 9 ** c);
+      c++;
+    }
+    return L;
+  }
+
+  private static int[] append(int[] L, int x) {
+    int[] newL = new int[L.length + 1];
+    System.arraycopy(L, 0, newL, 0, L.length);
+    newL[L.length] = x;
+    return newL;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L = append(L, (int) Math.pow(6, c));
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L = append(L, (int) Math.pow(9, c));
+      c++;
+    }
+    return L;
+  }
+
+  public static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < arr.length; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[arr.length] = val;
+    return newArr;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    // Function to calculate the powers of 6 and 9
+    int[] f(int n) {
+      int[] L = new int[1];
+      L[0] = 1;
+      int c = 1;
+      while (Math.pow(6, c) <= n) {
+        L[c] = (int) Math.pow(6, c);
+        c++;
+      }
+      c = 1;
+      while (Math.pow(9, c) <= n) {
+        L[c] = (int) Math.pow(9, c);
+        c++;
+      }
+      return L;
+    }
+
+    // Dynamic programming
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[2];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 0; i < N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 0; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+    
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[n];
+    int c = 1;
+    while (6 ** c <= n) {
+      L[c - 1] = 6 ** c;
+      c++;
+    }
+    c = 1;
+    while (9 ** c <= n) {
+      L[c - 1] = 9 ** c;
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+
+This is the Java code that implements the same logic as the Python code. The `f` function is implemented as a separate method in Java, and the `dp` array is initialized with all zeros. The `main` method is the driver class that reads the input, initializes the `dp` array, and calculates the final answer using the `f` function.
+
+Note that in Java, we use the `nextInt()` method to read the input, and the `Scanner` class is used to read input from the user. Additionally, the `f` function returns an `int[]` array in Java, which is equivalent to the Python `list`.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 0; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[n];
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L = Arrays.copyOf(L, L.length + 1);
+            L[L.length - 1] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L = Arrays.copyOf(L, L.length + 1);
+            L[L.length - 1] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = getL(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] getL(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (6 ** c <= n) {
+      L[c] = 6 ** c;
+      c++;
+    }
+    c = 1;
+    while (9 ** c <= n) {
+      L[c] = 9 ** c;
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L = append(L, (int) Math.pow(6, c));
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L = append(L, (int) Math.pow(9, c));
+            c++;
+        }
+        return L;
+    }
+
+    public static int[] append(int[] L, int x) {
+        int[] temp = new int[L.length + 1];
+        for (int i = 0; i < L.length; i++) {
+            temp[i] = L[i];
+        }
+        temp[L.length] = x;
+        return temp;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L = append(L, (int) Math.pow(6, c));
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L = append(L, (int) Math.pow(9, c));
+            c++;
+        }
+        return L;
+    }
+
+    public static int[] append(int[] L, int x) {
+        int[] newL = new int[L.length + 1];
+        for (int i = 0; i < L.length; i++) {
+            newL[i] = L[i];
+        }
+        newL[L.length] = x;
+        return newL;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    // Define the f function
+    Function<Integer, List<Integer>> f = (n) -> {
+      List<Integer> L = new ArrayList<>();
+      int c = 1;
+      while (Math.pow(6, c) <= n) {
+        L.add((int) Math.pow(6, c));
+        c++;
+      }
+      c = 1;
+      while (Math.pow(9, c) <= n) {
+        L.add((int) Math.pow(9, c));
+        c++;
+      }
+      return L;
+    };
+
+    // Define the dp array
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    // Fill in the dp array
+    for (int i = 1; i <= N; i++) {
+      List<Integer> L = f.apply(i + 1);
+      int temp = dp[i + 1 - L.get(0)];
+      for (int j = 1; j < L.size(); j++) {
+        if (temp > dp[i + 1 - L.get(j)]) {
+          temp = dp[i + 1 - L.get(j)];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    // Print the result
+    System.out.println(dp[N]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The `f` function is defined in the same way, and the `dp` array is initialized in the same way. The main loop is also similar, but with some minor changes to accommodate the different syntax of Java. The `temp` variable is used to keep track of the maximum value of `dp[i + 1 - L[j]]` for each `j`, and the `dp[i + 1]` is updated based on the maximum value of `temp`. Finally, the `dp[N]` is printed as the output.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+    for (int i = 1; i <= N; i++) {
+      int[] L = getL(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+    System.out.println(dp[N]);
+  }
+
+  public static int[] getL(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L = append(L, 6 ** c);
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L = append(L, 9 ** c);
+            c += 1;
+        }
+        return L;
+    }
+
+    public static int[] append(int[] L, int x) {
+        int[] newL = new int[L.length + 1];
+        for (int i = 0; i < L.length; i++) {
+            newL[i] = L[i];
+        }
+        newL[L.length] = x;
+        return newL;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+
+    int c = 1;
+    while (6 ** c <= n) {
+      L.append(6 ** c);
+      c += 1;
+    }
+
+    c = 1;
+    while (9 ** c <= n) {
+      L.append(9 ** c);
+      c += 1;
+    }
+
+    return L;
+  }
+}
+
+[/JAVA]
+
+Note: The `append` method is not available in Java, so I had to use the `+=` operator to add elements to the `L` array. Additionally, the `**` operator is not available in Java, so I had to use the `Math.pow` method to calculate the powers.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = getL(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 0; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+    System.out.println(dp[N]);
+  }
+
+  private static int[] getL(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = getFactors(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    private static int[] getFactors(int n) {
+        int[] L = new int[1];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = getL(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    private static int[] getL(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 0; i < N; i++) {
+      int[] L = getL(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 0; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] getL(int n) {
+    int[] L = new int[n];
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i < N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+
+    int c = 1;
+    while (6 ** c <= n) {
+      L[c] = 6 ** c;
+      c += 1;
+    }
+
+    c = 1;
+    while (9 ** c <= n) {
+      L[c] = 9 ** c;
+      c += 1;
+    }
+
+    return L;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  public static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        int c = 1;
+
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+
+        c = 1;
+
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c += 1;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c += 1;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 0; i < N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 0; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[n];
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    private static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            int[] L = getL(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+
+        System.out.println(dp[N]);
+    }
+
+    public static int[] getL(int n) {
+        int[] L = new int[n];
+        L[0] = 1;
+        int c = 1;
+        while (Math.pow(6, c) <= n) {
+            L[c] = (int) Math.pow(6, c);
+            c++;
+        }
+        c = 1;
+        while (Math.pow(9, c) <= n) {
+            L[c] = (int) Math.pow(9, c);
+            c++;
+        }
+        return L;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] dp = new int[N + 1];
+        dp[1] = 1;
+        for (int i = 1; i <= N; i++) {
+            int[] L = f(i + 1);
+            int temp = dp[i + 1 - L[0]];
+            for (int j = 1; j < L.length; j++) {
+                if (temp > dp[i + 1 - L[j]]) {
+                    temp = dp[i + 1 - L[j]];
+                }
+            }
+            dp[i + 1] = temp + 1;
+        }
+        System.out.println(dp[N]);
+    }
+
+    public static int[] f(int n) {
+        int[] L = new int[1];
+        L[0] = 1;
+        int c = 1;
+        while (6 ** c <= n) {
+            L[c] = 6 ** c;
+            c++;
+        }
+        c = 1;
+        while (9 ** c <= n) {
+            L[c] = 9 ** c;
+            c++;
+        }
+        return L;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+
+    for (int i = 1; i <= N; i++) {
+      int[] L = f(i + 1);
+      int temp = dp[i + 1 - L[0]];
+      for (int j = 1; j < L.length; j++) {
+        if (temp > dp[i + 1 - L[j]]) {
+          temp = dp[i + 1 - L[j]];
+        }
+      }
+      dp[i + 1] = temp + 1;
+    }
+
+    System.out.println(dp[N]);
+  }
+
+  private static int[] f(int n) {
+    int[] L = new int[1];
+    L[0] = 1;
+    int c = 1;
+    while (Math.pow(6, c) <= n) {
+      L[c] = (int) Math.pow(6, c);
+      c++;
+    }
+    c = 1;
+    while (Math.pow(9, c) <= n) {
+      L[c] = (int) Math.pow(9, c);
+      c++;
+    }
+    return L;
+  }
+}
+
+[/JAVA]
+======

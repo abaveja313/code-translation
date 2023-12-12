@@ -1,0 +1,1145 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    System.arraycopy(a, 0, alpha, 0, n);
+    Arrays.sort(alpha);
+
+    int l = 0, r = n, m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int check(int x) {
+      int b = n;
+      int r = 0;
+      int y = 0;
+      int[] D = new int[2 * n + 1];
+      for (int i = 0; i < n; i++) {
+        D[b] += 1;
+        if (a[i] < x) {
+          r += D[b];
+          b += 1;
+        } else {
+          b -= 1;
+          r -= D[b];
+        }
+        y += r;
+      }
+      return y;
+    }
+
+    int[] alpha = Arrays.stream(a).sorted().toArray();
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m]) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1]) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (m + l) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int[] alpha = new int[n];
+        System.arraycopy(a, 0, alpha, 0, n);
+        Arrays.sort(alpha);
+
+        int l = 0, r = n;
+        int m = n / 2, c = n * (n + 1) / 2;
+        while (true) {
+            if (check(alpha[m], n, a) <= c / 2) {
+                if (m == n - 1) {
+                    break;
+                } else if (check(alpha[m + 1], n, a) > c / 2) {
+                    break;
+                } else {
+                    l = m;
+                    m = (m + r) / 2;
+                }
+            } else {
+                m = (l + m) / 2;
+                r = m + 1;
+            }
+        }
+
+        System.out.println(alpha[m]);
+    }
+
+    public static int check(int x, int n, int[] a) {
+        int b = n;
+        int r = 0;
+        int y = 0;
+        int[] D = new int[2 * n + 1];
+        for (int i = 0; i < n; i++) {
+            D[b] += 1;
+            if (a[i] < x) {
+                r += D[b];
+                b += 1;
+            } else {
+                b -= 1;
+                r -= D[b];
+            }
+            y += r;
+        }
+        return y;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a.get(i);
+    }
+    Arrays.sort(alpha);
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, ArrayList<Integer> a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b]++;
+      if (a.get(i) < x) {
+        r += D[b];
+        b++;
+      } else {
+        b--;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+
+    int[] D = new int[2 * n + 1];
+    int b = n;
+    int r = 0;
+    int y = 0;
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a.get(i) < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int check(int x) {
+      int b = n;
+      int r = 0;
+      int y = 0;
+      int[] D = new int[2 * n + 1];
+      for (int i = 0; i < n; i++) {
+        D[b] += 1;
+        if (a[i] < x) {
+          r += D[b];
+          b += 1;
+        } else {
+          b -= 1;
+          r -= D[b];
+        }
+        y += r;
+      }
+      return y;
+    }
+
+    int[] alpha = Arrays.stream(a).sorted().toArray();
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m]) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1]) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (m + l) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int[] alpha = Arrays.stream(a).sorted().toArray();
+        int l = 0, r = n, m = n / 2, c = n * (n + 1) / 2;
+        while (true) {
+            if (check(alpha[m], n, a) <= c / 2) {
+                if (m == n - 1) {
+                    break;
+                } else if (check(alpha[m + 1], n, a) > c / 2) {
+                    break;
+                } else {
+                    l = m;
+                    m = (m + r) / 2;
+                }
+            } else {
+                m = (l + m) / 2;
+                r = m + 1;
+            }
+        }
+        System.out.println(alpha[m]);
+    }
+
+    public static int check(int x, int n, int[] a) {
+        int b = n;
+        int r = 0;
+        int y = 0;
+        int[] D = new int[2 * n + 1];
+        for (int i = 0; i < n; i++) {
+            D[b]++;
+            if (a[i] < x) {
+                r += D[b];
+                b++;
+            } else {
+                b--;
+                r -= D[b];
+            }
+            y += r;
+        }
+        return y;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int[] alpha = new int[n];
+        for (int i = 0; i < n; i++) {
+            alpha[i] = a[i];
+        }
+        Arrays.sort(alpha);
+
+        int l = 0, r = n;
+        int m = n / 2, c = n * (n + 1) / 2;
+        while (true) {
+            if (check(alpha[m]) <= c / 2) {
+                if (m == n - 1) {
+                    break;
+                } else if (check(alpha[m + 1]) > c / 2) {
+                    break;
+                } else {
+                    l = m;
+                    m = (m + r) / 2;
+                }
+            } else {
+                m = (l + m) / 2;
+                r = m + 1;
+            }
+        }
+        System.out.println(alpha[m]);
+    }
+
+    public static int check(int x) {
+        int b = n;
+        int r = 0;
+        int y = 0;
+        int[] D = new int[2 * n + 1];
+        for (int i = 0; i < n; i++) {
+            D[b] += 1;
+            if (a[i] < x) {
+                r += D[b];
+                b += 1;
+            } else {
+                b -= 1;
+                r -= D[b];
+            }
+            y += r;
+        }
+        return y;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (l + r) / 2;
+        }
+      } else {
+        m = (l + r) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int check(int x) {
+      int b = n;
+      int r = 0;
+      int y = 0;
+      int[] D = new int[2 * n + 1];
+      for (int i = 0; i < n; i++) {
+        D[b] += 1;
+        if (a[i] < x) {
+          r += D[b];
+          b += 1;
+        } else {
+          b -= 1;
+          r -= D[b];
+        }
+        y += r;
+      }
+      return y;
+    }
+
+    int[] alpha = Arrays.stream(a).sorted().toArray();
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m]) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1]) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (m + l) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int[] alpha = new int[n];
+        for (int i = 0; i < n; i++) {
+            alpha[i] = a[i];
+        }
+        Arrays.sort(alpha);
+
+        int l = 0, r = n, m = n / 2, c = n * (n + 1) / 2;
+        while (true) {
+            if (check(alpha[m], n, a) <= c / 2) {
+                if (m == n - 1) {
+                    break;
+                } else if (check(alpha[m + 1], n, a) > c / 2) {
+                    break;
+                } else {
+                    l = m;
+                    m = (m + r) / 2;
+                }
+            } else {
+                m = (l + m) / 2;
+                r = m + 1;
+            }
+        }
+        System.out.println(alpha[m]);
+    }
+
+    public static int check(int x, int n, int[] a) {
+        int b = n;
+        int r = 0;
+        int y = 0;
+        int[] D = new int[2 * n + 1];
+        for (int i = 0; i < n; i++) {
+            D[b] += 1;
+            if (a[i] < x) {
+                r += D[b];
+                b += 1;
+            } else {
+                b -= 1;
+                r -= D[b];
+            }
+            y += r;
+        }
+        return y;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int check(int x) {
+      int b = n;
+      int r = 0;
+      int y = 0;
+      int[] D = new int[2 * n + 1];
+      for (int i = 0; i < n; i++) {
+        D[b] += 1;
+        if (a[i] < x) {
+          r += D[b];
+          b += 1;
+        } else {
+          b -= 1;
+          r -= D[b];
+        }
+        y += r;
+      }
+      return y;
+    }
+
+    int[] alpha = Arrays.stream(a).sorted().toArray();
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m]) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1]) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (m + l) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0;
+    int r = n;
+    int m = n / 2;
+    int c = n * (n + 1) / 2;
+
+    while (true) {
+      if (check(alpha[m]) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1]) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+
+    System.out.println(alpha[m]);
+  }
+
+  private static int check(int x) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] alpha = Arrays.copyOf(a, n);
+    Arrays.sort(alpha);
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (m + l) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+
+    int l = 0;
+    int r = n;
+    int m = n / 2;
+    int c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], a, n) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], a, n) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int[] a, int n) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int[] alpha = Arrays.copyOf(a, n);
+        Arrays.sort(alpha);
+
+        int l = 0, r = n;
+        int m = n / 2, c = n * (n + 1) / 2;
+        while (true) {
+            if (check(alpha[m]) <= c / 2) {
+                if (m == n - 1) {
+                    break;
+                } else if (check(alpha[m + 1]) > c / 2) {
+                    break;
+                } else {
+                    l = m;
+                    m = (m + r) / 2;
+                }
+            } else {
+                m = (l + m) / 2;
+                r = m + 1;
+            }
+        }
+
+        System.out.println(alpha[m]);
+    }
+
+    private static int check(int x) {
+        int b = n;
+        int r = 0;
+        int y = 0;
+        int[] D = new int[2 * n + 1];
+        for (int i = 0; i < n; i++) {
+            D[b] += 1;
+            if (a[i] < x) {
+                r += D[b];
+                b += 1;
+            } else {
+                b -= 1;
+                r -= D[b];
+            }
+            y += r;
+        }
+        return y;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] alpha = new int[n];
+    for (int i = 0; i < n; i++) {
+      alpha[i] = a[i];
+    }
+    Arrays.sort(alpha);
+    int l = 0, r = n;
+    int m = n / 2, c = n * (n + 1) / 2;
+    while (true) {
+      if (check(alpha[m], n, a) <= c / 2) {
+        if (m == n - 1) {
+          break;
+        } else if (check(alpha[m + 1], n, a) > c / 2) {
+          break;
+        } else {
+          l = m;
+          m = (m + r) / 2;
+        }
+      } else {
+        m = (l + m) / 2;
+        r = m + 1;
+      }
+    }
+    System.out.println(alpha[m]);
+  }
+
+  public static int check(int x, int n, int[] a) {
+    int b = n;
+    int r = 0;
+    int y = 0;
+    int[] D = new int[2 * n + 1];
+    for (int i = 0; i < n; i++) {
+      D[b] += 1;
+      if (a[i] < x) {
+        r += D[b];
+        b += 1;
+      } else {
+        b -= 1;
+        r -= D[b];
+      }
+      y += r;
+    }
+    return y;
+  }
+}
+[/JAVA]
+======

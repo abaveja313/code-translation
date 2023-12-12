@@ -1,0 +1,4011 @@
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Pair[][] P = new Pair[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = new Pair(A[i], i);
+      P[i][1] = new Pair(0, 0);
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (P[i][0].compareTo(P[i][1]) > 0) {
+        P[i][1] = P[i][0];
+        P[i][0] = new Pair(0, 0);
+      } else if (P[i][0].compareTo(P[i][1]) == 0) {
+        P[i][1] = new Pair(0, 0);
+      }
+
+      for (int j = 0; j < N; j++) {
+        int index = i + (1 << j);
+        for (int k = 0; k < 2; k++) {
+          if (P[i][k].compareTo(P[index][0]) > 0) {
+            P[index][1] = P[index][0];
+            P[index][0] = P[i][k];
+          } else if (P[i][k].compareTo(P[index][1]) > 0 && P[i][k].compareTo(P[index][0]) != 0) {
+            P[index][1] = P[i][k];
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0].first + P[i][1].first);
+      System.out.println(ans);
+    }
+  }
+
+  static class Pair implements Comparable<Pair> {
+    int first;
+    int second;
+
+    public Pair(int first, int second) {
+      this.first = first;
+      this.second = second;
+    }
+
+    @Override
+    public int compareTo(Pair o) {
+      return Integer.compare(
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * (int)Math.pow(2, N)];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * (int)Math.pow(2, N)][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = 0;
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < P.length; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the same algorithm and data structures as the Python code, but it is written in Java syntax. The code reads input from the command line, converts it to integers, and then performs the same calculations as the Python code. The output is printed to the console.
+
+Note that the Java code uses a different syntax for certain operations, such as the `Math.pow()` function
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            A.add(scanner.nextInt());
+        }
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>());
+            P.get(i).add(0);
+            P.get(i).add(0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A.get(i) > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A.get(i));
+            } else if (A.get(i) > P.get(i).get(1)) {
+                P.get(i).set(1, A.get(i));
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * (int) Math.pow(2, N)];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] P = new int[2 * (int) Math.pow(2, N)][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = P[i][1] = 0;
+    }
+
+    for (int i = 1; i < P.length; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 << N];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 << N][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = Integer.MIN_VALUE;
+      P[i][1] = Integer.MIN_VALUE;
+    }
+    for (int i = 1; i < P.length; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        List<int[]> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new int[] {A[i], i});
+        }
+
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i)[0]) {
+                P.get(i)[1] = P.get(i)[0];
+                P.get(i)[0] = A[i];
+            } else if (A[i] > P.get(i)[1]) {
+                P.get(i)[1] = A[i];
+            }
+
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i)[k] > P.get(index)[0]) {
+                            P.get(index)[1] = P.get(index)[0];
+                            P.get(index)[0] = P.get(i)[k];
+                        } else if (P.get(i)[k] > P.get(index)[1] && P.get(i)[k] != P.get(index)[0]) {
+                            P.get(index)[1] = P.get(i)[k];
+                        }
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i)[0] + P.get(i)[1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(0);
+      P.get(i).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the Java implementation of the Python code, with the necessary imports and a driver class called `Solution` with an executable `main` method. The code is functionally identical
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        List<Integer>[] P = new ArrayList[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i] = new ArrayList<>();
+            P[i].add(new Integer(A[i]));
+            P[i].add(new Integer(0));
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i].get(0)) {
+                P[i].set(1, P[i].get(0));
+                P[i].set(0, new Integer(A[i]));
+            } else if (A[i] > P[i].get(1)) {
+                P[i].set(1, new Integer(A[i]));
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i].get(k) > P[index].get(0)) {
+                            P[index].set(1, P[index].get(0));
+                            P[index].set(0, P[i].get(k));
+                        } else if (P[i].get(k) > P[index].get(1) && P[i].get(k) != P[index].get(0)) {
+                            P[index].set(1, P[i].get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i].get(0) + P[i].get(1));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<Integer>());
+      P.get(i).add(0);
+      P.get(i).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2**N; i++) {
+            P.add(new ArrayList<>(Arrays.asList(0, 0)));
+        }
+        for (int i = 1; i < 2**N; i++) {
+            if (A[i] > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1)) {
+                P.get(i).set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2**N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+            System.out.println(ans);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Pair>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new Pair(0, 0));
+      P.get(i).add(new Pair(0, 0));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0).value) {
+        P.get(i).get(1).value = P.get(i).get(0).value;
+        P.get(i).get(0).value = A[i];
+      } else if (A[i] > P.get(i).get(1).value) {
+        P.get(i).get(1).value = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k).value > P.get(index).get(0).value) {
+              P.get(index).get(1).value = P.get(index).get(0).value;
+              P.get(index).get(0).value = P.get(i).get(k).value;
+            } else if (P.get(i).get(k).value > P.get(index).get(1).value && P.get(i).get(k).value != P.get(index).get(0).value) {
+              P.get(index).get(1).value = P.get(i).get(k).value;
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0).value + P.get
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>(Arrays.asList(0, 0)));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0][0] + P[i][1][0]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>());
+            P.get(i).add(0);
+            P.get(i).add(0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1)) {
+                P.get(i).set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = 0;
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<Pair> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new Pair(A[i], i));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).first) {
+        P.get(i).second = P.get(i).first;
+        P.get(i).first = A[i];
+      } else if (A[i] > P.get(i).second) {
+        P.get(i).second = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+
+  public static class Pair {
+    public int first;
+    public int second;
+
+    public Pair(int first, int second) {
+      this.first = first;
+      this.second = second;
+    }
+
+    public int get(int index) {
+      if (index == 0) {
+        return first
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[1 << N][2];
+    for (int i = 0; i < 1 << N; i++) {
+      P[i][0] = Math.max(A[i], 0);
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 1 << N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 1 << N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    List<List<int[]>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new int[] {0, 0});
+      P.get(i).add(new int[] {0, 0});
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)[0]) {
+        P.get(i).get(1)[0] = P.get(i).get(0)[0];
+        P.get(i).get(1)[1] = P.get(i).get(0)[1];
+        P.get(i).get(0)[0] = A[i];
+        P.get(i).get(0)[1] = i;
+      } else if (A[i] > P.get(i).get(1)[0]) {
+        P.get(i).get(1)[0] = A[i];
+        P.get(i).get(1)[1] = i;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k)[0] > P.get(index).get(0)[0]) {
+              P.get(index).get(1)[0] = P.get(index).get(0)[0];
+              P.get(index).get(1)[1] = P.get(index).get(0)[1];
+              P.get(index).get(0)[0] = P.get(i).get(k)[0];
+              P.get(index).get(0)[1] = P.get(i).get(k)[1];
+            } else if (P.get(i).get(k
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(0);
+      P.get(i).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the same logic and data structures as the Python code, but with Java syntax and conventions.
+
+Note that the code uses
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>());
+            P.get(i).add(new ArrayList<>());
+            P.get(i).get(0).add(0);
+            P.get(i).get(0).add(0);
+            P.get(i).get(1).add(0);
+            P.get(i).get(1).add(0);
+        }
+
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0).get(0)) {
+                P.get(i).get(1).set(0, P.get(i).get(0).get(0));
+                P.get(i).get(0).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1).get(0)) {
+                P.get(i).get(1).set(0, A[i]);
+            }
+
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k).get(0) > P.get(index).get(0).get(0)) {
+                            P.get(index).get(1).set(0, P.get(index).get(0).get(0));
+                            P.get(index).get(0).set(0, P.get(i).get(k).get(0));
+                        } else if (P.get(i).get(k).get(0) > P.get(index).get(1).get(0) && P.get(i).get(k).get(0) != P.get(index).get(0).get(0)) {
+                           
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    List<List<Pair>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>(Arrays.asList(new Pair(0, 0), new Pair(0, 0))));
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0).getKey()) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, new Pair(A[i], i));
+      } else if (A[i] > P.get(i).get(1).getKey()) {
+        P.get(i).set(1, new Pair(A[i], i));
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k).getKey() > P.get(index).get(0).getKey()) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k).getKey() > P.get(index).get(1).getKey() && P.get(i).get(k).getKey() != P.get(index).get(0).getKey()) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0).getKey() + P.get(i).get(
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = Integer.MIN_VALUE;
+      P[i][1] = Integer.MIN_VALUE;
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 ** N];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 ** N][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = Integer.MIN_VALUE;
+      P[i][1] = Integer.MIN_VALUE;
+    }
+    for (int i = 1; i < P.length; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<int[]>> P = new ArrayList<>(2 * N);
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>(Arrays.asList(new int[][]{{A[0], 0}, {0, 0}})));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)[0]) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, new int[]{A[i], i});
+      } else if (A[i] > P.get(i).get(1)[0]) {
+        P.get(i).set(1, new int[]{A[i], i});
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k)[0] > P.get(index).get(0)[0]) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k)[0] > P.get(index).get(1)[0] && P.get(i).get(k)[0] != P.get(index).get(0)[0]) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0)[0] + P.get(i).get(1)[0]);
+      System.out
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new ArrayList<>());
+      P.get(i).get(0).add(A[i]);
+      P.get(i).get(0).add(i);
+      P.get(i).get(1).add(0);
+      P.get(i).get(1).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0).get(0)) {
+        P.get(i).get(1).set(0, P.get(i).get(0).get(0));
+        P.get(i).get(1).set(1, P.get(i).get(0).get(1));
+        P.get(i).get(0).set(0, A[i]);
+        P.get(i).get(0).set(1, i);
+      } else if (A[i] > P.get(i).get(1).get(0)) {
+        P.get(i).get(1).set(0, A[i]);
+        P.get(i).get(1).set(1, i);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k).get(0) > P.get(index).get(0).get(0)) {
+              P.get(index).get(1).set(0, P.get(index).get(0).get(0));
+              P.get(index).get(1).set(1, P.get(index).get(0).get(1));
+              P.get(index).get(0).set(0, P.get(i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    List<Pair>[] P = new ArrayList[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i] = new ArrayList<>();
+      P[i].add(new Pair(A[0], 0));
+      P[i].add(new Pair(0, 0));
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i].get(0).first) {
+        P[i].set(1, P[i].get(0));
+        P[i].set(0, new Pair(A[i], i));
+      } else if (A[i] > P[i].get(1).first) {
+        P[i].set(1, new Pair(A[i], i));
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i].get(k).first > P[index].get(0).first) {
+              P[index].set(1, P[index].get(0));
+              P[index].set(0, P[i].get(k));
+            } else if (P[i].get(k).first > P[index].get(1).first && P[i].get(k).first != P[index].get(0).first) {
+              P[index].set(1, P[i].get(k));
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i].get(0).first + P[i].get(1).first);
+    }
+
+    System.out.println(ans);
+  }
+
+  public static class Pair {
+    public int first;
+    public int second;
+
+    public Pair(int first, int second) {
+      this.
+======
+  [JAVA]
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = (A[i] << 16) | i;
+            P[i][1] = 0;
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = (A[i] << 16) | i;
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = (A[i] << 16) | i;
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] >> 16 + P[i][1] >> 16);
+            System.out.println(ans);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(0);
+      P.get(i).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        List<List<Integer>> P = new ArrayList<>(2 * N);
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>(2));
+            P.get(i).add(0, 0);
+            P.get(i).add(1, 0);
+        }
+
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1)) {
+                P.get(i).set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+            System.out.println(ans);
+        }
+    }
+}
+[/JAVA]
+
+This is the
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[][] P = new int[2][2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = (A[i] > P[i][0]) ? A[i] : P[i][0];
+            P[i][1] = (A[i] > P[i][1]) ? A[i] : P[i][1];
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The main differences are:
+
+* The use of the `Scanner` class to read input from the console, instead of `input()` function.
+* The use of `Math.max()` function to find the maximum value of two numbers, instead of the `max()` function in Python.
+* The use of `int[][]` and `int[]` arrays instead of `list` and `tuple` in Python.
+* The use of `for` loops instead of `range()` and `itertools` in Python.
+* The use
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = (A[i], i);
+      P[i][1] = (0, 0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if ((A[i], i) > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = (A[i], i);
+      } else if ((A[i], i) > P[i][1]) {
+        P[i][1] = (A[i], i);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0][0] + P[i][1][0]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = Math.max(A[i], 0);
+            P[i][1] = Math.max(A[i], 0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = IntStream.range(0, 2 * N).map(i -> scanner.nextInt()).toArray();
+        int[][] P = new int[2][N];
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
+    List<List<int[]>> P = new ArrayList<>();
+    for (int i = 0; i < 2 ** N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new int[] {0, 0});
+      P.get(i).add(new int[] {0, 0});
+    }
+    for (int i = 1; i < 2 ** N; i++) {
+      if (A[i] > P.get(i).get(0)[0]) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, new int[] {A[i], i});
+      } else if (A[i] > P.get(i).get(1)[0]) {
+        P.get(i).set(1, new int[] {A[i], i});
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k)[0] > P.get(index).get(0)[0]) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k)[0] > P.get(index).get(1)[0] && P.get(i).get(k)[0] != P.get(index).get(0)[0]) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 ** N; i++) {
+      ans = Math.max(ans, P.get(i).get(0)[0] + P.get(i).get(1)[0]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(0);
+      P.get(i).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `Scanner` class to read input from
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
+    int[][] P = new int[1 << N][2];
+    for (int i = 0; i < 1 << N; i++) {
+      P[i][0] = Math.max(A[i], 0);
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 1 << N; i++) {
+      if (P[i][0] > P[i][1]) {
+        P[i][1] = P[i][0];
+        P[i][0] = 0;
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 1 << N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = IntStream.range(0, 2 * N).map(i -> scanner.nextInt()).toArray();
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new Integer(0));
+      P.get(i).add(new Integer(0));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
+    Pair[][] P = new Pair[1 << N][2];
+    for (int i = 0; i < 1 << N; i++) {
+      P[i][0] = new Pair(A[i], i);
+      P[i][1] = new Pair(0, 0);
+    }
+    for (int i = 1; i < 1 << N; i++) {
+      if (P[i][0].compareTo(P[i][1]) > 0) {
+        P[i][1] = P[i][0];
+        P[i][0] = new Pair(0, 0);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k].compareTo(P[index][0]) > 0) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k].compareTo(P[index][1]) > 0 && !P[i][k].equals(P[index][0])) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 1 << N; i++) {
+      ans = Math.max(ans, P[i][0].x + P[i][1].x);
+    }
+    System.out.println(ans);
+  }
+
+  private static class Pair implements Comparable<Pair> {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    @Override
+    public int compareTo(Pair other) {
+      return Integer.compare(x, other.x);
+    }
+
+    @Override
+    public boolean equals(Object
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = Math.max(A[i], 0);
+            P[i][1] = Math.max(A[i], 0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * (int)Math.pow(2, N)];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * (int)Math.pow(2, N); i++) {
+      P.add(Arrays.asList(new Integer[] {null, null}));
+    }
+    for (int i = 1; i < 2 * (int)Math.pow(2, N); i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * (int)Math.pow(2, N); i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = Math.max(A[i], 0);
+      P[i][1] = Math.max(A[i], 0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = A[i];
+            P[i][1] = i;
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0][0] + P[i][1][0]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new ArrayList<>());
+      P.get(i).get(0).add(A[i]);
+      P.get(i).get(0).add(i);
+      P.get(i).add(new ArrayList<>());
+      P.get(i).get(1).add(0);
+      P.get(i).get(1).add(0);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0).get(0)) {
+        P.get(i).get(1).set(0, P.get(i).get(0).get(0));
+        P.get(i).get(0).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1).get(0)) {
+        P.get(i).get(1).set(0, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k).get(0) > P.get(index).get(0).get(0)) {
+              P.get(index).get(1).set(0, P.get(index).get(0).get(0));
+              P.get(index).get(0).set(0, P.get(i).get(k).get(0));
+            } else if (P.get(i).get(k).get(0) > P.get(index).get(1).get(0) && P.get(i).get(k).get(0) != P.get(index).get(0).get(0)) {
+              P.get(index).get(1).set(0, P.get(i).get(k).get(0));
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+        List<int[]> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new int[]{(A[i], i), (0, 0)});
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i)[0][0]) {
+                P.get(i)[1][0] = P.get(i)[0][0];
+                P.get(i)[0][0] = A[i];
+            } else if (A[i] > P.get(i)[1][0]) {
+                P.get(i)[1][0] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i)[k][0] > P.get(index)[0][0]) {
+                            P.get(index)[1][0] = P.get(index)[0][0];
+                            P.get(index)[0][0] = P.get(i)[k][0];
+                        } else if (P.get(i)[k][0] > P.get(index)[1][0] && P.get(i)[k][0] != P.get(index)[0][0]) {
+                            P.get(index)[1][0] = P.get(i)[k][0];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i)[0][0] + P.get(i)[1][0]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = (A[i] == 0 ? 0 : A[i]);
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>());
+            P.get(i).add(0);
+            P.get(i).add(0);
+        }
+
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1)) {
+                P.get(i).set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<Integer>());
+      P.get(i).add(A[i]);
+      P.get(i).add(i);
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code given in the question. I have used the `Scanner` class to read input from the user, and the `ArrayList
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * (int)Math.pow(2, N)];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * (int)Math.pow(2, N)][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = (A[i] > P[i][0]) ? A[i] : P[i][0];
+      P[i][1] = (A[i] > P[i][1]) ? A[i] : P[i][1];
+    }
+    for (int i = 1; i < P.length; i++) {
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0][0] + P[i][1][0]);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = Math.max(A[i], 0);
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = Math.max(A[i], 0);
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = A[i];
+            P[i][1] = 0;
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2**N; i++) {
+      P.add(new ArrayList<Integer>());
+      P.get(i).add((A[0], 0));
+      P.get(i).add((0, 0));
+    }
+    for (int i = 1; i < 2**N; i++) {
+      if (A[i] > P.get(i).get(0).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, (A[i], i));
+      } else if (A[i] > P.get(i).get(1).get(0)) {
+        P.get(i).set(1, (A[i], i));
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2**N; i++) {
+      ans = Math.max(ans, P.get(i).get(0).get(0) + P.get(i).get(1).get(0));
+      System.out.println(ans);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * (int)Math.pow(2, N)];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * (int)Math.pow(2, N); i++) {
+      P.add(new ArrayList<>(Arrays.asList(0, 0)));
+    }
+    for (int i = 1; i < 2 * (int)Math.pow(2, N); i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * (int)Math.pow(2, N); i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < A.length; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < P.length; i++) {
+            P[i][0] = (A[i] << 16) | i;
+            P[i][1] = 0;
+        }
+        for (int i = 1; i < P.length; i++) {
+            if (P[i][0] > P[i - 1][0]) {
+                P[i - 1][1] = P[i][0];
+                P[i][0] = (A[i] << 16) | i;
+            } else if (P[i][0] > P[i - 1][1]) {
+                P[i - 1][1] = P[i][0];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < P.length; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = Stream.generate(scanner::nextInt).limit(N).toArray();
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>(List.of(A[i], 0)));
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0)) {
+                P.get(i).set(1, P.get(i).get(0));
+                P.get(i).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1)) {
+                P.get(i).set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k) > P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(index).get(0));
+                            P.get(index).set(0, P.get(i).get(k));
+                        } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+                            P.get(index).set(1, P.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The main difference is that Java uses a more verbose syntax for some of the operations, such as the `List` and `ArrayList` classes for the `P` variable, and the `Stream` class
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>(Arrays.asList(0, 0)));
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        List<Integer>[] P = new ArrayList[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i] = new ArrayList<Integer>();
+            P[i].add(0);
+            P[i].add(0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i].get(0)) {
+                P[i].set(1, P[i].get(0));
+                P[i].set(0, A[i]);
+            } else if (A[i] > P[i].get(1)) {
+                P[i].set(1, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i].get(k) > P[index].get(0)) {
+                            P[index].set(1, P[index].get(0));
+                            P[index].set(0, P[i].get(k));
+                        } else if (P[i].get(k) > P[index].get(1) && P[i].get(k) != P[index].get(0)) {
+                            P[index].set(1, P[i].get(k));
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i].get(0) + P[i].get(1));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = 0;
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>(Arrays.asList(0, 0)));
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[][] P = new int[1 << N][2];
+        for (int i = 0; i < 1 << N; i++) {
+            P[i][0] = Integer.MIN_VALUE;
+            P[i][1] = Integer.MIN_VALUE;
+        }
+        for (int i = 1; i < 1 << N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 1 << N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = Integer.MIN_VALUE;
+            P[i][1] = Integer.MIN_VALUE;
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. The `Scanner` class is used to read input from the user, and the `Math` class is used for mathematical operations such as `max()`. The `ArrayList` class is used to create a dynamic array, and the `Collections` class is used to sort the array. The `itertools` class is used to generate all possible combinations of the elements in the array. The `func()` method is the main method that takes input from the user, creates the dynamic array, sorts the array, and prints the output.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = sc.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<>());
+      P.get(i).add(new Integer(0));
+      P.get(i).add(new Integer(0));
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `ArrayList`
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < 2 * N; i++) {
+      P.add(new ArrayList<Integer>());
+    }
+
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    int N = in.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < 2 * N; i++) {
+      A[i] = in.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < 2 * N; i++) {
+      P[i][0] = A[i];
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2 * N; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < 2 * N; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+      System.out.println(ans);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        List<List<Integer>> P = new ArrayList<>();
+        for (int i = 0; i < 2 * N; i++) {
+            P.add(new ArrayList<>());
+            P.get(i).add(new ArrayList<>());
+            P.get(i).get(0).add(0);
+            P.get(i).get(0).add(0);
+            P.get(i).get(1).add(0);
+            P.get(i).get(1).add(0);
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P.get(i).get(0).get(0)) {
+                P.get(i).get(1).set(0, P.get(i).get(0).get(0));
+                P.get(i).get(0).set(0, A[i]);
+            } else if (A[i] > P.get(i).get(1).get(0)) {
+                P.get(i).get(1).set(0, A[i]);
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P.get(i).get(k).get(0) > P.get(index).get(0).get(0)) {
+                            P.get(index).get(1).set(0, P.get(index).get(0).get(0));
+                            P.get(index).get(0).set(0, P.get(i).get(k).get(0));
+                        } else if (P.get(i).get(k).get(0) > P.get(index).get(1).get(0) && P.get(i).get(k).get(0) != P.get(index).get(0).get(0)) {
+                            P.get(index).get(1).set(0, P.get(i).get(k).get(0));
+                        }
+                    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    List<List<Integer>> P = new ArrayList<>();
+    for (int i = 0; i < (1 << N); i++) {
+      P.add(new ArrayList<>(Arrays.asList(0, 0)));
+    }
+    for (int i = 1; i < (1 << N); i++) {
+      if (A[i] > P.get(i).get(0)) {
+        P.get(i).set(1, P.get(i).get(0));
+        P.get(i).set(0, A[i]);
+      } else if (A[i] > P.get(i).get(1)) {
+        P.get(i).set(1, A[i]);
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P.get(i).get(k) > P.get(index).get(0)) {
+              P.get(index).set(1, P.get(index).get(0));
+              P.get(index).set(0, P.get(i).get(k));
+            } else if (P.get(i).get(k) > P.get(index).get(1) && P.get(i).get(k) != P.get(index).get(0)) {
+              P.get(index).set(1, P.get(i).get(k));
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < (1 << N); i++) {
+      ans = Math.max(ans, P.get(i).get(0) + P.get(i).get(1));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int[] A = Arrays.stream(args[1].split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[][] P = new int[2][2];
+    for (int i = 0; i < 2; i++) {
+      P[i][0] = (A[0] << 16) | i;
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < 2; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = (A[i] << 16) | i;
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = (A[i] << 16) | i;
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 0; i < 2; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[2 * N];
+        for (int i = 0; i < 2 * N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[][] P = new int[2 * N][2];
+        for (int i = 0; i < 2 * N; i++) {
+            P[i][0] = 0;
+            P[i][1] = 0;
+        }
+        for (int i = 1; i < 2 * N; i++) {
+            if (A[i] > P[i][0]) {
+                P[i][1] = P[i][0];
+                P[i][0] = A[i];
+            } else if (A[i] > P[i][1]) {
+                P[i][1] = A[i];
+            }
+            for (int j = 0; j < N; j++) {
+                if ((i & (1 << j)) == 0) {
+                    int index = i + (1 << j);
+                    for (int k = 0; k < 2; k++) {
+                        if (P[i][k] > P[index][0]) {
+                            P[index][1] = P[index][0];
+                            P[index][0] = P[i][k];
+                        } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+                            P[index][1] = P[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < 2 * N; i++) {
+            ans = Math.max(ans, P[i][0] + P[i][1]);
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[2 * N];
+    for (int i = 0; i < A.length; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] P = new int[2 * N][2];
+    for (int i = 0; i < P.length; i++) {
+      P[i][0] = 0;
+      P[i][1] = 0;
+    }
+    for (int i = 1; i < P.length; i++) {
+      if (A[i] > P[i][0]) {
+        P[i][1] = P[i][0];
+        P[i][0] = A[i];
+      } else if (A[i] > P[i][1]) {
+        P[i][1] = A[i];
+      }
+      for (int j = 0; j < N; j++) {
+        if ((i & (1 << j)) == 0) {
+          int index = i + (1 << j);
+          for (int k = 0; k < 2; k++) {
+            if (P[i][k] > P[index][0]) {
+              P[index][1] = P[index][0];
+              P[index][0] = P[i][k];
+            } else if (P[i][k] > P[index][1] && P[i][k] != P[index][0]) {
+              P[index][1] = P[i][k];
+            }
+          }
+        }
+      }
+    }
+    int ans = 0;
+    for (int i = 1; i < P.length; i++) {
+      ans = Math.max(ans, P[i][0] + P[i][1]);
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

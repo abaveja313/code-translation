@@ -1,0 +1,957 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mx = 0;
+    List<String> a = new ArrayList<>();
+    while (true) {
+      try {
+        String input = scanner.nextLine();
+        int start = 0;
+        int end = input.length() - 1;
+        while (start < input.length() && input.charAt(start) == ' ') {
+          start++;
+        }
+        while (end >= 0 && input.charAt(end) == ' ') {
+          end--;
+        }
+        mx = Math.max(mx, end - start + 1);
+        a.add(input.substring(start, end + 1));
+      } catch (Exception e) {
+        break;
+      }
+    }
+    System.out.println("*".repeat(mx + 2));
+    int c = 0;
+    for (String i : a) {
+      System.out.print("*");
+      if ((mx - i.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        c++;
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*".repeat(mx + 2));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] a = new String[];
+    int mx = 0;
+    while (true) {
+      try {
+        String input = scanner.nextLine();
+        int start = 0;
+        int end = input.length() - 1;
+        while (start < input.length() && input.charAt(start) == ' ') {
+          start++;
+        }
+        while (end >= 0 && input.charAt(end) == ' ') {
+          end--;
+        }
+        mx = Math.max(mx, end - start + 1);
+        a[a.length] = input.substring(start, end + 1);
+      } catch (Exception e) {
+        break;
+      }
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+    int c = 0;
+    for (String i : a) {
+      System.out.print("*");
+      if ((mx - i.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+        c++;
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int i = 0;
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[i++] = input.substring(start, end + 1);
+        }
+        System.out.println("*" + " ".repeat(mx + 2) + "*");
+        int c = 0;
+        for (String s : a) {
+            System.out.print("*");
+            if ((mx - s.length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - s.length()) / 2));
+                System.out.print(s);
+                System.out.print(" ".repeat((mx - s.length()) / 2));
+            } else if ((mx - s.length()) % 2 != 0 && c % 2 == 0) {
+                System.out.print(" ".repeat((mx - s.length()) / 2));
+                System.out.print(s);
+                System.out.print(" ".repeat(((mx - s.length()) - ((mx - s.length()) / 2))));
+                c++;
+            } else if ((mx - s.length()) % 2 != 0 && c % 2 == 1) {
+                System.out.print(" ".repeat(((mx - s.length()) - ((mx - s.length()) / 2))));
+                System.out.print(s);
+                System.out.print(" ".repeat((mx - s.length()) / 2));
+                c++;
+            }
+            System.out.println("*");
+        }
+        System.out.println("*" + " ".repeat(mx + 2) + "*");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] a = new String[1000];
+        int mx = 0;
+        while (true) {
+            try {
+                String input = scanner.nextLine();
+                int start = 0;
+                int end = input.length() - 1;
+                while (input.charAt(start) == ' ') {
+                    start++;
+                }
+                while (input.charAt(end) == ' ') {
+                    end--;
+                }
+                mx = Math.max(mx, end - start + 1);
+                a[start] = input.substring(start, end + 1);
+            } catch (Exception e) {
+                break;
+            }
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int i = 0; i < a.length; i++) {
+            System.out.print("*");
+            if ((mx - a[i].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 1) {
+                System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int i = 0;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            int start = 0;
+            int end = line.length() - 1;
+            while (start < line.length() && line.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && line.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[i++] = line.substring(start, end + 1);
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int j = 0; j < i; j++) {
+            System.out.print("*");
+            if ((mx - a[j].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat(((mx - a[j].length()) - ((mx - a[j].length()) / 2))));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+                System.out.print(" ".repeat(((mx - a[j].length()) - ((mx - a[j].length()) / 2))));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mx = 0;
+        ArrayList<String> a = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a.add(input.substring(start, end + 1));
+        }
+        System.out.println("*".repeat(mx + 2));
+        int c = 0;
+        for (String i : a) {
+            System.out.print("*");
+            if ((mx - i.length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - i.length()) / 2));
+                System.out.print(i);
+                System.out.print(" ".repeat((mx - i.length()) / 2));
+            } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+                System.out.print(" ".repeat((mx - i.length()) / 2));
+                System.out.print(i);
+                System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+                c++;
+            } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+                System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+                System.out.print(i);
+                System.out.print(" ".repeat((mx - i.length()) / 2));
+                c++;
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] a = new String[0];
+    int mx = 0;
+    while (true) {
+      try {
+        String i = scanner.nextLine();
+        int start = 0;
+        int end = i.length() - 1;
+        while (i.charAt(start) == ' ') {
+          start++;
+        }
+        while (i.charAt(end) == ' ') {
+          end--;
+        }
+        mx = Math.max(mx, end - start + 1);
+        a[a.length] = i.substring(start, end + 1);
+      } catch (Exception e) {
+        break;
+      }
+    }
+    System.out.println("*".repeat(mx + 2));
+    int c = 0;
+    for (String i : a) {
+      System.out.print("*");
+      if ((mx - i.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        c++;
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*".repeat(mx + 2));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int start, end;
+        while (true) {
+            try {
+                String input = sc.nextLine();
+                start = 0;
+                end = input.length() - 1;
+                while (input.charAt(start) == ' ') {
+                    start++;
+                }
+                while (input.charAt(end) == ' ') {
+                    end--;
+                }
+                mx = Math.max(mx, end - start + 1);
+                a[a.length - 1] = input.substring(start, end + 1);
+            } catch (Exception e) {
+                break;
+            }
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int i = 0; i < a.length; i++) {
+            System.out.print("*");
+            if ((mx - a[i].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) - (mx - a[i].length()) / 2));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 1) {
+                System.out.print(" ".repeat((mx - a[i].length()) - (mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] a = new String[100];
+    int mx = 0;
+    int start = 0;
+    int end = 0;
+    int c = 0;
+
+    while (true) {
+      try {
+        String input = scanner.nextLine();
+        start = 0;
+        end = input.length() - 1;
+        while (input.charAt(start) == ' ') {
+          start++;
+        }
+        while (input.charAt(end) == ' ') {
+          end--;
+        }
+        mx = Math.max(mx, end - start + 1);
+        a[end] = input.substring(start, end + 1);
+      } catch (Exception e) {
+        break;
+      }
+    }
+
+    System.out.println("*".repeat(mx + 2));
+    for (int i = 0; i < a.length; i++) {
+      System.out.print("*");
+      if ((mx - a[i].length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+      } else if ((mx - a[i].length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat((mx - a[i].length()) - (mx - a[i].length()) / 2));
+        c++;
+      } else if ((mx - a[i].length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat((mx - a[i].length()) - (mx - a[i].length()) / 2));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*".repeat(mx + 2));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mx = 0;
+    ArrayList<String> a = new ArrayList<>();
+    while (true) {
+      try {
+        String input = scanner.nextLine();
+        int start = 0;
+        int end = input.length() - 1;
+        while (start < input.length() && input.charAt(start) == ' ') {
+          start++;
+        }
+        while (end >= 0 && input.charAt(end) == ' ') {
+          end--;
+        }
+        mx = Math.max(mx, end - start + 1);
+        a.add(input.substring(start, end + 1));
+      } catch (Exception e) {
+        break;
+      }
+    }
+    System.out.println("*".repeat(mx + 2));
+    int c = 0;
+    for (String i : a) {
+      System.out.print("*");
+      if ((mx - i.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+        c++;
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat(((mx - i.length()) - ((mx - i.length()) / 2))));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*".repeat(mx + 2));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int i = 0;
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[i++] = input.substring(start, end + 1);
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int j = 0; j < i; j++) {
+            System.out.print("*");
+            if ((mx - a[j].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+                System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<String> a = new ArrayList<>();
+        int mx = 0;
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a.add(input.substring(start, end + 1));
+        }
+        sc.close();
+
+        System.out.println("*" + " ".repeat(mx + 2) + "*");
+        for (int i = 0; i < a.size(); i++) {
+            System.out.print("*");
+            String current = a.get(i);
+            if ((mx - current.length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - current.length()) / 2));
+                System.out.print(current);
+                System.out.print(" ".repeat((mx - current.length()) / 2));
+            } else if ((mx - current.length()) % 2 != 0 && i % 2 == 0) {
+                System.out.print(" ".repeat((mx - current.length()) / 2));
+                System.out.print(current);
+                System.out.print(" ".repeat((mx - current.length()) - (mx - current.length()) / 2));
+            } else if ((mx - current.length()) % 2 != 0 && i % 2 == 1) {
+                System.out.print(" ".repeat((mx - current.length()) - (mx - current.length()) / 2));
+                System.out.print(current);
+                System.out.print(" ".repeat((mx - current.length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*" + " ".repeat(mx + 2) + "*");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] a = new String[100];
+    int mx = 0;
+    int i = 0;
+    while (scanner.hasNextLine()) {
+      String input = scanner.nextLine();
+      int start = 0;
+      int end = input.length() - 1;
+      while (start < input.length() && input.charAt(start) == ' ') {
+        start++;
+      }
+      while (end >= 0 && input.charAt(end) == ' ') {
+        end--;
+      }
+      mx = Math.max(mx, end - start + 1);
+      a[i++] = input.substring(start, end + 1);
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+    for (int j = 0; j < i; j++) {
+      System.out.print("*");
+      if ((mx - a[j].length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[j].length()) / 2));
+        System.out.print(a[j]);
+        System.out.print(" ".repeat((mx - a[j].length()) / 2));
+      } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[j].length()) / 2));
+        System.out.print(a[j]);
+        System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+      } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+        System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+        System.out.print(a[j]);
+        System.out.print(" ".repeat((mx - a[j].length()) / 2));
+      }
+      System.out.println("*");
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int i = 0;
+        while (true) {
+            try {
+                String input = sc.nextLine();
+                int start = 0;
+                int end = input.length() - 1;
+                while (start < input.length() && input.charAt(start) == ' ') {
+                    start++;
+                }
+                while (end >= 0 && input.charAt(end) == ' ') {
+                    end--;
+                }
+                mx = Math.max(mx, end - start + 1);
+                a[i++] = input.substring(start, end + 1);
+            } catch (Exception e) {
+                break;
+            }
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int j = 0; j < i; j++) {
+            System.out.print("*");
+            if ((mx - a[j].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) - (mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+                System.out.print(" ".repeat((mx - a[j].length()) - (mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mx = 0;
+        String[] a = new String[100];
+        int i = 0;
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[i++] = input.substring(start, end + 1);
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int j = 0; j < i; j++) {
+            System.out.print("*");
+            if ((mx - a[j].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) - (mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+                System.out.print(" ".repeat((mx - a[j].length()) - (mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int i = 0;
+        while (sc.hasNext()) {
+            String input = sc.next();
+            int start = 0;
+            int end = input.length() - 1;
+            while (start < input.length() && input.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && input.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[i++] = input.substring(start, end + 1);
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int j = 0; j < i; j++) {
+            System.out.print("*");
+            if ((mx - a[j].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+            } else if ((mx - a[j].length()) % 2 != 0 && j % 2 == 1) {
+                System.out.print(" ".repeat(((mx - a[j].length()) - (mx - a[j].length()) / 2)));
+                System.out.print(a[j]);
+                System.out.print(" ".repeat((mx - a[j].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    List<String> a = new ArrayList<>();
+    int mx = 0;
+    while (sc.hasNextLine()) {
+      String i = sc.nextLine();
+      int start = 0;
+      int end = i.length() - 1;
+      while (start < i.length() && i.charAt(start) == ' ') {
+        start++;
+      }
+      while (end >= 0 && i.charAt(end) == ' ') {
+        end--;
+      }
+      mx = Math.max(mx, end - start + 1);
+      a.add(i.substring(start, end + 1));
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+    int c = 0;
+    for (String i : a) {
+      System.out.print("*");
+      if ((mx - i.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 0) {
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        System.out.print(i);
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        c++;
+      } else if ((mx - i.length()) % 2 != 0 && c % 2 == 1) {
+        System.out.print(" ".repeat(((mx - i.length()) - (mx - i.length()) / 2)));
+        System.out.print(i);
+        System.out.print(" ".repeat((mx - i.length()) / 2));
+        c++;
+      }
+      System.out.println("*");
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] a = new String[100];
+        int mx = 0;
+        int start, end;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            start = 0;
+            end = line.length() - 1;
+            while (start < line.length() && line.charAt(start) == ' ') {
+                start++;
+            }
+            while (end >= 0 && line.charAt(end) == ' ') {
+                end--;
+            }
+            mx = Math.max(mx, end - start + 1);
+            a[end] = line.substring(start, end + 1);
+        }
+        System.out.println("*".repeat(mx + 2));
+        for (int i = 0; i < a.length; i++) {
+            System.out.print("*");
+            if ((mx - a[i].length()) % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 0) {
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+            } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 1) {
+                System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+                System.out.print(a[i]);
+                System.out.print(" ".repeat((mx - a[i].length()) / 2));
+            }
+            System.out.println("*");
+        }
+        System.out.println("*".repeat(mx + 2));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] a = new String[100];
+    int mx = 0;
+    while (sc.hasNextLine()) {
+      String line = sc.nextLine();
+      int start = 0;
+      int end = line.length() - 1;
+      while (start < line.length() && line.charAt(start) == ' ') {
+        start++;
+      }
+      while (end >= 0 && line.charAt(end) == ' ') {
+        end--;
+      }
+      mx = Math.max(mx, end - start + 1);
+      a[a.length - 1] = line.substring(start, end + 1);
+    }
+    System.out.println("*".repeat(mx + 2));
+    for (int i = 0; i < a.length; i++) {
+      System.out.print("*");
+      if ((mx - a[i].length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+      } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 0) {
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+      } else if ((mx - a[i].length()) % 2 != 0 && i % 2 == 1) {
+        System.out.print(" ".repeat(((mx - a[i].length()) - (mx - a[i].length()) / 2)));
+        System.out.print(a[i]);
+        System.out.print(" ".repeat((mx - a[i].length()) / 2));
+      }
+      System.out.println("*");
+    }
+    System.out.println("*".repeat(mx + 2));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mx = 0;
+    List<String> a = new ArrayList<>();
+    while (sc.hasNextLine()) {
+      String line = sc.nextLine();
+      int start = 0;
+      int end = line.length() - 1;
+      while (start < line.length() && line.charAt(start) == ' ') {
+        start++;
+      }
+      while (end >= 0 && line.charAt(end) == ' ') {
+        end--;
+      }
+      mx = Math.max(mx, end - start + 1);
+      a.add(line.substring(start, end + 1));
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+    for (int i = 0; i < a.size(); i++) {
+      String line = a.get(i);
+      System.out.print("*");
+      if ((mx - line.length()) % 2 == 0) {
+        System.out.print(" ".repeat((mx - line.length()) / 2));
+        System.out.print(line);
+        System.out.print(" ".repeat((mx - line.length()) / 2));
+      } else if ((mx - line.length()) % 2 != 0 && i % 2 == 0) {
+        System.out.print(" ".repeat((mx - line.length()) / 2));
+        System.out.print(line);
+        System.out.print(" ".repeat((mx - line.length()) - (mx - line.length()) / 2));
+      } else if ((mx - line.length()) % 2 != 0 && i % 2 == 1) {
+        System.out.print(" ".repeat((mx - line.length()) - (mx - line.length()) / 2));
+        System.out.print(line);
+        System.out.print(" ".repeat((mx - line.length()) / 2));
+      }
+      System.out.println("*");
+    }
+    System.out.println("*" + " ".repeat(mx + 2) + "*");
+  }
+}
+[/JAVA]
+======

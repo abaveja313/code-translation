@@ -1,0 +1,820 @@
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    List<Integer> Xs = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.subList(0, N);
+    Collections.reverse(Ys);
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys.get(0);
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys.get(i);
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int[] Xs = new int[N];
+    for (int i = 0; i < N; i++) {
+      Xs[i] = scanner.nextInt();
+    }
+    int[] Ys = new int[N];
+    for (int i = 0; i < N; i++) {
+      Ys[i] = Xs[i];
+    }
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys[0];
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys[i];
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int X = sc.nextInt();
+        int[] Xs = new int[N];
+        for (int i = 0; i < N; i++) {
+            Xs[i] = sc.nextInt();
+        }
+        int[] Ys = new int[N];
+        for (int i = 0; i < N; i++) {
+            Ys[i] = Xs[i];
+        }
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys[0];
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys[i];
+        }
+        int ans = (int) 1e100;
+        for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.subList(0, N).stream().map(i -> i * -1).collect(Collectors.toList());
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys.get(0);
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys.get(i);
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int X = sc.nextInt();
+        int[] Xs = new int[N];
+        for (int i = 0; i < N; i++) {
+            Xs[i] = sc.nextInt();
+        }
+        int[] Ys = new int[N];
+        for (int i = 0; i < N; i++) {
+            Ys[i] = Xs[i] * -1;
+        }
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys[0];
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys[i];
+        }
+        int ans = 1000000000;
+        for (int rep_num = 1; rep_num <= N; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        List<Integer> Xs = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> Ys = Xs.subList(0, N - 1);
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys.get(0);
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys.get(i);
+        }
+        int ans = 1000000000;
+        for (int rep_num = 1; rep_num <= N; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int[] Xs = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] Ys = Arrays.copyOf(Xs, N);
+        Collections.reverse(Arrays.asList(Ys));
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys[0];
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys[i];
+        }
+        int ans = (int) 1e100;
+        for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int[] Xs = new int[N];
+    int[] Ys = new int[N];
+    int[] Y_sum = new int[N];
+    for (int i = 0; i < N; i++) {
+      Xs[i] = sc.nextInt();
+      Ys[i] = Xs[i];
+    }
+    Y_sum[0] = Ys[0];
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys[i];
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int[] Xs = new int[N];
+    for (int i = 0; i < N; i++) {
+      Xs[i] = sc.nextInt();
+    }
+    int[] Ys = new int[N];
+    for (int i = 0; i < N; i++) {
+      Ys[i] = Xs[N - 1 - i];
+    }
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys[0];
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys[i];
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.subList(0, N).stream().map(i -> i * -1).collect(Collectors.toList());
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(Ys.get(0));
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.subList(0, N - 1).stream().map(i -> i * -1).collect(Collectors.toList());
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(0, Ys.get(0));
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(i, Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n += 1;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.subList(0, N).stream().map(i -> i * -1).collect(Collectors.toList());
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(0, Ys.get(0));
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(i, Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int[] Xs = new int[N];
+    for (int i = 0; i < N; i++) {
+      Xs[i] = sc.nextInt();
+    }
+    int[] Ys = new int[N];
+    for (int i = 0; i < N; i++) {
+      Ys[i] = Xs[i];
+    }
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys[0];
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys[i];
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    List<Integer> Xs = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.stream().map(i -> i * -1).collect(Collectors.toList());
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(Ys.get(0));
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.stream().map(x -> x * -1).collect(Collectors.toList());
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(0);
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 100;
+    for (int rep_num = 1; rep_num < N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int[] Xs = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[] Ys = Arrays.copyOfRange(Xs, 1, N);
+    int[] Y_sum = new int[N];
+    Y_sum[0] = Ys[0];
+    for (int i = 1; i < N; i++) {
+      Y_sum[i] = Y_sum[i - 1] + Ys[i];
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum[rep_num - 1];
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    List<Integer> Xs = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      Xs.add(scanner.nextInt());
+    }
+    List<Integer> Ys = new ArrayList<>(Xs);
+    Collections.reverse(Ys);
+    List<Integer> Y_sum = new ArrayList<>(N);
+    Y_sum.add(0);
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    int N = Integer.parseInt(args[0]);
+    int X = Integer.parseInt(args[1]);
+    List<Integer> Xs = Arrays.stream(args[2].split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+    List<Integer> Ys = Xs.stream().map(x -> x * -1).collect(Collectors.toList());
+    Ys.add(0, Xs.get(0));
+    List<Integer> Y_sum = new ArrayList<>();
+    Y_sum.add(0, Ys.get(0));
+    for (int i = 1; i < N; i++) {
+      Y_sum.add(i, Y_sum.get(i - 1) + Ys.get(i));
+    }
+    int ans = 1000000000;
+    for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+      int local_ans = X * rep_num;
+      local_ans += 5 * Y_sum.get(rep_num - 1);
+      int i = 2 * rep_num - 1;
+      int n = 1;
+      while (i <= N - 1) {
+        local_ans += (2 * n + 3) * (Y_sum.get(i) - Y_sum.get(i - rep_num));
+        n++;
+        i += rep_num;
+      }
+      local_ans += (2 * n + 3) * (Y_sum.get(N - 1) - Y_sum.get(i - rep_num));
+      ans = Math.min(ans, local_ans);
+    }
+    System.out.println(ans + N * X);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        List<Integer> Xs = Arrays.asList(scanner.nextInt().split(" "));
+        List<Integer> Ys = Xs.subList(0, N);
+        Ys.addAll(Xs.subList(N, 2 * N));
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys.get(0);
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys.get(i);
+        }
+        int ans = 1000000000;
+        for (int rep_num = 1; rep_num <= N + 1; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int[] Xs = new int[N];
+        for (int i = 0; i < N; i++) {
+            Xs[i] = scanner.nextInt();
+        }
+        int[] Ys = new int[N];
+        for (int i = 0; i < N; i++) {
+            Ys[i] = Xs[N - i - 1];
+        }
+        int[] Y_sum = new int[N];
+        Y_sum[0] = Ys[0];
+        for (int i = 1; i < N; i++) {
+            Y_sum[i] = Y_sum[i - 1] + Ys[i];
+        }
+        int ans = 1000000000000000000;
+        for (int rep_num = 1; rep_num <= N; rep_num++) {
+            int local_ans = X * rep_num;
+            local_ans += 5 * Y_sum[rep_num - 1];
+            int i = 2 * rep_num - 1;
+            int n = 1;
+            while (i <= N - 1) {
+                local_ans += (2 * n + 3) * (Y_sum[i] - Y_sum[i - rep_num]);
+                n++;
+                i += rep_num;
+            }
+            local_ans += (2 * n + 3) * (Y_sum[N - 1] - Y_sum[i - rep_num]);
+            ans = Math.min(ans, local_ans);
+        }
+        System.out.println(ans + N * X);
+    }
+}
+[/JAVA]
+======

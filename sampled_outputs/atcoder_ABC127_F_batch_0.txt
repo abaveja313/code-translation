@@ -1,0 +1,1030 @@
+  [JAVA]
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int Q = scanner.nextInt();
+    List<List<Integer>> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      List<Integer> query = new ArrayList<>();
+      query.add(scanner.nextInt());
+      query.add(scanner.nextInt());
+      query.add(scanner.nextInt());
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, List<List<Integer>> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>();
+    PriorityQueue<Integer> right = new PriorityQueue<>();
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(-Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    List<List<Integer>> ans = new ArrayList<>();
+    for (List<Integer> query : queries) {
+      if (query.get(0) == 1) {
+        int a = query.get(1);
+        int b = query.get(2);
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        List<Integer> row = new ArrayList<>();
+        row.add(current_median);
+        row.add(current_ans + bias_total);
+        ans.add(row);
+      }
+    }
+    return ans.stream().map(row -> row.stream().map(String::valueOf).collect(Collectors.joining(" "))).collect(Collectors.joining("\n"));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Q = sc.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = sc.nextInt();
+            queries[i][1] = sc.nextInt();
+            queries[i][2] = sc.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>((a, b) -> a - b);
+        PriorityQueue<Integer> right = new PriorityQueue<>((a, b) -> b - a);
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (queries[i][0] == 1) {
+                int a = queries[i][1];
+                int b = queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = current_median + " " + (current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        int Q = Integer.parseInt(args[0]);
+        int[][] Queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            String[] query = args[i + 1].split(" ");
+            Queries[i][0] = Integer.parseInt(query[0]);
+            Queries[i][1] = Integer.parseInt(query[1]);
+            Queries[i][2] = Integer.parseInt(query[2]);
+        }
+        System.out.println(f_absolute_minima(Q, Queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] Queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(-Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (Queries[i][0] == 1) {
+                int a = Queries[i][1];
+                int b = Queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = current_median + " " + (current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    int Q = Integer.parseInt(args[0]);
+    int[][] Queries = new int[Q][3];
+    for (int i = 0; i < Q; i++) {
+      Queries[i][0] = Integer.parseInt(args[i * 3 + 1]);
+      Queries[i][1] = Integer.parseInt(args[i * 3 + 2]);
+      Queries[i][2] = Integer.parseInt(args[i * 3 + 3]);
+    }
+    System.out.println(f_absolute_minima(Q, Queries));
+  }
+
+  public static String f_absolute_minima(int Q, int[][] Queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>(), right = new PriorityQueue<>();
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    int current_ans = 0, current_median = 0, bias_total = 0;
+    for (int[] query : Queries) {
+      if (query[0] == 1) {
+        int a = query[1], b = query[2];
+        bias_total += b;
+        int last_left = -left.peek(), last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.remove());
+        right.add(-left.remove());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        System.out.println(current_median + " " + (current_ans + bias_total));
+      }
+    }
+    return null;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int Q = scanner.nextInt();
+    List<List<Integer>> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      List<Integer> query = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        query.add(scanner.nextInt());
+      }
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, List<List<Integer>> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>((a, b) -> a - b);
+    PriorityQueue<Integer> right = new PriorityQueue<>((a, b) -> a - b);
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    List<List<Integer>> ans = new ArrayList<>();
+    for (List<Integer> query : queries) {
+      if (query.get(0) == 1) {
+        int a = query.get(1);
+        int b = query.get(2);
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        List<Integer> row = new ArrayList<>();
+        row.add(current_median);
+        row.add(current_ans + bias_total);
+        ans.add(row);
+      }
+    }
+    return ans.stream().map(row -> row.stream().map(String::valueOf).collect(Collectors.joining(" "))).collect(Collectors.joining("\n"));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    int[][] Queries = new int[Q][3];
+    for (int i = 0; i < Q; i++) {
+      for (int j = 0; j < 3; j++) {
+        Queries[i][j] = sc.nextInt();
+      }
+    }
+    System.out.println(f_absolute_minima(Q, Queries));
+  }
+
+  public static String f_absolute_minima(int Q, int[][] Queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>();
+    PriorityQueue<Integer> right = new PriorityQueue<>();
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    String[] ans = new String[Q];
+    for (int i = 0; i < Q; i++) {
+      if (Queries[i][0] == 1) {
+        int a = Queries[i][1];
+        int b = Queries[i][2];
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        ans[i] = current_median + " " + (current_ans + bias_total);
+      }
+    }
+    return String.join("\n", ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Q = sc.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = sc.nextInt();
+            queries[i][1] = sc.nextInt();
+            queries[i][2] = sc.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>((a, b) -> b - a);
+        PriorityQueue<Integer> right = new PriorityQueue<>((a, b) -> b - a);
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        for (int[] query : queries) {
+            if (query[0] == 1) {
+                int a = query[1];
+                int b = query[2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                return String.format("%d %d", current_median, current_ans + bias_total);
+            }
+        }
+        return "";
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Q = sc.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = sc.nextInt();
+            queries[i][1] = sc.nextInt();
+            queries[i][2] = sc.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int currentAns = 0;
+        int currentMedian = 0;
+        int biasTotal = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (queries[i][0] == 1) {
+                int a = queries[i][1];
+                int b = queries[i][2];
+                biasTotal += b;
+                int lastLeft = -left.peek();
+                int lastRight = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                currentMedian = -left.peek();
+                if (a < lastLeft || lastRight < a) {
+                    currentAns += Math.min(Math.abs(lastRight - a), Math.abs(lastLeft - a));
+                }
+            } else {
+                ans[i] = currentMedian + " " + (currentAns + biasTotal);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    ArrayList<int[]> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      int[] query = new int[3];
+      query[0] = sc.nextInt();
+      query[1] = sc.nextInt();
+      query[2] = sc.nextInt();
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, ArrayList<int[]> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>(Comparator.reverseOrder());
+    PriorityQueue<Integer> right = new PriorityQueue<>(Comparator.reverseOrder());
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    ArrayList<String> ans = new ArrayList<>();
+    for (int[] query : queries) {
+      if (query[0] == 1) {
+        int a = query[1];
+        int b = query[2];
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        ans.add(String.format("%d %d", current_median, current_ans + bias_total));
+      }
+    }
+    return String.join("\n", ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    List<List<Integer>> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      List<Integer> query = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        query.add(sc.nextInt());
+      }
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, List<List<Integer>> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>();
+    PriorityQueue<Integer> right = new PriorityQueue<>();
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    List<List<Integer>> ans = new ArrayList<>();
+    for (List<Integer> query : queries) {
+      if (query.get(0) == 1) {
+        int a = query.get(1);
+        int b = query.get(2);
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        List<Integer> row = new ArrayList<>();
+        row.add(current_median);
+        row.add(current_ans + bias_total);
+        ans.add(row);
+      }
+    }
+    return ans.stream().map(row -> row.stream().map(String::valueOf).collect(Collectors.joining(" "))).collect(Collectors.joining("\n"));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    List<List<Integer>> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      List<Integer> query = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        query.add(sc.nextInt());
+      }
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, List<List<Integer>> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>(), right = new PriorityQueue<>();
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    int currentMedian = 0, currentAns = 0, biasTotal = 0;
+    for (List<Integer> query : queries) {
+      if (query.get(0) == 1) {
+        int a = query.get(1), b = query.get(2);
+        biasTotal += b;
+        int lastLeft = -left.peek(), lastRight = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        currentMedian = -left.peek();
+        if (a < lastLeft || lastRight < a) {
+          currentAns += Math.min(Math.abs(lastRight - a), Math.abs(lastLeft - a));
+        }
+      } else {
+        System.out.println(currentMedian + " " + (currentAns + biasTotal));
+      }
+    }
+    return "";
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int Q = scanner.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = scanner.nextInt();
+            queries[i][1] = scanner.nextInt();
+            queries[i][2] = scanner.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (queries[i][0] == 1) {
+                int a = queries[i][1];
+                int b = queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = current_median + " " + (current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        int Q = Integer.parseInt(args[0]);
+        int[][] Queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            String[] query = args[i + 1].split(" ");
+            Queries[i][0] = Integer.parseInt(query[0]);
+            Queries[i][1] = Integer.parseInt(query[1]);
+            Queries[i][2] = Integer.parseInt(query[2]);
+        }
+        System.out.println(f_absolute_minima(Q, Queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] Queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(-Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (Queries[i][0] == 1) {
+                int a = Queries[i][1];
+                int b = Queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = String.format("%d %d", current_median, current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        int Q = Integer.parseInt(args[0]);
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i] = Arrays.stream(args[i + 1].split(" ")).mapToInt(Integer::parseInt).toArray();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>((a, b) -> b - a);
+        PriorityQueue<Integer> right = new PriorityQueue<>((a, b) -> a - b);
+        int current_ans = 0, current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        for (int[] query : queries) {
+            if (query[0] == 1) {
+                int a = query[1], b = query[2];
+                bias_total += b;
+                int last_left = -left.peek(), last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                int[] ans = new int[2];
+                ans[0] = current_median;
+                ans[1] = current_ans + bias_total;
+                return String.join(" ", Arrays.stream(ans).mapToObj(String::valueOf).toArray(String[]::new));
+            }
+        }
+        return null;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Q = sc.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = sc.nextInt();
+            queries[i][1] = sc.nextInt();
+            queries[i][2] = sc.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> right = new PriorityQueue<>(Comparator.reverseOrder());
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (queries[i][0] == 1) {
+                int a = queries[i][1];
+                int b = queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = current_median + " " + current_ans + " " + bias_total;
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int Q = scanner.nextInt();
+        ArrayList<ArrayList<Integer>> Queries = new ArrayList<>();
+        for (int i = 0; i < Q; i++) {
+            ArrayList<Integer> query = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                query.add(scanner.nextInt());
+            }
+            Queries.add(query);
+        }
+        System.out.println(f_absolute_minima(Q, Queries));
+    }
+
+    public static String f_absolute_minima(int Q, ArrayList<ArrayList<Integer>> Queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        for (ArrayList<Integer> query : Queries) {
+            if (query.get(0) == 1) {
+                int a = query.get(1);
+                int b = query.get(2);
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.remove());
+                right.add(-left.remove());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ArrayList<Integer> row = new ArrayList<>();
+                row.add(current_median);
+                row.add(current_ans + bias_total);
+                ans.add(row);
+            }
+        }
+        return String.join("\n", ans.stream().map(row -> String.join(" ", row.stream().map(String::valueOf).collect(Collectors.toList()))).collect(Collectors.toList()));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    int[][] queries = new int[Q][3];
+    for (int i = 0; i < Q; i++) {
+      queries[i][0] = sc.nextInt();
+      queries[i][1] = sc.nextInt();
+      queries[i][2] = sc.nextInt();
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, int[][] queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>(Comparator.comparing(a -> -a));
+    PriorityQueue<Integer> right = new PriorityQueue<>(Comparator.comparing(a -> -a));
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    ArrayList<String> ans = new ArrayList<>();
+    for (int[] query : queries) {
+      if (query[0] == 1) {
+        int a = query[1];
+        int b = query[2];
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        ans.add(String.format("%d %d", current_median, current_ans + bias_total));
+      }
+    }
+    return String.join("\n", ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int Q = sc.nextInt();
+    ArrayList<ArrayList<Integer>> queries = new ArrayList<>();
+    for (int i = 0; i < Q; i++) {
+      ArrayList<Integer> query = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        query.add(sc.nextInt());
+      }
+      queries.add(query);
+    }
+    System.out.println(f_absolute_minima(Q, queries));
+  }
+
+  public static String f_absolute_minima(int Q, ArrayList<ArrayList<Integer>> queries) {
+    PriorityQueue<Integer> left = new PriorityQueue<>(Comparator.comparing(i -> -i));
+    PriorityQueue<Integer> right = new PriorityQueue<>(Comparator.comparing(i -> -i));
+    int current_ans = 0;
+    int current_median = 0;
+    int bias_total = 0;
+    left.add(Integer.MAX_VALUE);
+    right.add(Integer.MAX_VALUE);
+    ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+    for (ArrayList<Integer> query : queries) {
+      if (query.get(0) == 1) {
+        int a = query.get(1);
+        int b = query.get(2);
+        bias_total += b;
+        int last_left = -left.peek();
+        int last_right = right.peek();
+        left.add(-a);
+        right.add(a);
+        left.add(-right.poll());
+        right.add(-left.poll());
+        current_median = -left.peek();
+        if (a < last_left || last_right < a) {
+          current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+        }
+      } else {
+        ArrayList<Integer> row = new ArrayList<>();
+        row.add(current_median);
+        row.add(current_ans + bias_total);
+        ans.add(row);
+      }
+    }
+    return String.join("\n", ans.stream().map(row -> String.join(" ", row.stream().map(String::valueOf).collect(Collectors.toList()))).collect(Collectors.toList()));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Q = sc.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            for (int j = 0; j < 3; j++) {
+                queries[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>((a, b) -> b - a);
+        PriorityQueue<Integer> right = new PriorityQueue<>((a, b) -> b - a);
+        int current_ans = 0;
+        int current_median = 0;
+        int bias_total = 0;
+        left.add(-Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int[] query : queries) {
+            if (query[0] == 1) {
+                int a = query[1];
+                int b = query[2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[query[0] - 1] = String.format("%d %d", current_median, current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int Q = scanner.nextInt();
+        int[][] queries = new int[Q][3];
+        for (int i = 0; i < Q; i++) {
+            queries[i][0] = scanner.nextInt();
+            queries[i][1] = scanner.nextInt();
+            queries[i][2] = scanner.nextInt();
+        }
+        System.out.println(f_absolute_minima(Q, queries));
+    }
+
+    public static String f_absolute_minima(int Q, int[][] queries) {
+        PriorityQueue<Integer> left = new PriorityQueue<>();
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        int current_ans = 0, current_median = 0;
+        int bias_total = 0;
+        left.add(Integer.MAX_VALUE);
+        right.add(Integer.MAX_VALUE);
+        String[] ans = new String[Q];
+        for (int i = 0; i < Q; i++) {
+            if (queries[i][0] == 1) {
+                int a = queries[i][1];
+                int b = queries[i][2];
+                bias_total += b;
+                int last_left = -left.peek();
+                int last_right = right.peek();
+                left.add(-a);
+                right.add(a);
+                left.add(-right.poll());
+                right.add(-left.poll());
+                current_median = -left.peek();
+                if (a < last_left || last_right < a) {
+                    current_ans += Math.min(Math.abs(last_right - a), Math.abs(last_left - a));
+                }
+            } else {
+                ans[i] = current_median + " " + (current_ans + bias_total);
+            }
+        }
+        return String.join("\n", ans);
+    }
+}
+[/JAVA]
+======

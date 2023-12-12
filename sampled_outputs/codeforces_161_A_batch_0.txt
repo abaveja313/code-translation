@@ -1,0 +1,965 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = getList(scanner.nextLine());
+    List<Integer> a = getList(scanner.nextLine());
+    List<Integer> b = getList(scanner.nextLine());
+
+    int nSoldiers = first.get(0);
+    int nVest = first.get(1);
+    int x = first.get(2);
+    int y = first.get(3);
+
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0;
+    int curSoldier = 0;
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static List<Integer> getList(String line) {
+    return Arrays.stream(line.split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int nSoldiers = scanner.nextInt();
+        int nVest = scanner.nextInt();
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+
+        int[] a = new int[nSoldiers];
+        int[] b = new int[nVest];
+
+        for (int i = 0; i < nSoldiers; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < nVest; i++) {
+            b[i] = scanner.nextInt();
+        }
+
+        int pair = 0;
+        String[] result = new String[nSoldiers];
+
+        for (int i = 0, j = 0; i < nSoldiers && j < nVest;) {
+            if (a[i] - x <= b[j] && b[j] <= a[i] + y) {
+                result[pair] = String.valueOf(i + 1) + " " + String.valueOf(j + 1);
+                pair++;
+                i++;
+                j++;
+            } else if (a[i] < b[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        System.out.println(pair);
+        System.out.println(String.join("\n", result));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y;
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0, curSoldier = 0;
+
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    for (int i = 0; i < nSoldiers; i++) {
+      a.add(scanner.nextInt());
+    }
+
+    for (int i = 0; i < nVest; i++) {
+      b.add(scanner.nextInt());
+    }
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] first = getArray(scanner);
+        int nSoldiers = first[0];
+        int nVest = first[1];
+        int x = first[2];
+        int y = first[3];
+
+        int[] a = getArray(scanner);
+        int[] b = getArray(scanner);
+
+        int pair = 0;
+        String[] result = new String[nSoldiers];
+        int curVest = 0;
+        int curSoldier = 0;
+
+        while (curSoldier < nSoldiers && curVest < nVest) {
+            if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+                result[pair] = curSoldier + 1 + " " + curVest + 1;
+                pair++;
+                curSoldier++;
+                curVest++;
+            } else if (a[curSoldier] < b[curVest]) {
+                curSoldier++;
+            } else {
+                curVest++;
+            }
+        }
+
+        System.out.println(pair);
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+
+    private static int[] getArray(Scanner scanner) {
+        String[] input = scanner.nextLine().split(" ");
+        int[] array = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            array[i] = Integer.parseInt(input[i]);
+        }
+        return array;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y, pair = 0;
+
+    // Read input
+    first = readInput(scanner);
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    // Read the remaining input
+    a = readInput(scanner);
+    b = readInput(scanner);
+
+    // Initialize the current soldier and vest indices
+    int curSoldier = 0, curVest = 0;
+
+    // Loop until all soldiers and vests have been assigned
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      // Check if the current soldier and vest are compatible
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        // If compatible, assign the soldier and vest and increment the pair count
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        // If not compatible, increment the soldier or vest index as needed
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    // Print the pair count and the assigned soldiers and vests
+    System.out.println(pair);
+    System.out.println(String.join("\n", getAssignedSoldiersAndVests(a, b, pair)));
+  }
+
+  private static List<Integer> readInput(Scanner scanner) {
+    List<Integer> input = new ArrayList<>();
+    String[] tokens = scanner.nextLine().split(" ");
+    for (String token : tokens) {
+      input.add(Integer.parseInt(token));
+    }
+    return input;
+  }
+
+  private static List<String> getAssignedSoldiersAndVests(List<Integer> a, List<Integer> b, int pair) {
+    List<String> assigned = new ArrayList<>();
+    for (int i = 0; i < pair; i++) {
+      assigned.add(String.format("%d %d", a.get(i) + 1, b.get(i) + 1));
+    }
+    return assigned;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int nSoldiers = sc.nextInt();
+    int nVest = sc.nextInt();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    int[] a = new int[nSoldiers];
+    int[] b = new int[nVest];
+    for (int i = 0; i < nSoldiers; i++) {
+      a[i] = sc.nextInt();
+    }
+    for (int i = 0; i < nVest; i++) {
+      b[i] = sc.nextInt();
+    }
+    int pair = 0;
+    String[] result = new String[nSoldiers];
+    int curVest = 0;
+    int curSoldier = 0;
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+        result[pair] = curSoldier + 1 + " " + curVest + 1;
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else if (a[curSoldier] < b[curVest]) {
+        curSoldier++;
+      } else {
+        curVest++;
+      }
+    }
+    System.out.println(pair);
+    for (String s : result) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y;
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0, curSoldier = 0;
+
+    first = getInput(sc, first);
+    a = getInput(sc, a);
+    b = getInput(sc, b);
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static List<Integer> getInput(Scanner sc, List<Integer> list) {
+    String[] input = sc.nextLine().split(" ");
+    for (String s : input) {
+      list.add(Integer.parseInt(s));
+    }
+    return list;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y;
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0, curSoldier = 0;
+
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+    first.add(scanner.nextInt());
+
+    a.add(scanner.nextInt());
+    a.add(scanner.nextInt());
+    a.add(scanner.nextInt());
+
+    b.add(scanner.nextInt());
+    b.add(scanner.nextInt());
+    b.add(scanner.nextInt());
+
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    ArrayList<Integer> first = new ArrayList<>();
+    ArrayList<Integer> a = new ArrayList<>();
+    ArrayList<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y, pair = 0;
+
+    // Read input
+    String[] input = scanner.nextLine().split(" ");
+    nSoldiers = Integer.parseInt(input[0]);
+    nVest = Integer.parseInt(input[1]);
+    x = Integer.parseInt(input[2]);
+    y = Integer.parseInt(input[3]);
+
+    // Read the rest of the input
+    for (int i = 0; i < nSoldiers; i++) {
+      first.add(scanner.nextInt());
+    }
+    for (int i = 0; i < nVest; i++) {
+      a.add(scanner.nextInt());
+    }
+    for (int i = 0; i < nVest; i++) {
+      b.add(scanner.nextInt());
+    }
+
+    // Iterate through the input and find the pairs
+    for (int i = 0, j = 0; i < nSoldiers && j < nVest; ) {
+      if (a.get(i) - x <= b.get(j) && b.get(j) <= a.get(i) + y) {
+        pair++;
+        System.out.println(i + 1 + " " + j + 1);
+        i++;
+        j++;
+      } else if (a.get(i) < b.get(j)) {
+        i++;
+      } else {
+        j++;
+      }
+    }
+
+    // Print the number of pairs
+    System.out.println(pair);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] first = scanner.nextLine().split(" ").stream().mapToInt(Integer::parseInt).toArray();
+    int nSoldiers = first[0];
+    int nVest = first[1];
+    int x = first[2];
+    int y = first[3];
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0;
+    int curSoldier = 0;
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+        result.add(String.format("%d %d", curSoldier + 1, curVest + 1));
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else if (a[curSoldier] < b[curVest]) {
+        curSoldier++;
+      } else {
+        curVest++;
+      }
+    }
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y;
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0;
+    int curSoldier = 0;
+
+    first = readList(scanner);
+    a = readList(scanner);
+    b = readList(scanner);
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static List<Integer> readList(Scanner scanner) {
+    List<Integer> list = new ArrayList<>();
+    String[] input = scanner.nextLine().split(" ");
+    for (String s : input) {
+      list.add(Integer.parseInt(s));
+    }
+    return list;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] first = getIntArray(scanner.nextLine());
+    int nSoldiers = first[0];
+    int nVest = first[1];
+    int x = first[2];
+    int y = first[3];
+    int[] a = getIntArray(scanner.nextLine());
+    int[] b = getIntArray(scanner.nextLine());
+
+    int pair = 0;
+    String[] result = new String[nSoldiers];
+    int curVest = 0;
+    int curSoldier = 0;
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+        result[pair] = curSoldier + 1 + " " + curVest + 1;
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a[curSoldier] < b[curVest]) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static int[] getIntArray(String line) {
+    String[] tokens = line.split(" ");
+    int[] array = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      array[i] = Integer.parseInt(tokens[i]);
+    }
+    return array;
+  }
+}
+[/JAVA]
+
+This is the Java code that implements the same logic as the Python code. It uses the `Scanner` class to read input from the user, and it uses the `String.split()` method to split the input string into an array of strings. The `getIntArray()` method is used to convert the array of strings into an array of integers.
+
+The rest of the code is similar to the Python code, with the exception of the `String.join()` method, which is used to join the elements of the `result` array into a single string separated by newlines.
+
+Note that the `main()` method in Java is the entry point of the program, and it is where the program starts executing. The `main()` method takes an array of strings as an argument, which contains the command-line arguments passed to the program. In this case, the program takes no command-line arguments, so the `main()` method is empty.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    ArrayList<Integer> first = new ArrayList<>();
+    ArrayList<Integer> a = new ArrayList<>();
+    ArrayList<Integer> b = new ArrayList<>();
+    int nSoldiers, nVest, x, y, pair = 0;
+
+    // Read input
+    first = readInput(scanner);
+    a = readInput(scanner);
+    b = readInput(scanner);
+    nSoldiers = first.get(0);
+    nVest = first.get(1);
+    x = first.get(2);
+    y = first.get(3);
+
+    // Initialize variables
+    int curVest = 0;
+    int curSoldier = 0;
+
+    // Loop until all soldiers and vest are used up
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        // Add to result list
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    // Print result
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  // Read input from scanner and return as ArrayList of integers
+  private static ArrayList<Integer> readInput(Scanner scanner) {
+    ArrayList<Integer> list = new ArrayList<>();
+    String[] input = scanner.nextLine().split(" ");
+    for (String s : input) {
+      list.add(Integer.parseInt(s));
+    }
+    return list;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = getInputAsList(scanner);
+    int nSoldiers = first.get(0);
+    int nVest = first.get(1);
+    int x = first.get(2);
+    int y = first.get(3);
+
+    List<Integer> a = getInputAsList(scanner);
+    List<Integer> b = getInputAsList(scanner);
+
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0;
+    int curSoldier = 0;
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(curSoldier + 1 + " " + curVest + 1);
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static List<Integer> getInputAsList(Scanner scanner) {
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    List<Integer> list = new ArrayList<>();
+    for (String token : tokens) {
+      list.add(Integer.parseInt(token));
+    }
+    return list;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    // Read the input
+    int[] first = scanner.nextLine().split(" ").map(Integer::parseInt).toArray(int[]::new);
+    int[] a = scanner.nextLine().split(" ").map(Integer::parseInt).toArray(int[]::new);
+    int[] b = scanner.nextLine().split(" ").map(Integer::parseInt).toArray(int[]::new);
+
+    // Initialize variables
+    int nSoldiers = first[0];
+    int nVest = first[1];
+    int x = first[2];
+    int y = first[3];
+    int pair = 0;
+    String[] result = new String[nSoldiers];
+    int curVest = 0;
+    int curSoldier = 0;
+
+    // Loop through the soldiers and vests
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+        result[pair] = curSoldier + 1 + " " + curVest + 1;
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else if (a[curSoldier] < b[curVest]) {
+        curSoldier++;
+      } else {
+        curVest++;
+      }
+    }
+
+    // Print the result
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int nSoldiers = scanner.nextInt();
+    int nVest = scanner.nextInt();
+    int x = scanner.nextInt();
+    int y = scanner.nextInt();
+    int[] a = new int[nSoldiers];
+    int[] b = new int[nVest];
+    for (int i = 0; i < nSoldiers; i++) {
+      a[i] = scanner.nextInt();
+    }
+    for (int i = 0; i < nVest; i++) {
+      b[i] = scanner.nextInt();
+    }
+    int pair = 0;
+    String[] result = new String[nSoldiers];
+    for (int i = 0, j = 0; i < nSoldiers && j < nVest;) {
+      if (Math.abs(a[i] - b[j]) <= x + y) {
+        result[i] = String.valueOf(i + 1) + " " + String.valueOf(j + 1);
+        pair++;
+        i++;
+        j++;
+      } else if (a[i] < b[j]) {
+        i++;
+      } else {
+        j++;
+      }
+    }
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] first = getIntArray(scanner.nextLine());
+    int nSoldiers = first[0];
+    int nVest = first[1];
+    int x = first[2];
+    int y = first[3];
+    int pair = 0;
+    String[] result = new String[nSoldiers];
+    int curVest = 0;
+    int curSoldier = 0;
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+        result[pair] = curSoldier + 1 + " " + curVest + 1;
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else if (a[curSoldier] < b[curVest]) {
+        curSoldier++;
+      } else {
+        curVest++;
+      }
+    }
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+
+  private static int[] getIntArray(String input) {
+    String[] tokens = input.split(" ");
+    int[] array = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      array[i] = Integer.parseInt(tokens[i]);
+    }
+    return array;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> first = new ArrayList<>();
+    List<Integer> a = new ArrayList<>();
+    List<Integer> b = new ArrayList<>();
+    int nSoldiers = scanner.nextInt();
+    int nVest = scanner.nextInt();
+    int x = scanner.nextInt();
+    int y = scanner.nextInt();
+    int pair = 0;
+    List<String> result = new ArrayList<>();
+    int curVest = 0;
+    int curSoldier = 0;
+
+    while (curSoldier < nSoldiers && curVest < nVest) {
+      if (a.get(curSoldier) - x <= b.get(curVest) && b.get(curVest) <= a.get(curSoldier) + y) {
+        result.add(String.format("%d %d", curSoldier + 1, curVest + 1));
+        pair++;
+        curSoldier++;
+        curVest++;
+      } else {
+        if (a.get(curSoldier) < b.get(curVest)) {
+          curSoldier++;
+        } else {
+          curVest++;
+        }
+      }
+    }
+
+    System.out.println(pair);
+    System.out.println(String.join("\n", result));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int nSoldiers = sc.nextInt();
+        int nVest = sc.nextInt();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int[] a = new int[nSoldiers];
+        int[] b = new int[nVest];
+        for (int i = 0; i < nSoldiers; i++) {
+            a[i] = sc.nextInt();
+        }
+        for (int i = 0; i < nVest; i++) {
+            b[i] = sc.nextInt();
+        }
+        int pair = 0;
+        String[] result = new String[nSoldiers];
+        for (int i = 0, j = 0; i < nSoldiers && j < nVest; ) {
+            if (a[i] - x <= b[j] && b[j] <= a[i] + y) {
+                result[pair++] = (i + 1) + " " + (j + 1);
+                i++;
+                j++;
+            } else if (a[i] < b[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        System.out.println(pair);
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int nSoldiers = scanner.nextInt();
+        int nVest = scanner.nextInt();
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+        int[] first = new int[4];
+        int[] a = new int[nSoldiers];
+        int[] b = new int[nVest];
+        for (int i = 0; i < nSoldiers; i++) {
+            a[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < nVest; i++) {
+            b[i] = scanner.nextInt();
+        }
+        int pair = 0;
+        String[] result = new String[nSoldiers];
+        int curVest = 0;
+        int curSoldier = 0;
+        while (curSoldier < nSoldiers && curVest < nVest) {
+            if (a[curSoldier] - x <= b[curVest] && b[curVest] <= a[curSoldier] + y) {
+                result[pair] = curSoldier + 1 + " " + curVest + 1;
+                pair++;
+                curSoldier++;
+                curVest++;
+            } else {
+                if (a[curSoldier] < b[curVest]) {
+                    curSoldier++;
+                } else {
+                    curVest++;
+                }
+            }
+        }
+        System.out.println(pair);
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======

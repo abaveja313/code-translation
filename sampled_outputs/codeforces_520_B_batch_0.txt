@@ -1,0 +1,802 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+    int maxn = 10000;
+
+    Set<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.removeFirst();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(currentN - 1) && currentN - 1 > 0) {
+        memoizedValues.add(currentN - 1);
+        queue.add(new int[] {currentN - 1, buttonsPressed + 1});
+      }
+      if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+        memoizedValues.add(currentN * 2);
+        queue.add(new int[] {currentN * 2, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[]{n, 0});
+    int maxn = 100000;
+
+    Set<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.pop();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (blue(currentN) != 0 && !memoizedValues.contains(blue(currentN))) {
+        memoizedValues.add(blue(currentN));
+        queue.add(new int[]{blue(currentN), buttonsPressed + 1});
+      }
+      if (red(currentN) <= maxn && !memoizedValues.contains(red(currentN))) {
+        memoizedValues.add(red(currentN));
+        queue.add(new int[]{red(currentN), buttonsPressed + 1});
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n - 1;
+  }
+
+  private static int red(int n) {
+    return n * 2;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+    int maxn = 100000;
+
+    HashSet<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.removeFirst();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(currentN - 1) && currentN - 1 > 0) {
+        memoizedValues.add(currentN - 1);
+        queue.add(new int[] {currentN - 1, buttonsPressed + 1});
+      }
+      if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+        memoizedValues.add(currentN * 2);
+        queue.add(new int[] {currentN * 2, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[][] queue = new int[][] {{n, 0}};
+    int maxn = 10000;
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.remove(0);
+      int n = current[0];
+      int buttonsPressed = current[1];
+      if (n == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(blue(n)) && blue(n) > 0) {
+        memoizedValues.add(blue(n));
+        queue.add(new int[] {blue(n), buttonsPressed + 1});
+      }
+      if (!memoizedValues.contains(red(n)) && red(n) <= maxn) {
+        memoizedValues.add(red(n));
+        queue.add(new int[] {red(n), buttonsPressed + 1});
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n * 2;
+  }
+
+  private static int red(int n) {
+    return n - 1;
+  }
+
+  private static Set<Integer> memoizedValues = new HashSet<>();
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        LinkedList<Integer> queue = new LinkedList<>();
+        queue.add(n);
+        int maxn = 10000;
+        HashSet<Integer> memoizedValues = new HashSet<>();
+        while (!queue.isEmpty()) {
+            int currentN = queue.pop();
+            if (currentN == m) {
+                System.out.println(currentN);
+                break;
+            }
+            if (!memoizedValues.contains(currentN - 1) && currentN - 1 > 0) {
+                memoizedValues.add(currentN - 1);
+                queue.add(currentN - 1);
+            }
+            if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+                memoizedValues.add(currentN * 2);
+                queue.add(currentN * 2);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+    int maxn = 100000;
+    HashSet<Integer> memoizedValues = new HashSet<>();
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.pop();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(blue(currentN)) && blue(currentN) > 0) {
+        memoizedValues.add(blue(currentN));
+        queue.add(new int[] {blue(currentN), buttonsPressed + 1});
+      }
+      if (!memoizedValues.contains(red(currentN)) && red(currentN) <= maxn) {
+        memoizedValues.add(red(currentN));
+        queue.add(new int[] {red(currentN), buttonsPressed + 1});
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n * 2;
+  }
+
+  private static int red(int n) {
+    return n - 1;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    List<int[]> queue = new ArrayList<>();
+    queue.add(new int[] { n, 0 });
+    int maxn = 10000;
+    Set<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.remove(0);
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(currentN / 2) && currentN % 2 == 0) {
+        memoizedValues.add(currentN / 2);
+        queue.add(new int[] { currentN / 2, buttonsPressed + 1 });
+      }
+      if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+        memoizedValues.add(currentN * 2);
+        queue.add(new int[] { currentN * 2, buttonsPressed + 1 });
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[]{n, 0});
+    int maxn = 10000;
+    HashSet<Integer> memoizedValues = new HashSet<>();
+    memoizedValues.add(n);
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (currentN * 2 <= maxn && !memoizedValues.contains(currentN * 2)) {
+        memoizedValues.add(currentN * 2);
+        queue.add(new int[]{currentN * 2, buttonsPressed + 1});
+      }
+      if (currentN - 1 >= 0 && !memoizedValues.contains(currentN - 1)) {
+        memoizedValues.add(currentN - 1);
+        queue.add(new int[]{currentN - 1, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] queue = new int[][] {{n, 0}};
+        int maxn = 10000;
+        Set<Integer> memoizedValues = new HashSet<>();
+        memoizedValues.add(n);
+
+        while (!queue.isEmpty()) {
+            int[] current = queue.remove(0);
+            int currentN = current[0];
+            int buttonsPressed = current[1];
+
+            if (currentN == m) {
+                System.out.println(buttonsPressed);
+                break;
+            }
+
+            if (!memoizedValues.contains(currentN - 1) && currentN - 1 > 0) {
+                memoizedValues.add(currentN - 1);
+                queue.add(new int[] {currentN - 1, buttonsPressed + 1});
+            }
+
+            if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+                memoizedValues.add(currentN * 2);
+                queue.add(new int[] {currentN * 2, buttonsPressed + 1});
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    Queue<int[]> queue = new LinkedList<>();
+    queue.add(new int[] { n, 0 });
+    int maxn = 10000;
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(blue(currentN)) && blue(currentN) > 0) {
+        memoizedValues.add(blue(currentN));
+        queue.add(new int[] { blue(currentN), buttonsPressed + 1 });
+      }
+      if (!memoizedValues.contains(red(currentN)) && red(currentN) <= maxn) {
+        memoizedValues.add(red(currentN));
+        queue.add(new int[] { red(currentN), buttonsPressed + 1 });
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n * 2;
+  }
+
+  private static int red(int n) {
+    return n - 1;
+  }
+
+  private static Set<Integer> memoizedValues = new HashSet<>();
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    Queue<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+    Set<Integer> memoizedValues = new HashSet<>();
+    memoizedValues.add(n);
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      int blue = currentN * 2;
+      if (blue > 0 && !memoizedValues.contains(blue)) {
+        memoizedValues.add(blue);
+        queue.add(new int[] {blue, buttonsPressed + 1});
+      }
+      int red = currentN - 1;
+      if (red <= 10000 && !memoizedValues.contains(red)) {
+        memoizedValues.add(red);
+        queue.add(new int[] {red, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        scanner.close();
+
+        ArrayList<Integer> queue = new ArrayList<>();
+        queue.add(n);
+
+        HashSet<Integer> memoizedValues = new HashSet<>();
+        memoizedValues.add(n);
+
+        while (!queue.isEmpty()) {
+            int currentN = queue.remove(0);
+            if (currentN == m) {
+                System.out.println(currentN);
+                break;
+            }
+
+            int blue = currentN * 2;
+            if (blue > 0 && !memoizedValues.contains(blue)) {
+                memoizedValues.add(blue);
+                queue.add(blue);
+            }
+
+            int red = currentN - 1;
+            if (red <= 10000 && !memoizedValues.contains(red)) {
+                memoizedValues.add(red);
+                queue.add(red);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[][] queue = new int[][] {{n, 0}};
+    int maxn = 100000;
+    int buttonsPressed = 0;
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.remove(0);
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+
+      if (blue(currentN) != 0 && !memoizedValues.contains(blue(currentN))) {
+        memoizedValues.add(blue(currentN));
+        queue.add(new int[] {blue(currentN), buttonsPressed + 1});
+      }
+
+      if (red(currentN) <= maxn && !memoizedValues.contains(red(currentN))) {
+        memoizedValues.add(red(currentN));
+        queue.add(new int[] {red(currentN), buttonsPressed + 1});
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n * 2;
+  }
+
+  private static int red(int n) {
+    return n - 1;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    Queue<int[]> queue = new LinkedList<>();
+    queue.add(new int[]{n, 0});
+    int maxn = 10000;
+    Function<Integer, Integer> red = x -> x * 2;
+    Function<Integer, Integer> blue = x -> x - 1;
+    Set<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (blue.apply(currentN) != 0 && !memoizedValues.contains(blue.apply(currentN))) {
+        memoizedValues.add(blue.apply(currentN));
+        queue.add(new int[]{blue.apply(currentN), buttonsPressed + 1});
+      }
+      if (red.apply(currentN) <= maxn && !memoizedValues.contains(red.apply(currentN))) {
+        memoizedValues.add(red.apply(currentN));
+        queue.add(new int[]{red.apply(currentN), buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    ArrayList<int[]> queue = new ArrayList<>();
+    queue.add(new int[] {n, 0});
+    int maxn = 100000;
+    HashSet<Integer> memoizedValues = new HashSet<>();
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.remove(0);
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+
+      int blueN = currentN * 2;
+      if (blueN > 0 && !memoizedValues.contains(blueN)) {
+        memoizedValues.add(blueN);
+        queue.add(new int[] {blueN, buttonsPressed + 1});
+      }
+
+      int redN = currentN - 1;
+      if (redN <= maxn && !memoizedValues.contains(redN)) {
+        memoizedValues.add(redN);
+        queue.add(new int[] {redN, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int m = Integer.parseInt(input[1]);
+    LinkedList<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+    int maxn = 10000;
+    HashSet<Integer> memoizedValues = new HashSet<>();
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.pop();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+      if (!memoizedValues.contains(blue(currentN)) && blue(currentN) > 0) {
+        memoizedValues.add(blue(currentN));
+        queue.add(new int[] {blue(currentN), buttonsPressed + 1});
+      }
+      if (!memoizedValues.contains(red(currentN)) && red(currentN) <= maxn) {
+        memoizedValues.add(red(currentN));
+        queue.add(new int[] {red(currentN), buttonsPressed + 1});
+      }
+    }
+  }
+
+  private static int blue(int n) {
+    return n * 2;
+  }
+
+  private static int red(int n) {
+    return n - 1;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Queue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int m = Integer.parseInt(input[1]);
+    Queue<int[]> queue = new LinkedList<>();
+    queue.add(new int[]{n, 0});
+    int maxn = 10000;
+    int red = (int) Math.pow(2, n);
+    int blue = n - 1;
+    HashSet<Integer> memoizedValues = new HashSet<>();
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      if (current[0] == m) {
+        System.out.println(current[1]);
+        break;
+      }
+      if (blue > 0 && !memoizedValues.contains(blue)) {
+        memoizedValues.add(blue);
+        queue.add(new int[]{blue, current[1] + 1});
+      }
+      if (red <= maxn && !memoizedValues.contains(red)) {
+        memoizedValues.add(red);
+        queue.add(new int[]{red, current[1] + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    scanner.close();
+
+    Queue<int[]> queue = new LinkedList<>();
+    queue.add(new int[] {n, 0});
+
+    Set<Integer> memoizedValues = new HashSet<>();
+    memoizedValues.add(n);
+
+    while (!queue.isEmpty()) {
+      int[] current = queue.poll();
+      int currentN = current[0];
+      int buttonsPressed = current[1];
+
+      if (currentN == m) {
+        System.out.println(buttonsPressed);
+        break;
+      }
+
+      int blue = currentN * 2;
+      if (blue > 0 && !memoizedValues.contains(blue)) {
+        memoizedValues.add(blue);
+        queue.add(new int[] {blue, buttonsPressed + 1});
+      }
+
+      int red = currentN - 1;
+      if (red <= 10000 && !memoizedValues.contains(red)) {
+        memoizedValues.add(red);
+        queue.add(new int[] {red, buttonsPressed + 1});
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] queue = new int[1][2];
+    queue[0][0] = n;
+    queue[0][1] = 0;
+    int maxn = 100000;
+
+    while (queue.length > 0) {
+      int current_n = queue[0][0];
+      int buttons_pressed = queue[0][1];
+      queue = queue.slice(1);
+      if (current_n == m) {
+        System.out.println(buttons_pressed);
+        break;
+      }
+      if (!memoized_values.contains(blue(current_n)) && blue(current_n) > 0) {
+        memoized_values.add(blue(current_n));
+        queue.push([blue(current_n), buttons_pressed + 1]);
+      }
+      if (!memoized_values.contains(red(current_n)) && red(current_n) <= maxn) {
+        memoized_values.add(red(current_n));
+        queue.push([red(current_n), buttons_pressed + 1]);
+      }
+    }
+  }
+
+  public static int blue(int x) {
+    return x * 2;
+  }
+
+  public static int red(int x) {
+    return x - 1;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int maxn = 100000;
+        LinkedList<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{n, 0});
+        HashSet<Integer> memoizedValues = new HashSet<>();
+        while (!queue.isEmpty()) {
+            int[] current = queue.pop();
+            int currentN = current[0];
+            int buttonsPressed = current[1];
+            if (currentN == m) {
+                System.out.println(buttonsPressed);
+                break;
+            }
+            if (!memoizedValues.contains(currentN - 1) && currentN - 1 > 0) {
+                memoizedValues.add(currentN - 1);
+                queue.add(new int[]{currentN - 1, buttonsPressed + 1});
+            }
+            if (!memoizedValues.contains(currentN * 2) && currentN * 2 <= maxn) {
+                memoizedValues.add(currentN * 2);
+                queue.add(new int[]{currentN * 2, buttonsPressed + 1});
+            }
+        }
+    }
+}
+[/JAVA]
+======

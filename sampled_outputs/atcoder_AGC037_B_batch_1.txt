@@ -1,0 +1,1046 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int[] a = new int[3 * n];
+        for (int i = 0; i < 3 * n; i++) {
+            a[i] = sc.next().charAt(i) % 3;
+        }
+        int[][] g = new int[3][3 * n];
+        for (int i = 0; i < 3 * n; i++) {
+            g[a[i]].append(i);
+        }
+        int[] l = new int[3 * n];
+        for (int i = 0; i < n; i++) {
+            int[] sorted = new int[3];
+            sorted[0] = g[0][i];
+            sorted[1] = g[1][i];
+            sorted[2] = g[2][i];
+            Arrays.sort(sorted);
+            l[sorted[1]] = 1;
+            l[sorted[2]] = 2;
+        }
+        int ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            if (l[i] == 2) {
+                c++;
+            } else if (l[i] == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    long mod = 998244353;
+    int n = scanner.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = scanner.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = new int[3];
+      for (int j = 0; j < 3; j++) {
+        sorted[j] = g[j][i];
+      }
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int i = n - 1; i >= 0; i--) {
+      if (l[i] == 2) {
+        c++;
+      } else if (l[i] == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = {g[0][i], g[1][i], g[2][i]};
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].append(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int a = g[0][i];
+      int b = g[1][i];
+      int c = g[2][i];
+      l[b] = 1;
+      l[c] = 2;
+    }
+    int ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = sc.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = new int[3];
+      for (int j = 0; j < 3; j++) {
+        sorted[j] = g[j][i];
+      }
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mod = 998244353;
+    int n = scanner.nextInt();
+    char[] input = scanner.next().toCharArray();
+    List<Integer> a = new ArrayList<>();
+    for (char c : input) {
+      a.add((int) c % 3);
+    }
+    List<List<Integer>> g = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      g.add(new ArrayList<>());
+    }
+    for (int i = 0; i < 3 * n; i++) {
+      g.get(a.get(i)).add(i);
+    }
+    List<Integer> l = new ArrayList<>();
+    for (int i = 0; i < 3 * n; i++) {
+      l.add(0);
+    }
+    for (int i = 0; i < n; i++) {
+      int a = g.get(0).get(i);
+      int b = g.get(1).get(i);
+      int c = g.get(2).get(i);
+      l.set(b, 1);
+      l.set(c, 2);
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        long mod = 998244353;
+        int n = scanner.nextInt();
+        int[] a = new int[3 * n];
+        for (int i = 0; i < 3 * n; i++) {
+            a[i] = scanner.next().charAt(0) % 3;
+        }
+        int[][] g = new int[3][3 * n];
+        for (int i = 0; i < 3 * n; i++) {
+            g[a[i]].append(i);
+        }
+        int[] l = new int[3 * n];
+        for (int i = 0; i < n; i++) {
+            int[] bc = new int[2];
+            for (int j = 0; j < 3; j++) {
+                bc[j] = g[j][i];
+            }
+            Arrays.sort(bc);
+            l[bc[1]] = 1;
+            l[bc[2]] = 2;
+        }
+        long ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int x : l) {
+            if (x == 2) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = sc.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = new int[3];
+      sorted[0] = g[0].get(i);
+      sorted[1] = g[1].get(i);
+      sorted[2] = g[2].get(i);
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mod = 998244353;
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.next().charAt(0) % 3;
+        }
+        int[][] g = new int[3][n];
+        for (int i = 0; i < n; i++) {
+            g[a[i]][i] = i;
+        }
+        int[] l = new int[3 * n];
+        for (int i = 0; i < n; i++) {
+            int a = g[0][i];
+            int b = g[1][i];
+            int c = g[2][i];
+            l[b] = 1;
+            l[c] = 2;
+        }
+        long ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            if (l[i] == 2) {
+                c++;
+            } else if (l[i] == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = sc.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = new int[3];
+      sorted[0] = g[0][i];
+      sorted[1] = g[1][i];
+      sorted[2] = g[2][i];
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mod = 998244353;
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].append(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sortedIndices = {g[0][i], g[1][i], g[2][i]};
+      Arrays.sort(sortedIndices);
+      l[sortedIndices[1]] = 1;
+      l[sortedIndices[2]] = 2;
+    }
+    int ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]][i] = i;
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = {g[0][i], g[1][i], g[2][i]};
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int i = n - 1; i >= 0; i--) {
+      if (l[i] == 2) {
+        c++;
+      } else if (l[i] == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    long mod = 998244353;
+    int n = scanner.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = scanner.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] indices = new int[3];
+      for (int j = 0; j < 3; j++) {
+        indices[j] = g[j].get(i);
+      }
+      Arrays.sort(indices);
+      l[indices[1]] = 1;
+      l[indices[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int i = n - 1; i >= 0; i--) {
+      if (l[i] == 2) {
+        c++;
+      } else if (l[i] == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mod = 998244353;
+        int n = scanner.nextInt();
+        List<Integer> a = scanner.nextLine().chars().map(x -> x % 3).collect(Collectors.toList());
+        List<List<Integer>> g = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            g.add(new ArrayList<>());
+        }
+        for (int i = 0; i < 3 * n; i++) {
+            g.get(a.get(i)).add(i);
+        }
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int a = g.get(0).get(i);
+            int b = g.get(1).get(i);
+            int c = g.get(2).get(i);
+            l.set(b, 1);
+            l.set(c, 2);
+        }
+        long ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int x : l.subList(l.size() - 1, l.size())) {
+            if (x == 2) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mod = 998244353;
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.next().charAt(i) % 3;
+        }
+        int[][] g = new int[3][n];
+        for (int i = 0; i < 3 * n; i++) {
+            g[a[i]].append(i);
+        }
+        int[] l = new int[3 * n];
+        for (int i = 0; i < n; i++) {
+            int[] indices = {g[0][i], g[1][i], g[2][i]};
+            int[] sortedIndices = sort(indices);
+            l[sortedIndices[1]] = 1;
+            l[sortedIndices[2]] = 2;
+        }
+        int ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int x : l) {
+            if (x == 2) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+    
+    public static int[] sort(int[] arr) {
+        int[] sorted = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            sorted[i] = arr[i];
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (sorted[i] > sorted[j]) {
+                    int temp = sorted[i];
+                    sorted[i] = sorted[j];
+                    sorted[j] = temp;
+                }
+            }
+        }
+        return sorted;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]][i] = i;
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = {g[0][i], g[1][i], g[2][i]};
+      Arrays.sort(sorted);
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    int ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int i = n - 1; i >= 0; i--) {
+      if (l[i] == 2) {
+        c++;
+      } else if (l[i] == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    long mod = 998244353;
+    int n = scanner.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = scanner.next().charAt(i) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].append(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] indices = {g[0][i], g[1][i], g[2][i]};
+      Arrays.sort(indices);
+      l[indices[1]] = 1;
+      l[indices[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mod = 998244353;
+    int n = scanner.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = scanner.next().charAt(0) % 3;
+    }
+    int[][] g = new int[3][3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      g[a[i]].add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] indices = {g[0].get(i), g[1].get(i), g[2].get(i)};
+      Arrays.sort(indices);
+      l[indices[1]] = 1;
+      l[indices[2]] = 2;
+    }
+    long ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int i = n - 1; i >= 0; i--) {
+      if (l[i] == 2) {
+        c++;
+      } else if (l[i] == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long mod = 998244353;
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.next().charAt(0) % 3;
+        }
+        int[][] g = new int[3][n];
+        for (int i = 0; i < 3 * n; i++) {
+            g[a[i]][i] = i;
+        }
+        int[] l = new int[3 * n];
+        for (int i = 0; i < n; i++) {
+            int a = g[0][i];
+            int b = g[1][i];
+            int c = g[2][i];
+            l[b] = 1;
+            l[c] = 2;
+        }
+        long ans = 1;
+        for (int i = 0; i < n; i++) {
+            ans = (ans * (i + 1)) % mod;
+        }
+        int c = 0;
+        for (int x : l) {
+            if (x == 0) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        for (int x : l) {
+            if (x == 2) {
+                c++;
+            } else if (x == 1) {
+                ans = (ans * c) % mod;
+                c--;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int[] a = new int[3 * n];
+    for (int i = 0; i < 3 * n; i++) {
+      a[i] = sc.next().charAt(0) % 3;
+    }
+    List<List<Integer>> g = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      g.add(new ArrayList<>());
+    }
+    for (int i = 0; i < 3 * n; i++) {
+      g.get(a[i]).add(i);
+    }
+    int[] l = new int[3 * n];
+    for (int i = 0; i < n; i++) {
+      int[] sorted = Arrays.stream(g.get(0).get(i), g.get(1).get(i), g.get(2).get(i)).sorted().toArray();
+      l[sorted[1]] = 1;
+      l[sorted[2]] = 2;
+    }
+    int ans = 1;
+    for (int i = 0; i < n; i++) {
+      ans = (ans * (i + 1)) % mod;
+    }
+    int c = 0;
+    for (int x : l) {
+      if (x == 0) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    for (int x : l) {
+      if (x == 2) {
+        c++;
+      } else if (x == 1) {
+        ans = (ans * c) % mod;
+        c--;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

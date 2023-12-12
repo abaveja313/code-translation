@@ -1,0 +1,1206 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        a = b;
+        b = a;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if (a > b) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> X = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      X.add(sc.nextInt());
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X.toArray(), X.get(i) + l);
+      dp[0][i] = Arrays.binarySearch(X.toArray(), X.get(i) + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) % 2 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if (a > b) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if (a > b) {
+                a = b;
+                b = a;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt() - 1;
+            int b = sc.nextInt() - 1;
+            if (a > b) {
+                a = b;
+                b = a;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt() - 1;
+            int b = sc.nextInt() - 1;
+            if (a > b) {
+                a = b;
+                b = a;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  private static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) % 2 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      if (a > b) {
+        a = b;
+        b = a;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if (a > b) {
+                a = b;
+                b = a;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) & 1 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      if (a > b) {
+        a = b;
+        b = a;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  private static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int tmp = a;
+        a = b;
+        b = tmp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        a = b;
+        b = a;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        int temp = a;
+        a = b;
+        b = temp;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] X = new int[n];
+    for (int i = 0; i < n; i++) {
+      X[i] = sc.nextInt();
+    }
+    int l = sc.nextInt();
+    int U = 17;
+    int[][] dp = new int[U + 1][n];
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(X, X[i] + l);
+      dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+    }
+    for (int k = 0; k < U; k++) {
+      for (int i = 0; i < n; i++) {
+        dp[k + 1][i] = dp[k][dp[k][i]];
+      }
+    }
+
+    int q = sc.nextInt();
+    for (int i = 0; i < q; i++) {
+      int a = sc.nextInt() - 1;
+      int b = sc.nextInt() - 1;
+      if (a > b) {
+        a = b;
+        b = a;
+      }
+      int ng = 0;
+      int ok = n - 1;
+      while (ok - ng > 1) {
+        int mid = (ng + ok) / 2;
+        if (test(mid, a, b)) {
+          ok = mid;
+        } else {
+          ng = mid;
+        }
+      }
+      System.out.println(ok);
+    }
+  }
+
+  public static boolean test(int x, int a, int b) {
+    for (int i = U; i >= 0; i--) {
+      if ((x >> i) & 1 == 1) {
+        a = dp[i][a];
+      }
+    }
+    return a >= b;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] X = new int[n];
+        for (int i = 0; i < n; i++) {
+            X[i] = sc.nextInt();
+        }
+        int l = sc.nextInt();
+        int U = 17;
+        int[][] dp = new int[U + 1][n];
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(X, X[i] + l);
+            dp[0][i] = Arrays.binarySearch(X, X[i] + l) - 1;
+        }
+        for (int k = 0; k < U; k++) {
+            for (int i = 0; i < n; i++) {
+                dp[k + 1][i] = dp[k][dp[k][i]];
+            }
+        }
+
+        int q = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt() - 1;
+            int b = sc.nextInt() - 1;
+            if (a > b) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            int ng = 0;
+            int ok = n - 1;
+            while (ok - ng > 1) {
+                int mid = (ng + ok) / 2;
+                if (test(mid, a, b)) {
+                    ok = mid;
+                } else {
+                    ng = mid;
+                }
+            }
+            System.out.println(ok);
+        }
+    }
+
+    public static boolean test(int x, int a, int b) {
+        for (int i = U; i >= 0; i--) {
+            if ((x >> i) % 2 == 1) {
+                a = dp[i][a];
+            }
+        }
+        return a >= b;
+    }
+}
+[/JAVA]
+======

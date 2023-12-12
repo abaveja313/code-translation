@@ -1,0 +1,847 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        String[] c = new String[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = scanner.next();
+        }
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = i; k < n; k++) {
+                    for (int l = j; l < m; l++) {
+                        if (allZeros(c, i, j, k, l)) {
+                            s = Math.max(s, 2 * (k - i + l - j + 2));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(s);
+    }
+
+    private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+        for (int x = i; x <= k; x++) {
+            for (int y = j; y <= l; y++) {
+                if (c[x].charAt(y) != '0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        String[] c = new String[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = sc.next();
+        }
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = i; k < n; k++) {
+                    for (int l = j; l < m; l++) {
+                        if (allZeros(c, i, j, k, l)) {
+                            s = Math.max(s, 2 * (k - i + l - j + 2));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(s);
+    }
+    
+    private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+        for (int x = i; x <= k; x++) {
+            if (!allZeros(c[x], j, l)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private static boolean allZeros(String str, int j, int l) {
+        for (int i = j; i <= l; i++) {
+            if (str.charAt(i) != '0') {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = scanner.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c[x].substring(j, l + 1).equals("0" * (l - j + 1)) for x in range(i, k + 1))) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean all(String[] c, int j, int l) {
+    for (int x = j; x <= l; x++) {
+      if (!c[x].equals("0")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        String[] c = new String[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = sc.next();
+        }
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = i; k < n; k++) {
+                    for (int l = j; l < m; l++) {
+                        if (allZeroes(c, i, j, k, l)) {
+                            s = Math.max(s, 2 * (k - i + l - j + 2));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(s);
+    }
+    
+    private static boolean allZeroes(String[] c, int i, int j, int k, int l) {
+        for (int x = i; x <= k; x++) {
+            for (int y = j; y <= l; y++) {
+                if (c[x].charAt(y) != '0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c, i, k, j, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean all(String[] c, int i, int k, int j, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!c[x].substring(j, l + 1).equals("0".repeat(l - j + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The code uses the `Scanner` class to read input from the user, and the `Math` class to perform mathematical operations. The `all` method is used to check if all the characters in a given range are equal to a specific character.
+
+Note that the `String` class in Java does not have a `repeat` method like in Python, so we use the `String.repeat` method from the `java.util.stream` package instead.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!isAllZeros(c[x], j, l)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isAllZeros(String s, int j, int l) {
+    for (int i = j; i <= l; i++) {
+      if (s.charAt(i) != '0') {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The `main` method reads the input, initializes the `c` array, and sets `s` to 0. The nested loops iterate over the rows and columns of the array, and for each combination of `i`, `j`, `k`, and `l`, the `allZeros` method is called to check if all the elements in the subarray `c[i:k+1][j:l+1]` are zeros. If they are, the maximum value of `s` is updated. Finally, the `s` value is printed.
+
+The `allZeros` method takes a subarray `c[i:k+1][j:l+1]` and checks if all the elements in the subarray are zeros. It does this by iterating over the elements in the subarray and checking if each element is a zero. If all the elements are zeros, the method returns `true`, otherwise it returns `false`.
+
+The `isAllZeros` method takes a string `s` and checks if all the characters in the string are zeros. It does this by iterating over the characters in the string and checking if each character is a zero. If all the characters are zeros, the method returns `true`, otherwise it returns `false`.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      for (int y = j; y <= l; y++) {
+        if (c[x].charAt(y) != '0') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input from the user, and the `Math.max()` method to find the maximum value of two numbers. The `allZeros()` method checks if all the characters in a given range of the string are zeros.
+
+Note that the `String.charAt()` method is used to access the character at a specific index in the string. The `String.length()` method is used to get the length of the string.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = scanner.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!isAllZeros(c[x].substring(j, l + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isAllZeros(String s) {
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) != '0') {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = scanner.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!isAllZeros(c[x], j, l)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isAllZeros(String s, int j, int l) {
+    for (int i = j; i <= l; i++) {
+      if (s.charAt(i) != '0') {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = scanner.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      for (int y = j; y <= l; y++) {
+        if (c[x].charAt(y) != '0') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        String[] c = new String[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = scanner.next();
+        }
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = i; k < n; k++) {
+                    for (int l = j; l < m; l++) {
+                        if (allZeros(c, i, j, k, l)) {
+                            s = Math.max(s, 2 * (k - i + l - j + 2));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(s);
+    }
+
+    private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+        for (int x = i; x <= k; x++) {
+            for (int y = j; y <= l; y++) {
+                if (c[x].charAt(y) != '0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c[x].substring(j, l + 1).equals("0" * (l - j + 1)) for x in range(i, k + 1))) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c, i, k, j, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean all(String[] c, int i, int k, int j, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!c[x].substring(j, l + 1).equals("0".repeat(l - j + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `Scanner` class is used to read input from the user, and the `String` class is used to represent the input string. The `Math` class is used to calculate the maximum value of two numbers. The `all` method is a helper method that checks if all the strings in the given range have the same substring.
+
+The `main` method first reads the input from the user, splits it into two integers `n` and `m`, and then reads `n` strings into an array `c`. It then initializes the variable `s` to 0.
+
+The outer loop iterates over the rows of the grid, and the inner loop iterates over the columns. The innermost loop iterates over the rows and columns of the sub-grid that starts at the current row and column and extends to the end of the grid.
+
+The `all` method is called with the current row and column, and the maximum value of `s` is updated if the sub-grid is all zeros.
+
+Finally, the maximum value of `s` is printed.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!allZeros(c[x], j, l)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean allZeros(String s, int j, int l) {
+    for (int i = j; i <= l; i++) {
+      if (s.charAt(i) != '0') {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c, i, k, j, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean all(String[] c, int i, int k, int j, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!c[x].substring(j, l + 1).equals("0" * (l - j + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (all(c, i, k, j, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean all(String[] c, int i, int k, int j, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!c[x].substring(j, l + 1).equals("0" * (l - j + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        String[] c = new String[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = sc.next();
+        }
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = i; k < n; k++) {
+                    for (int l = j; l < m; l++) {
+                        if (allZeroes(c, i, j, k, l)) {
+                            s = Math.max(s, 2 * (k - i + l - j + 2));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(s);
+    }
+    
+    private static boolean allZeroes(String[] c, int i, int j, int k, int l) {
+        for (int x = i; x <= k; x++) {
+            for (int y = j; y <= l; y++) {
+                if (c[x].charAt(y) != '0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (isAllZero(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean isAllZero(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!isAllZero(c[x].substring(j, l + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isAllZero(String s) {
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) != '0') {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeroes(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeroes(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      for (int y = j; y <= l; y++) {
+        if (c[x].charAt(y) != '0') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[] c = new String[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = sc.next();
+    }
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int k = i; k < n; k++) {
+          for (int l = j; l < m; l++) {
+            if (allZeros(c, i, j, k, l)) {
+              s = Math.max(s, 2 * (k - i + l - j + 2));
+            }
+          }
+        }
+      }
+    }
+    System.out.println(s);
+  }
+
+  private static boolean allZeros(String[] c, int i, int j, int k, int l) {
+    for (int x = i; x <= k; x++) {
+      if (!c[x].substring(j, l + 1).equals("0".repeat(l - j + 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======

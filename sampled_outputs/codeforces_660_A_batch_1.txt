@@ -1,0 +1,1292 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int count = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[count++] = i;
+      }
+    }
+    System.out.println(count);
+    int flag = 1;
+    for (int i = 0; i < count; i++) {
+      arr = insert(arr, mistakes[i] + flag, 1);
+      flag++;
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < arr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[i] = i;
+      }
+    }
+    System.out.println(mistakes.length);
+    for (int i = 0; i < mistakes.length; i++) {
+      arr = insertElement(arr, mistakes[i] + i + 1, 1);
+    }
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static int[] insertElement(int[] arr, int index, int element) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = element;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int mistakeCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[mistakeCount++] = i;
+      }
+    }
+    System.out.println(mistakeCount);
+    for (int i = 0; i < mistakeCount; i++) {
+      arr = insertElement(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insertElement(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < arr.length + 1; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int mistakesCount = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[mistakesCount++] = i;
+            }
+        }
+        System.out.println(mistakesCount);
+        int flag = 1;
+        for (int i = 0; i < mistakesCount; i++) {
+            arr = insertElement(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    private static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private static int[] insertElement(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[index] = value;
+        for (int i = index + 1; i < newArr.length; i++) {
+            newArr[i] = arr[i - 1];
+        }
+        return newArr;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int mistakesCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[mistakesCount++] = i;
+      }
+    }
+    System.out.println(mistakesCount);
+    for (int i = 0; i < mistakesCount; i++) {
+      arr = insert(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < arr.length + 1; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int count = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[count++] = i;
+            }
+        }
+        System.out.println(count);
+        int flag = 1;
+        for (int i = 0; i < count; i++) {
+            arr = insert(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static int[] insert(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[index] = value;
+        for (int i = index + 1; i < arr.length + 1; i++) {
+            newArr[i] = arr[i - 1];
+        }
+        return newArr;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[i] = i;
+      }
+    }
+    System.out.println(mistakes.length);
+    for (int i = 0; i < mistakes.length; i++) {
+      arr = insertElement(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insertElement(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < arr.length + 1; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int count = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[count++] = i;
+            }
+        }
+        System.out.println(count);
+        int flag = 1;
+        for (int i = 0; i < count; i++) {
+            arr = insert(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static int[] insert(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[index] = value;
+        for (int i = index + 1; i < newArr.length; i++) {
+            newArr[i] = arr[i - 1];
+        }
+        return newArr;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int count = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[count++] = i;
+            }
+        }
+        System.out.println(count);
+        int flag = 1;
+        for (int i = 0; i < count; i++) {
+            arr = insertElement(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static int[] insertElement(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            if (i < index) {
+                newArr[i] = arr[i];
+            } else if (i == index) {
+                newArr[i] = value;
+            } else {
+                newArr[i + 1] = arr[i];
+            }
+        }
+        return newArr;
+    }
+
+    public static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int count = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[count] = i;
+                count++;
+            }
+        }
+        System.out.println(count);
+        int flag = 1;
+        for (int i = 0; i < count; i++) {
+            arr = insert(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    
+    public static int[] insert(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[index] = value;
+        for (int i = index + 1; i < arr.length; i++) {
+            newArr[i] = arr[i - 1];
+        }
+        return newArr;
+    }
+    
+    public static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int count = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[count++] = i;
+      }
+    }
+    System.out.println(count);
+    for (int i = 0; i < count; i++) {
+      arr = insert(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < arr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int count = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[count++] = i;
+      }
+    }
+    System.out.println(count);
+    int flag = 1;
+    for (int i = 0; i < count; i++) {
+      arr = insertElement(arr, mistakes[i] + flag, 1);
+      flag++;
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insertElement(int[] arr, int index, int element) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = element;
+    for (int i = index + 1; i < arr.length + 1; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int count = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[count++] = i;
+      }
+    }
+    System.out.println(count);
+    for (int i = 0; i < count; i++) {
+      arr = insertElement(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static int[] insertElement(int[] arr, int index, int element) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = element;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[i] = i;
+      }
+    }
+    System.out.println(mistakes.length);
+    for (int i = 0; i < mistakes.length; i++) {
+      arr = insert(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  private static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  private static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int[] mistakes = new int[n - 1];
+        int count = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (!checkDivisor(arr[i], arr[i + 1])) {
+                mistakes[count++] = i;
+            }
+        }
+        System.out.println(count);
+        int flag = 1;
+        for (int i = 0; i < count; i++) {
+            arr = insert(arr, mistakes[i] + flag, 1);
+            flag++;
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static boolean checkDivisor(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        if (min == 1) {
+            return true;
+        }
+        if (max % min == 0) {
+            return false;
+        }
+        int tempMin = min;
+        int tempMax = max;
+        while (tempMin != 0) {
+            int temp = tempMin;
+            tempMin = tempMax % tempMin;
+            tempMax = temp;
+        }
+        if (tempMax != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static int[] insert(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[index] = value;
+        for (int i = index + 1; i < newArr.length; i++) {
+            newArr[i] = arr[i - 1];
+        }
+        return newArr;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[i] = i;
+      }
+    }
+    System.out.println(mistakes.length);
+    int flag = 1;
+    for (int i = 0; i < mistakes.length; i++) {
+      arr = insert(arr, mistakes[i] + flag, 1);
+      flag++;
+    }
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int mistakesCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[mistakesCount++] = i;
+      }
+    }
+    System.out.println(mistakesCount);
+    for (int i = 0; i < mistakesCount; i++) {
+      arr = insert(arr, mistakes[i] + i, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int count = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[count++] = i;
+      }
+    }
+    System.out.println(count);
+    for (int i = 0; i < count; i++) {
+      arr = insert(arr, mistakes[i] + 1, 1);
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    if (a == 1 || b == 1) {
+      return true;
+    }
+    if (b % a == 0) {
+      return false;
+    }
+    int tempMin = Math.min(a, b);
+    int tempMax = Math.max(a, b);
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    return tempMax == 1;
+  }
+
+  public static int[] insert(int[] arr, int index, int value) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = value;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int mistakesCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[mistakesCount++] = i;
+      }
+    }
+    System.out.println(mistakesCount);
+    for (int i = 0; i < mistakesCount; i++) {
+      arr = insertElement(arr, mistakes[i] + i + 1, 1);
+    }
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insertElement(int[] arr, int index, int element) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < arr.length; i++) {
+      if (i < index) {
+        newArr[i] = arr[i];
+      } else if (i == index) {
+        newArr[i] = element;
+      } else {
+        newArr[i] = arr[i - 1];
+      }
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    int[] mistakes = new int[n - 1];
+    int mistakeCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (!checkDivisor(arr[i], arr[i + 1])) {
+        mistakes[mistakeCount++] = i;
+      }
+    }
+    System.out.println(mistakeCount);
+    int flag = 1;
+    for (int i = 0; i < mistakeCount; i++) {
+      arr = insertElement(arr, mistakes[i] + flag, 1);
+      flag++;
+    }
+    for (int i = 0; i < n; i++) {
+      System.out.print(arr[i] + " ");
+    }
+  }
+
+  public static boolean checkDivisor(int a, int b) {
+    int min = Math.min(a, b);
+    int max = Math.max(a, b);
+    if (min == 1) {
+      return true;
+    }
+    if (max % min == 0) {
+      return false;
+    }
+    int tempMin = min;
+    int tempMax = max;
+    while (tempMin != 0) {
+      int temp = tempMin;
+      tempMin = tempMax % tempMin;
+      tempMax = temp;
+    }
+    if (tempMax != 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public static int[] insertElement(int[] arr, int index, int element) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[index] = element;
+    for (int i = index + 1; i < newArr.length; i++) {
+      newArr[i] = arr[i - 1];
+    }
+    return newArr;
+  }
+}
+
+[/JAVA]
+======

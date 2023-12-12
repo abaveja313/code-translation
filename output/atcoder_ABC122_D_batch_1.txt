@@ -1,0 +1,3928 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  public static int dfs(int cur, String last3) {
+    if (cur == n) {
+      return 1;
+    }
+
+    if (memo[cur][last3.charAt(2)] != 0) {
+      return memo[cur][last3.charAt(2)];
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3.charAt(2) + i)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + i)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(2)] = ret;
+    return ret;
+  }
+
+  public static boolean ok(char last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = new char[4];
+      t[0] = last4;
+      if (i >= 1) {
+        t[i] = t[i - 1];
+        t[i - 1] = last4;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+    
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(2)] != 0) {
+            return memo[cur][last3.charAt(2)];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2)] = ret;
+        return ret;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    private static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char)('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i))) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = (char) (t[i - 1] + (t[i] - t[i - 1]));
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  public static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3.charAt(2) - 'A', i)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(int last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1) {
+        char[] t = last4.toString().toCharArray();
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+        if (new String(t).contains("AGC")) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + "ACGT".charAt(i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT".charAt(i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i) + "".join(last3.substring(1)))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + last3.charAt(i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  public static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + "ACGT"[i])) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i])) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1) {
+        char t = last4.charAt(i);
+        last4 = last4.substring(0, i - 1) + last4.charAt(i - 1) + t + last4.substring(i + 1);
+      }
+      if (last4.indexOf("AGC") != -1) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+
+        if (memo[cur][last3.charAt(last3.length() - 1) - 'A'] != -1) {
+            return memo[cur][last3.charAt(last3.length() - 1) - 'A'];
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(last3.length() - 1) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                last4 = swap(last4, i, i - 1);
+            }
+            if (last4.indexOf("AGC") >= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String swap(String s, int i, int j) {
+        char[] chars = s.toCharArray();
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  private static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  private static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1) {
+        char t = last4.charAt(i);
+        last4 = last4.substring(0, i - 1) + last4.charAt(i - 1) + t + last4.substring(i + 1);
+      }
+      if (last4.indexOf("AGC") >= 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+
+    if (cur == n) {
+      return 1;
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char tmp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = tmp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+    
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+    
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(1) - 'A'] != 0) {
+            return memo[cur][last3.charAt(1) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(1) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n+1][];
+        for (int i = 0; i <= n; i++) {
+            memo[i] = new int[4];
+        }
+        System.out.println(dfs(0, "TTT"));
+    }
+    
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i+1);
+            if (i >= 1) {
+                t = t.substring(0, 1) + t.substring(1, 2);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3] != 0) {
+            return memo[cur][last3];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = last3.substring(i, i+1);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3] = ret;
+        return ret;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT"));
+    }
+    
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(0, 1) + t.substring(1, 2);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = "" + (char) ('A' + i);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i < memo.length; i++) {
+            for (int j = 0; j < memo[i].length; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+
+        if (cur == n) {
+            return 1;
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i) + "")) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) (i + 'A'), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                char temp = last4.charAt(i);
+                last4 = last4.substring(0, i - 1) + last4.charAt(i - 1) + temp + last4.substring(i + 1);
+            }
+            if (last4.indexOf("AGC") != -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.hashCode()] != 0) {
+            return memo[cur][last3.hashCode()];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.hashCode()] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+
+        if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(2) - 'A', i)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(int last4) {
+        for (int i = 0; i < 4; i++) {
+            int[] t = new int[4];
+            for (int j = 0; j < 4; j++) {
+                t[j] = last4 % 10;
+                last4 /= 10;
+            }
+            if (i >= 1) {
+                int temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                char c = last4.charAt(i);
+                last4 = last4.substring(0, i) + last4.charAt(i - 1) + last4.substring(i + 1);
+            }
+            if (last4.indexOf("AGC") >= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 1; i < 4; i++) {
+            if (last4.charAt(i) == last4.charAt(i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1 && last4.charAt(i) != last4.charAt(i - 1)) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = (char) (t[i - 1] ^ t[i]);
+            }
+            if ("AGC".contains(String.valueOf(t))) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char tmp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = tmp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char)('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      String t = last4.substring(i, i + 1);
+      if (i >= 1 && t.equals("A") && last4.substring(i - 1, i).equals("G")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `java.util.Scanner` class to read input from the user, and the `java.lang.String` class to perform string manipulations. The `mod` variable is used to perform modular arithmetic, and the `mem
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i < memo.length; i++) {
+            for (int j = 0; j < memo[i].length; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(1, 2) + t.substring(0, 1);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = String.valueOf((char) (i + 'A'));
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT"));
+    }
+    
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(i - 1, i) + t.substring(i, i + 1);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.length() - 1] != 0) {
+            return memo[cur][last3.length() - 1];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = last3.substring(i, i + 1);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3.length() - 1] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][];
+    for (int i = 0; i <= n; i++) {
+      memo[i] = new int[4];
+    }
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  private static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3.charAt(i) + last3.charAt(i + 1) + last3.charAt(i + 2))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + last3.charAt(i))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  private static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1 && last4.charAt(i) == last4.charAt(i - 1)) {
+        return false;
+      }
+      if (last4.substring(i, i + 3).equals("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (cur == n) {
+      return 1;
+    }
+    if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1) {
+        char t = last4.charAt(i);
+        last4 = last4.substring(0, i) + last4.charAt(i - 1) + last4.substring(i + 1);
+      }
+      if (last4.indexOf("AGC") >= 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][];
+    for (int i = 0; i <= n; i++) {
+      memo[i] = new int[4];
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      String t = last4.substring(i, i + 1);
+      if (i >= 1) {
+        t = t.substring(0, 1) + t.substring(1, 2);
+      }
+      if (t.contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3] != 0) {
+      return memo[cur][last3];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      String c = "ACGT".substring(i, i + 1);
+      if (ok(last3 + c)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1, 4) + c, memo)) % mod;
+      }
+    }
+    memo[cur][last3] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.hashCode()] != 0) {
+            return memo[cur][last3.hashCode()];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + i)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + i, memo)) % mod;
+            }
+        }
+        memo[cur][last3.hashCode()] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                last4 = swap(last4, i, i - 1);
+            }
+            if (count(last4, "AGC") >= 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String swap(String s, int i, int j) {
+        char[] chars = s.toCharArray();
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+        return String.valueOf(chars);
+    }
+
+    public static int count(String s, String substr) {
+        int count = 0;
+        for (int i = 0; i < s.length() - substr.length() + 1; i++) {
+            if (s.substring(i, i + substr.length()).equals(substr)) {
+                count++;
+            }
+        }
+        return count;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][];
+    for (int i = 0; i <= n; i++) {
+      memo[i] = new int[4];
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.hashCode()] != 0) {
+      return memo[cur][last3.hashCode()];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (char c : "ACGT".toCharArray()) {
+      if (ok(last3 + c)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+      }
+    }
+    memo[cur][last3.hashCode()] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, new char[] {'T', 'T', 'T'}, memo));
+    }
+
+    private static int dfs(int cur, char[] last3, int[][] memo) {
+        if (memo[cur][last3[0] - 'A'] != 0) {
+            return memo[cur][last3[0] - 'A'];
+        }
+
+        if (cur == n) {
+            return 1;
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3, i)) {
+                ret = (ret + dfs(cur + 1, new char[] {last3[1], last3[2], 'A'}, memo)) % mod;
+            }
+        }
+
+        memo[cur][last3[0] - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(char[] last3, int i) {
+        char[] t = new char[4];
+        System.arraycopy(last3, 0, t, 0, 4);
+
+        if (i >= 1) {
+            char temp = t[i];
+            t[i] = t[i - 1];
+            t[i - 1] = temp;
+        }
+
+        return !new String(t).contains("AGC");
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT", n, mod, memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int n, int mod, int[][] memo) {
+    if (memo[cur][last3.charAt(2)] != 0) {
+      return memo[cur][last3.charAt(2)];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (char c : "ACGT".toCharArray()) {
+      if (ok(last3 + c)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + c, n, mod, memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2)] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+
+Explanation:
+
+* The `main` method is the entry point of the program. It takes the input `n` from the user and initializes the `mod` variable.
+* The `ok` method checks if the last 4 characters of the input string `last4` form the substring "AGC". If so, it returns `false`. Otherwise, it returns `true`.
+* The `dfs` method is the recursive method that performs the depth-first search. It takes the current position `cur
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+
+        if (cur == n) {
+            return 1;
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    private static final int mod = 1000000007;
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int dfs(int cur, String last3) {
+        if (memo[cur].containsKey(last3)) {
+            return memo[cur].get(last3);
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur].put(last3, ret);
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT"));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  public static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] ^= t[i - 1];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+
+I have converted the Python code to Java code. The Java code is functionally identical to the Python code, and it obeys the constraints you specified. The code is within a driver class called `Solution` with an executable `main(String[] args)` method. The code contains all necessary imports and is between the `[JAVA]` and `[/JAVA]` tags.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  private static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+
+    if (cur == n) {
+      return 1;
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  private static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        t[i] = t[i - 1];
+        t[i - 1] = t[i];
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + "ACGT"[i])) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i], memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    private static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i))) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(char last4) {
+        for (int i = 0; i < 4; i++) {
+            char t = last4;
+            if (i >= 1) {
+                t = (char) (t ^ (1 << i));
+            }
+            if (Integer.bitCount(t) >= 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i], memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(char last4) {
+        for (int i = 0; i < 4; i++) {
+            char t = last4;
+            if (i >= 1) {
+                t = (char) (last4 ^ (1 << i));
+            }
+            if (new String(new char[] { t }).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i) + last3.charAt(i + 1) + last3.charAt(i + 2))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + last3.charAt(i), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1 && last4.charAt(i) == last4.charAt(i - 1)) {
+                return false;
+            }
+            if (last4.substring(i, i + 3).equals("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The `ok` function is implemented using a `for` loop to iterate over the last 4 characters of the string, and check if any of them are equal to the previous character. If any of them are equal, the function returns `false`, otherwise it returns `true`.
+
+The `dfs` function is implemented using a recursive approach, where it calls itself
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+
+    if (cur == n) {
+      return 1;
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1) {
+        char temp = last4.charAt(i);
+        last4 = last4.substring(0, i) + last4.charAt(i - 1) + last4.substring(i + 1);
+        last4 = last4.substring(0, i - 1) + temp + last4.substring(i);
+      }
+      if (last4.indexOf("AGC") != -1) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][];
+        for (int i = 0; i <= n; i++) {
+            memo[i] = new int[4];
+        }
+        System.out.println(dfs(0, "TTT", memo));
+    }
+    
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(1, 2) + t.substring(0, 1);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3] != 0) {
+            return memo[cur][last3];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = "ACGT".substring(i, i + 1);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      String t = last4.substring(i, i + 1);
+      if (i >= 1) {
+        t = t.substring(1, 2) + t.substring(0, 1);
+      }
+      if (t.contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+
+        if (memo[cur][last3.charAt(last3.length() - 1) - 'A'] != 0) {
+            return memo[cur][last3.charAt(last3.length() - 1) - 'A'];
+        }
+
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char)('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(last3.length() - 1) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][];
+    for (int i = 0; i < n + 1; i++) {
+      memo[i] = new int[4];
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+
+This is a Java implementation of the Python code you provided. I have converted the Python code to Java by following the same structure and logic. The only difference is that I have used a `Scanner` to read the input from the user instead of `input()`. I have also used a `String`
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+
+    if (cur == n) {
+      return 1;
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char tmp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = tmp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (cur == n) {
+      return 1;
+    }
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char)('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        t[i] = t[i - 1];
+        t[i - 1] = t[i];
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + "ACGT"[i])) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i], memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + "ACGT"[i])) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i], memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  private static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (char c : "ACGT".toCharArray()) {
+      if (ok(last3 + c)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  private static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  private static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      if (i >= 1 && last4.charAt(i) == last4.charAt(i - 1)) {
+        return false;
+      }
+      if (i >= 2 && last4.charAt(i) == last4.charAt(i - 2)) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i < memo.length; i++) {
+            for (int j = 0; j < memo[i].length; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + "ACGT"[i])) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i], memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = last4.substring(i - 1, i) + t;
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = last3.substring(i, i + 1);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(0, 1) + t.substring(1, 2);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i))) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (cur == n) {
+      return 1;
+    }
+
+    if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char)('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+      }
+    }
+
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char temp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = temp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3.charAt(i) + last3.charAt(i + 1) + last3.charAt(i + 2))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + last3.charAt(i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+
+    System.out.println(dfs(0, "TTT"));
+  }
+
+  private static int dfs(int cur, String last3) {
+    if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3.charAt(i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) (i + 'A'))) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  private static boolean ok(char last4) {
+    for (int i = 0; i < 4; i++) {
+      char t = last4;
+      if (i >= 1) {
+        t = (char) (t ^ (1 << i));
+      }
+      if (String.valueOf(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < 4; j++) {
+                memo[i][j] = -1;
+            }
+        }
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+
+        if (cur == n) {
+            return 1;
+        }
+
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        long[][] memo = new long[n + 1][4];
+        for (int i = 0; i < memo.length; i++) {
+            for (int j = 0; j < memo[0].length; j++) {
+                memo[i][j] = -1;
+            }
+        }
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char temp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = temp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static long dfs(int cur, String last3, long[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        long ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+    System.out.println(dfs(0, "TTT", memo));
+  }
+
+  public static int dfs(int cur, String last3, int[][] memo) {
+    if (memo[cur][last3.charAt(2) - 'A'] != -1) {
+      return memo[cur][last3.charAt(2) - 'A'];
+    }
+    if (cur == n) {
+      return 1;
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3 + (char) ('A' + i))) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(2) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(String last4) {
+    for (int i = 0; i < 4; i++) {
+      char[] t = last4.toCharArray();
+      if (i >= 1) {
+        char tmp = t[i];
+        t[i] = t[i - 1];
+        t[i - 1] = tmp;
+      }
+      if (new String(t).contains("AGC")) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + i)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + i, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                char temp = last4.charAt(i);
+                last4 = last4.substring(0, i - 1) + last4.charAt(i - 1) + temp + last4.substring(i + 1);
+            }
+            if (last4.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (cur == n) {
+            return 1;
+        }
+        if (memo[cur][last3.charAt(2) - 'A'] != 0) {
+            return memo[cur][last3.charAt(2) - 'A'];
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char)('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(2) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][];
+        for (int i = 0; i <= n; i++) {
+            memo[i] = new int[4];
+        }
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(i - 1, i) + t.substring(i, i + 1);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3] != 0) {
+            return memo[cur][last3];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            String c = "ACGT".substring(i, i + 1);
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT"));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                char tmp = t[i];
+                t[i] = t[i - 1];
+                t[i - 1] = tmp;
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + "ACGT"[i])) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT"[i])) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int mod = 1000000007;
+    int[][] memo = new int[n + 1][4];
+    for (int i = 0; i < n + 1; i++) {
+      for (int j = 0; j < 4; j++) {
+        memo[i][j] = -1;
+      }
+    }
+    System.out.println(dfs(0, "TTT", n, mod, memo));
+  }
+
+  public static int dfs(int cur, String last3, int n, int mod, int[][] memo) {
+    if (cur == n) {
+      return 1;
+    }
+    if (memo[cur][last3.charAt(0) - 'A'] != -1) {
+      return memo[cur][last3.charAt(0) - 'A'];
+    }
+    int ret = 0;
+    for (int i = 0; i < 4; i++) {
+      if (ok(last3.charAt(0) - 'A', last3.charAt(1) - 'A', last3.charAt(2) - 'A', i)) {
+        ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), n, mod, memo)) % mod;
+      }
+    }
+    memo[cur][last3.charAt(0) - 'A'] = ret;
+    return ret;
+  }
+
+  public static boolean ok(int a, int b, int c, int d) {
+    if (a == d || b == d || c == d) {
+      return false;
+    }
+    if (a == b || a == c || b == c) {
+      return false;
+    }
+    return true;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code. The code uses the same algorithm and data structures as the Python code, with the only difference being the syntax and the use of Java's built-in data structures
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (char c : "ACGT".toCharArray()) {
+            if (ok(last3 + c)) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + c, memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    private static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char) ('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char) ('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    private static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            char[] t = last4.toCharArray();
+            if (i >= 1) {
+                t[i] = t[i - 1];
+                t[i - 1] = t[i];
+            }
+            if (new String(t).contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+
+        System.out.println(dfs(0, "TTT", memo));
+    }
+
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A']) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + "ACGT".charAt(i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + "ACGT".charAt(i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            if (i >= 1) {
+                char t = last4.charAt(i);
+                last4 = last4.substring(0, i - 1) + last4.charAt(i - 1) + last4.substring(i);
+            }
+            if (last4.indexOf("AGC") >= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int mod = 1000000007;
+        int[][] memo = new int[n + 1][4];
+        System.out.println(dfs(0, "TTT", memo));
+    }
+    
+    public static boolean ok(String last4) {
+        for (int i = 0; i < 4; i++) {
+            String t = last4.substring(i, i + 1);
+            if (i >= 1) {
+                t = t.substring(0, 1) + t.substring(1, 2);
+            }
+            if (t.contains("AGC")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static int dfs(int cur, String last3, int[][] memo) {
+        if (memo[cur][last3.charAt(0) - 'A'] != 0) {
+            return memo[cur][last3.charAt(0) - 'A'];
+        }
+        if (cur == n) {
+            return 1;
+        }
+        int ret = 0;
+        for (int i = 0; i < 4; i++) {
+            if (ok(last3 + (char)('A' + i))) {
+                ret = (ret + dfs(cur + 1, last3.substring(1) + (char)('A' + i), memo)) % mod;
+            }
+        }
+        memo[cur][last3.charAt(0) - 'A'] = ret;
+        return ret;
+    }
+}
+
+[/JAVA]
+======

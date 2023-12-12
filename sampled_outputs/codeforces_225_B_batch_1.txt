@@ -1,0 +1,1316 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = Arrays.copyOf(fib_n, fib_n.length + 1);
+      fib_n[fib_n.length - 1] = fib_n[fib_n.length - 2] + fib_n[fib_n.length - 3];
+    }
+    int[] foundSeries = new int[1];
+    boolean found = false;
+
+    findBSearch(s, fib_n, foundSeries, found);
+
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries[0] = 0;
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    }
+
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom) > 1) {
+      if (total > numbers[(top + bottom) / 2]) {
+        bottom = (top + bottom) / 2;
+      } else {
+        top = (top + bottom) / 2;
+      }
+    }
+    if (total == numbers[top] || total == numbers[bottom]) {
+      foundSeries[0] = total;
+      found = true;
+      return;
+    }
+
+    findBSearch(total - numbers[top], Arrays.copyOf(numbers, top), foundSeries, found);
+    if (found) {
+      foundSeries[0] = numbers[top];
+      return;
+    }
+
+    findBSearch(total - numbers[bottom], Arrays.copyOf(numbers, bottom), foundSeries, found);
+    if (found) {
+      foundSeries[0] = numbers[bottom];
+      return;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, k));
+    }
+    del(fib_n, 1);
+    del(fib_n, 0);
+    del(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < arr.length; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    for (int i = index + 1; i < arr.length; i++) {
+      newArr[i - 1] = arr[i];
+    }
+    arr = newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k && i < arr.length; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = append(foundSeries, 0);
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, Math.min(k, fib_n.length)));
+    }
+    fib_n = remove(fib_n, 1);
+    fib_n = remove(fib_n, 0);
+    fib_n = remove(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static int[] remove(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = append(foundSeries, 0);
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int s = Integer.parseInt(input[0]);
+    int k = Integer.parseInt(input[1]);
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, Math.min(k, fib_n.length)));
+    }
+    del(fib_n, 1);
+    del(fib_n, 0);
+    del(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  public static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  public static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    arr = newArr;
+  }
+
+  public static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  public static boolean findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return false;
+    }
+    if (total == 0) {
+      return true;
+    } else if (numbers.length == 0 || total < 0) {
+      return false;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2]) {
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int s = scanner.nextInt();
+        int k = scanner.nextInt();
+        scanner.close();
+
+        int[] fib_n = {0, 1};
+        while (fib_n[fib_n.length - 1] <= s) {
+            fib_n = append(fib_n, sum(fib_n, Math.min(k, fib_n.length)));
+        }
+        del(fib_n, 1);
+        del(fib_n, 0);
+        del(fib_n, fib_n.length - 1);
+
+        int[] foundSeries = {0};
+        boolean found = false;
+        findBSearch(s, fib_n, foundSeries, found);
+        System.out.println(foundSeries.length);
+        for (int i : foundSeries) {
+            System.out.print(i + " ");
+        }
+    }
+
+    private static int[] append(int[] arr, int val) {
+        int[] newArr = new int[arr.length + 1];
+        System.arraycopy(arr, 0, newArr, 0, arr.length);
+        newArr[arr.length] = val;
+        return newArr;
+    }
+
+    private static void del(int[] arr, int index) {
+        int[] newArr = new int[arr.length - 1];
+        System.arraycopy(arr, 0, newArr, 0, index);
+        System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    }
+
+    private static int sum(int[] arr, int k) {
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+        if (found) {
+            return;
+        }
+        int top = numbers.length - 1;
+        int bottom = 0;
+        while (Math.abs(top - bottom) > 1) {
+            if (total > numbers[(top + bottom) / 2]) {
+                bottom = (top + bottom) / 2;
+            } else {
+                top = (top + bottom) / 2;
+            }
+        }
+        if (total == numbers[top] || total == numbers[bottom]) {
+            foundSeries = append(foundSeries, total);
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int s = sc.nextInt();
+    int k = sc.nextInt();
+    sc.close();
+
+    int[] fibN = new int[] {0, 1};
+    while (fibN[fibN.length - 1] <= s) {
+      fibN = append(fibN, sum(fibN, Math.min(k, fibN.length)));
+    }
+    del(fibN, 1);
+    del(fibN, 0);
+    del(fibN, fibN.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fibN, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    for (int i = 0; i < arr.length; i++) {
+      newArr[i] = arr[i];
+    }
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    for (int i = 0; i < index; i++) {
+      newArr[i] = arr[i];
+    }
+    for (int i = index + 1; i < arr.length; i++) {
+      newArr[i - 1] = arr[i];
+    }
+    arr = newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = new int[] {0};
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    }
+
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int s = scanner.nextInt();
+        int k = scanner.nextInt();
+
+        int[] fibN = new int[2];
+        fibN[0] = 0;
+        fibN[1] = 1;
+
+        while (fibN[fibN.length - 1] <= s) {
+            int[] newFibN = new int[fibN.length + 1];
+            for (int i = 0; i < fibN.length; i++) {
+                newFibN[i] = fibN[i];
+            }
+            newFibN[fibN.length] = fibN[fibN.length - 1] + fibN[fibN.length - 2];
+            fibN = newFibN;
+        }
+
+        int[] foundSeries = new int[1];
+        boolean found = false;
+
+        boolean findBSearch(int total, int[] numbers) {
+            if (found) {
+                return false;
+            }
+
+            if (total == 0) {
+                return true;
+            } else if (numbers.length == 0 || total < 0) {
+                return false;
+            } else {
+                int top = numbers.length - 1;
+                int bottom = 0;
+
+                while (Math.abs(top - bottom) > 1) {
+                    if (total > numbers[(top + bottom) / 2]) {
+                        bottom = (top + bottom) / 2;
+                    } else {
+                        top = (top + bottom) / 2;
+                    }
+                }
+
+                if (total == numbers[top] || total == numbers[bottom]) {
+                    foundSeries[foundSeries.length] = total;
+                    found = true;
+                    return true;
+                } else {
+                    if (findBSearch(total - numbers[top], Arrays.copyOfRange(numbers, 0, top))) {
+                        foundSeries[foundSeries.length] = numbers[top];
+                        return true;
+                    } else if (findBSearch(total - numbers[bottom], Arrays.copyOfRange(numbers, 0, bottom))) {
+                        foundSeries[foundSeries.length] = numbers[bottom];
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        findBSearch(s, fibN);
+
+        System.out.println(foundSeries.length);
+        for (int i : foundSeries) {
+           
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int s = scanner.nextInt();
+        int k = scanner.nextInt();
+
+        int[] fib_n = new int[2];
+        fib_n[0] = 0;
+        fib_n[1] = 1;
+
+        while (fib_n[fib_n.length - 1] <= s) {
+            int[] newFib = new int[fib_n.length + 1];
+            for (int i = 0; i < fib_n.length; i++) {
+                newFib[i] = fib_n[i];
+            }
+            newFib[newFib.length - 1] = fib_n[fib_n.length - 1] + fib_n[fib_n.length - 2];
+            fib_n = newFib;
+        }
+
+        int[] foundSeries = new int[1];
+        boolean found = false;
+
+        findBSearch(s, fib_n, foundSeries, found);
+
+        System.out.println(foundSeries.length);
+        for (int i : foundSeries) {
+            System.out.print(i + " ");
+        }
+    }
+
+    private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+        if (found) {
+            return;
+        }
+
+        if (total == 0) {
+            found = true;
+            return;
+        } else if (numbers.length == 0 || total < 0) {
+            return;
+        }
+
+        int top = numbers.length - 1;
+        int bottom = 0;
+
+        while (Math.abs(top - bottom) > 1) {
+            if (total > numbers[(top + bottom) / 2]) {
+                bottom = (top + bottom) / 2;
+            } else {
+                top = (top + bottom) / 2;
+            }
+        }
+
+        if (total == numbers[top] || total == numbers[bottom]) {
+            foundSeries[foundSeries.length - 1] = total;
+            found = true;
+            return;
+        }
+
+        findBSearch(total - numbers[top], numbers[0], foundSeries, found);
+        if (found) {
+            foundSeries[foundSeries.length - 1] = numbers[top];
+            return;
+        }
+
+        findBSearch(total - numbers[bottom], numbers[0], foundSeries, found);
+        if (found) {
+            foundSeries[foundSeries.length -
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, min(k, fib_n.length)));
+    }
+    del(fib_n, 1);
+    del(fib_n, 0);
+    del(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int sum(int[] fib_n, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += fib_n[i];
+    }
+    return sum;
+  }
+
+  private static int[] append(int[] fib_n, int value) {
+    int[] newArray = new int[fib_n.length + 1];
+    for (int i = 0; i < fib_n.length; i++) {
+      newArray[i] = fib_n[i];
+    }
+    newArray[newArray.length - 1] = value;
+    return newArray;
+  }
+
+  private static void del(int[] fib_n, int index) {
+    int[] newArray = new int[fib_n.length - 1];
+    for (int i = 0; i < fib_n.length; i++) {
+      if (i != index) {
+        newArray[i] = fib_n[i];
+      }
+    }
+    fib_n = newArray;
+  }
+
+  private static void findBSearch(int s, int[] fib_n, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (s == 0) {
+      foundSeries = append(foundSeries, 0);
+      found = true;
+      return;
+    } else if (fib_n.length == 0 || s < 0) {
+      return;
+    } else {
+      int top = fib_n.length - 1;
+     
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, k));
+    }
+    fib_n = delete(fib_n, 1);
+    fib_n = delete(fib_n, 0);
+    fib_n = delete(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static int[] delete(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < Math.min(k, arr.length); i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = append(foundSeries, 0);
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top +
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = Arrays.copyOf(fib_n, fib_n.length + 1);
+      fib_n[fib_n.length - 1] =
+          IntStream.range(0, Math.min(k, fib_n.length - 1))
+              .map(i -> fib_n[fib_n.length - 1 - i])
+              .sum();
+    }
+    fib_n = Arrays.copyOf(fib_n, fib_n.length - 2);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+
+    findBSearch(s, fib_n, foundSeries, found);
+
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static void findBSearch(
+      int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+
+    if (total == 0) {
+      found = true;
+      return;
+    }
+
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom) > 1) {
+      if (total > numbers[(top + bottom) / 2]) {
+        bottom = (top + bottom) / 2;
+      } else {
+        top = (top + bottom) / 2;
+      }
+    }
+
+    if (total == numbers[top] || total == numbers[bottom]) {
+      foundSeries = Arrays.copyOf(foundSeries, foundSeries.length + 1);
+      foundSeries[foundSeries.length - 1] = total;
+      found = true;
+      return;
+    }
+
+    findBSearch(total - numbers[top], Arrays.copyOf(numbers, top), foundSeries, found);
+    if (found) {
+      return;
+    }
+
+    findBSearch(total - numbers[bottom], Arrays.copyOf(numbers, bottom), foundSeries, found);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+
+    int[] fibN = new int[] {0, 1};
+    while (fibN[fibN.length - 1] <= s) {
+      fibN = append(fibN, sum(fibN, Math.min(k, fibN.length)));
+    }
+    fibN = delete(fibN, 1);
+    fibN = delete(fibN, 0);
+    fibN = delete(fibN, fibN.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+
+    findBSearch(s, fibN, foundSeries, found);
+
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static int[] delete(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom) > 1) {
+      if (total > numbers[(top + bottom) / 2]) {
+        bottom = (top + bottom) / 2;
+      } else {
+        top = (top + bottom) / 2;
+      }
+    }
+
+    if (total == numbers[top] || total == numbers[bottom]) {
+      foundSeries = append
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int s = sc.nextInt();
+    int k = sc.nextInt();
+    int[] fib_n = new int[]{0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = Arrays.copyOf(fib_n, fib_n.length + 1);
+      fib_n[fib_n.length - 1] = Arrays.stream(fib_n).limit(Math.min(k, fib_n.length)).sum();
+    }
+    int[] foundSeries = new int[]{0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2]) {
+          bottom = (top + bottom) / 2;
+        } else {
+          top = (top + bottom) / 2;
+        }
+      }
+      if (total == numbers[top] || total == numbers[bottom]) {
+        foundSeries = Arrays.copyOf(foundSeries, foundSeries.length + 1);
+        foundSeries[foundSeries.length - 1] = total;
+        found = true;
+        return;
+      } else {
+        findBSearch(total - numbers[top], Arrays.copyOf(numbers, top), foundSeries, found);
+        findBSearch(total - numbers[bottom], Arrays.copyOf(numbers, bottom), foundSeries, found);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fibN = new int[] {0, 1};
+    while (fibN[fibN.length - 1] <= s) {
+      fibN = append(fibN, sum(fibN, Math.min(k, fibN.length)));
+    }
+    del(fibN, 1);
+    del(fibN, 0);
+    del(fibN, fibN.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fibN, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int value) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = value;
+    return newArr;
+  }
+
+  private static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    arr = newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries[0] = 0;
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2]) {
+          bottom = (top + bottom
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, Math.min(k, fib_n.length)));
+    }
+    del(fib_n, 1);
+    del(fib_n, 0);
+    del(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int value) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = value;
+    return newArr;
+  }
+
+  private static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static boolean findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return false;
+    }
+    if (total == 0) {
+      return true;
+    } else if (numbers.length == 0 || total < 0) {
+      return false;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2]) {
+          bottom = (top + bottom) / 2;
+        } else {
+          top = (top + bottom
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, Math.min(k, fib_n.length)));
+    }
+    del(fib_n, 1);
+    del(fib_n, 0);
+    del(fib_n, fib_n.length - 1);
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int value) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = value;
+    return newArr;
+  }
+
+  private static void del(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static boolean findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return false;
+    }
+    if (total == 0) {
+      return true;
+    } else if (numbers.length == 0 || total < 0) {
+      return false;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2]) {
+          bottom = (top + bottom) / 2;
+        } else {
+          top = (top + bottom
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fibN = new int[] {0, 1};
+    while (fibN[fibN.length - 1] <= s) {
+      fibN = append(fibN, sum(fibN, Math.min(k, fibN.length)));
+    }
+    fibN = remove(fibN, 1);
+    fibN = remove(fibN, 0);
+    fibN = remove(fibN, fibN.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fibN, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = val;
+    return newArr;
+  }
+
+  private static int[] remove(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = append(foundSeries, total);
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    } else {
+      int top = numbers.length - 1;
+      int bottom = 0;
+      while (Math.abs(top - bottom) > 1) {
+        if (total > numbers[(top + bottom) / 2
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fib_n = new int[] {0, 1};
+    while (fib_n[fib_n.length - 1] <= s) {
+      fib_n = append(fib_n, sum(fib_n, k));
+    }
+    fib_n = delete(fib_n, 1);
+    fib_n = delete(fib_n, 0);
+    fib_n = delete(fib_n, fib_n.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fib_n, foundSeries, found);
+
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int num) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[arr.length] = num;
+    return newArr;
+  }
+
+  private static int[] delete(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < Math.min(k, arr.length); i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    if (total == 0) {
+      foundSeries = append(foundSeries, 0);
+      found = true;
+      return;
+    } else if (numbers.length == 0 || total < 0) {
+      return;
+    }
+
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom) > 1) {
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int s = scanner.nextInt();
+    int k = scanner.nextInt();
+    scanner.close();
+
+    int[] fibN = new int[] {0, 1};
+    while (fibN[fibN.length - 1] <= s) {
+      fibN = append(fibN, sum(fibN, Math.min(k, fibN.length)));
+    }
+    fibN = remove(fibN, 1);
+    fibN = remove(fibN, 0);
+    fibN = remove(fibN, fibN.length - 1);
+
+    int[] foundSeries = new int[] {0};
+    boolean found = false;
+    findBSearch(s, fibN, foundSeries, found);
+    System.out.println(foundSeries.length);
+    for (int i : foundSeries) {
+      System.out.print(i + " ");
+    }
+  }
+
+  private static int[] append(int[] arr, int val) {
+    int[] newArr = new int[arr.length + 1];
+    System.arraycopy(arr, 0, newArr, 0, arr.length);
+    newArr[newArr.length - 1] = val;
+    return newArr;
+  }
+
+  private static int[] remove(int[] arr, int index) {
+    int[] newArr = new int[arr.length - 1];
+    System.arraycopy(arr, 0, newArr, 0, index);
+    System.arraycopy(arr, index + 1, newArr, index, newArr.length - index);
+    return newArr;
+  }
+
+  private static int sum(int[] arr, int k) {
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+    if (found) {
+      return;
+    }
+    int top = numbers.length - 1;
+    int bottom = 0;
+    while (Math.abs(top - bottom) > 1) {
+      if (total > numbers[(top + bottom) / 2]) {
+        bottom = (top + bottom) / 2;
+      } else {
+        top = (top + bottom) / 2;
+      }
+    }
+    if (total == numbers[top] || total == numbers[bottom]) {
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int s = scanner.nextInt();
+        int k = scanner.nextInt();
+        scanner.close();
+
+        int[] fibN = new int[] {0, 1};
+        while (fibN[fibN.length - 1] <= s) {
+            fibN = append(fibN, sum(fibN, k));
+        }
+        del(fibN, 1);
+        del(fibN, 0);
+        del(fibN, fibN.length - 1);
+
+        int[] foundSeries = new int[] {0};
+        boolean found = false;
+        findBSearch(s, fibN, foundSeries, found);
+
+        System.out.println(foundSeries.length);
+        for (int i : foundSeries) {
+            System.out.print(i + " ");
+        }
+    }
+
+    private static int[] append(int[] arr, int num) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        newArr[arr.length] = num;
+        return newArr;
+    }
+
+    private static int sum(int[] arr, int k) {
+        int sum = 0;
+        for (int i = 0; i < k && i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    private static void del(int[] arr, int index) {
+        int[] newArr = new int[arr.length - 1];
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+        for (int i = index + 1; i < arr.length; i++) {
+            newArr[i - 1] = arr[i];
+        }
+        arr = newArr;
+    }
+
+    private static void findBSearch(int total, int[] numbers, int[] foundSeries, boolean found) {
+        if (found) {
+            return;
+        }
+        if (total == 0) {
+            foundSeries = append(foundSeries, 0);
+            found = true;
+            return;
+        } else if (numbers.length == 0 || total < 0) {
+            return;
+        } else {
+            int top = numbers.length - 1;
+            int bottom = 0;
+            while (Math.
+======

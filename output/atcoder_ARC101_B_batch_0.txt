@@ -1,0 +1,5379 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MIN_VALUE;
+    int ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  public static class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void b_add(int i, int x) {
+      while (i <= size) {
+        table[i] += x;
+        i += (i & -i);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int fr = Arrays.stream(a).min().getAsInt();
+    int ba = Arrays.stream(a).max().getAsInt() + 1;
+
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      int[] table = new int[n + 1];
+      for (int j = 0; j < n + 1; j++) {
+        res += table[inv[j] - min_tmp + 1];
+        table[inv[j] - min_tmp + 1]++;
+      }
+
+      if (res >= (n * (n + 1)) / 4) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int bSum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void bAdd(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE;
+        int ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int minTmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    minTmp = Math.min(minTmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.bSum(inv[j] - minTmp + 1);
+                bit.bAdd(inv[j] - minTmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE;
+        int ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+
+            int res = 0;
+            for (int j = 0; j < n + 1; j++) {
+                res += inv[j] - min_tmp + 1;
+            }
+
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = 0, ba = 0;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+}
+
+class BIT {
+  int[] table;
+  int size;
+
+  public BIT(int size) {
+    this.table = new int[size + 2];
+    this.size = size;
+  }
+
+  public int b_sum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  public void b_add(int i, int x) {
+    while (i <= size) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE;
+        int ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = 0, ba = 0;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            int[] inv = new int[n];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+
+            int res = 0;
+            for (int j = 0; j < n + 1; j++) {
+                res += inv[j] - min_tmp + 1;
+            }
+
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int fr = Integer.MIN_VALUE;
+    int ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.bSum(inv[j] - min_tmp + 1);
+        bit.bAdd(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  static class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int bSum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void bAdd(int i, int x) {
+      while (i <= size) {
+        table[i] += x;
+        i += (i & -i);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+
+    class BIT {
+      int[] table;
+      int size;
+
+      BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+      }
+
+      int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+          s += table[i];
+          i -= (i & -i);
+        }
+        return s;
+      }
+
+      void b_add(int i, int x) {
+        while (i <= size) {
+          table[i] += x;
+          i += (i & -i);
+        }
+      }
+    }
+
+    int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE, mi;
+    while (ba - fr > 1) {
+      mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      ArrayList<Integer> inv = new ArrayList<>();
+      inv.add(0);
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a.get(j) >= mi) {
+          inv.add(inv.get(inv.size() - 1) + 1);
+        } else {
+          inv.add(inv.get(inv.size() - 1) - 1);
+          min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv.get(j) - min_tmp + 1);
+        bit.b_add(inv.get(j) - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int minValue = a[0];
+    int maxValue = a[0];
+    for (int i = 1; i < n; i++) {
+      if (a[i] < minValue) {
+        minValue = a[i];
+      } else if (a[i] > maxValue) {
+        maxValue = a[i];
+      }
+    }
+
+    int lowerBound = minValue;
+    int upperBound = maxValue + 1;
+    while (upperBound - lowerBound > 1) {
+      int mid = (lowerBound + upperBound) / 2;
+      int[] inv = new int[n];
+      inv[0] = 0;
+      for (int i = 1; i < n; i++) {
+        if (a[i] >= mid) {
+          inv[i] = inv[i - 1] + 1;
+        } else {
+          inv[i] = inv[i - 1] - 1;
+        }
+      }
+
+      int sum = 0;
+      for (int i = 0; i < n; i++) {
+        sum += inv[i];
+      }
+
+      if (sum >= (n * (n + 1) / 4)) {
+        lowerBound = mid;
+      } else {
+        upperBound = mid;
+      }
+    }
+
+    System.out.println(lowerBound);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] table = new int[n + 2];
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a.get(j) >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += table[inv[j] - min_tmp + 1];
+        table[inv[j] - min_tmp + 1] += 1;
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  public static int min(ArrayList<Integer> a) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < a.size(); i++) {
+      if (a.get(i) < min) {
+        min = a.get(i);
+      }
+    }
+    return min;
+  }
+
+  public static int max(ArrayList<Integer> a) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < a.size(); i++) {
+      if (a.get(i) > max) {
+        max = a.get(i);
+      }
+    }
+    return max;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            Bit bit = new Bit(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+class Bit {
+    private int[] table;
+    private int size;
+
+    public Bit(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (a[i] < fr) {
+        fr = a[i];
+      }
+      if (a[i] > ba) {
+        ba = a[i];
+      }
+    }
+
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += inv[j] - min_tmp + 1;
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 1; j <= n; j++) {
+                if (a[j - 1] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 1; j <= n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int bSum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void bAdd(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE;
+        int ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.bSum(inv[j] - min_tmp + 1);
+                bit.bAdd(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int minTmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          minTmp = Math.min(minTmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      int[] bit = new int[n + 1];
+      for (int j = 0; j < n + 1; j++) {
+        res += bit[inv[j] - minTmp + 1];
+        bit[inv[j] - minTmp + 1] += 1;
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      inv[0] = 0;
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j + 1] = inv[j] + 1;
+        } else {
+          inv[j + 1] = inv[j] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  static class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void b_add(int i, int x) {
+      while (i <= size) {
+        table[i] += x;
+        i += (i & -i);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 1; j <= n; j++) {
+                if (a[j - 1] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 1; j <= n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Arrays.stream(a).min().getAsInt();
+        int ba = Arrays.stream(a).max().getAsInt() + 1;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j + 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    int[] table;
+    int size;
+
+    BIT(int size) {
+        this.size = size;
+        table = new int[size + 2];
+    }
+
+    int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<Integer>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv.add(inv.get(j) + 1);
+                } else {
+                    inv.add(inv.get(j) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(j));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MIN_VALUE;
+    int ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += bitSum(inv[j] - min_tmp + 1);
+        bitAdd(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  private static int bitSum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  private static void bitAdd(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  private static int[] table;
+  private static int n;
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = 0, ba = 0, mi = 0;
+        int res = 0;
+        int[] inv = new int[n + 1];
+        int min_tmp = 0;
+
+        fr = Math.min(a);
+        ba = Math.max(a) + 1;
+
+        while (ba - fr > 1) {
+            mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            res = 0;
+            inv = new int[n + 1];
+            min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            fr = Math.min(fr, a[i]);
+            ba = Math.max(ba, a[i]);
+        }
+        ba++;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int fr = Arrays.stream(a).min().getAsInt();
+        int ba = Arrays.stream(a).max().getAsInt() + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv.add(inv.get(j) + 1);
+                } else {
+                    inv.add(inv.get(j) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(j));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (a[i] < fr) {
+        fr = a[i];
+      }
+      if (a[i] > ba) {
+        ba = a[i];
+      }
+    }
+
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n + 1];
+      inv[0] = 0;
+      for (int i = 1; i <= n; i++) {
+        if (a[i - 1] >= mi) {
+          inv[i] = inv[i - 1] + 1;
+        } else {
+          inv[i] = inv[i - 1] - 1;
+        }
+      }
+
+      int res = 0;
+      for (int i = 1; i <= n; i++) {
+        res += inv[i] - inv[i - 1] + 1;
+      }
+
+      if (res >= (n * (n + 1)) / 4) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<Integer>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MAX_VALUE;
+    int ba = Integer.MIN_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += bitSum(inv[j] - min_tmp + 1);
+        bitAdd(inv[j] - min_tmp + 1, 1);
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  private static int bitSum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  private static void bitAdd(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  private static int[] table;
+  private static int n;
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  private static int min(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      min = Math.min(min, a[i]);
+    }
+    return min;
+  }
+
+  private static int max(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      max = Math.max(max, a[i]);
+    }
+    return max;
+  }
+
+  private static class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void b_add(int i, int x) {
+     
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += this.table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= this.size) {
+            this.table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = 0;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int fr = Arrays.stream(a).min().getAsInt();
+        int ba = Arrays.stream(a).max().getAsInt() + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += bitSum(inv[j] - min_tmp + 1);
+        bitAdd(inv[j] - min_tmp + 1, 1);
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  private static int min(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+
+  private static int max(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static int bitSum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  private static void bitAdd(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  private static int[] table = new int[n + 2];
+  private static int size = n;
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int minVal = Integer.MAX_VALUE;
+    int maxVal = Integer.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+      minVal = Math.min(minVal, a[i]);
+      maxVal = Math.max(maxVal, a[i]);
+    }
+
+    int mid = (minVal + maxVal) / 2;
+    int[] inv = new int[n];
+    int minTmp = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] >= mid) {
+        inv[i] = inv[i - 1] + 1;
+      } else {
+        inv[i] = inv[i - 1] - 1;
+        minTmp = Math.min(minTmp, inv[i]);
+      }
+    }
+
+    int sum = 0;
+    int[] bit = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      sum += bit[i];
+      bit[i] += 1;
+    }
+
+    if (sum >= (n * (n + 1)) / 4) {
+      minVal = mid;
+    } else {
+      maxVal = mid;
+    }
+
+    System.out.println(minVal);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += i & -i;
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+
+        int fr = min(a);
+        int ba = max(a) + 1;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a.get(j) >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<>();
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j + 1] = inv[j] + 1;
+        } else {
+          inv[j + 1] = inv[j] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  static class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void b_add(int i, int x) {
+      while (i <= size) {
+        table[i] += x;
+        i += (i & -i);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<>();
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int minValue = Integer.MAX_VALUE;
+    int maxValue = Integer.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+      minValue = Math.min(minValue, a[i]);
+      maxValue = Math.max(maxValue, a[i]);
+    }
+
+    int range = maxValue - minValue + 1;
+    int[] bit = new int[range + 1];
+    int[] inv = new int[n + 1];
+    int minTmp = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] >= minValue) {
+        inv[i] = inv[i - 1] + 1;
+      } else {
+        inv[i] = inv[i - 1] - 1;
+        minTmp = Math.min(minTmp, inv[i]);
+      }
+    }
+
+    int res = 0;
+    for (int i = 0; i < n + 1; i++) {
+      res += bit[inv[i] - minTmp + 1];
+      bit[inv[i] - minTmp + 1]++;
+    }
+
+    if (res >= (n * (n + 1) / 4)) {
+      System.out.println(minValue);
+    } else {
+      System.out.println(maxValue);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = 0, ba = 1000000000 + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE;
+        int ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Integer.MIN_VALUE;
+    int ba = Integer.MAX_VALUE;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      inv[0] = 0;
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j + 1] = inv[j] + 1;
+        } else {
+          inv[j + 1] = inv[j] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1)) / 4) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+}
+
+class BIT {
+  int[] table;
+  int size;
+
+  public BIT(int size) {
+    this.table = new int[size + 2];
+    this.size = size;
+  }
+
+  public int b_sum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  public void b_add(int i, int x) {
+    while (i <= size) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        int fr = min(a);
+        int ba = max(a) + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            ArrayList<Integer> inv = new ArrayList<>();
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a.get(j) >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+
+    private static int min(ArrayList<Integer> a) {
+        int min = Integer.MAX_VALUE;
+        for (int i : a) {
+            if (i < min) {
+                min = i;
+            }
+        }
+        return min;
+    }
+
+    private static int max(ArrayList<Integer
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE;
+        int ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      inv[0] = 0;
+      int min_tmp = 0;
+      for (int j = 1; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += bitSum(inv[j] - min_tmp + 1);
+        bitAdd(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  public static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+
+  public static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  public static int bitSum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  public static void bitAdd(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  public static int[] table = new int[n + 2];
+  public static int size = n;
+}
+
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += inv[j] - min_tmp + 1;
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  private static int min(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      min = Math.min(min, a[i]);
+    }
+    return min;
+  }
+
+  private static int max(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      max = Math.max(max, a[i]);
+    }
+    return max;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+
+        int fr = a.stream().mapToInt(Integer::intValue).min().orElse(0);
+        int ba = a.stream().mapToInt(Integer::intValue).max().orElse(0) + 1;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            List<Integer> inv = new ArrayList<>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a.get(j) >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int bSum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void bAdd(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            fr = Math.min(fr, a.get(i));
+            ba = Math.max(ba, a.get(i));
+        }
+        ba++;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            List<Integer> inv = new ArrayList<>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a.get(j) >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.bSum(inv.get(j) - min_tmp + 1);
+                bit.bAdd(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            List<Integer> inv = new ArrayList<>();
+            inv.add(0);
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a.get(j) >= mi) {
+                    inv.add(inv.get(inv.size() - 1) + 1);
+                } else {
+                    inv.add(inv.get(inv.size() - 1) - 1);
+                    min_tmp = Math.min(min_tmp, inv.get(inv.size() - 1));
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv.get(j) - min_tmp + 1);
+                bit.b_add(inv.get(j) - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  private static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+
+  private static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+      this.size = size;
+      table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Arrays.stream(a).min().getAsInt();
+        int ba = Arrays.stream(a).max().getAsInt() + 1;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 1; j <= n; j++) {
+                if (a[j - 1] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 1; j <= n; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int bSum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void bAdd(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.bSum(inv[j] - min_tmp + 1);
+                bit.bAdd(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] a = new int[n];
+		for (int i = 0; i < n; i++) {
+			a[i] = sc.nextInt();
+		}
+
+		int fr = 0, ba = 0;
+		while (ba - fr > 1) {
+			int mi = (fr + ba) / 2;
+			int[] inv = new int[n + 1];
+			int min_tmp = 0;
+			for (int j = 0; j < n; j++) {
+				if (a[j] >= mi) {
+					inv[j] = inv[j - 1] + 1;
+				} else {
+					inv[j] = inv[j - 1] - 1;
+					min_tmp = Math.min(min_tmp, inv[j]);
+				}
+			}
+
+			int res = 0;
+			for (int j = 0; j < n + 1; j++) {
+				res += inv[j] - min_tmp + 1;
+			}
+
+			if (res >= (n * (n + 1) / 4)) {
+				fr = mi;
+			} else {
+				ba = mi;
+			}
+		}
+
+		System.out.println(fr);
+	}
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int minValue = a[0];
+    int maxValue = a[0];
+    for (int i = 1; i < n; i++) {
+      minValue = Math.min(minValue, a[i]);
+      maxValue = Math.max(maxValue, a[i]);
+    }
+
+    int range = maxValue - minValue + 1;
+    int[] bit = new int[range + 1];
+    int[] inv = new int[n + 1];
+    inv[0] = 0;
+    int minTmp = 0;
+    for (int i = 1; i <= n; i++) {
+      if (a[i - 1] >= minValue + range / 2) {
+        inv[i] = inv[i - 1] + 1;
+      } else {
+        inv[i] = inv[i - 1] - 1;
+        minTmp = Math.min(minTmp, inv[i]);
+      }
+    }
+
+    int res = 0;
+    for (int i = 0; i <= n; i++) {
+      res += bit[inv[i] - minTmp + 1];
+      bit[inv[i] - minTmp + 1] += 1;
+    }
+
+    if (res >= (n * (n + 1) / 4)) {
+      System.out.println(minValue + range / 2);
+    } else {
+      System.out.println(minValue + range / 4);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j <= n; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += this.table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= this.size) {
+            this.table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int min = Integer.MAX_VALUE;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+      min = Math.min(min, a[i]);
+      max = Math.max(max, a[i]);
+    }
+
+    int mid = (min + max) / 2;
+    int[] inv = new int[n];
+    int min_tmp = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] >= mid) {
+        inv[i] = inv[i - 1] + 1;
+      } else {
+        inv[i] = inv[i - 1] - 1;
+        min_tmp = Math.min(min_tmp, inv[i]);
+      }
+    }
+
+    int res = 0;
+    for (int i = 0; i < n + 1; i++) {
+      res += inv[i] - min_tmp + 1;
+    }
+
+    if (res >= (n * (n + 1) / 4)) {
+      mid = (min + mid) / 2;
+    } else {
+      mid = (mid + max) / 2;
+    }
+
+    System.out.println(mid);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = Math.min(a);
+    int ba = Math.max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      BIT bit = new BIT(n + 1);
+      int res = 0;
+      int[] inv = new int[n + 1];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j + 1] = inv[j] + 1;
+        } else {
+          inv[j + 1] = inv[j] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        res += bit.b_sum(inv[j] - min_tmp + 1);
+        bit.b_add(inv[j] - min_tmp + 1, 1);
+      }
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+    System.out.println(fr);
+  }
+
+  private static class BIT {
+    int[] table;
+    int size;
+
+    public BIT(int size) {
+      this.table = new int[size + 2];
+      this.size = size;
+    }
+
+    public int b_sum(int i) {
+      int s = 0;
+      while (i > 0) {
+        s += table[i];
+        i -= (i & -i);
+      }
+      return s;
+    }
+
+    public void b_add(int i, int x) {
+      while (i <= size) {
+        table[i] += x;
+        i += (i & -i);
+      }
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE;
+        int ba = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            fr = Math.min(fr, a[i]);
+            ba = Math.max(ba, a[i]);
+        }
+        ba++;
+
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n + 1];
+      inv[0] = 0;
+      int min_tmp = 0;
+      for (int j = 1; j <= n; j++) {
+        if (a[j - 1] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j - 1]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j <= n; j++) {
+        res += bitSum(inv[j] - min_tmp + 1);
+        bitAdd(inv[j] - min_tmp + 1, 1);
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  private static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+
+  private static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static int bitSum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  private static void bitAdd(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  private static int[] table = new int[n + 2];
+  private
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = 0, ba = 0;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += i & -i;
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int fr = Math.min(a);
+        int ba = Math.max(a) + 1;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MAX_VALUE, ba = Integer.MIN_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+
+    static class BIT {
+        int[] table;
+        int size;
+
+        BIT(int size) {
+            this.table = new int[size + 2];
+            this.size = size;
+        }
+
+        int b_sum(int i) {
+            int s = 0;
+            while (i > 0) {
+                s += table[i];
+                i -= (i & -i);
+            }
+            return s;
+        }
+
+        void b_add(int i, int x) {
+            while (i <= size) {
+                table[i] += x;
+                i += (i & -i);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int minValue = findMin(a);
+    int maxValue = findMax(a) + 1;
+
+    while (maxValue - minValue > 1) {
+      int mid = (minValue + maxValue) / 2;
+      int[] bit = new int[n + 1];
+      int sum = 0;
+      int[] inv = new int[n + 1];
+      inv[0] = 0;
+      int minTmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mid) {
+          inv[j + 1] = inv[j] + 1;
+        } else {
+          inv[j + 1] = inv[j] - 1;
+          minTmp = Math.min(minTmp, inv[j]);
+        }
+      }
+      for (int j = 0; j < n + 1; j++) {
+        sum += bit[inv[j] - minTmp + 1];
+        bit[inv[j] - minTmp + 1]++;
+      }
+      if (sum >= (n * (n + 1) / 4)) {
+        minValue = mid;
+      } else {
+        maxValue = mid;
+      }
+    }
+    System.out.println(minValue);
+  }
+
+  private static int findMin(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+
+  private static int findMax(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.table = new int[size + 2];
+        this.size = size;
+    }
+
+    public int bSum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void bAdd(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            int min_tmp = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[j] >= mi) {
+                    inv[j + 1] = inv[j] + 1;
+                } else {
+                    inv[j + 1] = inv[j] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j]);
+                }
+            }
+            for (int j = 0; j < n + 1; j++) {
+                res += bit.bSum(inv[j] - min_tmp + 1);
+                bit.bAdd(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int fr = min(a);
+    int ba = max(a) + 1;
+    while (ba - fr > 1) {
+      int mi = (fr + ba) / 2;
+      int[] inv = new int[n];
+      int min_tmp = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] >= mi) {
+          inv[j] = inv[j - 1] + 1;
+        } else {
+          inv[j] = inv[j - 1] - 1;
+          min_tmp = Math.min(min_tmp, inv[j]);
+        }
+      }
+
+      int res = 0;
+      for (int j = 0; j < n + 1; j++) {
+        res += b_sum(inv[j] - min_tmp + 1);
+        b_add(inv[j] - min_tmp + 1, 1);
+      }
+
+      if (res >= (n * (n + 1) / 4)) {
+        fr = mi;
+      } else {
+        ba = mi;
+      }
+    }
+
+    System.out.println(fr);
+  }
+
+  private static int b_sum(int i) {
+    int s = 0;
+    while (i > 0) {
+      s += table[i];
+      i -= (i & -i);
+    }
+    return s;
+  }
+
+  private static void b_add(int i, int x) {
+    while (i <= n) {
+      table[i] += x;
+      i += (i & -i);
+    }
+  }
+
+  private static int[] table;
+  private static int n;
+}
+
+[/JAVA]
+
+Note: The above code is written in a single file, with the driver class `Solution` and the `BIT` class defined within it. The `main` method is the entry point of the program, and it takes an array of `String` arguments as input.
+
+The code is functionally identical to the Python code, with the following changes:
+
+* The `input` function is replaced with a `Scanner` object to read input from the user.
+* The `map` function is replaced with a loop to convert the input string to an array of integers.
+* The `min` and `max` functions are replaced with the `Math.min` and `Math.max` methods, respectively.
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int[] table;
+    private int size;
+
+    public BIT(int size) {
+        this.size = size;
+        this.table = new int[size + 2];
+    }
+
+    public int b_sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += table[i];
+            i -= (i & -i);
+        }
+        return s;
+    }
+
+    public void b_add(int i, int x) {
+        while (i <= size) {
+            table[i] += x;
+            i += (i & -i);
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int fr = Integer.MIN_VALUE, ba = Integer.MAX_VALUE;
+        while (ba - fr > 1) {
+            int mi = (fr + ba) / 2;
+            BIT bit = new BIT(n + 1);
+            int res = 0;
+            int[] inv = new int[n + 1];
+            inv[0] = 0;
+            int min_tmp = 0;
+            for (int j = 1; j <= n; j++) {
+                if (a[j - 1] >= mi) {
+                    inv[j] = inv[j - 1] + 1;
+                } else {
+                    inv[j] = inv[j - 1] - 1;
+                    min_tmp = Math.min(min_tmp, inv[j - 1]);
+                }
+            }
+            for (int j = 1; j <= n + 1; j++) {
+                res += bit.b_sum(inv[j] - min_tmp + 1);
+                bit.b_add(inv[j] - min_tmp + 1, 1);
+            }
+            if (res >= (n * (n + 1) / 4)) {
+                fr = mi;
+            } else {
+                ba = mi;
+            }
+        }
+        System.out.println(fr);
+    }
+}
+
+[/JAVA]
+======

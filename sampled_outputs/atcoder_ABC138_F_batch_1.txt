@@ -1,0 +1,1360 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    private static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+
+        String RStr = Integer.toBinaryString(R);
+        int N = RStr.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+        String LStr = Integer.toBinaryString(L);
+        if (LStr.length() != N) {
+            LStr = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (RStr.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RStr;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (LStr.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LStr;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = (tmp * 3) % mod;
+                    } else if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = (tmp * 2) % mod;
+                    } else if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+                        tmp = (tmp * 2
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R, mod));
+    }
+
+    public static int f(int L, int R, int mod) {
+        if (L > R) {
+            return 0;
+        }
+
+        String RBinary = Integer.toBinaryString(R);
+        int N = RBinary.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+        String LBinary = Integer.toBinaryString(L);
+        if (LBinary.length() != N) {
+            LBinary = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (RBinary.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = RBinary.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RBinary;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (LBinary.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = LBinary.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LBinary;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int r = i + 1, l = j + 1; r < N && l < N; r++, l++) {
+                    if (R2.charAt(r) == '0' && L2.charAt(l) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(r) == '?' && L2.charAt(l) == '?') {
+                        tmp = (tmp * 3) % mod;
+                    }
+
+                    if (R2.charAt(r) == '?' && L2.charAt(l) == '0') {
+                        tmp = (tmp * 2) % mod;
+                    }
+
+                    if (R2.charAt(r) ==
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int L = scanner.nextInt();
+    int R = scanner.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+
+    String RStr = Integer.toBinaryString(R);
+    int N = RStr.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+    String LStr = Integer.toBinaryString(L);
+    if (LStr.length() != N) {
+      LStr = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (RStr.charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = RStr;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (LStr.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = LStr;
+        }
+
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int k = 1; k < N; k++) {
+          if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+            tmp = tmp * 3 % mod;
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+            tmp = tmp * 2 % mod;
+          }
+
+          if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+            tmp = tmp * 2 % mod;
+          }
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+
+    R = Integer.parseInt(Integer.toBinaryString(R).substring(2), 2);
+    int N = Integer.toBinaryString(R).length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+    L = Integer.parseInt(Integer.toBinaryString(L).substring(2), 2);
+    if (Integer.toBinaryString(L).length() != N) {
+      L = Integer.parseInt("1" + "0".repeat(N - 1), 2);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (Integer.toBinaryString(R).charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = Integer.toBinaryString(R).substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = Integer.toBinaryString(R);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (Integer.toBinaryString(L).charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = Integer.toBinaryString(L).substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = Integer.toBinaryString(L);
+        }
+
+        if (Integer.toBinaryString(L2).charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int r = 1; r < R2.length(); r++) {
+          if (R2.charAt(r) == '0' && L2.charAt(r) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(r) == '?' && L2.charAt(r) == '?') {
+            tmp = (tmp * 3) % mod;
+          }
+
+          if (R2.charAt(r) == '?' && L2.char
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int L = sc.nextInt();
+        int R = sc.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    public static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+        R = Integer.parseInt(Integer.toBinaryString(R), 2);
+        int N = R.length();
+        int ret = f(L, Integer.parseInt(Integer.toBinaryString(L), 2));
+        L = Integer.parseInt(Integer.toBinaryString(L), 2);
+        if (L.length() != N) {
+            L = "1" + "0" * (N - 1);
+        }
+        for (int i = 0; i < N; i++) {
+            if (R[i] == "0") {
+                continue;
+            }
+            String R2 = R.substring(0, i) + "0" + "?" * (N - i - 1);
+            if (i == 0) {
+                R2 = R;
+            }
+            for (int j = 0; j < N; j++) {
+                if (L[j] == "1" && j != 0) {
+                    continue;
+                }
+                String L2 = L.substring(0, j) + "1" + "?" * (N - j - 1);
+                if (j == 0) {
+                    L2 = L;
+                }
+                if (L2[0] == "0") {
+                    break;
+                }
+                int tmp = 1;
+                for (int r = 1; r < R2.length(); r++) {
+                    if (R2[r] == "0" && L2[r] == "1") {
+                        tmp *= 0;
+                        break;
+                    }
+                    if (R2[r] == "?" && L2[r] == "?") {
+                        tmp = tmp * 3 % mod;
+                    }
+                    if (R2[r] == "?" && L2[r] == "0") {
+                        tmp = tmp * 2 % mod;
+                    }
+                    if (R2[r] == "1" && L2[r] == "?") {
+                        tmp = tmp * 2 % mod;
+                    }
+                }
+                ret += tmp;
+                ret %= mod;
+            }
+        }
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R));
+  }
+
+  private static int f(int L, int R) {
+    if (L > R) {
+      return 0;
+    }
+
+    R = Integer.parseInt(String.valueOf(R), 2);
+    int N = Integer.bitCount(R);
+    int ret = f(L, Integer.parseInt(String.valueOf(R), 2));
+
+    L = Integer.parseInt(String.valueOf(L), 2);
+    if (L.length != N) {
+      L = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (R[i] == "0") {
+        continue;
+      }
+
+      String R2 = R.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = R;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (L[j] == "1" && j != 0) {
+          continue;
+        }
+
+        String L2 = L.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = L;
+        }
+
+        if (L2[0] == "0") {
+          break;
+        }
+
+        int tmp = 1;
+        for (int r = 1; r < R2.length(); r++) {
+          if (R2[r] == "0" && L2[r] == "1") {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2[r] == "?" && L2[r] == "?") {
+            tmp = tmp * 3 % mod;
+          }
+
+          if (R2[r] == "?" && L2[r] == "0") {
+            tmp = tmp * 2 % mod;
+          }
+
+          if (R2[r] == "1" && L2[r] == "?") {
+            tmp = tmp * 2 % mod;
+          }
+        }
+
+        ret += tmp;
+        ret %= mod;
+      }
+    }
+
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R));
+  }
+
+  public static int f(int L, int R) {
+    if (L > R) {
+      return 0;
+    }
+
+    R = Integer.parseInt(Integer.toBinaryString(R).substring(2), 2);
+    int N = Integer.toBinaryString(R).length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+    L = Integer.parseInt(Integer.toBinaryString(L).substring(2), 2);
+    if (Integer.toBinaryString(L).length() != N) {
+      L = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (Integer.toBinaryString(R).charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = Integer.toBinaryString(R).substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = Integer.toBinaryString(R);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (Integer.toBinaryString(L).charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = Integer.toBinaryString(L).substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = Integer.toBinaryString(L);
+        }
+
+        if (Integer.toBinaryString(L2).charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int r = 1; r < N; r++) {
+          if (Integer.toBinaryString(R2).charAt(r) == '0' && Integer.toBinaryString(L2).charAt(r) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (Integer.toBinaryString(R2).charAt(r) == '?' && Integer.toBinaryString(L2).charAt(r) == '?') {
+            tmp = tmp * 3 % mod;
+          }
+
+          if (Integer.toBinaryString(R2).
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int L = sc.nextInt();
+        int R = sc.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    public static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+
+        String R2 = Integer.toBinaryString(R);
+        int N = R2.length();
+        int ret = f(L, Integer.parseInt(R2.substring(0, N - 1) + "1", 2));
+
+        String L2 = Integer.toBinaryString(L);
+        if (L2.length() != N) {
+            L2 = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (R2.charAt(i) == '0') {
+                continue;
+            }
+
+            R2 = R2.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = R2.substring(0, N - 1) + "1";
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (L2.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                L2 = L2.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = L2.substring(0, N - 1) + "1";
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = (tmp * 3) % mod;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = (tmp * 2) % mod;
+                    }
+
+                    if (R2.charAt(k
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int L = sc.nextInt();
+        int R = sc.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    public static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+
+        String Rstr = Integer.toBinaryString(R);
+        int N = Rstr.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+        String Lstr = Integer.toBinaryString(L);
+        if (Lstr.length() != N) {
+            Lstr = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (Rstr.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = Rstr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = Rstr;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (Lstr.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = Lstr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = Lstr;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = tmp * 3 % mod;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = tmp * 2 % mod;
+                    }
+
+                    if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+                        tmp = tmp * 2 % mod
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R, mod));
+    }
+
+    private static int f(int L, int R, int mod) {
+        if (L > R) {
+            return 0;
+        }
+
+        String RBinary = Integer.toBinaryString(R);
+        int N = RBinary.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+        String LBinary = Integer.toBinaryString(L);
+        if (LBinary.length() != N) {
+            LBinary = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (RBinary.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = RBinary.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RBinary;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (LBinary.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = LBinary.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LBinary;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = tmp * 3 % mod;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = tmp * 2 % mod;
+                    }
+
+                    if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+                
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int L = scanner.nextInt();
+    int R = scanner.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R));
+  }
+
+  public static int f(int L, int R) {
+    if (L > R) {
+      return 0;
+    }
+
+    String Rbin = Integer.toBinaryString(R);
+    int N = Rbin.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+    String Lbin = Integer.toBinaryString(L);
+    if (Lbin.length() != N) {
+      Lbin = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (Rbin.charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = Rbin.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = Rbin;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (Lbin.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = Lbin.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = Lbin;
+        }
+
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int k = 1; k < N; k++) {
+          char r = R2.charAt(k);
+          char l = L2.charAt(k);
+          if (r == '0' && l == '1') {
+            tmp *= 0;
+            break;
+          }
+          if (r == '?' && l == '?') {
+            tmp = tmp * 3 % mod;
+          }
+          if (r == '?' && l == '0') {
+            tmp = tmp * 2 % mod;
+          }
+          if (r == '1' && l == '?') {
+            tmp = tmp * 2 % mod;
+          }
+        }
+        ret += tmp;
+        ret %= mod;
+      }
+    }
+
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    public static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+
+        String RStr = Integer.toBinaryString(R);
+        int N = RStr.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+        String LStr = Integer.toBinaryString(L);
+        if (LStr.length() != N) {
+            LStr = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (RStr.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RStr;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (LStr.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LStr;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = tmp * 3 % mod;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = tmp * 2 % mod;
+                    }
+
+                    if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+                        tmp = tmp * 2
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] input = scanner.nextLine().split(" ");
+        int L = Integer.parseInt(input[0]);
+        int R = Integer.parseInt(input[1]);
+        int mod = (int) Math.pow(10, 9) + 7;
+
+        System.out.println(f(L, R, mod));
+    }
+
+    private static int f(int L, int R, int mod) {
+        if (L > R) {
+            return 0;
+        }
+        String RBinary = Integer.toBinaryString(R);
+        int N = RBinary.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+        String LBinary = Integer.toBinaryString(L);
+        if (LBinary.length() != N) {
+            LBinary = "1" + "0".repeat(N - 1);
+        }
+        for (int i = 0; i < N; i++) {
+            if (RBinary.charAt(i) == '0') {
+                continue;
+            }
+            String R2 = RBinary.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RBinary;
+            }
+            for (int j = 0; j < N; j++) {
+                if (LBinary.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+                String L2 = LBinary.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LBinary;
+                }
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = (tmp * 3) % mod;
+                    }
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = (tmp * 2) % mod;
+                    }
+                    if (R2.charAt(k) == '1
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = (int) Math.pow(10, 9) + 7;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+
+    String RStr = Integer.toBinaryString(R);
+    int N = RStr.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+    String LStr = Integer.toBinaryString(L);
+    if (LStr.length() != N) {
+      LStr = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (RStr.charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = RStr;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (LStr.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = LStr;
+        }
+
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int k = 1; k < N; k++) {
+          if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+            tmp = (int) (tmp * 3 % mod);
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+            tmp = (int) (tmp * 2 % mod);
+          }
+
+          if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+            tmp = (int
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R));
+    }
+
+    public static int f(int L, int R) {
+        if (L > R) {
+            return 0;
+        }
+
+        R = Integer.parseInt(Integer.toBinaryString(R).substring(2), 2);
+        int N = Integer.toBinaryString(R).length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+        L = Integer.parseInt(Integer.toBinaryString(L).substring(2), 2);
+        if (Integer.toBinaryString(L).length() != N) {
+            L = Integer.parseInt("1" + "0".repeat(N - 1), 2);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (Integer.toBinaryString(R).charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = Integer.toBinaryString(R).substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = Integer.toBinaryString(R);
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (Integer.toBinaryString(L).charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = Integer.toBinaryString(L).substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = Integer.toBinaryString(L);
+                }
+
+                if (Integer.toBinaryString(L2).charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int r = 1; r < R2.length(); r++) {
+                    if (R2.charAt(r) == '0' && L2.charAt(r) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(r) == '?' && L2.charAt(r) == '?') {
+                        tmp = tmp * 3 % mod;
+                    }
+
+                    if (R2.charAt(r) == '
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int L = scanner.nextInt();
+        int R = scanner.nextInt();
+        int mod = 1000000007;
+
+        System.out.println(f(L, R, mod));
+    }
+
+    public static int f(int L, int R, int mod) {
+        if (L > R) {
+            return 0;
+        }
+
+        String RStr = Integer.toBinaryString(R);
+        int N = RStr.length();
+        int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+        String LStr = Integer.toBinaryString(L);
+        if (LStr.length() != N) {
+            LStr = "1" + "0".repeat(N - 1);
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (RStr.charAt(i) == '0') {
+                continue;
+            }
+
+            String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+            if (i == 0) {
+                R2 = RStr;
+            }
+
+            for (int j = 0; j < N; j++) {
+                if (LStr.charAt(j) == '1' && j != 0) {
+                    continue;
+                }
+
+                String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+                if (j == 0) {
+                    L2 = LStr;
+                }
+
+                if (L2.charAt(0) == '0') {
+                    break;
+                }
+
+                int tmp = 1;
+                for (int k = 1; k < N; k++) {
+                    if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+                        tmp *= 0;
+                        break;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+                        tmp = tmp * 3 % mod;
+                    }
+
+                    if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+                        tmp = tmp * 2 % mod;
+                    }
+
+                    if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+                
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int L = scanner.nextInt();
+    int R = scanner.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R));
+  }
+
+  public static int f(int L, int R) {
+    if (L > R) {
+      return 0;
+    }
+
+    R = Integer.parseInt(Integer.toBinaryString(R).substring(2), 2);
+    int N = Integer.toBinaryString(R).length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2));
+
+    L = Integer.parseInt(Integer.toBinaryString(L).substring(2), 2);
+    if (Integer.toBinaryString(L).length() != N) {
+      L = Integer.parseInt("1" + "0".repeat(N - 1), 2);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (Integer.toBinaryString(R).charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = Integer.toBinaryString(R).substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = Integer.toBinaryString(R);
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (Integer.toBinaryString(L).charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = Integer.toBinaryString(L).substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = Integer.toBinaryString(L);
+        }
+
+        if (Integer.toBinaryString(L2).charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int r = 1; r < R2.length(); r++) {
+          if (R2.charAt(r) == '0' && L2.charAt(r) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(r) == '?' && L2.charAt(r) == '?') {
+            tmp = tmp * 3 % mod;
+          }
+
+          if (R2.charAt(r) == '?' && L2.charAt(r)
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int L = Integer.parseInt(input[0]);
+    int R = Integer.parseInt(input[1]);
+    int mod = 1000000007;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+
+    String RStr = Integer.toBinaryString(R);
+    int N = RStr.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+    String LStr = Integer.toBinaryString(L);
+    if (LStr.length() != N) {
+      LStr = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (RStr.charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = RStr;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (LStr.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = LStr;
+        }
+
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int k = 1; k < N; k++) {
+          if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+            tmp = (tmp * 3) % mod;
+          }
+
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+            tmp = (tmp * 2) % mod;
+          }
+
+          if (R2.charAt(k) == '1' && L2.charAt
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+    String RStr = Integer.toBinaryString(R);
+    int N = RStr.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+    String LStr = Integer.toBinaryString(L);
+    if (LStr.length() != N) {
+      LStr = "1" + "0".repeat(N - 1);
+    }
+    for (int i = 0; i < N; i++) {
+      if (RStr.charAt(i) == '0') {
+        continue;
+      }
+      String R2 = RStr.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = RStr;
+      }
+      for (int j = 0; j < N; j++) {
+        if (LStr.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+        String L2 = LStr.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = LStr;
+        }
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+        int tmp = 1;
+        for (int k = 1; k < N; k++) {
+          if (R2.charAt(k) == '0' && L2.charAt(k) == '1') {
+            tmp *= 0;
+            break;
+          }
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '?') {
+            tmp = (tmp * 3) % mod;
+          }
+          if (R2.charAt(k) == '?' && L2.charAt(k) == '0') {
+            tmp = (tmp * 2) % mod;
+          }
+          if (R2.charAt(k) == '1' && L2.charAt(k) == '?') {
+            tmp = (tmp * 2) % mod;
+          }
+        }
+        ret += tmp;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int L = sc.nextInt();
+    int R = sc.nextInt();
+    int mod = 1000000007;
+
+    System.out.println(f(L, R, mod));
+  }
+
+  public static int f(int L, int R, int mod) {
+    if (L > R) {
+      return 0;
+    }
+
+    String RBinary = Integer.toBinaryString(R);
+    int N = RBinary.length();
+    int ret = f(L, Integer.parseInt("0" + "1".repeat(N - 1), 2), mod);
+
+    String LBinary = Integer.toBinaryString(L);
+    if (LBinary.length() != N) {
+      LBinary = "1" + "0".repeat(N - 1);
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (RBinary.charAt(i) == '0') {
+        continue;
+      }
+
+      String R2 = RBinary.substring(0, i) + "0" + "?".repeat(N - i - 1);
+      if (i == 0) {
+        R2 = RBinary;
+      }
+
+      for (int j = 0; j < N; j++) {
+        if (LBinary.charAt(j) == '1' && j != 0) {
+          continue;
+        }
+
+        String L2 = LBinary.substring(0, j) + "1" + "?".repeat(N - j - 1);
+        if (j == 0) {
+          L2 = LBinary;
+        }
+
+        if (L2.charAt(0) == '0') {
+          break;
+        }
+
+        int tmp = 1;
+        for (int r = i + 1, l = j + 1; r < N && l < N; r++, l++) {
+          if (R2.charAt(r) == '0' && L2.charAt(l) == '1') {
+            tmp *= 0;
+            break;
+          }
+
+          if (R2.charAt(r) == '?' && L2.charAt(l) == '?') {
+            tmp = (int) (tmp * 3 % mod);
+          }
+
+          if (R2.charAt(r) == '?' && L2.charAt(l) == '0') {
+            tmp = (int) (tmp * 2 % mod);
+          }
+
+          if (R2.charAt(r) == '1' && L2.charAt(l) ==
+======

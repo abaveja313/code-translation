@@ -1,0 +1,919 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      int[] l = new int[3];
+      for (int j = 0; j < 3; j++) {
+        l[j] = sc.nextInt();
+      }
+      int[] c = new int[3];
+      int[] nc = new int[3];
+      for (int j = 0; j < 3; j++) {
+        if (!d.containsKey(l[j])) {
+          nc[j] = l[j];
+        } else {
+          c[j] = l[j];
+        }
+      }
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.values().contains(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+      System.out.print(entry.getValue() + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        Map<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            List<Integer> nc = new ArrayList<>();
+            List<Integer> c = new ArrayList<>();
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int input = sc.nextInt();
+                if (!d.containsKey(input)) {
+                    nc.add(input);
+                } else {
+                    c.add(input);
+                }
+            }
+            Map<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.containsValue(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        List<Integer> sortedValues = new ArrayList<>(d.values());
+        Collections.sort(sortedValues);
+        for (int value : sortedValues) {
+            System.out.print(value + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      List<Integer> l = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        l.add(sc.nextInt());
+      }
+      List<Integer> nc = new ArrayList<>();
+      List<Integer> c = new ArrayList<>();
+      for (int j = 0; j < l.size(); j++) {
+        if (!d.containsKey(l.get(j))) {
+          nc.add(l.get(j));
+        } else {
+          c.add(l.get(j));
+        }
+      }
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    List<Integer> sortedD = new ArrayList<>(d.values());
+    Collections.sort(sortedD);
+    for (int i : sortedD) {
+      System.out.print(i + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        HashMap<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            int[] l = new int[3];
+            for (int j = 0; j < 3; j++) {
+                l[j] = sc.nextInt();
+            }
+            ArrayList<Integer> nc = new ArrayList<>();
+            ArrayList<Integer> c = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                if (!d.containsKey(l[j])) {
+                    nc.add(l[j]);
+                } else {
+                    c.add(l[j]);
+                }
+            }
+            HashMap<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.values().contains(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i : d.keySet()) {
+            System.out.print(d.get(i) + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      int[] l = new int[3];
+      for (int j = 0; j < 3; j++) {
+        l[j] = sc.nextInt();
+        if (!d.containsKey(l[j])) {
+          nc.add(l[j]);
+        } else {
+          c.add(l[j]);
+        }
+      }
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+      System.out.print(entry.getValue() + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        Map<Integer, Integer> d = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            List<Integer> nc = new ArrayList<>();
+            List<Integer> c = new ArrayList<>();
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int input = scanner.nextInt();
+                if (!d.containsKey(input)) {
+                    nc.add(input);
+                } else {
+                    c.add(input);
+                }
+            }
+
+            Map<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.values().contains(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+            System.out.print(entry.getValue() + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] d = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < 3; j++) {
+                d[i][j] = sc.nextInt();
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            int[] nc = new int[3];
+            int[] c = new int[3];
+            for (int j = 0; j < 3; j++) {
+                if (!d[i][j].containsKey(d[i][j])) {
+                    nc[j] = d[i][j];
+                } else {
+                    c[j] = d[i][j];
+                }
+            }
+
+            for (int k = 0; k < 3; k++) {
+                if (!d[i][k].containsValue(d[i][k])) {
+                    d[i][k] = d[i][k] + 1;
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(d[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+[/JAVA]
+
+This is a line-by-line conversion of the Python code to Java. The `map` function in Python is replaced by the `Scanner` class in Java, which allows us to read input from the user. The `d` dictionary in Python is replaced by a 2D array `d` in Java, which is initialized with the size of `m` and `3`. The `range` function in Python is replaced by a for loop in Java, which iterates over the indices of the `d` array. The `list` function in Python is not needed in Java, as we can directly access the elements of the `d` array. The `containsKey` and `containsValue` methods in Python are replaced by the `containsKey` and `containsValue` methods in Java, which check if a key or value exists in the `d` array. The `sorted` function in Python is not needed in Java, as we can directly access the elements of the `d` array in sorted order. The `print` function in Python is replaced by the `System.out.print` method in Java, which prints the output to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        HashMap<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            ArrayList<Integer> nc = new ArrayList<>();
+            ArrayList<Integer> c = new ArrayList<>();
+            ArrayList<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int num = scanner.nextInt();
+                if (!d.containsKey(num)) {
+                    nc.add(num);
+                } else {
+                    c.add(num);
+                }
+            }
+            HashMap<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.values().contains(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+            System.out.print(entry.getValue() + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      ArrayList<Integer> l = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        int input = scanner.nextInt();
+        if (!d.containsKey(input)) {
+          nc.add(input);
+        } else {
+          c.add(input);
+        }
+      }
+      HashMap<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (int i : d.keySet()) {
+      System.out.print(d.get(i) + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        Map<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            List<Integer> nc = new ArrayList<>();
+            List<Integer> c = new ArrayList<>();
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int input = scanner.nextInt();
+                if (!d.containsKey(input)) {
+                    nc.add(input);
+                } else {
+                    c.add(input);
+                }
+            }
+            Map<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.containsValue(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        List<Integer> sortedD = new ArrayList<>(d.values());
+        Collections.sort(sortedD);
+        for (int i : sortedD) {
+            System.out.print(i + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      int[] l = new int[3];
+      for (int j = 0; j < 3; j++) {
+        l[j] = sc.nextInt();
+        if (!d.containsKey(l[j])) {
+          nc.add(l[j]);
+        } else {
+          c.add(l[j]);
+        }
+      }
+      HashMap<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+      System.out.print(entry.getValue() + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        Map<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            int[] l = new int[3];
+            for (int j = 0; j < 3; j++) {
+                l[j] = sc.nextInt();
+            }
+            int[] nc = new int[l.length];
+            int[] c = new int[l.length];
+            for (int j = 0; j < l.length; j++) {
+                if (!d.containsKey(l[j])) {
+                    nc[j] = l[j];
+                } else {
+                    c[j] = l[j];
+                }
+            }
+            Map<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.values().contains(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+            System.out.print(entry.getValue() + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      ArrayList<Integer> l = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        int num = sc.nextInt();
+        if (!d.containsKey(num)) {
+          nc.add(num);
+        } else {
+          c.add(num);
+        }
+      }
+
+      HashMap<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+
+    for (int i : d.keySet()) {
+      System.out.print(d.get(i) + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        HashMap<Integer, Integer> d = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            List<Integer> nc = new ArrayList<>();
+            List<Integer> c = new ArrayList<>();
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int num = scanner.nextInt();
+                if (!d.containsKey(num)) {
+                    nc.add(num);
+                } else {
+                    c.add(num);
+                }
+            }
+            HashMap<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 3; v++) {
+                    if (!d1.containsValue(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+
+        List<Integer> sortedValues = new ArrayList<>(d.values());
+        sortedValues.sort(Comparator.naturalOrder());
+        for (int value : sortedValues) {
+            System.out.print(value + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        Map<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            List<Integer> nc = new ArrayList<>();
+            List<Integer> c = new ArrayList<>();
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                int num = sc.nextInt();
+                if (!d.containsKey(num)) {
+                    nc.add(num);
+                } else {
+                    c.add(num);
+                }
+            }
+            Map<Integer, Integer> d1 = new HashMap<>();
+            for (int u : c) {
+                d1.put(u, d.get(u));
+            }
+            for (int b : nc) {
+                for (int v = 1; v <= 4; v++) {
+                    if (!d1.containsValue(v)) {
+                        d.put(b, v);
+                        d1.put(b, v);
+                        break;
+                    }
+                }
+            }
+        }
+        List<Integer> sortedD = new ArrayList<>(d.values());
+        Collections.sort(sortedD);
+        for (int i : sortedD) {
+            System.out.print(i + " ");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] nm = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(nm[0]);
+    int m = Integer.parseInt(nm[1]);
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      String[] l = scanner.nextLine().split(" ");
+      List<Integer> nc = new ArrayList<>();
+      List<Integer> c = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        int num = Integer.parseInt(l[j]);
+        if (!d.containsKey(num)) {
+          nc.add(num);
+        } else {
+          c.add(num);
+        }
+      }
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+      System.out.print(entry.getValue() + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      int[] l = new int[3];
+      for (int j = 0; j < 3; j++) {
+        l[j] = scanner.nextInt();
+      }
+      int[] nc = new int[l.length];
+      int[] c = new int[l.length];
+      for (int j = 0; j < l.length; j++) {
+        if (!d.containsKey(l[j])) {
+          nc[j] = l[j];
+        } else {
+          c[j] = l[j];
+        }
+      }
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (Map.Entry<Integer, Integer> entry : d.entrySet()) {
+      System.out.print(entry.getValue() + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      int[] l = new int[3];
+      for (int j = 0; j < 3; j++) {
+        l[j] = scanner.nextInt();
+        if (!d.containsKey(l[j])) {
+          nc.add(l[j]);
+        } else {
+          c.add(l[j]);
+        }
+      }
+      HashMap<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.values().contains(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (int i : d.keySet()) {
+      System.out.print(d.get(i) + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+      ArrayList<Integer> nc = new ArrayList<>();
+      ArrayList<Integer> c = new ArrayList<>();
+      ArrayList<Integer> l = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        int num = sc.nextInt();
+        if (!d.containsKey(num)) {
+          nc.add(num);
+        } else {
+          c.add(num);
+        }
+      }
+      HashMap<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+    for (int i : d.keySet()) {
+      System.out.print(d.get(i) + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    Map<Integer, Integer> d = new HashMap<>();
+
+    for (int i = 0; i < m; i++) {
+      List<Integer> nc = new ArrayList<>();
+      List<Integer> c = new ArrayList<>();
+      List<Integer> l = new ArrayList<>();
+      for (int j = 0; j < 3; j++) {
+        int num = scanner.nextInt();
+        if (!d.containsKey(num)) {
+          nc.add(num);
+        } else {
+          c.add(num);
+        }
+      }
+
+      Map<Integer, Integer> d1 = new HashMap<>();
+      for (int u : c) {
+        d1.put(u, d.get(u));
+      }
+
+      for (int b : nc) {
+        for (int v = 1; v <= 4; v++) {
+          if (!d1.containsValue(v)) {
+            d.put(b, v);
+            d1.put(b, v);
+            break;
+          }
+        }
+      }
+    }
+
+    List<Integer> sortedValues = new ArrayList<>(d.values());
+    Collections.sort(sortedValues);
+    for (int value : sortedValues) {
+      System.out.print(value + " ");
+    }
+  }
+}
+[/JAVA]
+======

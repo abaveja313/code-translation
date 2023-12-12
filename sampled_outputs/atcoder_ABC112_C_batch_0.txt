@@ -1,0 +1,986 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      int[] edge = new int[3];
+      for (int j = 0; j < 3; j++) {
+        edge[j] = scanner.nextInt();
+      }
+      edges[i] = edge;
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int[] edge = edges[i];
+          int x = edge[0];
+          int y = edge[1];
+          int h = edge[2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int[] edge = edges[i];
+          int x = edge[0];
+          int y = edge[1];
+          int h = edge[2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i][0] = scanner.nextInt();
+      edges[i][1] = scanner.nextInt();
+      edges[i][2] = scanner.nextInt();
+    }
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            edges[i][0] = scanner.nextInt();
+            edges[i][1] = scanner.nextInt();
+            edges[i][2] = scanner.nextInt();
+        }
+
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            break;
+                        }
+                    } else if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            break;
+                        }
+                    }
+                }
+
+                if (i == N) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            edges[i] = scanner.nextInt();
+        }
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            break;
+                        }
+                    } else if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            break;
+                        }
+                    }
+                }
+                if (i == N) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            edges[i][0] = sc.nextInt();
+            edges[i][1] = sc.nextInt();
+            edges[i][2] = sc.nextInt();
+        }
+
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop = Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            break;
+                        }
+                    } else if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            break;
+                        }
+                    }
+                }
+
+                if (i == N) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i][0] = sc.nextInt();
+      edges[i][1] = sc.nextInt();
+      edges[i][2] = sc.nextInt();
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+
+        boolean valid = true;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              valid = false;
+              break;
+            }
+          } else {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              valid = false;
+              break;
+            }
+          }
+        }
+
+        if (valid) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = scanner.nextInt();
+      }
+    }
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop = Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          }
+          if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i][0] = scanner.nextInt();
+      edges[i][1] = scanner.nextInt();
+      edges[i][2] = scanner.nextInt();
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i][0] = sc.nextInt();
+      edges[i][1] = sc.nextInt();
+      edges[i][2] = sc.nextInt();
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            edges[i] = scanner.nextInt();
+        }
+
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            break;
+                        }
+                    }
+                    if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            break;
+                        }
+                    }
+                }
+                if (i == N) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = scanner.nextInt();
+      }
+    }
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          }
+          if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = scanner.nextInt();
+      }
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i] = new int[] {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};
+    }
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = scanner.nextInt();
+      }
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i] = new int[] {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          } else {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+
+        if (i == N) {
+          System.out.println(cx + " " + cy + " " + htop);
+          return;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            int h = scanner.nextInt();
+            edges[i] = new int[] {x, y, h};
+        }
+
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+                boolean isValid = true;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            isValid = false;
+                            break;
+                        }
+                    } else if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+                if (isValid) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[][] edges = new int[N][3];
+    for (int i = 0; i < N; i++) {
+      edges[i] = scanner.nextInt();
+    }
+
+    for (int cx = 0; cx <= 100; cx++) {
+      for (int cy = 0; cy <= 100; cy++) {
+        int htop = 0;
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h > 0) {
+            htop = Math.abs(x - cx) + Math.abs(y - cy) + h;
+          }
+        }
+        for (int i = 0; i < N; i++) {
+          int x = edges[i][0];
+          int y = edges[i][1];
+          int h = edges[i][2];
+          if (h == 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+              break;
+            }
+          }
+          if (h > 0) {
+            if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+              break;
+            }
+          }
+        }
+        System.out.println(cx + " " + cy + " " + htop);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] edges = new int[N][3];
+        for (int i = 0; i < N; i++) {
+            edges[i][0] = scanner.nextInt();
+            edges[i][1] = scanner.nextInt();
+            edges[i][2] = scanner.nextInt();
+        }
+        for (int cx = 0; cx <= 100; cx++) {
+            for (int cy = 0; cy <= 100; cy++) {
+                int htop = 0;
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h > 0) {
+                        htop += Math.abs(x - cx) + Math.abs(y - cy) + h;
+                    }
+                }
+                for (int i = 0; i < N; i++) {
+                    int x = edges[i][0];
+                    int y = edges[i][1];
+                    int h = edges[i][2];
+                    if (h == 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) > 0) {
+                            break;
+                        }
+                    } else if (h > 0) {
+                        if (htop - (Math.abs(x - cx) + Math.abs(y - cy)) != h) {
+                            break;
+                        }
+                    }
+                }
+                if (i == N) {
+                    System.out.println(cx + " " + cy + " " + htop);
+                    return;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======

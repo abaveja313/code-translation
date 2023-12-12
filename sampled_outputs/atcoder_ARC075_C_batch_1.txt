@@ -1,0 +1,1545 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt() - K;
+        }
+
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+
+        int[] comacc = compress(acc);
+
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt() - K;
+        }
+        int[] acc = IntStream.concat(IntStream.of(0), IntStream.range(0, N).map(i -> A[i])).toArray();
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        int[] compressed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            compressed[i] = convert[arr[i]];
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        IntStream.range(0, arr.length).forEach(i -> {
+            convert[i] = convert[i] - convert[i - 1];
+        });
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.ArrayList;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] arr) {
+        ArrayList<Integer> convert = new ArrayList<>();
+        for (int x : arr) {
+            if (!convert.contains(x)) {
+                convert.add(x);
+            }
+        }
+        int[] compressed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            compressed[i] = convert.indexOf(arr[i]) + 1;
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        List<Integer> acc = new ArrayList<>();
+        acc.add(0);
+        acc.addAll(accumulate(A));
+        List<Integer> comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.size());
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static List<Integer> accumulate(int[] A) {
+        List<Integer> acc = new ArrayList<>();
+        acc.add(0);
+        for (int i = 0; i < A.length; i++) {
+            acc.add(acc.get(i) + A[i]);
+        }
+        return acc;
+    }
+
+    private static List<Integer> compress(List<Integer> acc) {
+        List<Integer> comacc = new ArrayList<>();
+        for (int i = 1; i < acc.size(); i++) {
+            if (!comacc.contains(acc.get(i))) {
+                comacc.add(acc.get(i));
+            }
+        }
+        return comacc;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        int[] compressed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            compressed[i] = convert[arr[i]];
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        Arrays.sort(convert);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Arrays.binarySearch(convert, arr[i]);
+        }
+        return arr;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        IntStream.range(0, arr.length).forEach(i -> {
+            int x = arr[i];
+            convert[x] = i + 1;
+        });
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] arr) {
+        Map<Integer, Integer> convert = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            convert.put(arr[i], i + 1);
+        }
+        int[] compressed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            compressed[i] = convert.get(arr[i]);
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt() - K);
+        }
+        List<Integer> acc = new ArrayList<>(A);
+        acc.add(0, 0);
+        acc = acc.stream().map(x -> x + 1).collect(Collectors.toList());
+        List<Integer> comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.size());
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static List<Integer> compress(List<Integer> iter) {
+        List<Integer> convert = new ArrayList<>();
+        for (int x : iter) {
+            if (!convert.contains(x)) {
+                convert.add(x);
+            }
+        }
+        convert.sort(null);
+        List<Integer> compressed = new ArrayList<>();
+        for (int x : iter) {
+            compressed.add(convert.indexOf(x) + 1);
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = IntStream.rangeClosed(1, N).map(i -> A[i - 1] + A[i]).toArray();
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        List<Integer> acc = new ArrayList<>();
+        acc.add(0);
+        for (int i = 0; i < N; i++) {
+            acc.add(acc.get(i) + A[i]);
+        }
+        List<Integer> comacc = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            comacc.add(i + 1);
+        }
+        comacc.sort((a, b) -> a - b);
+        int ret = 0;
+        BIT b = new BIT(comacc.size());
+        for (int i = 0; i < comacc.size(); i++) {
+            ret += b.sum(comacc.get(i));
+            b.add(comacc.get(i), 1);
+        }
+        System.out.println(ret);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        this.data = new int[n + 1];
+        this.el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = IntStream.concat(IntStream.of(0), IntStream.of(A)).toArray();
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    public static int[] compress(int[] iter) {
+        int[] convert = new int[iter.length];
+        for (int i = 0; i < iter.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] acc) {
+        int[] convert = new int[acc.length];
+        for (int i = 0; i < acc.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        int[] compressed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            compressed[i] = convert[arr[i]];
+        }
+        return compressed;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class BIT {
+    private int n;
+    private int[] data;
+    private int[] el;
+
+    public BIT(int n) {
+        this.n = n;
+        data = new int[n + 1];
+        el = new int[n + 1];
+    }
+
+    public int sum(int i) {
+        int s = 0;
+        while (i > 0) {
+            s += data[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    public void add(int i, int x) {
+        el[i] += x;
+        while (i <= n) {
+            data[i] += x;
+            i += i & -i;
+        }
+    }
+
+    public int get(int i, int j) {
+        if (j == null) {
+            return el[i];
+        }
+        return sum(j) - sum(i);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt() - K;
+        }
+
+        int[] acc = new int[N + 1];
+        acc[0] = 0;
+        for (int i = 1; i <= N; i++) {
+            acc[i] = acc[i - 1] + A[i - 1];
+        }
+
+        int[] comacc = compress(acc);
+        int ret = 0;
+        BIT b = new BIT(comacc.length);
+        for (int x : comacc) {
+            ret += b.sum(x);
+            b.add(x, 1);
+        }
+        System.out.println(ret);
+    }
+
+    private static int[] compress(int[] arr) {
+        int[] convert = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            convert[i] = i + 1;
+        }
+        return convert;
+    }
+}
+
+[/JAVA]
+======

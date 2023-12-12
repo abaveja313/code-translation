@@ -1,0 +1,951 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        HashMap<String, Integer> d = new HashMap<>();
+        ArrayList<String> r = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            r.add(name + " " + score);
+        }
+        int best = 0;
+        HashSet<String> winners = new HashSet<>();
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = sc.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            r.add(name + " " + score);
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d.clear();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            r.add(name + " " + score);
+        }
+        int best = 0;
+        Set<String> winners = new HashSet<>();
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<String> names = new ArrayList<>();
+        Map<String, Integer> scores = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] nameAndScore = scanner.nextLine().split(" ");
+            names.add(nameAndScore[0]);
+            scores.put(nameAndScore[0], Integer.parseInt(nameAndScore[1]));
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : scores.keySet()) {
+            if (scores.get(name) > best) {
+                best = scores.get(name);
+                winners.add(name);
+            } else if (scores.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        Map<String, Integer> sortedScores = new HashMap<>();
+        for (String name : names) {
+            sortedScores.put(name, scores.get(name));
+        }
+        List<String> sortedNames = new ArrayList<>(sortedScores.keySet());
+        Collections.sort(sortedNames, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return sortedScores.get(o2).compareTo(sortedScores.get(o1));
+            }
+        });
+        for (String name : sortedNames) {
+            if (winners.contains(name) && scores.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String> r = new ArrayList<>();
+    HashMap<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String name = sc.next();
+      int score = sc.nextInt();
+      d.put(name, score + d.getOrDefault(name, 0));
+      r.add(name + " " + score);
+    }
+    int best = 0;
+    HashSet<String> winners = new HashSet<>();
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String name = r.get(i).split(" ")[0];
+      int score = Integer.parseInt(r.get(i).split(" ")[1]);
+      d.put(name, score + d.getOrDefault(name, 0));
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<String> r = new ArrayList<>();
+    Map<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = scanner.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      r.add(name + " " + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String> r = new ArrayList<>();
+    HashMap<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = sc.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      r.add(name);
+      d.put(name, d.getOrDefault(name, 0) + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String name = r.get(i);
+      int score = Integer.parseInt(r.get(i));
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String> r = new ArrayList<>();
+    HashMap<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = sc.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score);
+      r.add(name + " " + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            r.add(name + " " + score);
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<String> r = new ArrayList<>();
+    Map<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = scanner.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      r.add(name + " " + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] r = new String[n];
+    Map<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = sc.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      r[i] = name + " " + score;
+    }
+    int best = 0;
+    Set<String> winners = new HashSet<>();
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r[i].split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<String> r = new ArrayList<>();
+    Map<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = scanner.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score + d.getOrDefault(name, 0));
+      r.add(name + " " + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score + d.getOrDefault(name, 0));
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            r.add(name);
+            d.put(name, d.getOrDefault(name, 0) + score);
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String> r = new ArrayList<>();
+    HashMap<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = sc.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      r.add(name + " " + score);
+    }
+    int best = 0;
+    Set<String> winners = new HashSet<>();
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String[]> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = sc.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            r.add(new String[]{name, String.valueOf(score)});
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] nameScore = r.get(i);
+            String name = nameScore[0];
+            int score = Integer.parseInt(nameScore[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<String> r = new ArrayList<>();
+    Map<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = scanner.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      r.add(name + " " + score);
+    }
+    Set<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i).split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, d.getOrDefault(name, 0) + score);
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String[]> r = new ArrayList<>();
+    HashMap<String, Integer> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String[] x = sc.nextLine().split(" ");
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score + d.getOrDefault(name, 0));
+      r.add(new String[] {name, Integer.toString(score)});
+    }
+    HashSet<String> winners = new HashSet<>();
+    int best = 0;
+    for (String name : d.keySet()) {
+      if (d.get(name) > best) {
+        best = d.get(name);
+        winners.clear();
+        winners.add(name);
+      } else if (d.get(name) == best) {
+        winners.add(name);
+      }
+    }
+    d.clear();
+    for (int i = 0; i < n; i++) {
+      String[] x = r.get(i);
+      String name = x[0];
+      int score = Integer.parseInt(x[1]);
+      d.put(name, score + d.getOrDefault(name, 0));
+      if (winners.contains(name) && d.get(name) >= best) {
+        System.out.println(name);
+        break;
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = sc.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            r.add(name + " " + score);
+        }
+        int best = 0;
+        Set<String> winners = new HashSet<>();
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d.clear();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Map;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<String> r = new ArrayList<>();
+        Map<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            r.add(name + " " + score);
+        }
+        Set<String> winners = new HashSet<>();
+        int best = 0;
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, score + d.getOrDefault(name, 0));
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<String> r = new ArrayList<>();
+        HashMap<String, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] x = scanner.nextLine().split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            r.add(name + " " + score);
+        }
+        int best = 0;
+        Set<String> winners = new HashSet<>();
+        for (String name : d.keySet()) {
+            if (d.get(name) > best) {
+                best = d.get(name);
+                winners.clear();
+                winners.add(name);
+            } else if (d.get(name) == best) {
+                winners.add(name);
+            }
+        }
+        d.clear();
+        for (int i = 0; i < n; i++) {
+            String[] x = r.get(i).split(" ");
+            String name = x[0];
+            int score = Integer.parseInt(x[1]);
+            d.put(name, d.getOrDefault(name, 0) + score);
+            if (winners.contains(name) && d.get(name) >= best) {
+                System.out.println(name);
+                break;
+            }
+        }
+    }
+}
+[/JAVA]
+======

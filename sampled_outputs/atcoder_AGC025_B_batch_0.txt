@@ -1,0 +1,1586 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int N = Integer.parseInt(input[0]);
+    int A = Integer.parseInt(input[1]);
+    int B = Integer.parseInt(input[2]);
+    int K = Integer.parseInt(input[3]);
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    final int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    int[] fac_inv = new int[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int n = 1; n <= N; n++) {
+      mem[n] = mul(fac[n], fac_inv[n - 1], MOD);
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + mul(ncr(N, a, mem), ncr(N, b, mem), MOD)) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int mul(int a, int b, int mod) {
+    return (a * b) % mod;
+  }
+
+  public static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = mul(ret, mag, mod);
+      }
+      mag = mul(mag, mag, mod);
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int inv(int a, int mod) {
+    return pow(a, mod - 2, mod);
+  }
+
+  public static int ncr(int n, int r, int
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int K = sc.nextInt();
+        sc.close();
+
+        if (A < B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+
+        int MOD = 998244353;
+
+        long[] fac = new long[N + 10];
+        fac[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            fac[n] = (fac[n - 1] * n) % MOD;
+        }
+
+        long[] fac_inv = new long[N + 10];
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+        }
+
+        long[] mem = new long[N + 1];
+        mem[0] = 1;
+
+        long ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            long rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            long b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans = (ans + mul(ncr(N, a), ncr(N, b), MOD)) % MOD;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long mul(long a, long b, long mod) {
+        return (a * b) % mod;
+    }
+
+    public static long pow(long a, long n, long mod) {
+        long ret = 1;
+        long mag = a;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ret = mul(ret, mag, mod);
+            }
+            mag = mul(mag, mag, mod);
+            n >>= 1;
+        }
+        return ret;
+    }
+
+    public static long inv(long a, long mod) {
+        return pow(a, mod - 2, mod);
+    }
+
+    public static long ncr(int n, int r, long[] fac, long[] fac_inv, long[] mem, long mod) {
+        if (mem[r] > 0) {
+            return mem[r];
+        } else {
+            long ret = mul(mul(fac[n], fac_inv[n - r
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    final int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    int[] fac_inv = new int[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int n = 0; n <= N; n++) {
+      mem[n] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + mul(ncr(N, a), ncr(N, b), MOD)) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int a, int n, int MOD) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = mul(ret, mag, MOD);
+      }
+      mag = mul(mag, mag, MOD);
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  private static int mul(int a, int b, int MOD) {
+    return (a * b) % MOD;
+  }
+
+  private static int ncr(int N, int a, int MOD) {
+    if (mem[a] > 0) {
+      return mem[a];
+    } else {
+      int ret = mul(mul(fac[N], fac_inv[N - a]), fac_inv[a], MOD);
+      mem[a] = ret;
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = inv(f, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans += (ncr(N, a) * ncr(N, b)) % MOD;
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  public static int inv(int a, int MOD) {
+    return pow(a, MOD - 2, MOD);
+  }
+
+  public static int pow(int a, int n, int MOD) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % MOD;
+      }
+      mag = (mag * mag) % MOD;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int ncr(int N, int a) {
+    if (a == 0 || a == N) {
+      return 1;
+    }
+    return (fac[N] * fac_inv[a] * fac_inv[N - a]) % MOD;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 1];
+    int[] fac_inv = new int[N + 1];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = pow(f, MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    int ncr(int n, int r) {
+      if (mem[r] > 0) {
+        return mem[r];
+      } else {
+        int ret = (fac[n] * fac_inv[n - r] % MOD) * fac_inv[r] % MOD;
+        mem[r] = ret;
+        return ret;
+      }
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + (ncr(N, a) * ncr(N, b)) % MOD) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % mod;
+      }
+      mag = (mag * mag) % mod;
+      n /= 2;
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    int[] fac_inv = new int[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac_inv[n - 1], MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + mul(ncr(N, a), ncr(N, b), MOD)) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int mul(int a, int b, int MOD) {
+    return (a * b) % MOD;
+  }
+
+  public static int pow(int a, int n, int MOD) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = mul(ret, mag, MOD);
+      }
+      mag = mul(mag, mag, MOD);
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int inv(int a, int MOD) {
+    return pow(a, MOD - 2, MOD);
+  }
+
+  public static int ncr(int N, int a, int MOD) {
+    if (a == 0) {
+      return 1;
+    }
+    if (a ==
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    final int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = pow(f, MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int i = 0; i <= N; i++) {
+      mem[i] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + (ncr(N, a) * ncr(N, b)) % MOD) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % mod;
+      }
+      mag = (mag * mag) % mod;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  private static int ncr(int n, int r) {
+    if (mem[r] > 0) {
+      return mem[r];
+    } else {
+      int ret = (fac[n] * fac_inv[n - r]) % MOD;
+      ret = (ret * fac_inv[r]) % MOD;
+      mem[r] = ret;
+      return ret;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = modInverse(f, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int i = 0; i <= N; i++) {
+      mem[i] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + (fac[N] * fac_inv[N - a] * fac_inv[a]) % MOD) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int modInverse(int a, int m) {
+    int b = m;
+    int u = 1;
+    int v = 0;
+    while (a > 0) {
+      int q = b / a;
+      int t = b % a;
+      b = a;
+      a = t;
+      t = u;
+      u = v;
+      v = t - q * u;
+    }
+    if (v < 0) {
+      v += m;
+    }
+    return v;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int K = sc.nextInt();
+        sc.close();
+
+        if (A < B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+
+        int MOD = 998244353;
+
+        int[] fac = new int[N + 10];
+        fac[0] = 1;
+        for (int n = 1; n <= N + 10; n++) {
+            fac[n] = (fac[n - 1] * n) % MOD;
+        }
+
+        int[] fac_inv = new int[N + 10];
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N + 10; n++) {
+            fac_inv[n] = pow(fac_inv[n - 1], MOD - 2, MOD);
+        }
+
+        int[] mem = new int[N + 1];
+        for (int r = 0; r <= N; r++) {
+            mem[r] = mul(fac[N], fac_inv[N - r], fac_inv[r], MOD);
+        }
+
+        long ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            int rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            int b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans += mul(ncr(N, a, mem), ncr(N, b, mem), MOD);
+        }
+
+        System.out.println(ans % MOD);
+    }
+
+    private static int mul(int a, int b, int mod) {
+        return (a * b) % mod;
+    }
+
+    private static int pow(int a, int n, int mod) {
+        int ret = 1;
+        int mag = a;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ret = mul(ret, mag, mod);
+            }
+            mag = mul(mag, mag, mod);
+            n >>= 1;
+        }
+        return ret;
+    }
+
+    private static int inv(int a, int mod) {
+        return pow(a, mod - 2, mod);
+    }
+
+    private static int ncr(int n, int r, int[] mem) {
+        if (mem
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int K = sc.nextInt();
+        sc.close();
+
+        if (A < B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+
+        int MOD = 998244353;
+
+        int[] fac = new int[N + 10];
+        fac[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            fac[n] = (fac[n - 1] * n) % MOD;
+        }
+
+        int[] fac_inv = new int[N + 10];
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            fac_inv[n] = pow(fac_inv[n - 1], MOD - 2, MOD);
+        }
+
+        int[] mem = new int[N + 1];
+        for (int r = 0; r <= N; r++) {
+            mem[r] = 0;
+        }
+
+        int ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            int rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            int b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans = (ans + (ncr(N, a) * ncr(N, b)) % MOD) % MOD;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int pow(int a, int n, int MOD) {
+        int ret = 1;
+        int mag = a;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ret = (ret * mag) % MOD;
+            }
+            mag = (mag * mag) % MOD;
+            n >>= 1;
+        }
+        return ret;
+    }
+
+    public static int ncr(int N, int a) {
+        if (a == 0 || a == N) {
+            return 1;
+        }
+        return (fac[N] * fac_inv[a] * fac_inv[N - a]) % MOD;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int K = scanner.nextInt();
+    scanner.close();
+
+    if (A < B) {
+      A = B;
+      B = A;
+    }
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = pow(f, MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + (ncr(N, a, fac, fac_inv) * ncr(N, b, fac, fac_inv)) % MOD) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % mod;
+      }
+      mag = (mag * mag) % mod;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int ncr(int n, int r, int[] fac, int[] fac_inv) {
+    if (r == 0) {
+      return 1;
+    }
+    if (r == n) {
+      return fac[n];
+    }
+    if (mem[r] > 0) {
+      return mem[r];
+    }
+    int ret = (fac[n] * fac_inv[n - r]) % MOD;
+    ret = (ret * fac_inv[r]) % MOD
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = inv(f);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int i = 0; i <= N; i++) {
+      mem[i] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans += (ncr(N, a) * ncr(N, b)) % MOD;
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  public static int inv(int a) {
+    return pow(a, MOD - 2);
+  }
+
+  public static int pow(int a, int n) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % MOD;
+      }
+      mag = (mag * mag) % MOD;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int ncr(int n, int r) {
+    if (mem[r] > 0) {
+      return mem[r];
+    } else {
+      int ret = (fac[n] * fac_inv[n - r]) % MOD;
+      ret = (ret * fac_inv[r]) % MOD;
+      mem[r] = ret;
+      return ret;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    int MOD = 998244353;
+
+    long[] fac = new long[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    long[] fac_inv = new long[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+    }
+
+    long[] mem = new long[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    long ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      long rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = (int) (rem / B);
+      if (b > N) {
+        continue;
+      }
+      ans += (ncr(N, a, MOD) * ncr(N, b, MOD)) % MOD;
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  private static long pow(long a, long n, int mod) {
+    long ret = 1;
+    long mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % mod;
+      }
+      mag = (mag * mag) % mod;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  private static long ncr(int n, int r, int mod) {
+    if (r == 0) {
+      return 1;
+    }
+    if (r == n) {
+      return 1;
+    }
+    if (mem[r] > 0) {
+      return mem[r];
+    }
+    long ret = (ncr(n - 1, r - 1, mod) * (n - r + 1)) % mod;
+    mem[r] = ret;
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int K = scanner.nextInt();
+    scanner.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    final int MOD = 998244353;
+
+    int[] fac = new int[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    int[] fac_inv = new int[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = mul(fac[N], fac_inv[N - r], fac_inv[r], MOD);
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans += mul(ncr(N, a, mem), ncr(N, b, mem), MOD);
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  private static int mul(int a, int b, int mod) {
+    return (a * b) % mod;
+  }
+
+  private static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 != 0) {
+        ret = mul(ret, mag, mod);
+      }
+      mag = mul(mag, mag, mod);
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  private static int inv(int a, int mod) {
+    return pow(a, mod - 2, mod);
+  }
+
+  private static int ncr(int n, int r, int[] mem) {
+    if (mem[r] > 
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    int MOD = 998244353;
+    int[] fac = new int[N + 10];
+    int[] fac_inv = new int[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      int f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = inv(f, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int i = 0; i <= N; i++) {
+      mem[i] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans += (ncr(N, a) * ncr(N, b)) % MOD;
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  public static int inv(int a, int mod) {
+    return pow(a, mod - 2, mod);
+  }
+
+  public static int pow(int a, int n, int mod) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % mod;
+      }
+      mag = (mag * mag) % mod;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static int ncr(int n, int r) {
+    if (r > n) {
+      return 0;
+    }
+    if (r == 0) {
+      return 1;
+    }
+    if (mem[r] > 0) {
+      return mem[r];
+    }
+    int ret = (fac[n] * fac_inv[n - r]) % MOD;
+    ret = (ret * fac_inv[r]) % MOD;
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
+        int K = scanner.nextInt();
+        scanner.close();
+
+        if (A < B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+
+        int MOD = 998244353;
+
+        int[] fac = new int[N + 10];
+        int[] fac_inv = new int[N + 10];
+        fac[0] = 1;
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            int f = (fac[n - 1] * n) % MOD;
+            fac[n] = f;
+            fac_inv[n] = pow(f, MOD - 2, MOD);
+        }
+
+        int[] mem = new int[N + 1];
+        for (int r = 0; r <= N; r++) {
+            mem[r] = (fac[N] * fac_inv[N - r] * fac_inv[r]) % MOD;
+        }
+
+        int ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            int rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            int b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans = (ans + (mem[a] * mem[b]) % MOD) % MOD;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int pow(int a, int n, int MOD) {
+        int ret = 1;
+        int mag = a;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ret = (ret * mag) % MOD;
+            }
+            mag = (mag * mag) % MOD;
+            n >>= 1;
+        }
+        return ret;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    sc.close();
+
+    int MOD = 998244353;
+
+    long[] fac = new long[N + 10];
+    long[] fac_inv = new long[N + 10];
+    fac[0] = 1;
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      long f = (fac[n - 1] * n) % MOD;
+      fac[n] = f;
+      fac_inv[n] = inv(f, MOD);
+    }
+
+    long[] mem = new long[N + 1];
+    for (int i = 0; i <= N; i++) {
+      mem[i] = 0;
+    }
+
+    long ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      long rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = (int) (rem / B);
+      if (b > N) {
+        continue;
+      }
+      ans += (ncr(N, a) * ncr(N, b)) % MOD;
+    }
+
+    System.out.println(ans % MOD);
+  }
+
+  public static long inv(long a, long m) {
+    return pow(a, m - 2, m);
+  }
+
+  public static long pow(long a, long n, long m) {
+    long ret = 1;
+    long mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % m;
+      }
+      mag = (mag * mag) % m;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  public static long ncr(int n, int r) {
+    if (r < 0 || r > n) {
+      return 0;
+    }
+    if (r == 0 || r == n) {
+      return 1;
+    }
+    return (fac[n] * fac_inv[r] * fac_inv[n - r]) % MOD;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] input = sc.nextLine().split(" ");
+        int N = Integer.parseInt(input[0]);
+        int A = Integer.parseInt(input[1]);
+        int B = Integer.parseInt(input[2]);
+        int K = Integer.parseInt(input[3]);
+        int MOD = 998244353;
+
+        if (A < B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+
+        int[] fac = new int[N + 10];
+        int[] fac_inv = new int[N + 10];
+        fac[0] = 1;
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            int f = (fac[n - 1] * n) % MOD;
+            fac[n] = f;
+            fac_inv[n] = inv(f);
+        }
+
+        int[] mem = new int[N + 1];
+        for (int r = 0; r <= N; r++) {
+            mem[r] = 0;
+        }
+
+        int ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            int rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            int b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans += (ncr(N, a) * ncr(N, b)) % MOD;
+        }
+        System.out.println(ans % MOD);
+    }
+
+    public static int inv(int a) {
+        return pow(a, MOD - 2);
+    }
+
+    public static int pow(int a, int n) {
+        int ret = 1;
+        int mag = a;
+        while (n > 0) {
+            if (n % 2 != 0) {
+                ret = mul(ret, mag);
+            }
+            mag = mul(mag, mag);
+            n /= 2;
+        }
+        return ret;
+    }
+
+    public static int mul(int a, int b) {
+        return (a * b) % MOD;
+    }
+
+    public static int ncr(int n, int r) {
+        if (mem[r] > 0) {
+            return mem[r];
+        } else {
+            int ret = mul(mul(fac[n], fac_inv[n - r]), fac_inv[r]);
+            mem[r] = ret;
+            return ret
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int K = sc.nextInt();
+    int MOD = 998244353;
+
+    if (A < B) {
+      int temp = A;
+      A = B;
+      B = temp;
+    }
+
+    int[] fac = new int[N + 10];
+    fac[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac[n] = (fac[n - 1] * n) % MOD;
+    }
+
+    int[] fac_inv = new int[N + 10];
+    fac_inv[0] = 1;
+    for (int n = 1; n <= N; n++) {
+      fac_inv[n] = pow(fac[n], MOD - 2, MOD);
+    }
+
+    int[] mem = new int[N + 1];
+    for (int r = 0; r <= N; r++) {
+      mem[r] = 0;
+    }
+
+    int ans = 0;
+    for (int a = 0; a <= N; a++) {
+      if (a * A > K) {
+        break;
+      }
+      int rem = K - a * A;
+      if (rem % B != 0) {
+        continue;
+      }
+      int b = rem / B;
+      if (b > N) {
+        continue;
+      }
+      ans = (ans + (ncr(N, a) * ncr(N, b)) % MOD) % MOD;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int a, int n, int MOD) {
+    int ret = 1;
+    int mag = a;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ret = (ret * mag) % MOD;
+      }
+      mag = (mag * mag) % MOD;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  private static int ncr(int N, int a) {
+    if (mem[a] > 0) {
+      return mem[a];
+    } else {
+      int ret = (fac[N] * fac_inv[N - a]) % MOD;
+      mem[a] = ret;
+      return ret;
+    }
+  }
+}
+
+[/JAVA]
+
+This is the Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int K = sc.nextInt();
+        sc.close();
+
+        if (A < B) {
+            A = B;
+            B = A;
+        }
+
+        int MOD = 998244353;
+
+        long[] fac = new long[N + 10];
+        long[] fac_inv = new long[N + 10];
+        fac[0] = 1;
+        fac_inv[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            long f = (fac[n - 1] * n) % MOD;
+            fac[n] = f;
+            fac_inv[n] = inv(f, MOD);
+        }
+
+        long[] mem = new long[N + 1];
+
+        long ncr(int n, int r) {
+            if (mem[r] > 0) {
+                return mem[r];
+            } else {
+                long ret = (mul(fac[n], fac_inv[n - r]) * fac_inv[r]) % MOD;
+                mem[r] = ret;
+                return ret;
+            }
+        }
+
+        long ans = 0;
+        for (int a = 0; a <= N; a++) {
+            if (a * A > K) {
+                break;
+            }
+            long rem = K - a * A;
+            if (rem % B != 0) {
+                continue;
+            }
+            int b = rem / B;
+            if (b > N) {
+                continue;
+            }
+            ans += (mul(ncr(N, a), ncr(N, b)) % MOD);
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long mul(long a, long b) {
+        return (a * b) % MOD;
+    }
+
+    public static long inv(long a, long n) {
+        long ret = 1;
+        long mag = a;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ret = mul(ret, mag);
+            }
+            mag = mul(mag, mag);
+            n /= 2;
+        }
+        return ret;
+    }
+}
+
+[/JAVA]
+======

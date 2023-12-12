@@ -1,0 +1,1002 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        List<Integer> b = new ArrayList<>();
+        Map<Integer, Integer> counter = new HashMap<>();
+        Map<Integer, Integer> positions = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int x = scanner.nextInt();
+            if (!counter.containsKey(x)) {
+                counter.put(x, 0);
+            }
+            counter.put(x, counter.get(x) + 1);
+            b.add(new Pair(x, counter.get(x)));
+            positions.put(new Pair(x, counter.get(x)), i);
+        }
+        Collections.sort(b);
+        List<Pair> result = new ArrayList<>();
+        for (int i = 0; i < b.size(); i++) {
+            Pair x = b.get(i);
+            int pos = positions.get(x);
+            if (pos != i) {
+                Pair tmp = b.get(i);
+                b.set(pos, tmp);
+                b.set(i, x);
+                result.add(new Pair(i, positions.get(x)));
+                positions.put(x, positions.get(tmp));
+                positions.put(tmp, positions.get(x));
+            }
+        }
+        System.out.println(result.size());
+        for (Pair p : result) {
+            System.out.println(p.getFirst() + " " + p.getSecond());
+        }
+    }
+
+    public static class Pair {
+        private int first;
+        private int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public int getFirst() {
+            return first;
+        }
+
+        public int getSecond() {
+            return second;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a.get(i);
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      positions.put(x, i);
+    }
+    a.sort(Comparator.comparingInt(x -> x));
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a.get(i);
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = a.get(i);
+        a.set(pos, tmp);
+        a.set(i, x);
+        result.add(i);
+        positions.put(x, i);
+        positions.put(tmp, pos);
+      }
+    }
+    System.out.println(result.size());
+    for (int i : result) {
+      System.out.println(i + " " + positions.get(a.get(i)));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    ArrayList<Integer> b = new ArrayList<>();
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b.add(new Integer(x));
+      positions.put(new Integer(x), i);
+    }
+    a = sorted(b);
+    ArrayList<Integer> result = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      int pos = positions.get(a.get(i));
+      if (pos != i) {
+        Integer tmp = b.get(i);
+        b.set(pos, b.get(i));
+        b.set(i, tmp);
+        result.add(new Integer(i));
+        positions.put(a.get(i), positions.get(tmp));
+        positions.put(tmp, positions.get(a.get(i)));
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i++) {
+      System.out.println(result.get(i) + " " + positions.get(result.get(i)));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String[] input = scanner.nextLine().split(" ");
+    List<Integer> a = new ArrayList<>();
+    for (String s : input) {
+      a.add(Integer.parseInt(s));
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      positions.put(x, i);
+    }
+    a.sort(Comparator.comparing(x -> x));
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = a.get(i);
+        a.set(pos, a.get(i));
+        a.set(i, tmp);
+        result.add(i);
+        positions.put(x, positions.get(tmp));
+      }
+    }
+    System.out.println(result.size());
+    for (int i : result) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    HashMap<Integer, Integer> counter = new HashMap<>();
+    HashMap<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      positions.put(x, i);
+    }
+    ArrayList<Integer> b = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      b.add((x, counter.get(x)));
+    }
+    a = b.stream().sorted().mapToInt(x -> x).toArray();
+    ArrayList<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b.get(i);
+        b.set(pos, b.get(i));
+        b.set(i, tmp);
+        result.add((i, positions.get(x)));
+        positions.put(x, positions.get(tmp));
+        positions.put(tmp, x);
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i++) {
+      System.out.println(result.get(i));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    ArrayList<Integer> b = new ArrayList<>();
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b.add(x);
+      positions.put(x, i);
+    }
+    a.clear();
+    for (int i = 0; i < b.size(); i++) {
+      a.add(b.get(i));
+    }
+    b.clear();
+    ArrayList<Integer> result = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b.get(i);
+        b.set(pos, b.get(i));
+        b.set(i, tmp);
+        result.add(i);
+        result.add(pos);
+        positions.put(x, pos);
+        positions.put(tmp, x);
+      }
+    }
+    System.out.println(result.size() / 2);
+    for (int i = 0; i < result.size(); i += 2) {
+      System.out.println(result.get(i) + " " + result.get(i + 1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = (x, counter.get(x));
+      positions.put((x, counter.get(x)), i);
+    }
+    a = b;
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add((i, positions.get(x)));
+        positions.put(x, positions.get(tmp));
+        positions.put(tmp, positions.get(x));
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i++) {
+      System.out.println(result.get(i));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = x;
+      positions.put(x, i);
+    }
+    a = sort(b);
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add(i);
+        result.add(pos);
+        positions.put(x, pos);
+        positions.put(tmp, x);
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i += 2) {
+      System.out.println(result.get(i) + " " + result.get(i + 1));
+    }
+  }
+
+  public static int[] sort(int[] a) {
+    for (int i = 0; i < a.length - 1; i++) {
+      for (int j = i + 1; j < a.length; j++) {
+        if (a[i] > a[j]) {
+          int tmp = a[i];
+          a[i] = a[j];
+          a[j] = tmp;
+        }
+      }
+    }
+    return a;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      positions.put(x, i);
+    }
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = a[i];
+        a[pos] = a[i];
+        a[i] = tmp;
+        result.add(i);
+        result.add(pos);
+        positions.put(x, pos);
+        positions.put(tmp, i);
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i += 2) {
+      System.out.println(result.get(i) + " " + result.get(i + 1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!counter.containsKey(a[i])) {
+        counter.put(a[i], 0);
+      }
+      counter.put(a[i], counter.get(a[i]) + 1);
+      b[i] = a[i];
+      positions.put(a[i], i);
+    }
+    Arrays.sort(b);
+    ArrayList<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int pos = positions.get(b[i]);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add(i);
+        result.add(pos);
+        positions.put(b[i], i);
+        positions.put(tmp, pos);
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i += 2) {
+      System.out.println(result.get(i) + " " + result.get(i + 1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    int[] counter = new int[n];
+    int[] positions = new int[n];
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (counter[x] == 0) {
+        counter[x] = 1;
+      } else {
+        counter[x]++;
+      }
+      b[i] = (x, counter[x]);
+      positions[i] = i;
+    }
+    a = sort(b);
+    int[] result = new int[n];
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions[i];
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result[i] = (i, positions[x]);
+        positions[x] = positions[tmp];
+      }
+    }
+    System.out.println(result.length);
+    for (int i = 0; i < result.length; i++) {
+      System.out.println(result[i]);
+    }
+  }
+
+  public static int[] sort(int[] a) {
+    int[] b = new int[a.length];
+    for (int i = 0; i < a.length; i++) {
+      b[i] = a[i];
+    }
+    for (int i = 1; i < a.length; i++) {
+      int key = b[i];
+      int j = i - 1;
+      while (j >= 0 && b[j] > key) {
+        b[j + 1] = b[j];
+        j--;
+      }
+      b[j + 1] = key;
+    }
+    return b;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String[] a = scanner.nextLine().split(" ");
+    List<Integer> b = new ArrayList<>();
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < a.length; i++) {
+      int x = Integer.parseInt(a[i]);
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b.add(new Integer(x));
+      positions.put(new Integer(x), i);
+    }
+    a = b;
+    b = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (positions.get(x) != i) {
+        int tmp = a.get(i);
+        a.set(positions.get(x), tmp);
+        a.set(i, x);
+        b.add(new Integer(i));
+        b.add(new Integer(positions.get(x)));
+      }
+    }
+    System.out.println(b.size());
+    for (int i = 0; i < b.size(); i++) {
+      System.out.println(b.get(i) + " " + b.get(i + 1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    List<Integer> b = new ArrayList<>();
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b.add(new Integer(x));
+      positions.put(new Integer(x), i);
+    }
+    a.sort(null);
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b.get(i);
+        b.set(pos, tmp);
+        result.add(new Integer(i));
+        positions.put(x, positions.get(tmp));
+      }
+    }
+    System.out.println(result.size());
+    for (int i : result) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = x;
+      positions.put(x, i);
+    }
+    a = b;
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add(i);
+        positions.put(x, i);
+        positions.put(tmp, pos);
+      }
+    }
+    System.out.println(result.size());
+    for (int i : result) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = (x, counter.get(x));
+      positions.put((x, counter.get(x)), i);
+    }
+    a = b;
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add((i, pos));
+        positions.put(x, positions.get(tmp));
+        positions.put(tmp, positions.get(x));
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i++) {
+      System.out.println(result.get(i));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = (x, counter.get(x));
+      positions.put((x, counter.get(x)), i);
+    }
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int pos = positions.get(b[i]);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add((i, pos));
+        positions.put(b[i], positions.get(tmp));
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i++) {
+      System.out.println(result.get(i));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    List<Integer> b = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b.add(new Integer(x));
+      positions.put(new Integer(x), i);
+    }
+    a = b.stream().sorted().toArray(Integer[]::new);
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b.get(i);
+        b.set(pos, tmp);
+        result.add(new Integer(i));
+        positions.put(x, positions.get(tmp));
+      }
+    }
+    System.out.println(result.size());
+    for (int i : result) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] b = new int[n];
+    Map<Integer, Integer> counter = new HashMap<>();
+    Map<Integer, Integer> positions = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (!counter.containsKey(x)) {
+        counter.put(x, 0);
+      }
+      counter.put(x, counter.get(x) + 1);
+      b[i] = x;
+      positions.put(x, i);
+    }
+    a = b;
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      int pos = positions.get(x);
+      if (pos != i) {
+        int tmp = b[i];
+        b[pos] = b[i];
+        b[i] = tmp;
+        result.add(i);
+        result.add(pos);
+        positions.put(x, pos);
+        positions.put(tmp, x);
+      }
+    }
+    System.out.println(result.size());
+    for (int i = 0; i < result.size(); i += 2) {
+      System.out.println(result.get(i) + " " + result.get(i + 1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Map<Integer, Integer> counter = new HashMap<>();
+        Map<Integer, Integer> positions = new HashMap<>();
+        for (int i = 0; i < a.size(); i++) {
+            int x = a.get(i);
+            if (!counter.containsKey(x)) {
+                counter.put(x, 0);
+            }
+            counter.put(x, counter.get(x) + 1);
+            positions.put(x, i);
+        }
+        a.sort(Comparator.comparingInt(x -> x));
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < a.size(); i++) {
+            int x = a.get(i);
+            int pos = positions.get(x);
+            if (pos != i) {
+                int tmp = a.get(i);
+                a.set(pos, tmp);
+                result.add(i);
+                positions.put(x, i);
+            }
+        }
+        System.out.println(result.size());
+        for (int i : result) {
+            System.out.println(i);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[] b = new int[n];
+        int[] counter = new int[n];
+        int[] positions = new int[n];
+        for (int i = 0; i < n; i++) {
+            int x = a[i];
+            if (counter[x] == 0) {
+                counter[x] = 1;
+            } else {
+                counter[x]++;
+            }
+            b[i] = (x, counter[x]);
+            positions[b[i]] = i;
+        }
+        a = b;
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            int x = a[i];
+            int pos = positions[x];
+            if (pos != i) {
+                int tmp = b[i];
+                b[pos] = b[i];
+                b[i] = tmp;
+                result++;
+                positions[x] = positions[tmp];
+                positions[tmp] = positions[x];
+            }
+        }
+        System.out.println(result);
+        for (int i = 0; i < result; i++) {
+            int j = i + 1;
+            System.out.println(i + " " + j);
+        }
+    }
+}
+[/JAVA]
+======

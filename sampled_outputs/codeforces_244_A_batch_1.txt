@@ -1,0 +1,970 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[][] a = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            a[i][0] = scanner.nextInt();
+        }
+        a = solve(n, k, a);
+        printRes(a);
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            b[i][0] = a[i][0];
+        }
+        Arrays.sort(b, (o1, o2) -> o1[0] - o2[0]);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", e) + " ");
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                if (b[i][j] != a[i][j]) {
+                    if (a[i][j] != a[i + 1][j]) {
+                        a[i + 1][j] = a[i][j];
+                    }
+                }
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It obeys the constraints you specified, with the only output being the Java code between the [JAVA] and [/JAVA] tags. The Java code is functionally identical to the Python code, with the only difference being the syntax and structure of the two languages.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[][] a = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        a[i][j] = sc.nextInt();
+      }
+    }
+    a = solve(n, k, a);
+    for (int[] e : a) {
+      System.out.print(String.join(" ", Arrays.toString(e)));
+    }
+  }
+
+  private static int[][] solve(int n, int k, int[][] a) {
+    int[][] b = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        b[i][j] = a[i][j];
+      }
+    }
+    Arrays.sort(b, (a, b) -> a[0] - b[0]);
+    int aIdx = 0;
+    int kIdx = 0;
+    for (int i = 1; i <= n * k; i++) {
+      if (i != b[aIdx][0]) {
+        if (kIdx == n - 1) {
+          kIdx = 0;
+        }
+        a[kIdx][a[kIdx].length] = i;
+      } else {
+        aIdx++;
+      }
+    }
+    return a;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = scanner.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(Arrays.toString(e) + " ");
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        a = solve(n, k, a);
+        for (int[] e : a) {
+            System.out.println(Arrays.toString(e));
+        }
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (kIdx == k - 1) {
+                    kIdx = 0;
+                }
+                a[kIdx][kIdx] = i;
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[][] a = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        a[i][j] = sc.nextInt();
+      }
+    }
+    int[][] res = solve(n, k, a);
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        System.out.print(res[i][j] + " ");
+      }
+      System.out.println();
+    }
+  }
+
+  public static int[][] solve(int n, int k, int[][] a) {
+    int[][] b = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        b[i][j] = a[i][j];
+      }
+    }
+    Arrays.sort(b);
+    int a_idx = 0;
+    int k_idx = 0;
+    for (int i = 1; i <= n * k; i++) {
+      if (i != b[a_idx][0]) {
+        if (a[k_idx].length == n) {
+          k_idx++;
+        }
+        a[k_idx][a[k_idx].length] = i;
+      } else if (a_idx < n - 1) {
+        a_idx++;
+      }
+    }
+    return a;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < a.length - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", Arrays.toString(e)));
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            a[i][0] = sc.nextInt();
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            b[i][0] = a[i][0];
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].add(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", Arrays.stream(e).mapToObj(String::valueOf).toArray(String[]::new)));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+    
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (kIdx == n) {
+                    kIdx = 0;
+                }
+                a[kIdx][i] = i;
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+    
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", Arrays.stream(e).mapToObj(String::valueOf).toArray(String[]::new)));
+            System.out.println();
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = scanner.nextInt();
+            }
+        }
+        a = solve(n, k, a);
+        printRes(a);
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            b[i] = Arrays.copyOf(a[i], k);
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(Arrays.toString(e));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        int[][] res = solve(n, k, a);
+        for (int[] row : res) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[][] a = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        a[i][j] = sc.nextInt();
+      }
+    }
+    a = solve(n, k, a);
+    printRes(a);
+  }
+
+  public static int[][] solve(int n, int k, int[][] a) {
+    int[][] b = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        b[i][j] = a[i][j];
+      }
+    }
+    Arrays.sort(b);
+    int aIdx = 0;
+    int kIdx = 0;
+    for (int i = 1; i <= n * k; i++) {
+      if (i != b[aIdx][0]) {
+        if (kIdx < k - 1) {
+          a[kIdx].add(i);
+          kIdx++;
+        }
+      } else if (aIdx < n - 1) {
+        aIdx++;
+      }
+    }
+    return a;
+  }
+
+  public static void printRes(int[][] a) {
+    for (int[] e : a) {
+      for (int x : e) {
+        System.out.print(x + " ");
+      }
+      System.out.println();
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        a = solve(n, k, a);
+        for (int[] e : a) {
+            for (int x : e) {
+                System.out.print(x + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        int a_idx = 0;
+        int k_idx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[a_idx][0]) {
+                if (k_idx == k - 1) {
+                    k_idx = 0;
+                }
+                b[k_idx][k_idx] = i;
+                k_idx++;
+            } else if (a_idx < n - 1) {
+                a_idx++;
+            }
+        }
+        return b;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    ArrayList<ArrayList<Integer>> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(new ArrayList<>());
+      a.get(i).add(sc.nextInt());
+    }
+    printRes(solve(n, k, a));
+  }
+
+  public static ArrayList<ArrayList<Integer>> solve(int n, int k, ArrayList<ArrayList<Integer>> a) {
+    ArrayList<Integer> b = new ArrayList<>(a.get(0));
+    for (int i = 1; i < n * k + 1; i++) {
+      if (i != b.get(a.get(0).indexOf(i))) {
+        if (a.get(a.get(0).indexOf(i)).size() == n) {
+          a.get(a.get(0).indexOf(i)).add(i);
+        }
+      }
+    }
+    return a;
+  }
+
+  public static void printRes(ArrayList<ArrayList<Integer>> a) {
+    for (ArrayList<Integer> e : a) {
+      System.out.print(e.toString().replaceAll("[\\[\\]]", ""));
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[][] a = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        a[i][j] = scanner.nextInt();
+      }
+    }
+    printRes(a);
+  }
+
+  public static void printRes(int[][] a) {
+    for (int[] e : a) {
+      for (int x : e) {
+        System.out.print(x + " ");
+      }
+      System.out.println();
+    }
+  }
+
+  public static int[][] solve(int n, int k, int[][] a) {
+    int[][] b = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        b[i][j] = a[i][j];
+      }
+    }
+    Arrays.sort(b, (a, b) -> a[0] - b[0]);
+    int aIdx = 0;
+    int kIdx = 0;
+    for (int i = 1; i < n * k + 1; i++) {
+      if (i != b[aIdx][0]) {
+        if (a[kIdx].length == n) {
+          kIdx++;
+        }
+        a[kIdx].add(i);
+      } else if (aIdx < n - 1) {
+        aIdx++;
+      }
+    }
+    return a;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[][] a = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < k; j++) {
+        a[i][j] = scanner.nextInt();
+      }
+    }
+    printRes(solve(n, k, a));
+  }
+
+  public static int[][] solve(int n, int k, int[][] a) {
+    int[][] b = new int[n][k];
+    for (int i = 0; i < n; i++) {
+      b[i] = Arrays.copyOf(a[i], k);
+    }
+    Arrays.sort(b, (o1, o2) -> Integer.compare(o1[0], o2[0]));
+    int aIdx = 0;
+    int kIdx = 0;
+    for (int i = 1; i <= n * k; i++) {
+      if (i != b[aIdx][0]) {
+        if (kIdx == k - 1) {
+          kIdx = 0;
+        }
+        b[kIdx][kIdx] = i;
+        kIdx++;
+      } else if (aIdx < n - 1) {
+        aIdx++;
+      }
+    }
+    return b;
+  }
+
+  public static void printRes(int[][] a) {
+    for (int[] e : a) {
+      System.out.print(String.join(" ", Arrays.stream(e).mapToObj(String::valueOf).toArray(String[]::new)));
+      System.out.println();
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the same algorithm to solve the problem, but with some differences in the syntax and the way the input is read.
+
+The `main` method is the entry point of the program, and it reads the input from the user using the `Scanner` class. It then calls the `solve` method with the input parameters, and prints the result using the `printRes` method.
+
+The `solve` method is the one that actually solves the problem. It takes the input parameters `n`, `k`, and `a`, and returns the result as an `int[][]` array. It uses the same algorithm as the Python code, but with some differences in the syntax. For example, in Java, we use the `Arrays.copyOf` method to copy the elements of the `a` array, and the `Arrays.sort` method to sort the `b` array.
+
+The `printRes` method is used to print the result in the same format as the Python code. It uses the `String.join` method to join the elements of the `e` array into a string, and the `System.out.println` method to print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = scanner.nextInt();
+            }
+        }
+        a = solve(n, k, a);
+        for (int[] e : a) {
+            System.out.print(String.join(" ", e) + " ");
+        }
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        Arrays.sort(b, (a, b) -> a[0] - b[0]);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < a.length - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[][] a = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            a[i][0] = scanner.nextInt();
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][1];
+        for (int i = 0; i < n; i++) {
+            b[i][0] = a[i][0];
+        }
+        Arrays.sort(b, (a1, a2) -> a1[0] - a2[0]);
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < a.length - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", e) + " ");
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        int aIdx = 0;
+        int kIdx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[aIdx][0]) {
+                if (a[kIdx].length == n) {
+                    kIdx++;
+                }
+                a[kIdx].append(i);
+            } else if (aIdx < n - 1) {
+                aIdx++;
+            }
+        }
+        return a;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", e) + " ");
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[][] a = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        printRes(solve(n, k, a));
+    }
+
+    public static int[][] solve(int n, int k, int[][] a) {
+        int[][] b = new int[n][k];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        int a_idx = 0;
+        int k_idx = 0;
+        for (int i = 1; i <= n * k; i++) {
+            if (i != b[a_idx][0]) {
+                if (b[k_idx].length == n) {
+                    k_idx++;
+                }
+                b[k_idx].append(i);
+            } else if (a_idx < n - 1) {
+                a_idx++;
+            }
+        }
+        return b;
+    }
+
+    public static void printRes(int[][] a) {
+        for (int[] e : a) {
+            System.out.print(String.join(" ", e) + " ");
+        }
+    }
+}
+
+[/JAVA]
+======

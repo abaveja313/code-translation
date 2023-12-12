@@ -1,0 +1,938 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    int[] l = {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+    int n, m;
+    int[] a;
+    String res = "";
+    int INF = 10000;
+    int[][] dp = new int[n + 1][2];
+
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+    m = sc.nextInt();
+    a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = -INF if dp[i][0] == 0 else dp[i][0];
+    }
+
+    for (int i = n - 1; i > 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          res += String.valueOf(a[j]);
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] l = new int[n];
+    for (int i = 0; i < n; i++) {
+      l[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[j] != i + l[j] || i + l[j] > n) {
+          continue;
+        } else {
+          dp[i + l[j]][0] = Math.max(dp[i][0] + 1, dp[i + l[j]][0]);
+          dp[i + l[j]][1] = dp[i][1] + l[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    java.util.Arrays.sort(a);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j] + " ");
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] l = {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] a = new int[m];
+        for (int i = 0; i < m; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] dp = new int[n + 1][2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+                    continue;
+                } else {
+                    dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+                    dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+                }
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+        }
+        a = reverse(a);
+        int i = n;
+        while (i > 0) {
+            for (int j = 0; j < m; j++) {
+                if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+                    System.out.print(a[j] + " ");
+                    i -= l[a[j]];
+                    break;
+                }
+            }
+        }
+    }
+
+    public static int[] reverse(int[] arr) {
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[arr.length - 1 - i];
+        }
+        return res;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      if (dp[i][0] == 0) {
+        dp[i][0] = -10000;
+      }
+    }
+    a = sort(a);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        }
+      }
+    }
+  }
+
+  private static int[] sort(int[] a) {
+    int[] sorted = new int[a.length];
+    for (int i = 0; i < a.length; i++) {
+      sorted[i] = a[i];
+    }
+    for (int i = 0; i < a.length - 1; i++) {
+      for (int j = i + 1; j < a.length; j++) {
+        if (sorted[i] < sorted[j]) {
+          int temp = sorted[i];
+          sorted[i] = sorted[j];
+          sorted[j] = temp;
+        }
+      }
+    }
+    return sorted;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] l = new int[n];
+    for (int i = 0; i < n; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = sort(a);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+  }
+
+  public static int[] sort(int[] a) {
+    int[] result = new int[a.length];
+    for (int i = 0; i < a.length; i++) {
+      result[i] = a[a.length - 1 - i];
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    int[] l = {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+    int n, m;
+    int[] a;
+    String res = "";
+    int INF = 10000;
+    int[][] dp = new int[n + 1][2];
+
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+    m = sc.nextInt();
+    a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = -INF if dp[i][0] == 0 else dp[i][0];
+    }
+
+    a.sort(reverse=True);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          res += a[j];
+          i -= l[a[j]];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        }
+        dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+        dp[i + a[j]][1] = dp[i][1] + a[j];
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = sort(a, true);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j] + " ");
+          i -= a[j];
+          break;
+        }
+      }
+    }
+    sc.close();
+  }
+
+  public static int[] sort(int[] arr, boolean reverse) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (arr[i] > arr[j]) {
+          int temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    if (reverse) {
+      for (int i = 0; i < n / 2; i++) {
+        int temp = arr[i];
+        arr[i] = arr[n - i - 1];
+        arr[n - i - 1] = temp;
+      }
+    }
+    return arr;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[] a = new int[m];
+        for (int i = 0; i < m; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int[][] dp = new int[n + 1][2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+                    continue;
+                } else {
+                    dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+                    dp[i + a[j]][1] = dp[i][1] + a[j];
+                }
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+        }
+        a = a.sort(Comparator.reverseOrder());
+        int i = n;
+        while (i > 0) {
+            for (int j = 0; j < m; j++) {
+                if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+                    System.out.print(a[j]);
+                    i -= a[j];
+                    break;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = java.util.Arrays.stream(a).boxed().sorted(java.util.Comparator.reverseOrder()).mapToInt(Integer::intValue).toArray();
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] a = new int[m];
+        for (int i = 0; i < m; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] dp = new int[n + 1][2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+                    continue;
+                } else {
+                    dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+                    dp[i + a[j]][1] = dp[i][1] + a[j];
+                }
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            if (dp[i][0] == 0) {
+                dp[i][0] = -10000;
+            }
+        }
+        a = sort(a);
+        int i = n;
+        while (i > 0) {
+            for (int j = 0; j < m; j++) {
+                if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+                    System.out.print(a[j]);
+                    i -= a[j];
+                    break;
+                }
+            }
+        }
+    }
+
+    public static int[] sort(int[] a) {
+        int[] sorted = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            sorted[i] = a[a.length - i - 1];
+        }
+        return sorted;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    int[] l = new int[] {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    String res = "";
+    int INF = 10000;
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -INF : dp[i][0];
+    }
+    for (int i = n - 1; i > 0; i--) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          res += String.valueOf(a[j]);
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l = {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = a.sort(a, (a, b) -> b - a);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = java.util.Arrays.stream(a).boxed().sorted(java.util.Comparator.reverseOrder()).mapToInt(Integer::intValue).toArray();
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    String res = "";
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          res += String.valueOf(a[j]);
+          i -= a[j];
+          break;
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] l = new int[n];
+    for (int i = 0; i < n; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = -10000 if dp[i][0] == 0 else dp[i][0];
+    }
+    a = a.sort(reverse=true);
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          res += String.valueOf(a[j]);
+          i -= l[a[j]];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = java.util.Arrays.stream(a).boxed().sorted(java.util.Collections.reverseOrder()).mapToInt(Integer::intValue).toArray();
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l = {0, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + l[a[j]] != i + l[a[j]] || i + l[a[j]] > n) {
+          continue;
+        } else {
+          dp[i + l[a[j]]][0] = Math.max(dp[i][0] + 1, dp[i + l[a[j]]][0]);
+          dp[i + l[a[j]]][1] = dp[i][1] + l[a[j]];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = a.sort(Comparator.reverseOrder());
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= l[a[j]] && dp[i - l[a[j]]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j] + " ");
+          i -= l[a[j]];
+          break;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = a.sort(Comparator.reverseOrder());
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] a = new int[m];
+    for (int i = 0; i < m; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] dp = new int[n + 1][2];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+          continue;
+        } else {
+          dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+          dp[i + a[j]][1] = dp[i][1] + a[j];
+        }
+      }
+    }
+    for (int i = 1; i < n; i++) {
+      dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+    }
+    a = a.stream().sorted().mapToInt(i -> i).toArray();
+    int i = n;
+    while (i > 0) {
+      for (int j = 0; j < m; j++) {
+        if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+          System.out.print(a[j]);
+          i -= a[j];
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] a = new int[m];
+        for (int i = 0; i < m; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] dp = new int[n + 1][2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dp[i][1] + a[j] != i + a[j] || i + a[j] > n) {
+                    continue;
+                } else {
+                    dp[i + a[j]][0] = Math.max(dp[i][0] + 1, dp[i + a[j]][0]);
+                    dp[i + a[j]][1] = dp[i][1] + a[j];
+                }
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = dp[i][0] == 0 ? -10000 : dp[i][0];
+        }
+        a = a.sort(Comparator.reverseOrder());
+        int i = n;
+        while (i > 0) {
+            for (int j = 0; j < m; j++) {
+                if (i >= a[j] && dp[i - a[j]][0] + 1 == dp[i][0]) {
+                    System.out.print(a[j]);
+                    i -= a[j];
+                    break;
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======

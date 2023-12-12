@@ -1,0 +1,1082 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+        int[] ds = fs(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+        System.out.println(ans % M);
+    }
+
+    public static int[] fs(int n) {
+        int[] s = new int[n];
+        for (int i = 1; i <= n / 2; i++) {
+            if (n % i == 0) {
+                s[i] = i;
+            }
+        }
+        return s;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int M = 1000000007;
+
+        int[] ds = getFactors(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+        int ans = 0;
+        int inv2 = pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+        System.out.println(ans % M);
+    }
+
+    private static int[] getFactors(int n) {
+        int[] ds = new int[n];
+        for (int i = 1; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                ds[i] = i;
+                ds[n / i] = n / i;
+            }
+        }
+        return ds;
+    }
+
+    private static int pow(int a, int b, int M) {
+        int result = 1;
+        for (int i = 0; i < b; i++) {
+            result *= a;
+            result %= M;
+        }
+        return result;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    public static int[] factorize(int n) {
+        int[] ds = new int[n];
+        for (int i = 1; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                ds[i] = i;
+                ds[n / i] = n / i;
+            }
+        }
+        return ds;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    public static int[] factorize(int n) {
+        Set<Integer> s = new HashSet<>();
+        for (int i = 1; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                s.add(i);
+                s.add(n / i);
+            }
+        }
+        List<Integer> l = new ArrayList<>(s);
+        Collections.sort(l);
+        int[] ds = new int[l.size()];
+        for (int i = 0; i < l.size(); i++) {
+            ds[i] = l.get(i);
+        }
+        return ds;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        List<Integer> ds = factorize(n);
+        int m = ds.size();
+        int[] nums = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds.get(i) + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds.get(i) % ds.get(j) == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds.get(i) % 2 == 0) {
+                ans += ds.get(i) * nums[i] * inv2;
+            } else {
+                ans += ds.get(i) * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    private static List<Integer> factorize(int n) {
+        List<Integer> ds = new ArrayList<>();
+        for (int i = 1; i <= Math.sqrt(n) + 1; i++) {
+            if (n % i == 0) {
+                ds.add(i);
+                ds.add(n / i);
+            }
+        }
+        Collections.sort(ds);
+        return ds;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+
+    int[] ds = factorize(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+    for (int i = 0; i < m; i++) {
+      int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          val -= nums[j];
+          val %= M;
+        }
+      }
+      nums[i] = val % M;
+    }
+
+    int ans = 0;
+    int inv2 = (int) Math.pow(2, M - 2, M);
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int[] factorize(int n) {
+    int[] ds = new int[n];
+    int m = 0;
+    for (int i = 1; i <= (int) Math.sqrt(n) + 1; i++) {
+      if (n % i == 0) {
+        ds[m++] = i;
+        if (n / i != i) {
+          ds[m++] = n / i;
+        }
+      }
+    }
+    return ds;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+
+    int[] ds = factorize(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+    for (int i = 0; i < m; i++) {
+      int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          val -= nums[j];
+          val %= M;
+        }
+      }
+      nums[i] = val % M;
+    }
+
+    int ans = 0;
+    int inv2 = (int) Math.pow(2, M - 2, M);
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+
+    System.out.println(ans % M);
+  }
+
+  private static int[] factorize(int n) {
+    int[] ds = new int[n];
+    int m = 0;
+    for (int i = 1; i * i <= n; i++) {
+      if (n % i == 0) {
+        ds[m++] = i;
+        if (i * i != n) {
+          ds[m++] = n / i;
+        }
+      }
+    }
+    return ds;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        BigInteger M = BigInteger.valueOf(1000000007);
+
+        BigInteger[] ds = factorize(n);
+        int m = ds.length;
+        BigInteger[] nums = new BigInteger[m];
+        for (int i = 0; i < m; i++) {
+            BigInteger val = k.pow((ds[i].add(BigInteger.ONE)).divide(BigInteger.TWO)).mod(M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i].mod(ds[j]).equals(BigInteger.ZERO)) {
+                    val = val.subtract(nums[j]).mod(M);
+                }
+            }
+            nums[i] = val;
+        }
+
+        BigInteger ans = BigInteger.ZERO;
+        BigInteger inv2 = BigInteger.valueOf(2).modPow(M.subtract(BigInteger.ONE).divide(BigInteger.TWO), M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i].mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+                ans = ans.add(ds[i].multiply(nums[i]).multiply(inv2));
+            } else {
+                ans = ans.add(ds[i].multiply(nums[i]));
+            }
+            ans = ans.mod(M);
+        }
+
+        System.out.println(ans);
+    }
+
+    public static BigInteger[] factorize(BigInteger n) {
+        BigInteger[] ds = new BigInteger[n.bitLength() - 1];
+        int m = 0;
+        for (BigInteger i = BigInteger.ONE; i.compareTo(n.sqrt()) <= 0; i = i.add(BigInteger.ONE)) {
+            if (n.mod(i).equals(BigInteger.ZERO)) {
+                ds[m++] = i;
+                if (i.multiply(i).compareTo(n) == 0) {
+                    break;
+                }
+            }
+        }
+        return ds;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    public static int[] factorize(int n) {
+        int[] ds = new int[n];
+        int m = 0;
+        for (int i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
+                ds[m++] = i;
+                if (i * i != n) {
+                    ds[m++] = n / i;
+                }
+            }
+        }
+        return ds;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            int val = pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        long ans = 0;
+        long inv2 = pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    public static int[] factorize(int n) {
+        int[] ds = new int[n];
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                ds[i] = i;
+            }
+        }
+        return ds;
+    }
+
+    public static long pow(long a, long b, long M) {
+        long result = 1;
+        for (long i = 0; i < b; i++) {
+            result *= a;
+            result %= M;
+        }
+        return result;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+
+    int[] ds = factors(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+
+    for (int i = 0; i < m; i++) {
+      int val = (int) (Math.pow(k, (ds[i] + 1) / 2, M));
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          val -= nums[j];
+          val %= M;
+        }
+      }
+      nums[i] = val % M;
+    }
+
+    int ans = 0;
+    int inv2 = (int) (Math.pow(2, M - 2, M));
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+
+    System.out.println(ans % M);
+  }
+
+  public static int[] factors(int n) {
+    int[] ds = new int[n];
+    for (int i = 1; i <= n; i++) {
+      if (n % i == 0) {
+        ds[i] = i;
+      }
+    }
+    return ds;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+    int[] ds = factorize(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+    for (int i = 0; i < m; i++) {
+      nums[i] = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          nums[i] -= nums[j];
+          nums[i] %= M;
+        }
+      }
+    }
+    int ans = 0;
+    int inv2 = (int) Math.pow(2, M - 2, M);
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+    System.out.println(ans % M);
+  }
+
+  private static int[] factorize(int n) {
+    int[] ds = new int[n];
+    for (int i = 1; i <= Math.sqrt(n); i++) {
+      if (n % i == 0) {
+        ds[i] = i;
+        if (n / i != i) {
+          ds[n / i] = n / i;
+        }
+      }
+    }
+    return ds;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factors(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        long ans = 0;
+        long inv2 = (long) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int[] factors(int n) {
+        int[] ds = new int[n];
+        for (int i = 1; i <= n / 2; i++) {
+            if (n % i == 0) {
+                ds[i] = i;
+            }
+        }
+        ds[n] = n;
+        return ds;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factors(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        long ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    private static int[] factors(int n) {
+        Set<Integer> s = new HashSet<>();
+        for (int i = 1; i <= Math.sqrt(n) + 1; i++) {
+            if (n % i == 0) {
+                s.add(i);
+                s.add(n / i);
+            }
+        }
+        int[] l = new int[s.size()];
+        int index = 0;
+        for (int i : s) {
+            l[index++] = i;
+        }
+        Arrays.sort(l);
+        return l;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+    int[] ds = fs(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+    for (int i = 0; i < m; i++) {
+      int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          val -= nums[j];
+          val %= M;
+        }
+      }
+      nums[i] = val % M;
+    }
+    int ans = 0;
+    int inv2 = (int) Math.pow(2, M - 2, M);
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+    System.out.println(ans % M);
+  }
+
+  public static int[] fs(int n) {
+    Set<Integer> s = new HashSet<>();
+    for (int i = 1; i <= Math.sqrt(n); i++) {
+      if (n % i == 0) {
+        s.add(i);
+        s.add(n / i);
+      }
+    }
+    int[] l = new int[s.size()];
+    int i = 0;
+    for (int x : s) {
+      l[i++] = x;
+    }
+    Arrays.sort(l);
+    return l;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = fs(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        long ans = 0;
+        long inv2 = (long) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    public static int[] fs(int n) {
+        Set<Integer> s = new HashSet<>();
+        for (int i = 1; i <= (int) Math.sqrt(n) + 1; i++) {
+            if (n % i == 0) {
+                s.add(i);
+                s.add(n / i);
+            }
+        }
+        List<Integer> l = new ArrayList<>(s);
+        Collections.sort(l);
+        return l.stream().mapToInt(i -> i).toArray();
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+        System.out.println(ans % M);
+    }
+    
+    private static int[] factorize(int n) {
+        Set<Integer> s = new HashSet<>();
+        for (int i = 1; i <= (int) Math.sqrt(n) + 1; i++) {
+            if (n % i == 0) {
+                s.add(i);
+                s.add(n / i);
+            }
+        }
+        int[] l = new int[s.size()];
+        int i = 0;
+        for (int x : s) {
+            l[i++] = x;
+        }
+        Arrays.sort(l);
+        return l;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int M = 1000000007;
+
+        int[] ds = factorize(n);
+        int m = ds.length;
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i] % ds[j] == 0) {
+                    val -= nums[j];
+                    val %= M;
+                }
+            }
+            nums[i] = val % M;
+        }
+
+        int ans = 0;
+        int inv2 = (int) Math.pow(2, M - 2, M);
+        for (int i = 0; i < m; i++) {
+            if (ds[i] % 2 == 0) {
+                ans += ds[i] * nums[i] * inv2;
+            } else {
+                ans += ds[i] * nums[i];
+            }
+            ans %= M;
+        }
+
+        System.out.println(ans % M);
+    }
+
+    private static int[] factorize(int n) {
+        int[] ds = new int[1000];
+        int m = 0;
+        for (int i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
+                ds[m++] = i;
+                if (i * i != n) {
+                    ds[m++] = n / i;
+                }
+            }
+        }
+        return ds;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int M = 1000000007;
+
+    int[] ds = factorize(n);
+    int m = ds.length;
+    int[] nums = new int[m];
+
+    for (int i = 0; i < m; i++) {
+      int val = (int) Math.pow(k, (ds[i] + 1) / 2, M);
+      for (int j = 0; j < i; j++) {
+        if (ds[i] % ds[j] == 0) {
+          val -= nums[j];
+          val %= M;
+        }
+      }
+      nums[i] = val % M;
+    }
+
+    long ans = 0;
+    long inv2 = (long) Math.pow(2, M - 2, M);
+    for (int i = 0; i < m; i++) {
+      if (ds[i] % 2 == 0) {
+        ans += ds[i] * nums[i] * inv2;
+      } else {
+        ans += ds[i] * nums[i];
+      }
+      ans %= M;
+    }
+
+    System.out.println(ans % M);
+  }
+
+  private static int[] factorize(int n) {
+    int[] ds = new int[n];
+    for (int i = 1; i <= n; i++) {
+      if (n % i == 0) {
+        ds[i] = i;
+      }
+    }
+    return ds;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BigInteger n = sc.nextBigInteger();
+        BigInteger k = sc.nextBigInteger();
+        BigInteger M = BigInteger.valueOf(1000000007);
+
+        BigInteger[] ds = getFactors(n);
+        BigInteger[] nums = new BigInteger[ds.length];
+
+        for (int i = 0; i < ds.length; i++) {
+            BigInteger val = k.pow((ds[i].add(BigInteger.ONE)).divide(BigInteger.valueOf(2))).mod(M);
+            for (int j = 0; j < i; j++) {
+                if (ds[i].mod(ds[j]).equals(BigInteger.ZERO)) {
+                    val = val.subtract(nums[j]).mod(M);
+                }
+            }
+            nums[i] = val.mod(M);
+        }
+
+        BigInteger ans = BigInteger.ZERO;
+        BigInteger inv2 = BigInteger.valueOf(2).modInverse(M);
+        for (int i = 0; i < ds.length; i++) {
+            if (ds[i].mod(BigInteger.valueOf(2)).equals(BigInteger.ZERO)) {
+                ans = ans.add(ds[i].multiply(nums[i]).multiply(inv2)).mod(M);
+            } else {
+                ans = ans.add(ds[i].multiply(nums[i])).mod(M);
+            }
+        }
+
+        System.out.println(ans.mod(M));
+    }
+
+    public static BigInteger[] getFactors(BigInteger n) {
+        BigInteger[] ds = new BigInteger[n.intValue()];
+        for (int i = 1; i <= n.intValue() / 2; i++) {
+            if (n.mod(BigInteger.valueOf(i)).equals(BigInteger.ZERO)) {
+                ds[i] = BigInteger.valueOf(i);
+            }
+        }
+        return ds;
+    }
+}
+
+[/JAVA]
+======

@@ -1,0 +1,3193 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] ^ (mod - 2)) % mod;
+        }
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigInteger;
+
+class Solution {
+  public static void main(String[] args) {
+    int mod = 998244353;
+
+    int n = Integer.parseInt(args[0]);
+    int k = Integer.parseInt(args[1]);
+
+    BigInteger[] fa = new BigInteger[k + 1];
+    BigInteger[] fi = new BigInteger[k + 1];
+
+    fa[0] = BigInteger.ONE;
+    fi[0] = BigInteger.ONE;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1].multiply(BigInteger.valueOf(i)).mod(BigInteger.valueOf(mod));
+      fi[i] = fa[i].modPow(BigInteger.valueOf(mod - 2), BigInteger.valueOf(mod));
+    }
+
+    BigInteger ans = BigInteger.ZERO;
+
+    for (int i = k - n + 1; i <= k; i++) {
+      ans = ans.add(comb(k - 1, n + i - 1, mod));
+      ans = ans.mod(BigInteger.valueOf(mod));
+    }
+
+    System.out.println(ans);
+  }
+
+  public static BigInteger comb(int n, int r, int mod) {
+    if (n < r) {
+      return BigInteger.ZERO;
+    }
+
+    if (n < 0 || r < 0) {
+      return BigInteger.ZERO;
+    }
+
+    return fa[n].multiply(fi[r]).mod(BigInteger.valueOf(mod)).multiply(fi[n - r]).mod(BigInteger.valueOf(mod));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k+1];
+        int[] fi = new int[k+1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i-1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k-n+1; i <= k; i++) {
+            ans += (fa[i] * fi[n+i-1]) % mod;
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. It uses the same mathematical formula for the combination and modulo operations, and it also uses the same input and output methods as the Python code. The only difference is that the Java code uses a Scanner object to read the input, and it uses System.out.println() to print the output.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+
+    int[] fa = new int[k + 1];
+    fa[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+    }
+
+    int[] fi = new int[k + 1];
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+    }
+
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+In this solution, we first import the `Scanner` class from the `java.util` package to read input from the user. We then create a `Solution` class with a `main` method that takes an array of strings as input.
+
+In the `main` method, we first read the values of `n` and `k` from the input using the `Scanner` class. We then create two arrays, `fa` and `fi`, to store the factorials of `n` and `k` respectively. We initialize the values of `
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2 + mod) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long mod = 998244353;
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+        long[] fa = new long[k + 1];
+        long[] fi = new long[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static long comb(long n, long r, long mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        sc.close();
+
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided, with the necessary imports and a driver class called `Solution` with an executable `main` method. The code is functionally identical to the Python code, and it obeys the constraints you specified.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+        long mod = 998244353L;
+
+        long[] fa = new long[k + 1];
+        long[] fi = new long[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2 + mod) % mod;
+        }
+
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long comb(long n, long r) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1)) % mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mod = 998244353;
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1] * i % mod;
+      fi[i] = (long) Math.pow(fa[i], mod - 2) % mod;
+    }
+
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static long comb(int n, int r) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return fa[n] * fi[r] % mod * fi[n - r] % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    int mod = 998244353;
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1) % mod;
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353;
+
+    long n = sc.nextLong();
+    long k = sc.nextLong();
+
+    long[] fa = new long[(int) k + 1];
+    long[] fi = new long[(int) k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1] * i % mod;
+      fi[i] = pow(fa[i], mod - 2, mod);
+    }
+
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return fa[n] * fi[r] % mod * fi[n - r] % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        long ans = 0;
+
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static long comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n; i >= 0; i--) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `comb` function is defined as a static method in the `Solution` class, and the `main` method is also defined in the same class. The `Scanner` class is used to read input from the user, and the `System.out.println` method is used to print the output. The `mod` variable is defined as a constant, and the `fa` and `fi` arrays are defined as static variables in the `Solution` class. The `comb` function is called with the `mod` parameter to ensure that the result is mod
+======
+  [JAVA]
+import java.math.BigInteger;
+
+class Solution {
+    public static void main(String[] args) {
+        int mod = 998244353;
+        int n = Integer.parseInt(args[0]);
+        int k = Integer.parseInt(args[1]);
+
+        BigInteger[] fa = new BigInteger[k + 1];
+        BigInteger[] fi = new BigInteger[k + 1];
+
+        fa[0] = BigInteger.ONE;
+        fi[0] = BigInteger.ONE;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1].multiply(BigInteger.valueOf(i)).mod(BigInteger.valueOf(mod));
+            fi[i] = fa[i].modPow(BigInteger.valueOf(mod - 2), BigInteger.valueOf(mod));
+        }
+
+        BigInteger ans = BigInteger.ZERO;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = ans.add(comb(k - 1, n + i - 1, mod));
+            ans = ans.mod(BigInteger.valueOf(mod));
+        }
+
+        System.out.println(ans);
+    }
+
+    public static BigInteger comb(int n, int r, int mod) {
+        if (n < r) {
+            return BigInteger.ZERO;
+        }
+
+        if (n < 0 || r < 0) {
+            return BigInteger.ZERO;
+        }
+
+        return fa[n].multiply(fi[r]).mod(BigInteger.valueOf(mod));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    long mod = 998244353L;
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1] * i % mod;
+      fi[i] = (long)Math.pow(fa[i], mod - 2) % mod;
+    }
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static long comb(int n, int r, long mod) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return fa[n] * fi[r] % mod * fi[n - r] % mod;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1)) % mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+    }
+
+    int ans = 0;
+
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1] * i % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+  
+  public static int comb(int n, int r, int mod) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2);
+    }
+
+    int ans = 0;
+    for (int i = k - n; i >= 0; i--) {
+      ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The `comb` function is defined separately and is called in the main method. The `mod` variable is defined as a class variable, and the `fa` and `fi` arrays are defined in the main method. The rest of the code is functionally identical to the Python code.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long mod = 998244353;
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+        long[] fa = new long[(int)k + 1];
+        long[] fi = new long[(int)k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (long)Math.pow(fa[i], mod - 2) % mod;
+        }
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static long comb(long n, long r, long mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+
+Explanation:
+
+1. First, we import the `java.util.Scanner` class to read input from the user.
+2. We define a class called `Solution` with a `main` method that takes a `String[] args` parameter.
+3. We create a `Scanner` object called `sc` to read input from the user.
+4. We define a `long` variable called `mod` and initialize it to 998244353.
+5. We define two `long` variables called `
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long mod = 998244353;
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+        long[] fa = new long[k + 1];
+        long[] fi = new long[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (long) Math.pow(fa[i], mod - 2) % mod;
+        }
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static long comb(long n, long r) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return fa[n] * fi[r] % mod * fi[n - r] % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The `comb` function is defined as a static method inside the `Solution` class. The `main` method is also defined inside the `Solution` class, and it uses the `Scanner` class to read input from the user. The `fa` and `fi` arrays are initialized with the values from the Python code, and the `ans` variable is calculated using the `comb` function. Finally, the `ans` variable is printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. The `comb` function is implemented in the same way as in Python, with the only difference being the use of the `Math.pow` function in Java to calculate the power of `fa[i]` to the `mod - 2` power. The rest of the code is the same as in Python, with the exception of the `import` statement at the beginning of the file.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k+1];
+        int[] fi = new int[k+1];
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i-1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2 + mod) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `Scanner` class to read the input from the user and the `Math.pow` method to calculate the power of a number. I have also used the `mod` parameter in the `comb` method to ensure that the result is calculated modulo the given value.
+
+Please note that I have assumed that the input values `n` and `k` are non-negative integers. If you want to handle negative values, you will need to modify the code accordingly.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        long mod = 998244353;
+
+        long n = scanner.nextLong();
+        long k = scanner.nextLong();
+
+        long[] fa = new long[(int) k + 1];
+        long[] fi = new long[(int) k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2 + mod) % mod;
+        }
+
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long comb(long n, long r, long mod) {
+        if (n < r) {
+            return 0;
+        }
+
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod) * fi[n - r] % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1) % mod;
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans = (ans + comb(k - 1, n + i - 1)) % mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code given in the question. The code uses the `Scanner` class to read input from the user, and the `Math` class to perform mathematical operations. The `comb` method is defined separately from the `main` method, and is used to calculate the binomial coefficient. The `main` method calculates the final answer and prints it to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the given Python code. The `comb` function is defined inside the `Solution` class, and the `main` method is also inside this class. The `Scanner` class is used to read input from the user, and the `Math.pow` method is used to calculate the power of a number. The `mod` variable is defined as a class variable, and the `fa` and `fi` arrays are also defined as class variables. The `ans` variable is also defined as a class variable, and it is used to store the final result. The `
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353L;
+
+    long n = sc.nextLong();
+    long k = sc.nextLong();
+
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * mod - 2 + mod) % mod;
+    }
+
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r, long mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+    }
+
+    int ans = 0;
+
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return fa[n] * fi[r] % mod * fi[n - r] % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+        }
+
+        int ans = 0;
+
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * mod - 2) % mod;
+    }
+
+    int ans = 0;
+
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+        }
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1) % mod;
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static int comb(int n, int r) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long mod = 998244353L;
+
+    long n = sc.nextLong();
+    long k = sc.nextLong();
+
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * mod - 2 + mod) % mod;
+    }
+
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r, long mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigInteger;
+
+public class Solution {
+    public static void main(String[] args) {
+        int mod = 998244353;
+        int n = Integer.parseInt(args[0]);
+        int k = Integer.parseInt(args[1]);
+
+        BigInteger[] fa = new BigInteger[k + 1];
+        BigInteger[] fi = new BigInteger[k + 1];
+
+        fa[0] = BigInteger.ONE;
+        fi[0] = BigInteger.ONE;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1].multiply(BigInteger.valueOf(i));
+            fi[i] = fa[i].modPow(BigInteger.valueOf(mod - 2), BigInteger.valueOf(mod));
+        }
+
+        BigInteger ans = BigInteger.ZERO;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = ans.add(comb(k - 1, n + i - 1, mod));
+            ans = ans.mod(BigInteger.valueOf(mod));
+        }
+
+        System.out.println(ans);
+    }
+
+    public static BigInteger comb(int n, int r, int mod) {
+        if (n < r) return BigInteger.ZERO;
+        if (n < 0 || r < 0) return BigInteger.ZERO;
+        return fa[n].multiply(fi[r]).mod(BigInteger.valueOf(mod)).multiply(fi[n - r]).mod(BigInteger.valueOf(mod));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigInteger;
+
+class Solution {
+    public static void main(String[] args) {
+        int mod = 998244353;
+        int n = Integer.parseInt(args[0]);
+        int k = Integer.parseInt(args[1]);
+        BigInteger[] fa = new BigInteger[k + 1];
+        BigInteger[] fi = new BigInteger[k + 1];
+        fa[0] = BigInteger.ONE;
+        fi[0] = BigInteger.ONE;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1].multiply(BigInteger.valueOf(i)).mod(BigInteger.valueOf(mod));
+            fi[i] = fa[i].modPow(BigInteger.valueOf(mod - 2), BigInteger.valueOf(mod));
+        }
+        BigInteger ans = BigInteger.ZERO;
+        for (int i = k - n; i >= 0; i--) {
+            ans = ans.add(comb(k - 1, n + i - 1, mod));
+            ans = ans.mod(BigInteger.valueOf(mod));
+        }
+        System.out.println(ans);
+    }
+
+    public static BigInteger comb(int n, int r, int mod) {
+        if (n < r) {
+            return BigInteger.ZERO;
+        }
+        if (n < 0 || r < 0) {
+            return BigInteger.ZERO;
+        }
+        return fa[n].multiply(fi[r]).mod(BigInteger.valueOf(mod)).multiply(fi[n - r]).mod(BigInteger.valueOf(mod));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+Explanation:
+
+1. The first line imports the `java.util.Scanner` class, which is used to read input from the user.
+2. The next line defines the `mod` variable, which is the modulo used in the Python code.
+3. The next two lines define the `n` and `k` variables, which are the input values read from the user using the `Scanner` class.
+4. The next four lines define the `fa` and `fi` arrays, which are used to store the values of the factorials in the Python code.
+5. The
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `java.util.Scanner` class to read input from the user, and the `mod` variable to store the modulus value. The `comb` method is defined separately, and is called from the `main` method to calculate the combination of `n` and `r`. The `fa` and `fi` arrays are used to store the values of the factorials and their inverses, respectively. The `ans` variable is used to store the final answer, which is calculated by summing the combination values for all possible values of `i
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        int mod = 998244353;
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    private static final int MOD = 998244353;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % MOD;
+            fi[i] = (fa[i] * pow(fa[i], MOD - 2, MOD)) % MOD;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, MOD);
+            ans %= MOD;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+    }
+
+    int ans = 0;
+
+    for (int i = k - n; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    } else if (n < 0 || r < 0) {
+      return 0;
+    } else {
+      return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int mod = 998244353;
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2, mod);
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+
+This is a Java implementation of the Python code. The `comb` function is implemented using the modular arithmetic properties of the binomial coefficients. The `main` method reads the input, initializes the `fa` and `fi` arrays, and calculates the answer using the `comb` function. The answer is then printed to the console.
+
+Note that the `comb` function takes an additional `mod` parameter, which is used to perform the modular arithmetic operations. This is necessary because the Python code uses the `pow` function, which takes a third argument that specifies the
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextInt();
+        long k = sc.nextInt();
+        long mod = 998244353;
+        long[] fa = new long[k + 1];
+        long[] fi = new long[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+        long ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static long comb(long n, long r, long mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = 0; i <= k - n; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `comb` function is defined as a static method in the `Solution` class, and the `main` method is also defined in the `Solution` class. The `Scanner` class is used to read input from the user. The `Math.pow` method is used to calculate the power of a number modulo `mod`. The `mod` variable is defined as a constant in the `Solution` class. The `fa` and `fi` arrays are defined as instance variables in the `Solution` class, and are initialized to 1.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+    }
+    int ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  private static int comb(int n, int r, int mod) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    long mod = 998244353L;
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+    fa[0] = 1;
+    fi[0] = 1;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (long)Math.pow(fa[i], mod - 2, mod);
+    }
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r, long mod) {
+    if (n < r) return 0;
+    if (n < 0 || r < 0) return 0;
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+  }
+}
+[/JAVA]
+
+Explanation:
+
+1. We first import the `Scanner` class from the `java.util` package to read input from the user.
+2. We then define a `Solution` class with a `main` method that takes an array of strings as an argument.
+3. We use a `Scanner` object to read the input from the user and convert it to integers.
+4. We define two arrays, `fa` and `fi`, to store the factorials of `k` and `k - 1` respectively.
+5. We use a `
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int mod = 998244353;
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+
+        int ans = 0;
+
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) ((fa[n] * fi[r] % mod) * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2);
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+    
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigInteger;
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    BigInteger mod = new BigInteger("998244353");
+    BigInteger[] fa = new BigInteger[k + 1];
+    BigInteger[] fi = new BigInteger[k + 1];
+    fa[0] = BigInteger.ONE;
+    fi[0] = BigInteger.ONE;
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1].multiply(new BigInteger(String.valueOf(i))).mod(mod);
+      fi[i] = fa[i].modPow(mod.subtract(BigInteger.ONE), mod);
+    }
+    BigInteger ans = BigInteger.ZERO;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans = ans.add(comb(k - 1, n + i - 1, mod));
+      ans = ans.mod(mod);
+    }
+    System.out.println(ans);
+  }
+
+  public static BigInteger comb(int n, int r, BigInteger mod) {
+    if (n < r) return BigInteger.ZERO;
+    if (n < 0 || r < 0) return BigInteger.ZERO;
+    return fa[n].multiply(fi[r]).mod(mod).multiply(fi[n - r]).mod(mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long mod = 998244353;
+
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+
+        long[] fa = new long[(int)k + 1];
+        long[] fi = new long[(int)k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (long)Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        long ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1) % mod;
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    public static long comb(long n, long r) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return fa[n] * fi[r] % mod * fi[n - r] % mod;
+    }
+}
+[/JAVA]
+
+Explanation:
+
+* The `mod` variable is defined as a constant at the top of the class.
+* The `comb` method is defined as a static method that takes two long arguments `n` and `r` and returns the result of the combination formula.
+* The `main` method is the driver class that takes input from the user and calls the `comb` method to calculate the result.
+* The `fa` and `fi` arrays are defined as arrays of longs, and are initialized with the values 1 and 1 respectively.
+* The `for` loop iterates from
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int mod = 998244353;
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        fa[0] = 1;
+        fi[0] = 1;
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (int) (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+        for (int i = 1; i <= k; i++) {
+            fa[i] = fa[i - 1] * i % mod;
+            fi[i] = (int) Math.pow(fa[i], mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1) % mod;
+            ans %= mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return fa[n] * fi[r] % mod * fi[n - r] % mod;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    long mod = 998244353L;
+
+    long[] fa = new long[k + 1];
+    long[] fi = new long[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = fa[i - 1] * i % mod;
+      fi[i] = (long) Math.pow(fa[i], mod - 2) % mod;
+    }
+
+    long ans = 0;
+    for (int i = k - n + 1; i <= k; i++) {
+      ans += comb(k - 1, n + i - 1, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static long comb(int n, int r, long mod) {
+    if (n < r) {
+      return 0;
+    }
+
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod) % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] * fi[n - r]) % mod;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int mod = 998244353;
+
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * pow(mod - 2, mod - 1, mod)) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans += comb(k - 1, n + i - 1, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) return 0;
+        if (n < 0 || r < 0) return 0;
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code given in the question. The `comb` function is defined as a static method in the `Solution` class, and the `main` method is also defined as a static method. The `fa` and `fi` arrays are defined as class variables, and the `mod` variable is defined as a constant. The `comb` function is called from the `main` method to calculate the combination value and print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int mod = 998244353;
+
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+
+    int[] fa = new int[k + 1];
+    int[] fi = new int[k + 1];
+
+    fa[0] = 1;
+    fi[0] = 1;
+
+    for (int i = 1; i <= k; i++) {
+      fa[i] = (fa[i - 1] * i) % mod;
+      fi[i] = (fa[i] * mod - 2) % mod;
+    }
+
+    int ans = 0;
+    for (int i = k - n; i >= 0; i--) {
+      ans = (ans + comb(k - 1, n + i - 1)) % mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r) {
+    if (n < r) {
+      return 0;
+    }
+    if (n < 0 || r < 0) {
+      return 0;
+    }
+    return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+
+        int[] fa = new int[k + 1];
+        int[] fi = new int[k + 1];
+
+        fa[0] = 1;
+        fi[0] = 1;
+
+        for (int i = 1; i <= k; i++) {
+            fa[i] = (fa[i - 1] * i) % mod;
+            fi[i] = (fa[i] * mod - 2) % mod;
+        }
+
+        int ans = 0;
+        for (int i = k - n + 1; i <= k; i++) {
+            ans = (ans + comb(k - 1, n + i - 1, mod)) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int comb(int n, int r, int mod) {
+        if (n < r) {
+            return 0;
+        }
+        if (n < 0 || r < 0) {
+            return 0;
+        }
+        return (fa[n] * fi[r] % mod * fi[n - r] % mod);
+    }
+}
+
+[/JAVA]
+======

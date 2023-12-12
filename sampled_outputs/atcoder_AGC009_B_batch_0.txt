@@ -1,0 +1,836 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i] - 1];
+            for (int j = 0; j < a[i] - 1; j++) {
+                loseTo[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo[x].length == 0) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo[x].length];
+            for (int i = 0; i < loseTo[x].length; i++) {
+                s[i] = dfs(loseTo[x][i]);
+            }
+            int max = 0;
+            for (int i = 0; i < s.length; i++) {
+                max = Math.max(max, i + s[i]);
+            }
+            return max;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        int n = Integer.parseInt(input[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < input.length; i++) {
+            a[i - 1] = Integer.parseInt(input[i]);
+        }
+        List<List<Integer>> loseTo = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            loseTo.add(new ArrayList<>());
+        }
+        for (int i = 1; i < a.length; i++) {
+            loseTo.get(a[i - 1] - 1).add(i);
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo.get(x).isEmpty()) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo.get(x).size()];
+            for (int i = 0; i < s.length; i++) {
+                s[i] = dfs(loseTo.get(x).get(i));
+            }
+            Arrays.sort(s);
+            int max = 0;
+            for (int i = 0; i < s.length; i++) {
+                max = Math.max(max, i + s[i]);
+            }
+            return max;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] nm = br.readLine().split(" ");
+        int n = Integer.parseInt(nm[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(nm[i + 1]);
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i]];
+        }
+        for (int i = 1; i < n; i++) {
+            loseTo[a[i] - 1].add(i);
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo[x].length == 0) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo[x].length];
+            for (int i = 0; i < loseTo[x].length; i++) {
+                s[i] = dfs(loseTo[x][i]);
+            }
+            return max(i + z for i, z in enumerate(s, start=1));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] nm = br.readLine().split(" ");
+    int n = Integer.parseInt(nm[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(br.readLine());
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[a[i]];
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < a[i]; j++) {
+        loseTo[i][j] = Integer.parseInt(br.readLine());
+      }
+    }
+    System.out.println(dfs(loseTo, 0));
+  }
+
+  public static int dfs(int[][] loseTo, int x) {
+    if (loseTo[x].length == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x].length];
+      for (int i = 0; i < loseTo[x].length; i++) {
+        s[i] = dfs(loseTo, loseTo[x][i]);
+      }
+      return Arrays.stream(s).max().getAsInt();
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] inputs = br.readLine().split(" ");
+    int n = Integer.parseInt(inputs[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(inputs[i + 1]);
+    }
+
+    List<List<Integer>> loseTo = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      loseTo.add(new ArrayList<>());
+    }
+    for (int i = 0; i < n; i++) {
+      loseTo.get(a[i] - 1).add(i);
+    }
+
+    int[] dfs = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (loseTo.get(i).isEmpty()) {
+        dfs[i] = 0;
+      } else {
+        int[] s = new int[loseTo.get(i).size()];
+        for (int j = 0; j < loseTo.get(i).size(); j++) {
+          s[j] = dfs[loseTo.get(i).get(j)];
+        }
+        dfs[i] = max(i + z for (int i, z in enumerate(s, start=1)));
+      }
+    }
+
+    System.out.println(dfs[0]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[n - i - 1];
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n - i - 1; j++) {
+        loseTo[i][j] = sc.nextInt();
+      }
+    }
+    System.out.println(dfs(loseTo, 0));
+  }
+
+  public static int dfs(int[][] loseTo, int x) {
+    if (loseTo[x].length == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x].length];
+      for (int i = 0; i < loseTo[x].length; i++) {
+        s[i] = dfs(loseTo, loseTo[x][i]);
+      }
+      int max = 0;
+      for (int i = 0; i < s.length; i++) {
+        max = Math.max(max, i + s[i]);
+      }
+      return max;
+    }
+  }
+}
+[/JAVA]
+
+Explanation:
+
+The code first reads the input from the user and stores it in the `a` array. It then initializes the `loseTo` array, which is a 2D array that stores the indices of the elements that are lost to each element in the `a` array.
+
+The `dfs` function is then called with the `loseTo` array and the index of the first element in the `a` array. This function recursively traverses the `loseTo` array and calculates the maximum number of elements that can be lost to each element. The maximum value is then returned.
+
+Finally, the `main` function calls the `dfs` function with the `loseTo` array and the index of the first element in the `a` array, and prints the result.
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] nm = br.readLine().split(" ");
+        int n = Integer.parseInt(nm[0]);
+        int m = Integer.parseInt(nm[1]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(br.readLine());
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i] - 1];
+            for (int j = 0; j < a[i] - 1; j++) {
+                loseTo[i][j] = Integer.parseInt(br.readLine());
+            }
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo[x].length == 0) {
+            return 0;
+        } else {
+            int[] s = Arrays.stream(loseTo[x]).sorted().map(i -> dfs(i)).toArray();
+            return Arrays.stream(s).map(i -> i + 1).max().getAsInt();
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[a[i] - 1];
+      for (int j = 0; j < a[i] - 1; j++) {
+        loseTo[i][j] = sc.nextInt();
+      }
+    }
+    int[][] dp = new int[n][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (i == j) {
+          dp[i][j] = 0;
+        } else if (loseTo[i][j] == 0) {
+          dp[i][j] = 0;
+        } else {
+          int max = 0;
+          for (int k = 0; k < loseTo[i].length; k++) {
+            if (loseTo[i][k] != 0) {
+              max = Math.max(max, dp[i][k] + 1);
+            }
+          }
+          dp[i][j] = max;
+        }
+      }
+    }
+    int max = 0;
+    for (int i = 0; i < n; i++) {
+      max = Math.max(max, dp[i][i]);
+    }
+    System.out.println(max);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i] - 1];
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < a[i] - 1; j++) {
+                loseTo[i][j] = sc.nextInt();
+            }
+        }
+        int[][] dp = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (loseTo[i][j] == 0) {
+                    dp[i][j] = 0;
+                } else {
+                    int max = 0;
+                    for (int k = 0; k < loseTo[i][j]; k++) {
+                        max = Math.max(max, dp[i][k] + 1);
+                    }
+                    dp[i][j] = max;
+                }
+            }
+        }
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, dp[i][n - 1]);
+        }
+        System.out.println(max);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i]];
+        }
+        for (int i = 1; i < n; i++) {
+            loseTo[a[i] - 1].add(i);
+        }
+        System.out.println(dfs(0, loseTo));
+    }
+
+    private static int dfs(int x, int[][] loseTo) {
+        if (loseTo[x].length == 0) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo[x].length];
+            for (int i = 0; i < loseTo[x].length; i++) {
+                s[i] = dfs(loseTo[x][i], loseTo);
+            }
+            int max = 0;
+            for (int i = 0; i < s.length; i++) {
+                max = Math.max(max, i + s[i]);
+            }
+            return max;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] inputs = br.readLine().split(" ");
+    int n = Integer.parseInt(inputs[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < inputs.length; i++) {
+      a[i - 1] = Integer.parseInt(inputs[i]);
+    }
+
+    List<List<Integer>> loseTo = new ArrayList<>(n);
+    for (int i = 0; i < n; i++) {
+      loseTo.add(new ArrayList<>());
+    }
+    for (int i = 1; i < a.length; i++) {
+      loseTo.get(a[i - 1] - 1).add(i);
+    }
+
+    int[] dp = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (loseTo.get(i).isEmpty()) {
+        dp[i] = 0;
+      } else {
+        int[] s = new int[loseTo.get(i).size()];
+        for (int j = 0; j < s.length; j++) {
+          s[j] = dp[loseTo.get(i).get(j)];
+        }
+        Arrays.sort(s);
+        for (int j = 0; j < s.length; j++) {
+          s[j] += j + 1;
+        }
+        dp[i] = Collections.max(Arrays.asList(s));
+      }
+    }
+
+    System.out.println(dp[0]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] loseTo = new int[n];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = 0;
+    }
+    for (int i = 1; i < n; i++) {
+      loseTo[a[i] - 1]++;
+    }
+    System.out.println(dfs(loseTo, 0));
+  }
+
+  public static int dfs(int[] loseTo, int x) {
+    if (loseTo[x] == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x]];
+      for (int i = 0; i < loseTo[x]; i++) {
+        s[i] = dfs(loseTo, i + 1);
+      }
+      int max = 0;
+      for (int i = 0; i < loseTo[x]; i++) {
+        max = Math.max(max, i + s[i]);
+      }
+      return max;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[a[i]];
+    }
+    for (int i = 1; i < n; i++) {
+      loseTo[a[i] - 1].add(i);
+    }
+    System.out.println(dfs(0));
+  }
+
+  public static int dfs(int x) {
+    if (loseTo[x].length == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x].length];
+      for (int i = 0; i < loseTo[x].length; i++) {
+        s[i] = dfs(loseTo[x][i]);
+      }
+      return s.length;
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The main method is the same, but the `dfs` method has been implemented in Java. The `loseTo` array is initialized with the values from the `a` array, and the `dfs` method uses the `loseTo` array to determine the next move. The `dfs` method returns the maximum number of moves possible, which is printed to the console in the `main` method.
+
+Note that the `import` statement is not required in Java, as the `Scanner` class is included in the Java standard library. Additionally, the `range` function is not required in Java, as the `for` loop can be used to iterate over the elements of an array.
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    List<List<Integer>> loseTo = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      loseTo.add(new ArrayList<>());
+    }
+    for (int i = 0; i < n; i++) {
+      loseTo.get(a[i] - 1).add(i + 1);
+    }
+    System.out.println(dfs(0, loseTo));
+  }
+
+  private static int dfs(int x, List<List<Integer>> loseTo) {
+    if (loseTo.get(x).isEmpty()) {
+      return 0;
+    } else {
+      List<Integer> s = new ArrayList<>(loseTo.get(x));
+      Collections.sort(s, Collections.reverseOrder());
+      int max = 0;
+      for (int i = 0; i < s.size(); i++) {
+        max = Math.max(max, i + s.get(i));
+      }
+      return max;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] nm = br.readLine().split(" ");
+    int n = Integer.parseInt(nm[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(br.readLine());
+    }
+
+    List<List<Integer>> loseTo = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      loseTo.add(new ArrayList<>());
+    }
+
+    for (int i = 0; i < n; i++) {
+      loseTo.get(a[i] - 1).add(i);
+    }
+
+    int[] memo = new int[n];
+    Arrays.fill(memo, -1);
+
+    System.out.println(dfs(0, memo, loseTo));
+  }
+
+  private static int dfs(int x, int[] memo, List<List<Integer>> loseTo) {
+    if (loseTo.get(x).isEmpty()) {
+      return 0;
+    } else {
+      int[] s = loseTo.get(x).stream().mapToInt(i -> dfs(i, memo, loseTo)).sorted().toArray();
+      return Arrays.stream(s).max().getAsInt() + 1;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] line = br.readLine().split(" ");
+    int n = Integer.parseInt(line[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < line.length; i++) {
+      a[i - 1] = Integer.parseInt(line[i]);
+    }
+
+    List<List<Integer>> loseTo = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      loseTo.add(new ArrayList<>());
+    }
+
+    for (int i = 1; i < a.length; i++) {
+      loseTo.get(a[i - 1] - 1).add(i);
+    }
+
+    int[] dp = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (loseTo.get(i).isEmpty()) {
+        dp[i] = 0;
+      } else {
+        int[] s = new int[loseTo.get(i).size()];
+        for (int j = 0; j < loseTo.get(i).size(); j++) {
+          s[j] = dp[loseTo.get(i).get(j)];
+        }
+        Arrays.sort(s);
+        int max = 0;
+        for (int j = 0; j < s.length; j++) {
+          max = Math.max(max, j + s[j]);
+        }
+        dp[i] = max;
+      }
+    }
+
+    System.out.println(dp[0]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[n];
+    }
+    for (int i = 1; i < n; i++) {
+      loseTo[a[i] - 1][i] = 1;
+    }
+    int[][] dp = new int[n][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        dp[i][j] = -1;
+      }
+    }
+    System.out.println(dfs(0, dp));
+  }
+
+  public static int dfs(int x, int[][] dp) {
+    if (loseTo[x].length == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x].length];
+      for (int i = 0; i < loseTo[x].length; i++) {
+        s[i] = dfs(loseTo[x][i], dp);
+      }
+      Arrays.sort(s);
+      int max = 0;
+      for (int i = 0; i < s.length; i++) {
+        max = Math.max(max, i + s[i]);
+      }
+      return max;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[][] loseTo = new int[n][];
+    for (int i = 0; i < n; i++) {
+      loseTo[i] = new int[a[i]];
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < a[i]; j++) {
+        loseTo[i][j] = sc.nextInt();
+      }
+    }
+    System.out.println(dfs(loseTo, 0));
+  }
+
+  public static int dfs(int[][] loseTo, int x) {
+    if (loseTo[x].length == 0) {
+      return 0;
+    } else {
+      int[] s = new int[loseTo[x].length];
+      for (int i = 0; i < loseTo[x].length; i++) {
+        s[i] = dfs(loseTo, loseTo[x][i]);
+      }
+      return max(s);
+    }
+  }
+
+  public static int max(int[] s) {
+    int max = 0;
+    for (int i = 0; i < s.length; i++) {
+      if (s[i] > max) {
+        max = s[i];
+      }
+    }
+    return max;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The code uses the `Scanner` class to read input from the user and the `System.out.println()` method to print the output. The `dfs()` method is implemented using recursion, and the `max()` method is used to find the maximum value in an array. The `Solution` class contains the `main()` method, which is the entry point of the program.
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = br.readLine().split(" ");
+        int n = Integer.parseInt(line[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(line[i]);
+        }
+        List<List<Integer>> loseTo = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            loseTo.add(new ArrayList<>());
+        }
+        for (int i = 1; i <= n; i++) {
+            loseTo.get(a[i - 1] - 1).add(i);
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo.get(x).size() == 0) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo.get(x).size()];
+            for (int i = 0; i < loseTo.get(x).size(); i++) {
+                s[i] = dfs(loseTo.get(x).get(i));
+            }
+            Arrays.sort(s);
+            int max = 0;
+            for (int i = 0; i < s.length; i++) {
+                max = Math.max(max, i + s[i]);
+            }
+            return max;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] nm = br.readLine().split(" ");
+        int n = Integer.parseInt(nm[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(nm[i + 1]);
+        }
+        int[][] loseTo = new int[n][];
+        for (int i = 0; i < n; i++) {
+            loseTo[i] = new int[a[i]];
+            for (int j = 0; j < a[i]; j++) {
+                loseTo[i][j] = Integer.parseInt(br.readLine());
+            }
+        }
+        System.out.println(dfs(0));
+    }
+
+    public static int dfs(int x) {
+        if (loseTo[x].length == 0) {
+            return 0;
+        } else {
+            int[] s = new int[loseTo[x].length];
+            for (int i = 0; i < loseTo[x].length; i++) {
+                s[i] = dfs(loseTo[x][i]);
+            }
+            return Math.max(1 + s[0], 1 + s[1]);
+        }
+    }
+}
+[/JAVA]
+======

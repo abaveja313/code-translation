@@ -1,0 +1,2931 @@
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+    }
+
+    for (int i = 0; i < N; i++) {
+      int group = i / (N / K);
+      groups[group][i % (N / K)] = A[i];
+    }
+
+    int[][] sums = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sums[i] = new int[N / K];
+    }
+
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N / K; j++) {
+        sums[i][j] = 0;
+        for (int k = 0; k < N / K; k++) {
+          sums[i][j] += groups[i][k];
+        }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    List<Integer>[] groups = new ArrayList[2];
+    for (int i = 0; i < 2; i++) {
+      groups[i] = new ArrayList<>();
+    }
+
+    for (int i = 0; i < N; i++) {
+      int value = A[i];
+      if (value >= 0) {
+        groups[0].add(value);
+      } else {
+        groups[1].add(value);
+      }
+    }
+
+    int[][] sums = new int[2][K];
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = 0;
+      }
+    }
+
+    for (int i = 0; i < K; i++) {
+
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int[][] groups = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                groups[i][j] = A[i] >= j ? 1 : 0;
+            }
+        }
+
+        int[][] sums = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                sums[i][j] = groups[i][j] + (j > 0 ? sums[i - 1][j - 1] : 0);
+            }
+        }
+
+        int[][] sortedSums = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                sortedSums[i][j] = sums
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] inputs = scanner.nextLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int K = Integer.parseInt(inputs[1]);
+        int Q = Integer.parseInt(inputs[2]);
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(inputs[i + 3]);
+        }
+
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            for (int j = i; j < N && j < i + K; j++) {
+                sum += A[j];
+            }
+            if (sum > Q) {
+                continue;
+            }
+            int diff = Q - sum;
+            if (diff < minDiff) {
+                minDiff = diff;
+            }
+        }
+        System.out.println(minDiff);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The `Scanner` class is used to read the input from the console, and the `Integer.parseInt()` method is used to convert the input strings to integers. The `sorted()` method is used to sort
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] grouped = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        grouped[0][i] = A[i];
+      } else {
+        grouped[1][i] = A[i];
+      }
+    }
+
+    int[][] sorted = new int[2][N];
+    for (int i = 0; i < 2; i++) {
+      sorted[i] = Arrays.stream(grouped[i]).sorted().toArray();
+    }
+
+    int[][] sums = new int[2][N];
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < N; j++) {
+        sums[i][j] = Arrays.stream(sorted[i], 0, Math.max(0, N - K + 1)).sum();
+      }
+    }
+
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[2][];
+    for (int i = 0; i < 2; i++) {
+      groups[i] = new int[A.length / 2];
+      for (int j = 0; j < groups[i].length; j++) {
+        groups[i][j] = A[j];
+      }
+    }
+    int[][] sums = new int[2][];
+    for (int i = 0; i < 2; i++) {
+      sums[i] = new int[groups[i].length];
+      for (int j = 0; j < sums[i].length; j++) {
+        sums[i][j] = 0;
+        for (int k = 0; k < groups[i].length; k++) {
+          sums[i][j] += groups[i][k];
+        }
+      }
+    }
+    int[][]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        List<Integer>[] group = new ArrayList[2];
+        group[0] = new ArrayList<>();
+        group[1] = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= 0) {
+                group[0].add(A[i]);
+            } else {
+                group[1].add(A[i]);
+            }
+        }
+
+        int[][] sum = new int[2][];
+        sum[0] = new int[group[0].size()];
+        sum[1] = new int[group[1].size()];
+        for (int i = 0; i < group[0].size(); i++) {
+           
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] B = new int[K][N];
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N; j++) {
+        B[i][j] = A[j];
+      }
+    }
+
+    int[][] C = new int[K][N];
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N; j++) {
+        C[i][j] = B[i][j];
+      }
+    }
+
+    int[] D = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      D[i] = sc.nextInt();
+    }
+
+    int[] E = new int[N];
+    for (int i = 0; i < N; i++) {
+      E[i] = A[i];
+   
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[2][N];
+    int group = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Q) {
+        groups[group][i] = 1;
+      }
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = groups[0][i] + groups[1][i];
+    }
+
+    int[][] windows = new int[N - K + 1][K];
+    for (int i = 0; i < N - K + 1; i++) {
+      for (int j = 0; j < K; j++) {
+        windows[i][j] = sums[i + j];
+      }
+    }
+
+    int[] minDiffs = new int[N - K +
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[N][];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[groupIndex] = new int[K];
+        for (int j = 0; j < K; j++) {
+          groups[groupIndex][j] = A[i + j];
+        }
+        groupIndex++;
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < groups.length; j++) {
+        if (groups[j] != null) {
+          sums[i] += groups[j][i];
+        }
+      }
+    }
+
+    int minSum = Integer.MAX_VALUE;
+    for (int i = 0;
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        int N = Integer.parseInt(input[0]);
+        int K = Integer.parseInt(input[1]);
+        int Q = Integer.parseInt(input[2]);
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(input[i + 3]);
+        }
+
+        int[][] v = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                v[i][j] = A[i] + j;
+            }
+        }
+
+        int[][] k = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                k[i][j] = A[i] - j;
+            }
+        }
+
+        int[][] result = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K;
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groups = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      groups[i] = Arrays.copyOfRange(A, i, Math.min(i + K, N));
+    }
+
+    int[][] sums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = groups[i][j] + (j > 0 ? sums[i][j - 1] : 0);
+      }
+    }
+
+    int[][] sortedSums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      sortedSums[i] = Arrays
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groups = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        groups[0][i] = A[i];
+      } else {
+        groups[1][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = groups[0][i] + groups[1][i];
+    }
+
+    int minValue = Integer.MAX_VALUE;
+    for (int i = 0; i < N; i++) {
+      int value = sums[i];
+      if (value >= 0 && value < minValue) {
+        minValue = value;
+      }
+    }
+
+    System.out.println(minValue);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N];
+      for (int j = 0; j < N; j++) {
+        groups[i][j] = A[j] >= i ? 1 : 0;
+      }
+    }
+    int[][] sums = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sums[i] = new int[N - K + 1];
+      for (int j = 0; j < N - K + 1; j++) {
+        sums[i][j] = IntStream.range(0, K).map(k -> groups[i][j + k]).sum();
+      }
+   
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[2][N];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[groupIndex][i] = A[i];
+      } else {
+        groupIndex++;
+        groups[groupIndex][i] = A[i];
+      }
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = Arrays.stream(groups[i]).sum();
+    }
+    int[] result = new int[N];
+    for (int i = 0; i < N; i++) {
+      if (sums[i] > 0) {
+        result[i] = sums[i] - Y;
+      } else {
+        result[i] = 2e9;
+      }
+    }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    List<Integer>[] groups = new ArrayList[2];
+    for (int i = 0; i < 2; i++) {
+      groups[i] = new ArrayList<>();
+    }
+
+    for (int i = 0; i < N; i++) {
+      int group = A[i] >= K ? 1 : 0;
+      groups[group].add(A[i]);
+    }
+
+    List<Integer>[] sums = new ArrayList[2];
+    for (int i = 0; i < 2; i++) {
+      sums[i] = new ArrayList<>();
+    }
+
+    for (int i = 0; i < groups.length; i++) {
+      for (int j = 0; j < groups[i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[N][];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[groupIndex++] = new int[] {A[i]};
+      } else {
+        groups[groupIndex - 1] = Arrays.copyOf(groups[groupIndex - 1], groups[groupIndex - 1].length + 1);
+        groups[groupIndex - 1][groups[groupIndex - 1].length - 1] = A[i];
+      }
+    }
+
+    int[][] sortedGroups = new int[N][];
+    for (int i = 0; i < N; i++) {
+      sortedGroups[i] = Arrays.stream(groups[i]).sorted().toArray();
+    }
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        Arrays.sort(A);
+        int[] B = new int[N];
+        for (int i = 0; i < N; i++) {
+            B[i] = A[i] >= Y ? A[i] : 0;
+        }
+
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            C[i] = B[i] >= K ? B[i] : 0;
+        }
+
+        int[] D = new int[N];
+        for (int i = 0; i < N; i++) {
+            D[i] = C[i] >= Q ? C[i] : 0;
+        }
+
+        int[] E = new int[N];
+        for (int i = 0; i < N; i++) {
+            E[i] = D[i] >= Y ? D[i] : 0;
+        }
+
+        int minValue = Integer
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = br.readLine().split(" ");
+        int N = Integer.parseInt(line[0]);
+        int K = Integer.parseInt(line[1]);
+        int Q = Integer.parseInt(line[2]);
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(line[i + 3]);
+        }
+
+        Arrays.sort(A);
+
+        long minDiff = Long.MAX_VALUE;
+        for (int i = 0; i < Q; i++) {
+            int Y = A[i];
+            int sum = 0;
+            for (int j = i; j < N && A[j] >= Y; j++) {
+                sum += A[j];
+            }
+            minDiff = Math.min(minDiff, sum - Y);
+        }
+
+        System.out.println(minDiff);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It reads the input from stdin, sorts the array, and then calculates the minimum difference between the sum of the elements in the array and the current element, for each element in the array.
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[2][N];
+    int group = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= groups[group][1]) {
+        group = 1 - group;
+      }
+      groups[group][0] += A[i];
+      groups[group][1] = A[i];
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = groups[0][0] + groups[1][0];
+    }
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < N; i++) {
+      if (sums[i] >= Q) {
+        minDiff = Math.min(minDiff, sums[i] - Q);
+      }
+    }
+    System.out.println(minDiff
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] sortedA = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      sortedA[i][0] = i;
+      sortedA[i][1] = A[i];
+    }
+    Arrays.sort(sortedA, (a, b) -> Integer.compare(a[1], b[1]));
+
+    int[][] groups = new int[N][2];
+    int groupIdx = 0;
+    int groupStart = 0;
+    for (int i = 0; i < N; i++) {
+      if (i == 0 || A[i] != A[i - 1]) {
+        groups[groupIdx][0] = groupStart;
+        groups[groupIdx][1] = i;
+        groupIdx++;
+        groupStart = i;
+      }
+    }
+
+
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[] B = new int[N];
+    for (int i = 0; i < N; i++) {
+      B[i] = A[i] >= K ? 1 : 0;
+    }
+
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      C[i] = A[i] - K + 1;
+    }
+
+    int[] D = new int[N];
+    for (int i = 0; i < N; i++) {
+      D[i] = C[i] < 0 ? 0 : C[i];
+    }
+
+    int[] E = new int[N];
+    for (int i = 0; i < N; i++) {
+      E[i] = D[i] > 0 ? D[i] : 0;
+    }
+
+    int[] F = new int[N];
+    for (int i = 0; i
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[N][];
+    for (int i = 0; i < N; i++) {
+      groups[i] = new int[K];
+      for (int j = 0; j < K; j++) {
+        groups[i][j] = A[i * K + j];
+      }
+    }
+
+    int[][] sums = new int[N][];
+    for (int i = 0; i < N; i++) {
+      sums[i] = new int[K];
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = groups[i][j] + (j == 0 ? 0 : sums[i][j - 1]);
+      }
+    }
+
+    int[][] sortedSums = new int[N][];
+    for (int i = 0; i < N; i++) {
+      sortedSums[i] = new int[
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[N][K];
+    int groupIdx = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= A[i + 1]) {
+        groups[groupIdx++] = Arrays.copyOfRange(A, i, i + K);
+        i += K - 1;
+      }
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = Arrays.stream(groups[i]).sum();
+    }
+
+    int[][] sortedSums = new int[N][N];
+    for (int i = 0; i < N; i++) {
+      sortedSums[i] = Arrays.stream(sums).sorted().toArray();
+    }
+
+    int[][][] sortedGroups = new int[N][N
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    // Group the elements in A by whether they are greater than or equal to Y
+    ArrayList<ArrayList<Integer>> groups = new ArrayList<>();
+    for (int i = 0; i < A.length; i++) {
+      int Y = A[i];
+      boolean isGreaterThan = Y >= Y;
+      ArrayList<Integer> group = groups.stream().filter(g -> g.get(0) == isGreaterThan).findFirst().orElse(new ArrayList<>());
+      group.add(Y);
+      groups.add(group);
+    }
+
+    // Sort the elements in each group
+    for (ArrayList<Integer> group : groups) {
+      group.sort(Integer::compareTo);
+    }
+
+    // Find the minimum difference between the sum of the first K elements and the sum of the last Q elements
+    int min
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+    }
+
+    for (int i = 0; i < N; i++) {
+      int index = i / K;
+      groups[index][i % K] = A[i];
+    }
+
+    int[][] sums = new int[Q][];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = new int[K];
+    }
+
+    for (int i = 0; i < Q; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = 0;
+        for (int k = 0; k < N / K; k++) {
+          sums[i][j] += groups[j][k];
+        }
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int Q = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        Arrays.sort(A);
+        int[][] groups = new int[K][];
+        for (int i = 0; i < K; i++) {
+            groups[i] = new int[N];
+        }
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= 0) {
+                groups[0][i] = A[i];
+            } else {
+                groups[1][i] = A[i];
+            }
+        }
+        for (int i = 0; i < K; i++) {
+            Arrays.sort(groups[i]);
+        }
+        int[] sums = new int[N];
+        for (int i = 0; i < N; i++) {
+            sums[i] = 0;
+            for (int j = 0; j < K; j++) {
+                if (i < groups[j].length) {
+                    sums[i] +=
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        int N = Integer.parseInt(input[0]);
+        int K = Integer.parseInt(input[1]);
+        int Q = Integer.parseInt(input[2]);
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(input[i + 3]);
+        }
+
+        int[][] v = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                v[i][j] = A[i] - j;
+            }
+        }
+
+        int[][] k = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                k[i][j] = A[i] - j;
+            }
+        }
+
+        int[][] s = new int[N][K];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K;
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        Arrays.sort(A);
+
+        int[][] groups = new int[N][K];
+        int groupSize = 0;
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= Y) {
+                groups[groupSize][i] = A[i];
+                groupSize++;
+            }
+        }
+
+        int[] sums = new int[Q];
+        for (int i = 0; i < Q; i++) {
+            sums[i] = 0;
+            for (int j = 0; j < groupSize; j++) {
+                sums[i] += groups[j][i];
+            }
+        }
+
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i < Q; i++) {
+            minDiff = Math.min(minDiff, sums[i] - Y);
+        }
+
+        System.out.println(minDiff);
+    }
+}
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] pairs = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        pairs[0][i] = A[i];
+      } else {
+        pairs[1][i] = A[i];
+      }
+    }
+
+    int[][] sums = new int[2][N];
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < N; j++) {
+        if (j == 0) {
+          sums[i][j] = pairs[i][j];
+        } else {
+          sums[i][j] = sums[i][j - 1] + pairs[i][j];
+        }
+      }
+    }
+
+    int[][] sortedSums = new int[2][N];
+    for (int i = 0; i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      groups[i] = Arrays.stream(A, i, i + K).toArray();
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = Arrays.stream(groups[i]).sum();
+    }
+
+    int[][] sortedSums = Arrays.stream(sums).sorted().toArray();
+
+    int minSum = Integer.MAX_VALUE;
+    for (int i = Q - 1; i < sortedSums.length; i++) {
+      minSum = Math.min(minSum, sortedSums[i] - A[i]);
+    }
+
+    System.out.println(min
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        List<Integer>[] groups = new ArrayList[2];
+        for (int i = 0; i < 2; i++) {
+            groups[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < N; i++) {
+            int group = A[i] >= Y ? 1 : 0;
+            groups[group].add(A[i]);
+        }
+
+        List<Integer>[] sums = new ArrayList[2];
+        for (int i = 0; i < 2; i++) {
+            sums[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < groups[i
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[N][2];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= groups[groupIndex][1]) {
+        groupIndex++;
+        groups[groupIndex][0] = i;
+        groups[groupIndex][1] = A[i];
+      }
+    }
+
+    int[][] sums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = 0;
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        if (i - groups[i][0] < K) {
+          sums[
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N];
+      for (int j = 0; j < N; j++) {
+        groups[i][j] = A[j] >= i ? 1 : 0;
+      }
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = Arrays.stream(groups).map(g -> g[i]).sum();
+    }
+    int[][] windows = new int[Q][];
+    for (int i = 0; i < Q; i++) {
+      windows[i] = new int[K];
+      for (int j = 0; j < K; j++) {
+        windows[i][j] = sums[i + j];
+      }
+    }
+   
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groupedA = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      groupedA[i][0] = i / K;
+      groupedA[i][1] = A[i];
+    }
+
+    Arrays.sort(groupedA, (a, b) -> a[1] - b[1]);
+
+    int[][] sortedA = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      sortedA[i][0] = i;
+      sortedA[i][1] = groupedA[i][1];
+    }
+
+    int[][] result = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      result[i][0] = i;
+      result[i][1] = sortedA[i][1] - A[i];
+    }
+
+    Arrays.sort(result,
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+    }
+
+    for (int i = 0; i < N; i++) {
+      int group = i / (N / K);
+      groups[group][i % (N / K)] = A[i];
+    }
+
+    int[] sums = new int[N / K];
+    for (int i = 0; i < N / K; i++) {
+      sums[i] = IntStream.range(0, K).map(j -> groups[j][i]).sum();
+    }
+
+    int[] sortedSums = Arrays.stream(sums).sorted().to
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groups = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      groups[i][0] = A[i] >= Y ? 1 : 0;
+      groups[i][1] = A[i];
+    }
+
+    int[][] sortedGroups = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      sortedGroups[i] = groups[i];
+    }
+    Arrays.sort(sortedGroups, (a, b) -> a[0] - b[0]);
+
+    int[][] sums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      for (int j = 0; j < K; j++) {
+        sum += sortedGroups[i][1];
+      }
+      sums[i][0] = sum;
+    }
+
+    int[]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N];
+    }
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        groups[0][i] = A[i];
+      } else {
+        groups[1][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      int sum = 0;
+      for (int j = 0; j < K; j++) {
+        if (groups[j].length > i) {
+          sum += groups[j][i];
+        }
+      }
+      sums[i] = sum;
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+    for
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[2][N];
+    int group = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[group][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < Math.max(0, N - K + 1); j++) {
+        sums[i] += groups[0][j];
+      }
+    }
+
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      if (sums[i] != 0) {
+        min = Math.min(min, sums[i] - Y);
+      }
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int N = Integer.parseInt(input[0]);
+    int K = Integer.parseInt(input[1]);
+    int Q = Integer.parseInt(input[2]);
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = Integer.parseInt(input[i + 3]);
+    }
+
+    int[][] groups = new int[2][];
+    for (int i = 0; i < 2; i++) {
+      groups[i] = new int[K];
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        groups[0][i] = A[i];
+      } else {
+        groups[1][i] = A[i];
+      }
+    }
+
+    int[][] sums = new int[2][];
+    for (int i = 0; i < 2; i++) {
+      sums[i] = new int[K];
+    }
+
+    for (int i = 0; i < K; i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int Q = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        Arrays.sort(A);
+        int[][] groups = new int[K][];
+        for (int i = 0; i < K; i++) {
+            groups[i] = new int[N / K];
+            for (int j = 0; j < N / K; j++) {
+                groups[i][j] = A[j + i * (N / K)];
+            }
+        }
+        int[] sums = new int[K];
+        for (int i = 0; i < K; i++) {
+            sums[i] = IntStream.range(0, groups[i].length).sum();
+        }
+        int[][] sortedSums = new int[K][];
+        for (int i = 0; i < K; i++) {
+            sortedSums[i] = Array
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    int[][] groups = new int[2][A.size()];
+    int groupIndex = 0;
+    for (int i = 0; i < A.size(); i++) {
+      if (A.get(i) >= Y) {
+        groups[groupIndex][i] = 1;
+      } else {
+        groups[groupIndex][i] = 0;
+      }
+    }
+    int[] sums = new int[A.size()];
+    for (int i = 0; i < A.size(); i++) {
+      sums[i] = groups[0][i] + groups[1][i];
+    }
+    Arrays.sort(sums);
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[] B = new int[N];
+    for (int i = 0; i < N; i++) {
+      B[i] = A[i];
+    }
+
+    Arrays.sort(B);
+
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      C[i] = B[i];
+    }
+
+    Arrays.sort(C);
+
+    int[] D = new int[N];
+    for (int i = 0; i < N; i++) {
+      D[i] = C[i];
+    }
+
+    Arrays.sort(D);
+
+    int[] E = new int[N];
+    for (int i = 0; i < N; i++) {
+      E[i] = D[i];
+    }
+
+    Arrays.sort
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] grouped = new int[K][];
+    for (int i = 0; i < K; i++) {
+      grouped[i] = new int[N / K];
+      for (int j = 0; j < N / K; j++) {
+        grouped[i][j] = A[i * (N / K) + j];
+      }
+    }
+
+    int[][] sorted = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sorted[i] = new int[N / K];
+      System.arraycopy(grouped[i], 0, sorted[i], 0, N / K);
+      Arrays.sort(sorted[i]);
+    }
+
+    int[][] sums = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sums[i] = new int[N / K];
+      for (int j = 0; j <
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[2][N];
+    int groupCount = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= A[i - 1]) {
+        groups[groupCount][i] = A[i];
+      } else {
+        groupCount++;
+        groups[groupCount][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < groups.length; j++) {
+        sums[i] += groups[j][i];
+      }
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < A.length; i++) {
+      int diff = sums[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Iterator;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+      for (int j = 0; j < N / K; j++) {
+        groups[i][j] = A[i * (N / K) + j];
+      }
+    }
+
+    int[][] sortedGroups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sortedGroups[i] = Arrays.stream(groups[i]).sorted().toArray();
+    }
+
+    int[][] prefixSums = new int[K][];
+    for (int i = 0; i < K; i++) {
+      prefixSums
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[2][N];
+    int group = 0;
+    int currentSum = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= groups[group][0]) {
+        currentSum += A[i];
+        groups[group][0] = currentSum;
+      } else {
+        group++;
+        currentSum = A[i];
+        groups[group][0] = currentSum;
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = groups[0][N - K + i];
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      int diff = sums[i] - A[i];
+      if
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        List<Integer> s = new ArrayList<>();
+        for (int i = 0; i < K; i++) {
+            s.add(A.get(i));
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < Q; i++) {
+            int Y = sc.nextInt();
+            int min = Integer.MAX_VALUE;
+            for (int j = 0; j < s.size(); j++) {
+                if (s.get(j) >= Y) {
+                    min = Math.min(min, s.get(j));
+                }
+            }
+            result.add(min - Y);
+        }
+
+        Collections.sort(result);
+        System.out.println(result.get(Q - 1));
+    }
+}
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[N][2];
+    int groupIdx = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= A[groupIdx]) {
+        groups[groupIdx][0] = A[i];
+        groups[groupIdx][1] = 1;
+        groupIdx++;
+      } else {
+        groups[groupIdx - 1][1]++;
+      }
+    }
+
+    int[][] sums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        if (i - j < 0) {
+          sums[i][j] = 0;
+        } else {
+          sums[i][j] = sums[i - 1][j - 1] + groups[i][1];
+        }
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[2][N];
+    int group = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[group][i] = A[i];
+        group++;
+      }
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < groups[i].length; j++) {
+        sums[i] += groups[i][j];
+      }
+    }
+
+    int[] sortedSums = sums.clone();
+    Arrays.sort(sortedSums);
+
+    int[][] sortedGroups = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      sortedGroups[i] = Arrays.copyOf(groups[i], groups[i].
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[][] groups = new int[N][];
+    for (int i = 0; i < N; i++) {
+      int group = 0;
+      for (int j = i; j < N; j++) {
+        if (A[j] >= A[i]) {
+          group++;
+        } else {
+          break;
+        }
+      }
+      groups[i] = new int[group];
+      for (int j = 0; j < group; j++) {
+        groups[i][j] = A[i + j];
+      }
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = Arrays.stream(groups[i]).sum();
+    }
+    int[][] sortedSums = new int[N][];
+    for
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[N][K];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= A[i - 1]) {
+        groups[groupIndex][i] = A[i];
+      } else {
+        groupIndex++;
+        groups[groupIndex][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[i][j];
+      }
+    }
+
+    int[][] sortedSums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[N][K];
+    int groupIdx = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[groupIdx][i] = A[i];
+        groupIdx++;
+      }
+    }
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[j][i];
+      }
+    }
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      if (sums[i] > 0) {
+        minDiff = Math.min(minDiff, sums[i] - Y);
+      }
+    }
+   
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[] sortedA = Arrays.stream(A).sorted().toArray();
+    int[][] groupedA = new int[K][N / K + 1];
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N / K + 1; j++) {
+        groupedA[i][j] = sortedA[i * (N / K + 1) + j];
+      }
+    }
+
+    int[][] sums = new int[K][N / K + 1];
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N / K + 1; j++) {
+        sums[i][j] = Arrays.stream(groupedA[i]).sum();
+
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[N][K];
+    int groupIdx = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= A[i - 1]) {
+        groups[groupIdx][i] = A[i];
+      } else {
+        groupIdx++;
+        groups[groupIdx][i] = A[i];
+      }
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[i][j];
+      }
+    }
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < N; i++) {
+      if (sums[i] >= Q) {
+        minDiff = Math.min(minDiff, sums[
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        Arrays.sort(A);
+        int[][] groups = new int[2][N];
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= Y) {
+                groups[0][i] = A[i];
+            } else {
+                groups[1][i] = A[i];
+            }
+        }
+        int[][] sums = new int[2][N];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < N; j++) {
+                if (j == 0) {
+                    sums[i][j] = groups[i][j];
+                } else {
+                    sums[i][j] = sums[i][j - 1] + groups[i][j];
+                }
+            }
+        }
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i < 2; i
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[2][N];
+    int group = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[group][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < groups[0].length; j++) {
+        sums[i] += groups[0][j];
+      }
+    }
+
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < sums.length; i++) {
+      if (sums[i] - Y < min) {
+        min = sums[i] - Y;
+      }
+    }
+
+    System.
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] kA = new int[K][];
+    for (int i = 0; i < K; i++) {
+      kA[i] = new int[N];
+      for (int j = 0; j < N; j++) {
+        kA[i][j] = A[j];
+      }
+    }
+
+    int[][] vA = new int[N][];
+    for (int i = 0; i < N; i++) {
+      vA[i] = new int[N];
+      for (int j = 0; j < N; j++) {
+        vA[i][j] = A[j];
+      }
+    }
+
+    int[][] sA = new int[N][];
+    for (int i = 0; i < N; i++) {
+      sA[i] = new int[N];
+      for (int j = 0; j < N; j
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] sortedA = new int[K][N];
+    for (int i = 0; i < K; i++) {
+      for (int j = 0; j < N; j++) {
+        sortedA[i][j] = A[j];
+      }
+      Arrays.sort(sortedA[i]);
+    }
+
+    int[][] result = new int[Q][N];
+    for (int i = 0; i < Q; i++) {
+      for (int j = 0; j < N; j++) {
+        result[i][j] = 0;
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        for (int k = 0; k < N; k++) {
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    // Group the elements in A by whether they are greater than or equal to Y
+    Map<Boolean, List<Integer>> groups = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      boolean isGreaterThanY = A[i] >= Y;
+      if (!groups.containsKey(isGreaterThanY)) {
+        groups.put(isGreaterThanY, new ArrayList<>());
+      }
+      groups.get(isGreaterThanY).add(A[i]);
+    }
+
+    // Sort the elements in each group
+    for (List<Integer> group : groups.values()) {
+      Collections.sort(group);
+    }
+
+    // Find
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[N][K];
+    int groupIndex = 0;
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[groupIndex][i] = A[i];
+        groupIndex++;
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[j][i];
+      }
+    }
+
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      if (sums[i] < min) {
+        min = sums[i];
+      }
+    }
+
+    System.out.println(min);
+ 
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[][] groupedA = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        groupedA[0][i] = A[i];
+      } else {
+        groupedA[1][i] = A[i];
+      }
+    }
+
+    int[][] sortedGroupedA = new int[2][N];
+    for (int i = 0; i < 2; i++) {
+      sortedGroupedA[i] = Arrays.stream(groupedA[i]).sorted().toArray();
+    }
+
+    int[][] summedGroupedA = new int[2][N];
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < N; j++) {
+        summedGroup
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+    List<Integer>[] groups = new ArrayList[2];
+    groups[0] = new ArrayList<>();
+    groups[1] = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= Y) {
+        groups[1].add(A[i]);
+      } else {
+        groups[0].add(A[i]);
+      }
+    }
+
+    int[][] sums = new int[2][];
+    sums[0] = new int[K];
+    sums[1] = new int[K];
+    for (int i = 0; i < K; i++) {
+      sums[0][i] = groups[0].stream().limit(i + 1).reduce(0, Integer::sum);
+      sums[1][i] = groups[1].stream().limit(i + 1).reduce(0, Integer::sum);
+    }
+
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        Arrays.sort(A);
+        int[][] groups = new int[2][N];
+        int group = 0;
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= 0) {
+                groups[group][i] = A[i];
+            } else {
+                group = 1 - group;
+                groups[group][i] = A[i];
+            }
+        }
+
+        int[] sums = new int[N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < groups[i].length; j++) {
+                sums[i] += groups[i][j];
+            }
+        }
+
+        int[] sortedSums = Arrays.stream(sums).sorted().toArray();
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = Q - 1; i < sortedSums.length; i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int Q = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        int[] B = new int[N];
+        for (int i = 0; i < N; i++) {
+            B[i] = A[i] >= Q ? 1 : 0;
+        }
+
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            C[i] = A[i] >= Q ? A[i] : 0;
+        }
+
+        int[] D = new int[N];
+        for (int i = 0; i < N; i++) {
+            D[i] = A[i] >= Q ? 1 : 0;
+        }
+
+        int[] E = new int[N];
+        for (int i = 0; i < N; i++) {
+            E[i] =
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+
+    int[][] groups = new int[2][A.length];
+    int group = 0;
+    for (int i = 0; i < A.length; i++) {
+      if (A[i] >= Y) {
+        groups[group][i] = A[i];
+      }
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      int sum = 0;
+      for (int j = 0; j < groups[group].length; j++) {
+        sum += groups[group][j];
+      }
+      sums[i] = sum;
+      group = (group + 1) % 2;
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < A.length; i++) {
+      int diff = sums[Q - 1] - A
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    // Sort the array
+    Arrays.sort(A);
+
+    // Group the array by values greater than or equal to Y
+    Map<Integer, List<Integer>> groups = new HashMap<>();
+    for (int i = 0; i < A.length; i++) {
+      int value = A[i];
+      if (!groups.containsKey(value)) {
+        groups.put(value, new ArrayList<>());
+      }
+      groups.get(value).add(i);
+    }
+
+    // Calculate the minimum difference between the Kth smallest element and Y
+    int minDiff = 2e9;
+    for (int Y : A) {
+      int diff = 0;
+      for (int i = 0; i < K; i++) {
+        int index = groups.get(Y).get(i);
+        diff += A[index] - Y;
+      }
+      minDiff = Math.min(minDiff, diff);
+    }
+
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      groups[i] = new int[] { A[i], i };
+    }
+
+    int[][] sortedGroups = Stream.of(groups)
+        .sorted((a, b) -> a[0] - b[0])
+        .toArray(int[][]::new);
+
+    int[][] windows = new int[N - K + 1][2];
+    for (int i = 0; i < N - K + 1; i++) {
+      windows[i] = new int[] { sortedGroups[i][0], i };
+    }
+
+    int[][] sortedWindows = Stream.of(windows)
+        .sorted((a, b) -> a[0] - b[0])
+        .toArray(
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int[] B = new int[N];
+        for (int i = 0; i < N; i++) {
+            B[i] = A[i] >= Q ? 1 : 0;
+        }
+
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            C[i] = A[i] - Q;
+        }
+
+        int[] D = new int[N];
+        for (int i = 0; i < N; i++) {
+            D[i] = Math.max(0, i - K + 1);
+        }
+
+        int[] E = new int[N];
+        for (int i = 0; i < N; i++) {
+            E[i] = Math.min(Q - 1, i);
+        }
+
+        int[] F = new int[N];
+        for (int i = 0; i < N; i++) {
+            F[
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int Q = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        // Sort the array
+        Arrays.sort(A);
+
+        // Group the array into subarrays of size K
+        List<List<Integer>> groups = new ArrayList<>();
+        for (int i = 0; i < N; i += K) {
+            List<Integer> group = new ArrayList<>();
+            for (int j = 0; j < K && i + j < N; j++) {
+                group.add(A[i + j]);
+            }
+            groups.add(group);
+        }
+
+        // Find the minimum value greater than or equal to Q in each group
+        List<Integer> minValues = new ArrayList<>();
+        for (List<Integer> group : groups) {
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i < group.size(); i++) {
+                if (group.get(i) >= Q && min > group.get(i)) {
+                    min = group.get(i);
+                }
+            }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+    }
+
+    for (int i = 0; i < N; i++) {
+      int group = A[i] / K;
+      groups[group][i % K] = A[i];
+    }
+
+    int[] sums = new int[Q];
+    for (int i = 0; i < Q; i++) {
+      sums[i] = IntStream.range(0, groups.length)
+          .map(j -> groups[j][Math.min(K - 1, j * K + i)])
+          .sum();
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    while (scanner.hasNextInt()) {
+      A.add(scanner.nextInt());
+    }
+
+    List<Integer> sortedA = A.stream().sorted().collect(Collectors.toList());
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < sortedA.size(); i++) {
+      if (i > 0 && sortedA.get(i) != sortedA.get(i - 1)) {
+        result.add(sortedA.get(i));
+      }
+    }
+
+    Collections.sort(result);
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < result.size(); i++) {
+      int diff = Math.abs(result.get(i) - A.get(Q - 1));
+      if (diff < minDiff) {
+        minDiff = diff;
+      }
+    }
+
+    System
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+      for (int j = 0; j < N / K; j++) {
+        groups[i][j] = A[i * (N / K) + j];
+      }
+      Arrays.sort(groups[i]);
+    }
+
+    int[] sums = new int[N / K];
+    for (int i = 0; i < N / K; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[j][i];
+      }
+    }
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      int diff = 0;
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+
+class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] input = br.readLine().split(" ");
+    int N = Integer.parseInt(input[0]);
+    int K = Integer.parseInt(input[1]);
+    int Q = Integer.parseInt(input[2]);
+    int[] A = Arrays.stream(input).skip(3).mapToInt(Integer::parseInt).toArray();
+
+    int[][] groups = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        groups[i][j] = A[i * K + j];
+      }
+    }
+
+    int[][] sums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i][j] = groups[i][j] + (j > 0 ? sums[i][j - 1] : 0);
+      }
+    }
+
+    int[][] sortedSums = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K;
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[2][N];
+    for (int i = 0; i < N; i++) {
+      if (A[i] >= 0) {
+        groups[0][i] = A[i];
+      } else {
+        groups[1][i] = A[i];
+      }
+    }
+
+    Arrays.sort(groups[0]);
+    Arrays.sort(groups[1]);
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = groups[0][i] + groups[1][i];
+    }
+
+    Arrays.sort(sums);
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      int diff = sums[i] - A[i];
+      if (diff < minDiff) {
+        minDiff =
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int Q = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Arrays.sort(A);
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      groups[i] = new int[N / K];
+      for (int j = 0; j < groups[i].length; j++) {
+        groups[i][j] = A[i * (N / K) + j];
+      }
+    }
+
+    int[][] sums = new int[K][];
+    for (int i = 0; i < K; i++) {
+      sums[i] = new int[N / K];
+      for (int j = 0; j < sums[i].length; j++) {
+        sums[i][j] = 0;
+        for (int k = 0; k < groups[i].length; k++) {
+          sums[i][j] += groups[i][k];
+        }
+      }
+    }
+
+    int[][] sortedS
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int[][] groups = new int[N][K];
+    for (int i = 0; i < N; i++) {
+      int groupId = i % K;
+      groups[groupId][i] = A[i];
+    }
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[i][j];
+      }
+    }
+    Arrays.sort(sums);
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 0; i < Q; i++) {
+      int diff = sums[i] - A[i];
+      if (diff < minDiff) {
+        minDiff = diff;
+      }
+    }
+    System.out.println(minDiff);
+  }
+}
+[/JAVA
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int Q = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        List<Integer>[] groups = new ArrayList[2];
+        for (int i = 0; i < 2; i++) {
+            groups[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (A[i] >= 0) {
+                groups[0].add(A[i]);
+            } else {
+                groups[1].add(A[i]);
+            }
+        }
+
+        List<Integer>[] sortedGroups = new ArrayList[2];
+        for (int i = 0; i < 2; i++) {
+            sortedGroups[i] = groups[i].stream().sorted().collect(Collectors.toList());
+        }
+
+        int[][] sumGroups
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int Q = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[][] groups = new int[K][];
+    for (int i = 0; i < K; i++) {
+      int[] group = new int[N];
+      for (int j = 0; j < N; j++) {
+        group[j] = A[j] >= i ? 1 : 0;
+      }
+      groups[i] = group;
+    }
+
+    int[] sums = new int[N];
+    for (int i = 0; i < N; i++) {
+      sums[i] = 0;
+      for (int j = 0; j < K; j++) {
+        sums[i] += groups[j][i];
+      }
+    }
+
+    int[] sortedSums = new int[N];
+    System.arraycopy(sums, 0, sortedSums, 0, N);
+    Arrays.sort(sortedSums);
+
+    int minDiff = Integer.MAX_VALUE
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int Q = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        Map<Boolean, List<Integer>> grouped = A.stream().collect(Collectors.groupingBy(x -> x >= Y));
+        List<Integer> result = new ArrayList<>();
+        for (Map.Entry<Boolean, List<Integer>> entry : grouped.entrySet()) {
+            List<Integer> values = entry.getValue();
+            for (int i = 0; i < values.size() - K + 1; i++) {
+                result.add(values.subList(i, i + K).stream().mapToInt(Integer::intValue).sum());
+            }
+        }
+
+        Collections.sort(result);
+        int min = result.stream().mapToInt(Integer::intValue).min().orElse(Integer.MAX
+======

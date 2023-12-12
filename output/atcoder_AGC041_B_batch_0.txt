@@ -1,0 +1,4099 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p - 1) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = Arrays.stream(votes).sum();
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Collections.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a.get(ind) + m < a.get(n - p - 1)) {
+            return false;
+        }
+        int thr = a.get(ind) + m;
+        ArrayList<Integer> votes = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes.add(m);
+            } else {
+                votes.add(thr - a.get(i));
+            }
+        }
+        int sm = 0;
+        for (int i : votes) {
+            sm += i;
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = a[ind] + m - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid, a, n, m, p)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind, int[] a, int n, int m, int p) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid, a, m, v, p)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind, int[] a, int m, int v, int p) {
+        if (a[ind] + m < a[a.length - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+  
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int vote : votes) {
+            sm += vote;
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = a[ind] + m - a[i];
+      }
+    }
+    int sm = 0;
+    for (int vote : votes) {
+      sm += vote;
+    }
+    return sm >= m * v;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int v = scanner.nextInt();
+    int p = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The only difference is that in Java, we need to import the `Scanner` class from the `java.util` package in order to read input from the user. The rest of the code is the same
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int vote : votes) {
+      sm += vote;
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+
+        a.sort(Integer::compareTo);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a.get(ind) + m < a.get(n - p - 1)) {
+            return false;
+        }
+        int thr = a.get(ind) + m;
+        ArrayList<Integer> votes = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes.add(m);
+            } else {
+                votes.add(thr - a.get(i));
+            }
+        }
+        int sm = 0;
+        for (int vote : votes) {
+            sm += vote;
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int v = scanner.nextInt();
+    int p = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a);
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a.get(ind) + m < a.get(n - p)) {
+      return false;
+    }
+    int thr = a.get(ind) + m;
+    ArrayList<Integer> votes = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes.add(m);
+      } else {
+        votes.add(thr - a.get(i));
+      }
+    }
+    int sm = 0;
+    for (int vote : votes) {
+      sm += vote;
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p - 1) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+
+This is a Java implementation of the Python code you provided. It uses the `Scanner` class to read input from the user, and the `Arrays.sort()` method to sort the array `a`. The `solve()` method is implemented similarly to the Python code
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p - 1) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int vote : votes) {
+            sm += vote;
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int v = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = Arrays.stream(votes).sum();
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Integer::compareTo);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid, a, n, m, v, p)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind, ArrayList<Integer> a, int n, int m, int v, int p) {
+    if (a.get(ind) + m < a.get(n - p)) {
+      return false;
+    }
+    int thr = a.get(ind) + m;
+    ArrayList<Integer> votes = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes.add(m);
+      } else {
+        votes.add(thr - a.get(i));
+      }
+    }
+    int sm = 0;
+    for (int i : votes) {
+      sm += i;
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p - 1) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int vote : votes) {
+      sm += vote;
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  private static boolean solve(int ind) {
+    if (a[ind] + m < a[n - p - 1]) {
+      return false;
+    }
+    int thr = a[ind] + m;
+    int[] votes = new int[n];
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p) {
+        votes[i] = m;
+      } else {
+        votes[i] = thr - a[i];
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < n; i++) {
+      sm += votes[i];
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int vote : votes) {
+            sm += vote;
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ng = 0;
+        int ok = n - 1;
+        while (Math.abs(ok - ng) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p - 1]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p - 1) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+    
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int vote : votes) {
+            sm += vote;
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    public static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int v = sc.nextInt();
+        int p = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+
+        int ok = n - 1;
+        int ng = -1;
+        while (Math.abs(ng - ok) > 1) {
+            int mid = (ng + ok) / 2;
+            if (solve(mid)) {
+                ok = mid;
+            } else {
+                ng = mid;
+            }
+        }
+
+        System.out.println(n - ok);
+    }
+
+    private static boolean solve(int ind) {
+        if (a[ind] + m < a[n - p]) {
+            return false;
+        }
+        int thr = a[ind] + m;
+        int[] votes = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i <= ind || i > n - p) {
+                votes[i] = m;
+            } else {
+                votes[i] = thr - a[i];
+            }
+        }
+        int sm = 0;
+        for (int i = 0; i < n; i++) {
+            sm += votes[i];
+        }
+        return sm >= m * v;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int v = sc.nextInt();
+    int p = sc.nextInt();
+
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(null);
+
+    int ok = n - 1;
+    int ng = -1;
+    while (Math.abs(ng - ok) > 1) {
+      int mid = (ng + ok) / 2;
+      if (solve(mid)) {
+        ok = mid;
+      } else {
+        ng = mid;
+      }
+    }
+    System.out.println(n - ok);
+  }
+
+  public static boolean solve(int ind) {
+    if (a.get(ind) + m < a.get(n - p - 1)) {
+      return false;
+    }
+    int thr = a.get(ind) + m;
+    ArrayList<Integer> votes = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      if (i <= ind || i > n - p - 1) {
+        votes.add(m);
+      } else {
+        votes.add(thr - a.get(i));
+      }
+    }
+    int sm = 0;
+    for (int i = 0; i < votes.size(); i++) {
+      sm += votes.get(i);
+    }
+    return sm >= m * v;
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,812 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int length = scanner.nextInt();
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    Arrays.sort(arr);
+    int ans = 0;
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          int k = check / arr[0];
+          ans = Math.max(ans, k + i);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            int k = check / arr[0];
+            ans = Math.max(ans, k + i + j);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int length = sc.nextInt();
+    int[] arr = new int[4];
+    for (int i = 0; i < 4; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Arrays.sort(arr);
+    int ans = 0;
+    if (length % arr[0] == 0) {
+      ans = length / arr[0];
+    } else {
+      if (arr[0] == arr[1]) {
+        for (int i = 0; i < length / arr[2] + 1; i++) {
+          int check = length - i * arr[2];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, check / arr[0] + i);
+          }
+        }
+      } else {
+        for (int i = 0; i < length / arr[2] + 1; i++) {
+          for (int j = 0; j < length / arr[1] + 1; j++) {
+            int check = length - i * arr[2] - j * arr[1];
+            if (check >= 0 && check % arr[0] == 0) {
+              ans = Math.max(ans, check / arr[0] + i + j);
+            }
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] arr = new int[4];
+    for (int i = 0; i < 4; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    Arrays.sort(arr, 1, 4);
+    int length = arr[0];
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int length = sc.nextInt();
+        int[] arr = new int[3];
+        for (int i = 0; i < 3; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Arrays.sort(arr);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code to the given Python code. The main method is the same as the Python code, with the exception that the input is taken using the Scanner class in Java. The rest of the code is similar, with the exception that the Python code uses list comprehension to create the sorted array, which is replaced with a for loop in Java. The rest of the code is functionally identical.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int length = scanner.nextInt();
+    int[] arr = new int[4];
+    for (int i = 1; i <= 4; i++) {
+      arr[i - 1] = scanner.nextInt();
+    }
+    arr = sort(arr);
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+
+  private static int[] sort(int[] arr) {
+    int[] sorted = new int[4];
+    for (int i = 0; i < 4; i++) {
+      sorted[i] = arr[i];
+    }
+    for (int i = 0; i < 3; i++) {
+      for (int j = i + 1; j < 4; j++) {
+        if (sorted[i] > sorted[j]) {
+          int temp = sorted[i];
+          sorted[i] = sorted[j];
+          sorted[j] = temp;
+        }
+      }
+    }
+    return sorted;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int length = arr[0];
+        arr[0] = arr[1];
+        arr[1] = arr[2];
+        arr[2] = arr[3];
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            int k = 0;
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    k = check / arr[0];
+                    ans = Math.max(ans, k + i);
+                }
+            }
+        } else {
+            int k = 0;
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        k = check / arr[0];
+                        ans = Math.max(ans, k + i + j);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[4];
+        for (int i = 1; i <= 4; i++) {
+            arr[i - 1] = scanner.nextInt();
+        }
+        Arrays.sort(arr);
+        int ans = 0;
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int length = scanner.nextInt();
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    Arrays.sort(arr);
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr, 1, 4);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[3];
+        for (int i = 0; i < 3; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, check / arr[0] + i);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, check / arr[0] + i + j);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int length = arr[0];
+    Arrays.sort(arr, 1, 4);
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      int k = 0;
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          k = check / arr[0];
+          ans = Math.max(ans, k + i);
+        }
+      }
+    } else {
+      int k = 0;
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            k = check / arr[0];
+            ans = Math.max(ans, k + i + j);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr, 1, 4);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int length = sc.nextInt();
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Arrays.sort(arr);
+    int ans = 0;
+    if (length % arr[0] == 0) {
+      ans = length / arr[0];
+    } else if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr, 1, 4);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int length = scanner.nextInt();
+    int[] arr = new int[4];
+    for (int i = 0; i < 4; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    Arrays.sort(arr, 1, 4);
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int length = scanner.nextInt();
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = scanner.nextInt();
+    }
+    Arrays.sort(arr);
+    if (length % arr[0] == 0) {
+      System.out.println(length / arr[0]);
+      return;
+    }
+    int ans = 0;
+    if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int length = sc.nextInt();
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Arrays.sort(arr);
+    int ans = 0;
+    if (length % arr[0] == 0) {
+      ans = length / arr[0];
+    } else if (arr[0] == arr[1]) {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        int check = length - i * arr[2];
+        if (check >= 0 && check % arr[0] == 0) {
+          ans = Math.max(ans, i + check / arr[0]);
+        }
+      }
+    } else {
+      for (int i = 0; i <= length / arr[2]; i++) {
+        for (int j = 0; j <= length / arr[1]; j++) {
+          int check = length - i * arr[2] - j * arr[1];
+          if (check >= 0 && check % arr[0] == 0) {
+            ans = Math.max(ans, i + j + check / arr[0]);
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] arr = input.split(" ");
+        int length = Integer.parseInt(arr[0]);
+        arr = Arrays.copyOfRange(arr, 1, 4);
+        Arrays.sort(arr);
+
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            int k = 0;
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    k = check / arr[0];
+                    ans = Math.max(ans, k + i);
+                }
+            }
+        } else {
+            int k = 0;
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        k = check / arr[0];
+                        ans = Math.max(ans, k + i + j);
+                    }
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[3];
+        for (int i = 0; i < 3; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr);
+        int ans = 0;
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, check / arr[0] + i);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, check / arr[0] + i + j);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int length = scanner.nextInt();
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Arrays.sort(arr, 1, 4);
+        if (length % arr[0] == 0) {
+            System.out.println(length / arr[0]);
+            return;
+        }
+        int ans = 0;
+        if (arr[0] == arr[1]) {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                int check = length - i * arr[2];
+                if (check >= 0 && check % arr[0] == 0) {
+                    ans = Math.max(ans, i + check / arr[0]);
+                }
+            }
+        } else {
+            for (int i = 0; i <= length / arr[2]; i++) {
+                for (int j = 0; j <= length / arr[1]; j++) {
+                    int check = length - i * arr[2] - j * arr[1];
+                    if (check >= 0 && check % arr[0] == 0) {
+                        ans = Math.max(ans, i + j + check / arr[0]);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======

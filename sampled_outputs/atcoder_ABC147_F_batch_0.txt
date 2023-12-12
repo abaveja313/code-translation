@@ -1,0 +1,1442 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    Map<Integer, ArrayList<Pair>> L = new HashMap<>();
+    L.put(0, new ArrayList<Pair>());
+    L.get(0).add(new Pair(0, 1));
+    L.get(0).add(new Pair(1, -1));
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<Pair>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Collections.sort(Q);
+      int cnt = 0;
+      int last = 0;
+      for (Pair val : Q) {
+        if (cnt > 0) {
+          ans += val.getVal() - last;
+        }
+        cnt += val.getSign();
+        last = val.getVal();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    private int val;
+    private int sign;
+
+    public Pair(int val, int sign) {
+      this.val = val;
+      this.sign = sign;
+    }
+
+    public int getVal() {
+      return val;
+    }
+
+    public int getSign() {
+      return sign;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    Map<Integer, List<Pair<Integer, Integer>>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair<>(l, 1));
+      L.get(m).add(new Pair<>(r + 1, -1));
+    }
+    int ans = 0;
+    for (List<Pair<Integer, Integer>> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getLeft));
+      int cnt = 0;
+      Integer last = null;
+      for (Pair<Integer, Integer> val : Q) {
+        if (cnt > 0) {
+          ans += val.getLeft() - last;
+        }
+        cnt += val.getRight();
+        last = val.getLeft();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair<T, U> {
+    private T left;
+    private U right;
+
+    public Pair(T left, U right) {
+      this.left = left;
+      this.right = right;
+    }
+
+    public T getLeft() {
+      return left;
+    }
+
+    public U getRight() {
+      return right;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    sc.close();
+
+    if (D == 0) {
+      if (X == 0) {
+        System.out.println(1);
+      } else {
+        System.out.println(N + 1);
+      }
+      return;
+    }
+
+    Map<Integer, ArrayList<Pair>> L = new HashMap<>();
+    L.put(0, new ArrayList<>(Arrays.asList(new Pair(0, 1), new Pair(1, -1))));
+
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getLeft));
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.getLeft() - last;
+        }
+        cnt += p.getRight();
+        last = p.getLeft();
+      }
+    }
+
+    System.out.println(ans);
+  }
+
+  static class Pair {
+    int left;
+    int right;
+
+    public Pair(int left, int right) {
+      this.left = left;
+      this.right = right;
+    }
+
+    public int getLeft() {
+      return left;
+    }
+
+    public int getRight() {
+      return right;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    HashMap<Integer, ArrayList<Pair>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort((a, b) -> a.val - b.val);
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.val - last;
+        }
+        cnt += p.sign;
+        last = p.val;
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    int val;
+    int sign;
+
+    public Pair(int val, int sign) {
+      this.val = val;
+      this.sign = sign;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    HashMap<Integer, ArrayList<Pair<Integer, Integer>>> L = new HashMap<>();
+    L.put(0, new ArrayList<Pair<Integer, Integer>>());
+    L.get(0).add(new Pair<Integer, Integer>(0, 1));
+    L.get(0).add(new Pair<Integer, Integer>(1, -1));
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = (X * coef_x) % D;
+      int l = (X * coef_x) / D + coef_l;
+      int r = (X * coef_x) / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<Pair<Integer, Integer>>());
+      }
+      L.get(m).add(new Pair<Integer, Integer>(l, 1));
+      L.get(m).add(new Pair<Integer, Integer>(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair<Integer, Integer>> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getKey));
+      int cnt = 0;
+      int last = 0;
+      for (Pair<Integer, Integer> val : Q) {
+        if (cnt > 0) {
+          ans += val.getKey() - last;
+        }
+        cnt += val.getValue();
+        last = val.getKey();
+      }
+    }
+    return ans;
+  }
+}
+
+class Pair<K, V> {
+  private K key;
+  private V value;
+
+  public Pair(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  public K getKey() {
+    return key;
+  }
+
+  public V getValue() {
+    return value;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    Map<Integer, List<Pair>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = (X * coef_x) % D;
+      int l = (X * coef_x) / D + coef_l;
+      int r = (X * coef_x) / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (List<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparingInt(Pair::getLeft));
+      int cnt = 0;
+      int last = 0;
+      for (Pair pair : Q) {
+        if (cnt > 0) {
+          ans += pair.getLeft() - last;
+        }
+        cnt += pair.getRight();
+        last = pair.getLeft();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    private int left;
+    private int right;
+
+    public Pair(int left, int right) {
+      this.left = left;
+      this.right = right;
+    }
+
+    public int getLeft() {
+      return left;
+    }
+
+    public int getRight() {
+      return right;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+
+    Map<Integer, List<Pair>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+
+    int ans = 0;
+    for (List<Pair> Q : L.values()) {
+      Q.sort((a, b) -> a.val - b.val);
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.val - last;
+        }
+        cnt += p.sign;
+        last = p.val;
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    public int val;
+    public int sign;
+
+    public Pair(int val, int sign) {
+      this.val = val;
+      this.sign = sign;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int D = scanner.nextInt();
+        System.out.println(solve(N, X, D));
+    }
+
+    public static int solve(int N, int X, int D) {
+        if (D == 0) {
+            if (X == 0) {
+                return 1;
+            }
+            return N + 1;
+        }
+
+        Map<Integer, List<Integer>> L = new HashMap<>();
+        int coef_l = 0;
+        int coef_r = 1;
+        for (int coef_x = 1; coef_x <= N; coef_x++) {
+            int m = X * coef_x % D;
+            int l = X * coef_x / D + coef_l;
+            int r = X * coef_x / D + coef_x * N - coef_r;
+            coef_l = coef_r;
+            coef_r += coef_x + 1;
+            if (!L.containsKey(m)) {
+                L.put(m, new ArrayList<>());
+            }
+            L.get(m).add(l);
+            L.get(m).add(r + 1);
+        }
+
+        int ans = 0;
+        for (List<Integer> Q : L.values()) {
+            Q.sort(null);
+            int cnt = 0;
+            int last = 0;
+            for (int val : Q) {
+                if (cnt > 0) {
+                    ans += val - last;
+                }
+                cnt += 1;
+                last = val;
+            }
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int X = sc.nextInt();
+        int D = sc.nextInt();
+        System.out.println(solve(N, X, D));
+    }
+
+    public static int solve(int N, int X, int D) {
+        if (D == 0) {
+            if (X == 0) {
+                return 1;
+            }
+            return N + 1;
+        }
+        Map<Integer, List<Pair>> L = new HashMap<>();
+        L.put(0, new ArrayList<Pair>(){{
+            add(new Pair(0, 1));
+            add(new Pair(1, -1));
+        }});
+        int coef_l = 0;
+        int coef_r = 1;
+        for (int coef_x = 1; coef_x <= N; coef_x++) {
+            int m = X * coef_x % D;
+            int l = X * coef_x / D + coef_l;
+            int r = X * coef_x / D + coef_x * N - coef_r;
+            coef_l = coef_r;
+            coef_r += coef_x + 1;
+            if (!L.containsKey(m)) {
+                L.put(m, new ArrayList<>());
+            }
+            L.get(m).add(new Pair(l, 1));
+            L.get(m).add(new Pair(r + 1, -1));
+        }
+        int ans = 0;
+        for (List<Pair> Q : L.values()) {
+            Q.sort((a, b) -> a.val - b.val);
+            int cnt = 0;
+            int last = 0;
+            for (Pair p : Q) {
+                if (cnt > 0) {
+                    ans += p.val - last;
+                }
+                cnt += p.sign;
+                last = p.val;
+            }
+        }
+        return ans;
+    }
+
+    public static class Pair {
+        public int val;
+        public int sign;
+
+        public Pair(int val, int sign) {
+            this.val = val;
+            this.sign = sign;
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+
+    HashMap<Integer, ArrayList<Integer>> L = new HashMap<>();
+    L.put(0, new ArrayList<Integer>());
+    L.get(0).add(0);
+    L.get(0).add(1);
+
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<Integer>());
+      }
+      L.get(m).add(l);
+      L.get(m).add(r + 1);
+    }
+
+    int ans = 0;
+    for (ArrayList<Integer> Q : L.values()) {
+      Q.sort(null);
+      int cnt = 0;
+      int last = 0;
+      for (int val : Q) {
+        if (cnt > 0) {
+          ans += val - last;
+        }
+        cnt += 1;
+        last = val;
+      }
+    }
+    return ans;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    HashMap<Integer, ArrayList<Pair>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = (X * coef_x) % D;
+      int l = (X * coef_x) / D + coef_l;
+      int r = (X * coef_x) / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getFirst));
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.getFirst() - last;
+        }
+        cnt += p.getSecond();
+        last = p.getFirst();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    private int first;
+    private int second;
+
+    public Pair(int first, int second) {
+      this.first = first;
+      this.second = second;
+    }
+
+    public int getFirst() {
+      return first;
+    }
+
+    public int getSecond() {
+      return second;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    Map<Integer, List<Pair<Integer, Integer>>> L = new HashMap<>();
+    L.put(0, new ArrayList<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(1, -1))));
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair<>(l, 1));
+      L.get(m).add(new Pair<>(r + 1, -1));
+    }
+    int ans = 0;
+    for (List<Pair<Integer, Integer>> Q : L.values()) {
+      Q.sort((a, b) -> a.getKey() - b.getKey());
+      int cnt = 0;
+      int last = 0;
+      for (Pair<Integer, Integer> val : Q) {
+        if (cnt > 0) {
+          ans += val.getKey() - last;
+        }
+        cnt += val.getValue();
+        last = val.getKey();
+      }
+    }
+    return ans;
+  }
+}
+
+class Pair<K, V> {
+  private K key;
+  private V value;
+
+  public Pair(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  public K getKey() {
+    return key;
+  }
+
+  public V getValue() {
+    return value;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int D = scanner.nextInt();
+        System.out.println(solve(N, X, D));
+    }
+
+    public static int solve(int N, int X, int D) {
+        if (D == 0) {
+            if (X == 0) {
+                return 1;
+            }
+            return N + 1;
+        }
+        HashMap<Integer, ArrayList<Pair<Integer, Integer>>> L = new HashMap<>();
+        L.put(0, new ArrayList<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(1, -1))));
+        int coef_l = 0;
+        int coef_r = 1;
+        for (int coef_x = 1; coef_x <= N; coef_x++) {
+            int m = X * coef_x % D;
+            int l = X * coef_x / D + coef_l;
+            int r = X * coef_x / D + coef_x * N - coef_r;
+            coef_l = coef_r;
+            coef_r += coef_x + 1;
+            if (!L.containsKey(m)) {
+                L.put(m, new ArrayList<>());
+            }
+            L.get(m).add(new Pair<>(l, 1));
+            L.get(m).add(new Pair<>(r + 1, -1));
+        }
+        int ans = 0;
+        for (ArrayList<Pair<Integer, Integer>> Q : L.values()) {
+            Q.sort(Comparator.comparingInt(Pair::getKey));
+            int cnt = 0;
+            int last = 0;
+            for (Pair<Integer, Integer> val : Q) {
+                if (cnt > 0) {
+                    ans += val.getKey() - last;
+                }
+                cnt += val.getValue();
+                last = val.getKey();
+            }
+        }
+        return ans;
+    }
+}
+
+class Pair<T, U> {
+    private T key;
+    private U value;
+
+    public Pair(T key, U value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public T getKey() {
+        return key;
+    }
+
+    public U getValue() {
+        return value;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int D = scanner.nextInt();
+        System.out.println(solve(N, X, D));
+    }
+
+    public static int solve(int N, int X, int D) {
+        if (D == 0) {
+            if (X == 0) {
+                return 1;
+            }
+            return N + 1;
+        }
+        HashMap<Integer, ArrayList<Pair<Integer, Integer>>> L = new HashMap<>();
+        int coef_l = 0;
+        int coef_r = 1;
+        for (int coef_x = 1; coef_x <= N; coef_x++) {
+            int m = X * coef_x % D;
+            int l = X * coef_x / D + coef_l;
+            int r = X * coef_x / D + coef_x * N - coef_r;
+            coef_l = coef_r;
+            coef_r += coef_x + 1;
+            if (!L.containsKey(m)) {
+                L.put(m, new ArrayList<>());
+            }
+            L.get(m).add(new Pair<>(l, 1));
+            L.get(m).add(new Pair<>(r + 1, -1));
+        }
+        int ans = 0;
+        for (ArrayList<Pair<Integer, Integer>> Q : L.values()) {
+            Q.sort(Comparator.comparingInt(Pair::getKey));
+            int cnt = 0;
+            int last = 0;
+            for (Pair<Integer, Integer> val : Q) {
+                if (cnt > 0) {
+                    ans += val.getKey() - last;
+                }
+                cnt += val.getValue();
+                last = val.getKey();
+            }
+        }
+        return ans;
+    }
+
+    public static class Pair<T, U> {
+        private T key;
+        private U value;
+
+        public Pair(T key, U value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public T getKey() {
+            return key;
+        }
+
+        public U getValue() {
+            return value;
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int X = scanner.nextInt();
+        int D = scanner.nextInt();
+        System.out.println(solve(N, X, D));
+    }
+
+    public static int solve(int N, int X, int D) {
+        if (D == 0) {
+            if (X == 0) {
+                return 1;
+            }
+            return N + 1;
+        }
+        Map<Integer, ArrayList<Pair>> L = new HashMap<>();
+        int coef_l = 0;
+        int coef_r = 1;
+        for (int coef_x = 1; coef_x <= N; coef_x++) {
+            int m = (X * coef_x) % D;
+            int l = (X * coef_x) / D + coef_l;
+            int r = (X * coef_x) / D + coef_x * N - coef_r;
+            coef_l = coef_r;
+            coef_r += coef_x + 1;
+            if (!L.containsKey(m)) {
+                L.put(m, new ArrayList<>());
+            }
+            L.get(m).add(new Pair(l, 1));
+            L.get(m).add(new Pair(r + 1, -1));
+        }
+        int ans = 0;
+        for (ArrayList<Pair> Q : L.values()) {
+            Collections.sort(Q);
+            int cnt = 0;
+            int last = 0;
+            for (Pair val : Q) {
+                if (cnt > 0) {
+                    ans += val.getLeft() - last;
+                }
+                cnt += val.getRight();
+                last = val.getLeft();
+            }
+        }
+        return ans;
+    }
+
+    public static class Pair {
+        private int left;
+        private int right;
+
+        public Pair(int left, int right) {
+            this.left = left;
+            this.right = right;
+        }
+
+        public int getLeft() {
+            return left;
+        }
+
+        public int getRight() {
+            return right;
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int X = sc.nextInt();
+    int D = sc.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    HashMap<Integer, ArrayList<Pair<Integer, Integer>>> L = new HashMap<>();
+    L.put(0, new ArrayList<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(1, -1))));
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair<>(l, 1));
+      L.get(m).add(new Pair<>(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair<Integer, Integer>> Q : L.values()) {
+      Q.sort(Comparator.comparingInt(Pair::getLeft));
+      int cnt = 0;
+      int last = 0;
+      for (Pair<Integer, Integer> val : Q) {
+        if (cnt > 0) {
+          ans += val.getLeft() - last;
+        }
+        cnt += val.getRight();
+        last = val.getLeft();
+      }
+    }
+    return ans;
+  }
+}
+
+class Pair<L, R> {
+  private L left;
+  private R right;
+
+  public Pair(L left, R right) {
+    this.left = left;
+    this.right = right;
+  }
+
+  public L getLeft() {
+    return left;
+  }
+
+  public R getRight() {
+    return right;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    HashMap<Integer, ArrayList<Pair>> L = new HashMap<>();
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getLeft));
+      int cnt = 0;
+      int last = 0;
+      for (Pair pair : Q) {
+        if (cnt > 0) {
+          ans += pair.getLeft() - last;
+        }
+        cnt += pair.getRight();
+        last = pair.getLeft();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    private int left;
+    private int right;
+
+    public Pair(int left, int right) {
+      this.left = left;
+      this.right = right;
+    }
+
+    public int getLeft() {
+      return left;
+    }
+
+    public int getRight() {
+      return right;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+
+    Map<Integer, ArrayList<Pair>> L = new HashMap<>();
+    L.put(0, new ArrayList<Pair>());
+    L.get(0).add(new Pair(0, 1));
+    L.get(0).add(new Pair(1, -1));
+
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<Pair>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparingInt(Pair::getFirst));
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.getFirst() - last;
+        }
+        cnt += p.getSecond();
+        last = p.getFirst();
+      }
+    }
+    return ans;
+  }
+
+  private static class Pair {
+    private int first;
+    private int second;
+
+    public Pair(int first, int second) {
+      this.first = first;
+      this.second = second;
+    }
+
+    public int getFirst() {
+      return first;
+    }
+
+    public int getSecond() {
+      return second;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+
+    Map<Integer, List<Pair>> L = new HashMap<>();
+    L.put(0, new ArrayList<>());
+    L.get(0).add(new Pair(0, 1));
+    L.get(0).add(new Pair(1, -1));
+
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+
+    int ans = 0;
+    for (List<Pair> Q : L.values()) {
+      Q.sort((a, b) -> a.l - b.l);
+      int cnt = 0;
+      int last = 0;
+      for (Pair val : Q) {
+        if (cnt > 0) {
+          ans += val.l - last;
+        }
+        cnt += val.r;
+        last = val.l;
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    int l;
+    int r;
+
+    public Pair(int l, int r) {
+      this.l = l;
+      this.r = r;
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int X = scanner.nextInt();
+    int D = scanner.nextInt();
+    System.out.println(solve(N, X, D));
+  }
+
+  public static int solve(int N, int X, int D) {
+    if (D == 0) {
+      if (X == 0) {
+        return 1;
+      }
+      return N + 1;
+    }
+    Map<Integer, ArrayList<Pair>> L = new HashMap<>();
+    L.put(0, new ArrayList<>());
+    L.get(0).add(new Pair(0, 1));
+    L.get(0).add(new Pair(1, -1));
+    int coef_l = 0;
+    int coef_r = 1;
+    for (int coef_x = 1; coef_x <= N; coef_x++) {
+      int m = X * coef_x % D;
+      int l = X * coef_x / D + coef_l;
+      int r = X * coef_x / D + coef_x * N - coef_r;
+      coef_l = coef_r;
+      coef_r += coef_x + 1;
+      if (!L.containsKey(m)) {
+        L.put(m, new ArrayList<>());
+      }
+      L.get(m).add(new Pair(l, 1));
+      L.get(m).add(new Pair(r + 1, -1));
+    }
+    int ans = 0;
+    for (ArrayList<Pair> Q : L.values()) {
+      Q.sort(Comparator.comparing(Pair::getLeft));
+      int cnt = 0;
+      int last = 0;
+      for (Pair p : Q) {
+        if (cnt > 0) {
+          ans += p.getLeft() - last;
+        }
+        cnt += p.getRight();
+        last = p.getLeft();
+      }
+    }
+    return ans;
+  }
+
+  public static class Pair {
+    private int left;
+    private int right;
+
+    public Pair(int left, int right) {
+      this.left = left;
+      this.right = right;
+    }
+
+    public int getLeft() {
+      return left;
+    }
+
+    public int getRight() {
+      return right;
+    }
+  }
+}
+
+[/JAVA]
+======

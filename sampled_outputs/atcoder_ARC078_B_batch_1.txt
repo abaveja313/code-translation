@@ -1,0 +1,1235 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] G = new int[N][N];
+    for (int i = 0; i < N; i++) {
+      G[i] = new int[N];
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G[a][b] = 1;
+      G[b][a] = 1;
+    }
+    int[] dist_1 = new int[N + 1];
+    int[] dist_N = new int[N + 1];
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G[a]) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G[a]) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    Map<Integer, List<Integer>> G = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      G.put(i, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 1; i <= N; i++) {
+      if (dist_1[i] <= dist_N[i]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            G.put(i + 1, new LinkedList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        Arrays.fill(dist_1, N);
+        dist_1[1] = 0;
+        Deque<Integer> que = new LinkedList<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        Arrays.fill(dist_N, N);
+        dist_N[N] = 0;
+        que = new LinkedList<>();
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 0; i < N; i++) {
+            if (dist_1[i + 1] <= dist_N[i + 1]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    HashMap<Integer, ArrayList<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new ArrayList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.addLast(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.addLast(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    Map<Integer, List<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new ArrayList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      G.put(i, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    LinkedList<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.remove();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.remove();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 1; i <= N; i++) {
+      if (dist_1[i] <= dist_N[i]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            G.put(i + 1, new LinkedList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        Arrays.fill(dist_1, N);
+        dist_1[1] = 0;
+        Deque<Integer> que = new LinkedList<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        Arrays.fill(dist_N, N);
+        dist_N[N] = 0;
+        que = new LinkedList<>();
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 0; i < N; i++) {
+            if (dist_1[i + 1] <= dist_N[i + 1]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+        for (int i = 1; i <= N; i++) {
+            G.put(i, new LinkedList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        Arrays.fill(dist_1, N);
+        dist_1[1] = 0;
+        LinkedList<Integer> que = new LinkedList<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        Arrays.fill(dist_N, N);
+        dist_N[N] = 0;
+        que = new LinkedList<>();
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 1; i <= N; i++) {
+            if (dist_1[i] <= dist_N[i]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] G = new int[N][N];
+    for (int i = 0; i < N; i++) {
+      G[i] = sc.nextInt();
+    }
+    int[] dist_1 = new int[N + 1];
+    int[] dist_N = new int[N + 1];
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G[a]) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G[a]) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      G.put(i, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    LinkedList<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.remove();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.remove();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 1; i <= N; i++) {
+      if (dist_1[i] <= dist_N[i]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        HashMap<Integer, ArrayList<Integer>> G = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            G.put(i + 1, new ArrayList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        Arrays.fill(dist_1, N);
+        dist_1[1] = 0;
+        Deque<Integer> que = new ArrayDeque<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.removeFirst();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        Arrays.fill(dist_N, N);
+        dist_N[N] = 0;
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.removeFirst();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 0; i < N; i++) {
+            if (dist_1[i + 1] <= dist_N[i + 1]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            G.put(i + 1, new LinkedList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        dist_1[1] = 0;
+        Deque<Integer> que = new LinkedList<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        dist_N[N] = 0;
+        que = new LinkedList<>();
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 0; i < N; i++) {
+            if (dist_1[i + 1] <= dist_N[i + 1]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    Map<Integer, List<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new ArrayList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] G = new int[N + 1][];
+    for (int i = 0; i < N; i++) {
+      G[i + 1] = new int[0];
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G[a].add(b);
+      G[b].add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    dist_1[1] = 0;
+    Queue<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.poll();
+      for (int b : G[a]) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.poll();
+      for (int b : G[a]) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    HashMap<Integer, ArrayList<Integer>> G = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      G.put(i + 1, new ArrayList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.pop();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 0; i < N; i++) {
+      if (dist_1[i + 1] <= dist_N[i + 1]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            G.put(i + 1, new LinkedList<>());
+        }
+        for (int i = 0; i < N - 1; i++) {
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            G.get(a).add(b);
+            G.get(b).add(a);
+        }
+        int[] dist_1 = new int[N + 1];
+        dist_1[1] = 0;
+        Deque<Integer> que = new LinkedList<>();
+        que.add(1);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_1[b] > dist_1[a] + 1) {
+                    dist_1[b] = dist_1[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int[] dist_N = new int[N + 1];
+        dist_N[N] = 0;
+        que = new LinkedList<>();
+        que.add(N);
+        while (!que.isEmpty()) {
+            int a = que.pop();
+            for (int b : G.get(a)) {
+                if (dist_N[b] > dist_N[a] + 1) {
+                    dist_N[b] = dist_N[a] + 1;
+                    que.add(b);
+                }
+            }
+        }
+        int count_Fennec = 0;
+        for (int i = 0; i < N; i++) {
+            if (dist_1[i + 1] <= dist_N[i + 1]) {
+                count_Fennec++;
+            }
+        }
+        if (count_Fennec > N - count_Fennec) {
+            System.out.println("Fennec");
+        } else {
+            System.out.println("Snuke");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Deque;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    HashMap<Integer, LinkedList<Integer>> G = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      G.put(i, new LinkedList<>());
+    }
+    for (int i = 0; i < N - 1; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      G.get(a).add(b);
+      G.get(b).add(a);
+    }
+    int[] dist_1 = new int[N + 1];
+    Arrays.fill(dist_1, N);
+    dist_1[1] = 0;
+    Deque<Integer> que = new LinkedList<>();
+    que.add(1);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_1[b] > dist_1[a] + 1) {
+          dist_1[b] = dist_1[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int[] dist_N = new int[N + 1];
+    Arrays.fill(dist_N, N);
+    dist_N[N] = 0;
+    que = new LinkedList<>();
+    que.add(N);
+    while (!que.isEmpty()) {
+      int a = que.removeFirst();
+      for (int b : G.get(a)) {
+        if (dist_N[b] > dist_N[a] + 1) {
+          dist_N[b] = dist_N[a] + 1;
+          que.add(b);
+        }
+      }
+    }
+    int count_Fennec = 0;
+    for (int i = 1; i <= N; i++) {
+      if (dist_1[i] <= dist_N[i]) {
+        count_Fennec++;
+      }
+    }
+    if (count_Fennec > N - count_Fennec) {
+      System.out.println("Fennec");
+    } else {
+      System.out.println("Snuke");
+    }
+  }
+}
+[/JAVA]
+======

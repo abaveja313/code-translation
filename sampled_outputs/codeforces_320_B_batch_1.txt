@@ -1,0 +1,1081 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+        intervals.add(null);
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int queries = scanner.nextInt();
+        List<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = scanner.nextInt();
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                Set<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    private static void dfs(int target, Set<Integer> reachable, List<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    private static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int queries = scanner.nextInt();
+        Pair[] intervals = new Pair[queries];
+
+        for (int i = 0; i < queries; i++) {
+            int kind = scanner.nextInt();
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            if (kind == 1) {
+                intervals[i] = new Pair(x, y);
+            } else {
+                Set<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    private static void dfs(int target, Set<Integer> reachable, Pair[] intervals) {
+        reachable.add(target);
+        Pair t = intervals[target];
+        for (int i = 1; i < intervals.length; i++) {
+            if (i != target && !reachable.contains(i)) {
+                Pair r = intervals[i];
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        List<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                Set<Integer> reachable = new HashSet<>();
+                dfs(x, reachable);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, Set<Integer> reachable) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        Pair[] intervals = new Pair[queries];
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals[i] = new Pair(x, y);
+            } else {
+                boolean reachable = false;
+                for (int j = 0; j < intervals.length; j++) {
+                    if (intervals[j] != null && intervals[j].x <= x && intervals[j].y >= y) {
+                        reachable = true;
+                        break;
+                    }
+                }
+                System.out.println(reachable ? "YES" : "NO");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        Pair[] intervals = new Pair[queries];
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals[i] = new Pair(x, y);
+            } else {
+                boolean reachable = false;
+                for (int j = 0; j < intervals.length; j++) {
+                    if (j != x && intervals[j] != null) {
+                        if ((intervals[j].x > intervals[x].x && intervals[j].x < intervals[x].y) ||
+                                (intervals[j].y > intervals[x].x && intervals[j].y < intervals[x].y)) {
+                            reachable = true;
+                            break;
+                        }
+                    }
+                }
+                if (reachable) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        Pair[] intervals = new Pair[queries];
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals[i] = new Pair(x, y);
+            } else {
+                boolean reachable = false;
+                for (int j = 0; j < intervals.length; j++) {
+                    if (intervals[j] != null) {
+                        Pair t = intervals[j];
+                        if ((t.x > x && t.x < y) || (t.y > x && t.y < y)) {
+                            reachable = true;
+                            break;
+                        }
+                    }
+                }
+                if (reachable) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+        intervals.add(null);
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        List<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                Set<Integer> reachable = new HashSet<>();
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    public static void dfs(int target, Set<Integer> reachable, List<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        List<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                boolean reachable = false;
+                for (int j = 0; j < intervals.size(); j++) {
+                    if (j != x && (intervals.get(j).x > intervals.get(x).x && intervals.get(j).x < intervals.get(x).y || intervals.get(j).y > intervals.get(x).x && intervals.get(j).y < intervals.get(x).y)) {
+                        reachable = true;
+                        break;
+                    }
+                }
+                if (reachable) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        ArrayList<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                HashSet<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(x, reachable, intervals);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    private static void dfs(int target, HashSet<Integer> reachable, ArrayList<Pair> intervals) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(i, reachable, intervals);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int queries = sc.nextInt();
+        Pair[] intervals = new Pair[queries];
+
+        for (int i = 0; i < queries; i++) {
+            int kind = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            if (kind == 1) {
+                intervals[i] = new Pair(x, y);
+            } else {
+                boolean reachable = false;
+                for (int j = 0; j < intervals.length; j++) {
+                    if (j == x) {
+                        reachable = true;
+                    }
+                    if (reachable && intervals[j].x <= y && intervals[j].y >= y) {
+                        System.out.println("YES");
+                        return;
+                    }
+                }
+                System.out.println("NO");
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+class Pair {
+    int x;
+    int y;
+
+    Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int queries = scanner.nextInt();
+        List<Pair> intervals = new ArrayList<>();
+
+        for (int i = 0; i < queries; i++) {
+            int kind = scanner.nextInt();
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            if (kind == 1) {
+                intervals.add(new Pair(x, y));
+            } else {
+                Set<Integer> reachable = new HashSet<>();
+                reachable.add(x);
+                dfs(intervals, reachable, x, y);
+                if (reachable.contains(y)) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+
+    private static void dfs(List<Pair> intervals, Set<Integer> reachable, int target, int y) {
+        reachable.add(target);
+        Pair t = intervals.get(target);
+        for (int i = 1; i < intervals.size(); i++) {
+            if (!reachable.contains(i)) {
+                Pair r = intervals.get(i);
+                if ((t.x > r.x && t.x < r.y) || (t.y > r.x && t.y < r.y)) {
+                    dfs(intervals, reachable, i, y);
+                }
+            }
+        }
+    }
+}
+
+[/JAVA]
+======

@@ -1,0 +1,1068 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[][] abc = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            abc[i][0] = scanner.nextInt();
+            abc[i][1] = scanner.nextInt();
+            abc[i][2] = scanner.nextInt();
+        }
+        abc = convert(abc, p);
+        int[][] edges = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                edges[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            edges[abc[i][0] - 1][abc[i][1] - 1] = abc[i][2];
+        }
+        int[] dist = new int[n];
+        boolean[] neg = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            neg[i] = false;
+        }
+        dist[0] = 0;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n; j++) {
+                if (edges[j][i] != Integer.MAX_VALUE && dist[j] > dist[i] + edges[j][i]) {
+                    dist[j] = dist[i] + edges[j][i];
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (edges[j][i] != Integer.MAX_VALUE && dist[j] > dist[i] + edges[j][i]) {
+                    dist[j] = dist[i] + edges[j][i];
+                    neg[j] = true;
+                }
+                if (neg[j] == true) {
+                    neg[i] = true;
+                }
+            }
+        }
+        System.out.println(-1 if neg[n - 1] else Math.max(0, -dist[n - 1]));
+    }
+
+    private static int[][] convert(int[][] abc, int p) {
+        int[][] result = new int[abc.length][3];
+        for (int i = 0; i < abc.length; i++)
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < 3; j++) {
+        abc[i][j] = sc.nextInt();
+      }
+    }
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = abc[i][j];
+      }
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1] == true) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1] == false) {
+      result = Math.max(0, -dist[n - 1]);
+    }
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < 3; j++) {
+        abc[i][j] = sc.nextInt();
+      }
+    }
+    abc = [[a, b, p - c] for a, b, c in abc];
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int[] edge : abc) {
+        if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int[] edge : abc) {
+        if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+          neg[edge[1] - 1] = true;
+        }
+        if (neg[edge[0] - 1]) {
+          neg[edge[1] - 1] = true;
+        }
+      }
+    }
+    System.out.println(-1 if neg[n - 1] else Math.max(0, -dist[n - 1]));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = p - sc.nextInt();
+    }
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = i;
+      edges[i][1] = i;
+      edges[i][2] = 0;
+    }
+    for (int i = 0; i < m; i++) {
+      edges[abc[i][0] - 1][1] = abc[i][1] - 1;
+      edges[abc[i][0] - 1][2] = abc[i][2];
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1]] > dist[edges[j][0]] + edges[j][2]) {
+          dist[edges[j][1]] = dist[edges[j][0]] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1]] > dist[edges[j][0]] + edges[j][2]) {
+          dist[edges[j][1]] = dist[edges[j][0]] + edges[j][2];
+          neg[edges[j][1]] = true;
+        }
+        if (neg[edges[j][0]]) {
+          neg[edges[j][1]] = true;
+        }
+      }
+    }
+    int maxDist = 0;
+    for (int i = 0; i < n; i++) {
+      if (neg[i]) {
+        max
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < 3; j++) {
+        abc[i][j] = sc.nextInt();
+      }
+    }
+    abc = convert(abc);
+    int[][] edges = new int[n][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        edges[i][j] = Integer.MAX_VALUE;
+      }
+    }
+    for (int i = 0; i < m; i++) {
+      int a = abc[i][0] - 1;
+      int b = abc[i][1] - 1;
+      int c = abc[i][2];
+      edges[a][b] = c;
+      edges[b][a] = c;
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][i] != Integer.MAX_VALUE && dist[i] + edges[j][i] < dist[j]) {
+          dist[j] = dist[i] + edges[j][i];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][i] != Integer.MAX_VALUE && dist[i] + edges[j][i] < dist[j]) {
+          dist[j] = dist[i] + edges[j][i];
+          neg[j] = true;
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      if (neg[i]) {
+        System.out.println(-1);
+        return;
+      }
+    }
+    int max = 0;
+    for (int i = 0; i < n; i++) {
+      if (dist[i] > max) {
+        max = dist[i];
+      }
+    }
+    System.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int p = scanner.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = scanner.nextInt();
+      abc[i][1] = scanner.nextInt();
+      abc[i][2] = scanner.nextInt();
+    }
+    abc = [[a, b, p - c] for a, b, c in abc];
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = i;
+      edges[i][1] = i + 1;
+      edges[i][2] = 1;
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1] == true) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    System.out.println(-1 if neg[n - 1] else max(0, -dist[n - 1])
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        int[][] abc = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            abc[i][0] = scanner.nextInt();
+            abc[i][1] = scanner.nextInt();
+            abc[i][2] = p - scanner.nextInt();
+        }
+
+        int[] dist = new int[n];
+        boolean[] neg = new boolean[n];
+
+        for (int i = 0; i < n; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            neg[i] = false;
+        }
+
+        dist[0] = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int[] edge : abc) {
+                if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+                    dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int[] edge : abc) {
+                if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+                    dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+                    neg[edge[1] - 1] = true;
+                }
+                if (neg[edge[0] - 1] == true) {
+                    neg[edge[1] - 1] = true;
+                }
+            }
+        }
+
+        int result = -1;
+        if (neg[n - 1] == false) {
+            result = Math.max(0, -dist[n - 1]);
+        }
+
+        System.out.println(result);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = sc.nextInt();
+    }
+    abc = [[a, b, p - c] for a, b, c in abc];
+    int[][] edges = new int[n][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        edges[i][j] = Integer.MAX_VALUE;
+      }
+    }
+    for (int i = 0; i < m; i++) {
+      int a = abc[i][0];
+      int b = abc[i][1];
+      int c = abc[i][2];
+      edges[a - 1][b - 1] = c;
+      edges[b - 1][a - 1] = c;
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[j] > dist[0] + edges[j][0]) {
+          dist[j] = dist[0] + edges[j][0];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[j] > dist[0] + edges[j][0]) {
+          dist[j] = dist[0] + edges[j][0];
+          neg[j] = true;
+        }
+        if (neg[j] == true) {
+          neg[j] = true;
+        }
+      }
+    }
+    System.out.println(-1 if neg[n - 1] else max(0, -dist[n - 1]));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = p - sc.nextInt();
+    }
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = i;
+      edges[i][1] = i;
+      edges[i][2] = 0;
+    }
+    for (int i = 0; i < m; i++) {
+      edges[abc[i][0] - 1][1] = abc[i][1] - 1;
+      edges[abc[i][1] - 1][0] = abc[i][0] - 1;
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1]] > dist[edges[j][0]] + edges[j][2]) {
+          dist[edges[j][1]] = dist[edges[j][0]] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1]] > dist[edges[j][0]] + edges[j][2]) {
+          dist[edges[j][1]] = dist[edges[j][0]] + edges[j][2];
+          neg[edges[j][1]] = true;
+        }
+        if (neg[edges[j][0]] == true) {
+          neg[edges[j][1]] = true;
+        }
+      }
+    }
+    System.out.println(-1 if neg[n - 1] else Math.max(0, -dist[n - 1
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int p = scanner.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = scanner.nextInt();
+      abc[i][1] = scanner.nextInt();
+      abc[i][2] = scanner.nextInt();
+    }
+    abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = scanner.nextInt();
+      abc[i][1] = scanner.nextInt();
+      abc[i][2] = p - scanner.nextInt();
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < m; j++) {
+        if (abc[j][0] != Integer.MAX_VALUE && dist[abc[j][1] - 1] > dist[abc[j][0] - 1] + abc[j][2]) {
+          dist[abc[j][1] - 1] = dist[abc[j][0] - 1] + abc[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (abc[j][0] != Integer.MAX_VALUE && dist[abc[j][1] - 1] > dist[abc[j][0] - 1] + abc[j][2]) {
+          dist[abc[j][1] - 1] = dist[abc[j][0] - 1] + abc[j][2];
+          neg[abc[j][1] - 1] = true;
+        }
+        if (neg[abc[j][0] - 1]) {
+          neg[abc[j][1] - 1] = true;
+        }
+      }
+    }
+    System.out.println((neg[n - 1] ? -1 : Math.max(0, -dist[n - 1])));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int p = scanner.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = scanner.nextInt();
+      abc[i][1] = scanner.nextInt();
+      abc[i][2] = scanner.nextInt();
+    }
+    int[][] edges = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      edges[i][0] = abc[i][0];
+      edges[i][1] = abc[i][1];
+      edges[i][2] = p - abc[i][2];
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    BF(edges, n, 1, dist, neg);
+    System.out.println(-1 + (neg[n - 1] ? 0 : -dist[n - 1]));
+  }
+
+  public static void BF(int[][] edges, int numV, int source, int[] dist, boolean[] neg) {
+    int inf = Integer.MAX_VALUE;
+    dist[source - 1] = 0;
+    neg[source - 1] = false;
+    for (int i = 0; i < numV - 1; i++) {
+      for (int edge : edges) {
+        if (edge[0] != inf && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+        }
+      }
+    }
+    for (int i = 0; i < numV; i++) {
+      for (int edge : edges) {
+        if (edge[0] != inf && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+          neg[edge[1] - 1] = true;
+        }
+        if (neg[edge[0] - 1] == true) {
+          neg[edge[1] - 1] = true;
+        }
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int p = scanner.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = scanner.nextInt();
+      abc[i][1] = scanner.nextInt();
+      abc[i][2] = scanner.nextInt();
+    }
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = scanner.nextInt();
+      edges[i][1] = scanner.nextInt();
+      edges[i][2] = scanner.nextInt();
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1] == true) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1] == false) {
+      result = Math.max(0, -dist[n - 1]);
+    }
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[][] edges = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            edges[i][0] = scanner.nextInt();
+            edges[i][1] = scanner.nextInt();
+            edges[i][2] = scanner.nextInt();
+        }
+        int source = 1;
+        int[] dist = new int[n];
+        boolean[] neg = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            neg[i] = false;
+        }
+        dist[source - 1] = 0;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < m; j++) {
+                int[] edge = edges[j];
+                if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+                    dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int[] edge = edges[j];
+                if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+                    dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+                    neg[edge[1] - 1] = true;
+                }
+                if (neg[edge[0] - 1]) {
+                    neg[edge[1] - 1] = true;
+                }
+            }
+        }
+        int result = -1;
+        if (neg[n - 1]) {
+            result = -dist[n - 1];
+        } else {
+            result = Math.max(0, -dist[n - 1]);
+        }
+        System.out.println(result);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = sc.nextInt();
+    }
+    abc = [[a, b, p - c] for a, b, c in abc];
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = sc.nextInt();
+      edges[i][1] = sc.nextInt();
+      edges[i][2] = sc.nextInt();
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1]) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1]) {
+      result = -1;
+    } else {
+      result
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < 3; j++) {
+        abc[i][j] = sc.nextInt();
+      }
+    }
+    abc = convert(abc, p);
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < 3; j++) {
+        edges[i][j] = sc.nextInt();
+      }
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    BF(edges, n, 1, dist, neg);
+    System.out.println(-1 + (neg[n - 1] ? 0 : -dist[n - 1]));
+  }
+
+  public static int[][] convert(int[][] abc, int p) {
+    int[][] newAbc = new int[abc.length][3];
+    for (int i = 0; i < abc.length; i++) {
+      newAbc[i][0] = abc[i][0];
+      newAbc[i][1] = abc[i][1];
+      newAbc[i][2] = p - abc[i][2];
+    }
+    return newAbc;
+  }
+
+  public static void BF(int[][] edges, int numV, int source, int[] dist, boolean[] neg) {
+    int inf = Integer.MAX_VALUE;
+    dist[source - 1] = 0;
+    neg[source - 1] = false;
+    for (int i = 0; i < numV - 1; i++) {
+      for (int[] edge : edges) {
+        if (edge[0] != inf && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+        }
+      }
+    }
+    for (int i = 0; i < numV; i++) {
+      for (int[] edge : edges) {
+        if (edge[0] != inf && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		int p = sc.nextInt();
+		int[][] abc = new int[m][3];
+		for (int i = 0; i < m; i++) {
+			abc[i][0] = sc.nextInt();
+			abc[i][1] = sc.nextInt();
+			abc[i][2] = p - sc.nextInt();
+		}
+		int[][] edges = new int[m][3];
+		for (int i = 0; i < m; i++) {
+			edges[i][0] = abc[i][0];
+			edges[i][1] = abc[i][1];
+			edges[i][2] = abc[i][2];
+		}
+		int[] dist = new int[n];
+		boolean[] neg = new boolean[n];
+		for (int i = 0; i < n; i++) {
+			dist[i] = Integer.MAX_VALUE;
+			neg[i] = false;
+		}
+		dist[0] = 0;
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < m; j++) {
+				if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+					dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+				}
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+					dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+					neg[edges[j][1] - 1] = true;
+				}
+				if (neg[edges[j][0] - 1] == true) {
+				
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] edges = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      int[] edge = new int[3];
+      edge[0] = sc.nextInt();
+      edge[1] = sc.nextInt();
+      edge[2] = sc.nextInt();
+      edges[i] = edge;
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int[] edge : edges) {
+        if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int[] edge : edges) {
+        if (edge[0] != Integer.MAX_VALUE && dist[edge[1] - 1] > dist[edge[0] - 1] + edge[2]) {
+          dist[edge[1] - 1] = dist[edge[0] - 1] + edge[2];
+          neg[edge[1] - 1] = true;
+        }
+        if (neg[edge[0] - 1] == true) {
+          neg[edge[1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1] == false) {
+      result = Math.max(0, -dist[n - 1]);
+    }
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = sc.nextInt();
+    }
+    int[][] edges = new int[n][3];
+    for (int i = 0; i < n; i++) {
+      edges[i][0] = sc.nextInt();
+      edges[i][1] = sc.nextInt();
+      edges[i][2] = sc.nextInt();
+    }
+    int source = 1;
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[source - 1] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1] == true) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1] == false) {
+      result = Math.max(0, -dist[n - 1]);
+    }
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int p = sc.nextInt();
+    int[][] abc = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      abc[i][0] = sc.nextInt();
+      abc[i][1] = sc.nextInt();
+      abc[i][2] = p - sc.nextInt();
+    }
+    int[][] edges = new int[m][3];
+    for (int i = 0; i < m; i++) {
+      edges[i][0] = abc[i][0];
+      edges[i][1] = abc[i][1];
+      edges[i][2] = abc[i][2];
+    }
+    int[] dist = new int[n];
+    boolean[] neg = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      dist[i] = Integer.MAX_VALUE;
+      neg[i] = false;
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+          dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+          neg[edges[j][1] - 1] = true;
+        }
+        if (neg[edges[j][0] - 1] == true) {
+          neg[edges[j][1] - 1] = true;
+        }
+      }
+    }
+    int result = -1;
+    if (neg[n - 1] == false) {
+      result = Math.max(0, -dist[n - 1]);
+    }
+    System.out.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int p = scanner.nextInt();
+        int[][] abc = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < 3; j++) {
+                abc[i][j] = scanner.nextInt();
+            }
+        }
+        abc = convert(abc);
+        int[] dist = bellmanFord(abc, n, 1);
+        int[] neg = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (dist[i] == Integer.MAX_VALUE) {
+                neg[i] = 1;
+            }
+        }
+        int result = -1;
+        if (neg[n - 1] == 0) {
+            result = Math.max(0, -dist[n - 1]);
+        }
+        System.out.println(result);
+    }
+
+    private static int[][] convert(int[][] abc) {
+        int[][] result = new int[abc.length][3];
+        for (int i = 0; i < abc.length; i++) {
+            result[i][0] = abc[i][0];
+            result[i][1] = abc[i][1];
+            result[i][2] = p - abc[i][2];
+        }
+        return result;
+    }
+
+    private static int[] bellmanFord(int[][] edges, int numV, int source) {
+        int[] dist = new int[numV];
+        int[] neg = new int[numV];
+        for (int i = 0; i < numV; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            neg[i] = 0;
+        }
+        dist[source - 1] = 0;
+        for (int i = 0; i < numV - 1; i++) {
+            for (int j = 0; j < edges.length; j++) {
+                if (edges[j][0] != Integer.MAX_VALUE && dist[edges[j][1] - 1] > dist[edges[j][0] - 1] + edges[j][2]) {
+                    dist[edges[j][1] - 1] = dist[edges[j][0] - 1] + edges[j][2];
+                }
+            }
+        }
+        for (int i = 0; i < numV; i++) {
+            for (int j = 0; j < edges.length; j
+======

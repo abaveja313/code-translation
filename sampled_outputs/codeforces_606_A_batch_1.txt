@@ -1,0 +1,698 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l1 = getIntArray(scanner);
+        int[] l2 = getIntArray(scanner);
+        int spn = getSPN(l1, l2);
+        int spp = getSPP(l1, l2);
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    private static int[] getIntArray(Scanner scanner) {
+        String[] input = scanner.nextLine().split(" ");
+        int[] output = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            output[i] = Integer.parseInt(input[i]);
+        }
+        return output;
+    }
+
+    private static int getSPN(int[] l1, int[] l2) {
+        int spn = 0;
+        for (int i = 0; i < l2.length; i++) {
+            spn += Math.max(l2[i] - l1[i], 0);
+        }
+        return spn;
+    }
+
+    private static int getSPP(int[] l1, int[] l2) {
+        int spp = 0;
+        for (int i = 0; i < l1.length; i++) {
+            spp += Math.max((l1[i] - l2[i]) / 2, 0);
+        }
+        return spp;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = getList(scanner);
+    int[] l2 = getList(scanner);
+    int spn = getSPN(l1, l2);
+    int spp = getSPP(l1, l2);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getList(Scanner scanner) {
+    String[] input = scanner.nextLine().split(" ");
+    int[] list = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      list[i] = Integer.parseInt(input[i]);
+    }
+    return list;
+  }
+
+  private static int getSPN(int[] l1, int[] l2) {
+    int spn = 0;
+    for (int i = 0; i < l2.length; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+    return spn;
+  }
+
+  private static int getSPP(int[] l1, int[] l2) {
+    int spp = 0;
+    for (int i = 0; i < l1.length; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+    return spp;
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The `getList` method is used to read the input and convert it to an array of integers. The `getSPN` and `getSPP` methods are used to calculate the sum of the absolute differences and the sum of the squared differences, respectively. Finally, the `main` method reads the input, calculates the values, and prints the output.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getIntArray(sc.nextLine());
+    int[] l2 = getIntArray(sc.nextLine());
+    int spn = getSPN(l1, l2);
+    int spp = getSPP(l1, l2);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getIntArray(String input) {
+    String[] strArray = input.split(" ");
+    int[] intArray = new int[strArray.length];
+    for (int i = 0; i < strArray.length; i++) {
+      intArray[i] = Integer.parseInt(strArray[i]);
+    }
+    return intArray;
+  }
+
+  private static int getSPN(int[] l1, int[] l2) {
+    int spn = 0;
+    for (int i = 0; i < 3; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+    return spn;
+  }
+
+  private static int getSPP(int[] l1, int[] l2) {
+    int spp = 0;
+    for (int i = 0; i < 3; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+    return spp;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[] l2 = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getInput(sc);
+    int[] l2 = getInput(sc);
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getInput(Scanner sc) {
+    String[] input = sc.nextLine().split(" ");
+    int[] result = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      result[i] = Integer.parseInt(input[i]);
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] l1 = new int[3];
+        int[] l2 = new int[3];
+        int spn = 0;
+        int spp = 0;
+
+        for (int i = 0; i < 3; i++) {
+            l1[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < 3; i++) {
+            l2[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < 3; i++) {
+            spn += Math.max(l2[i] - l1[i], 0);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            spp += Math.max((l1[i] - l2[i]) / 2, 0);
+        }
+
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getInput(sc);
+    int[] l2 = getInput(sc);
+    int spn = getSPN(l1, l2);
+    int spp = getSPP(l1, l2);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getInput(Scanner sc) {
+    String[] input = sc.nextLine().split(" ");
+    int[] arr = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      arr[i] = Integer.parseInt(input[i]);
+    }
+    return arr;
+  }
+
+  private static int getSPN(int[] l1, int[] l2) {
+    int spn = 0;
+    for (int i = 0; i < l1.length; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+    return spn;
+  }
+
+  private static int getSPP(int[] l1, int[] l2) {
+    int spp = 0;
+    for (int i = 0; i < l1.length; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+    return spp;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = getIntArray(scanner);
+    int[] l2 = getIntArray(scanner);
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getIntArray(Scanner scanner) {
+    String[] input = scanner.nextLine().split(" ");
+    int[] array = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      array[i] = Integer.parseInt(input[i]);
+    }
+    return array;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l1 = getInput(scanner);
+        int[] l2 = getInput(scanner);
+        int spp = 0;
+        int spn = 0;
+        spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+        spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    private static int[] getInput(Scanner scanner) {
+        String[] input = scanner.nextLine().split(" ");
+        int[] l = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            l[i] = Integer.parseInt(input[i]);
+        }
+        return l;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] l1 = new int[3];
+        int[] l2 = new int[3];
+        int spp = 0;
+        int spn = 0;
+
+        for (int i = 0; i < l1.length; i++) {
+            l1[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < l2.length; i++) {
+            l2[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < l1.length; i++) {
+            spn += Math.max(l2[i] - l1[i], 0);
+        }
+
+        for (int i = 0; i < l1.length; i++) {
+            spp += Math.max((l1[i] - l2[i]) / 2, 0);
+        }
+
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = new int[3];
+    int[] l2 = new int[3];
+    int spn = 0;
+    int spp = 0;
+
+    for (int i = 0; i < 3; i++) {
+      l1[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < 3; i++) {
+      l2[i] = sc.nextInt();
+    }
+
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = getIntArray(scanner);
+    int[] l2 = getIntArray(scanner);
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getIntArray(Scanner scanner) {
+    String[] input = scanner.nextLine().split(" ");
+    int[] array = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      array[i] = Integer.parseInt(input[i]);
+    }
+    return array;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getIntList(sc.nextLine());
+    int[] l2 = getIntList(sc.nextLine());
+    int spn = 0;
+    int spp = 0;
+
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getIntList(String input) {
+    String[] tokens = input.split(" ");
+    int[] list = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      list[i] = Integer.parseInt(tokens[i]);
+    }
+    return list;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getIntArray(sc.nextLine());
+    int[] l2 = getIntArray(sc.nextLine());
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  public static int[] getIntArray(String input) {
+    String[] strArr = input.split(" ");
+    int[] intArr = new int[strArr.length];
+    for (int i = 0; i < strArr.length; i++) {
+      intArr[i] = Integer.parseInt(strArr[i]);
+    }
+    return intArr;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = new int[3];
+    int[] l2 = new int[3];
+    int spp = 0;
+    int spn = 0;
+
+    for (int i = 0; i < 3; i++) {
+      l1[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < 3; i++) {
+      l2[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < 3; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+
+    for (int i = 0; i < 3; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = new int[3];
+    int[] l2 = new int[3];
+    int spp = 0;
+    int spn = 0;
+
+    for (int i = 0; i < 3; i++) {
+      l1[i] = scanner.nextInt();
+    }
+
+    for (int i = 0; i < 3; i++) {
+      l2[i] = scanner.nextInt();
+    }
+
+    for (int i = 0; i < 3; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+
+    for (int i = 0; i < 3; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l1 = getList(sc);
+    int[] l2 = getList(sc);
+    int spn = getSPN(l1, l2);
+    int spp = getSPP(l1, l2);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+
+  private static int[] getList(Scanner sc) {
+    String[] strs = sc.nextLine().split(" ");
+    int[] list = new int[strs.length];
+    for (int i = 0; i < strs.length; i++) {
+      list[i] = Integer.parseInt(strs[i]);
+    }
+    return list;
+  }
+
+  private static int getSPN(int[] l1, int[] l2) {
+    int spn = 0;
+    for (int i = 0; i < 3; i++) {
+      spn += Math.max(l2[i] - l1[i], 0);
+    }
+    return spn;
+  }
+
+  private static int getSPP(int[] l1, int[] l2) {
+    int spp = 0;
+    for (int i = 0; i < 3; i++) {
+      spp += Math.max((l1[i] - l2[i]) / 2, 0);
+    }
+    return spp;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `Math.max` method to calculate the maximum value of two numbers. The `getList` method is used to convert the input string into an array of integers, and the `getSPN` and `getSPP` methods are used to calculate the SPN and SPP values respectively. The main method then prints "YES" or "NO" based on the comparison of SPP and SPN.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l1 = getIntArray(scanner.nextLine());
+        int[] l2 = getIntArray(scanner.nextLine());
+        int spp = 0;
+        int spn = 0;
+        spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+        spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+    
+    public static int[] getIntArray(String input) {
+        String[] tokens = input.split(" ");
+        int[] array = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            array[i] = Integer.parseInt(tokens[i]);
+        }
+        return array;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l1 = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[] l2 = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int spp = 0;
+    int spn = 0;
+    spn = Math.max(l2[0] - l1[0], 0) + Math.max(l2[1] - l1[1], 0) + Math.max(l2[2] - l1[2], 0);
+    spp = Math.max((l1[0] - l2[0]) / 2, 0) + Math.max((l1[1] - l2[1]) / 2, 0) + Math.max((l1[2] - l2[2]) / 2, 0);
+    if (spp >= spn) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] l1 = getInput(sc);
+        int[] l2 = getInput(sc);
+        int spn = getSPN(l1, l2);
+        int spp = getSPP(l1, l2);
+        if (spp >= spn) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    private static int[] getInput(Scanner sc) {
+        String[] input = sc.nextLine().split(" ");
+        int[] arr = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            arr[i] = Integer.parseInt(input[i]);
+        }
+        return arr;
+    }
+
+    private static int getSPN(int[] l1, int[] l2) {
+        int spn = 0;
+        for (int i = 0; i < 3; i++) {
+            spn += Math.max(l2[i] - l1[i], 0);
+        }
+        return spn;
+    }
+
+    private static int getSPP(int[] l1, int[] l2) {
+        int spp = 0;
+        for (int i = 0; i < 3; i++) {
+            spp += Math.max((l1[i] - l2[i]) / 2, 0);
+        }
+        return spp;
+    }
+}
+[/JAVA]
+======

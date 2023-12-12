@@ -1,0 +1,1303 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        char[] s = sc.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if (Math.pow(2, k - 1) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = Arrays.copyOf(u, n);
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(s);
+        }
+    }
+    
+    public static char[] reverse(char[] s) {
+        char[] t = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            t[i] = s[s.length - 1 - i];
+        }
+        return t;
+    }
+    
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        System.arraycopy(a, 0, c, 0, a.length);
+        System.arraycopy(b, 0, c, a.length, b.length);
+        return c;
+    }
+    
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        char[] s = sc.nextLine().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = u.clone();
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.length > x.length) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println("".join(s));
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] rev = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            rev[i] = s[s.length - i - 1];
+        }
+        return rev;
+    }
+
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        System.arraycopy(a, 0, c, 0, a.length);
+        System.arraycopy(b, 0, c, a.length, b.length);
+        return c;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = new char[s.length];
+                for (int j = 0; j < s.length; j++) {
+                    t[j] = s[s.length - j - 1];
+                }
+                char[] u = new char[2 * s.length];
+                for (int j = 0; j < u.length; j++) {
+                    if (j < s.length) {
+                        u[j] = t[j];
+                    } else {
+                        u[j] = s[j - s.length];
+                    }
+                }
+                char[] uu = new char[n];
+                for (int j = 0; j < n; j++) {
+                    char[] x = new char[n];
+                    for (int k = 0; k < n; k++) {
+                        x[k] = u[j + k];
+                    }
+                    if (uu.length == 0 || compare(x, uu) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println("".join(s));
+        }
+    }
+
+    private static int compare(char[] a, char[] b) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != b[i]) {
+                return a[i] - b[i];
+            }
+        }
+        return 0;
+    }
+
+    private static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    char[] s = scanner.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == min(s)) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    s = reverse(s);
+    if ((1 << (k - 1)) * l > n) {
+      System.out.println(min(s) * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = reverse(s);
+        char[] u = concat(t, s);
+        char[] uu = Arrays.copyOf(u, n);
+        for (int j = 1; j <= n; j++) {
+          char[] x = Arrays.copyOfRange(u, j, j + n);
+          if (uu.compareTo(x) > 0) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println(new String(s));
+    }
+  }
+
+  private static char min(char[] s) {
+    char min = s[0];
+    for (int i = 1; i < s.length; i++) {
+      if (s[i] < min) {
+        min = s[i];
+      }
+    }
+    return min;
+  }
+
+  private static char[] reverse(char[] s) {
+    char[] reversed = new char[s.length];
+    for (int i = 0; i < s.length; i++) {
+      reversed[i] = s[s.length - i - 1];
+    }
+    return reversed;
+  }
+
+  private static char[] concat(char[] a, char[] b) {
+    char[] c = new char[a.length + b.length];
+    System.arraycopy(a, 0, c, 0, a.length);
+    System.arraycopy(b, 0, c, a.length, b.length);
+    return c;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = u.clone();
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(s);
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] r = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            r[i] = s[s.length - i - 1];
+        }
+        return r;
+    }
+
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        System.arraycopy(a, 0, c, 0, a.length);
+        System.arraycopy(b, 0, c, a.length, b.length);
+        return c;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        String s = sc.nextLine();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == s.charAt(0)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = new StringBuilder(s).reverse().toString();
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(s.charAt(0) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                String t = new StringBuilder(s).reverse().toString();
+                String u = t + s;
+                String uu = u.substring(0, n);
+                for (int j = 1; j <= n; j++) {
+                    String x = u.substring(j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = t + s;
+                char[] uu = Arrays.copyOf(u, n);
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu > x) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println("".join(s));
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] result = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            result[i] = s[s.length - 1 - i];
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        String s = sc.next();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = new StringBuilder(s).reverse().toString();
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                String t = new StringBuilder(s).reverse().toString();
+                String u = t + s;
+                String uu = u.substring(0, n);
+                for (int j = 1; j <= n; j++) {
+                    String x = u.substring(j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(s);
+        }
+    }
+
+    private static char min(String s) {
+        char min = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) < min) {
+                min = s.charAt(i);
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.nextLine().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = Arrays.copyOf(u, n);
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.length > x.length) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(new String(s));
+        }
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] t = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            t[i] = s[s.length - 1 - i];
+        }
+        return t;
+    }
+
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        System.arraycopy(a, 0, c, 0, a.length);
+        System.arraycopy(b, 0, c, a.length, b.length);
+        return c;
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if (Math.pow(2, k - 1) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = u.length > n ? u.substring(0, n) : u;
+                for (int j = 1; j <= n; j++) {
+                    char[] x = u.substring(j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println("".join(s));
+        }
+    }
+
+    private static char min(char[] arr) {
+        char min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+
+    private static char[] reverse(char[] arr) {
+        char[] reversed = new char[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            reversed[i] = arr[arr.length - i - 1];
+        }
+        return reversed;
+    }
+
+    private static char[] concat(char[] arr1, char[] arr2) {
+        char[] concat = new char[arr1.length + arr2.length];
+        for (int i = 0; i < arr1.length; i++) {
+            concat[i] = arr1[i];
+        }
+        for (int i = 0; i < arr2.length; i++) {
+            concat[i + arr1.length] = arr2[i];
+        }
+        return concat;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    char[] s = sc.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == min(s)) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    s = reverse(s);
+    if (Math.pow(2, k - 1) * l > n) {
+      System.out.println(min(s) * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = reverse(s);
+        char[] u = concat(t, s);
+        char[] uu = u.clone();
+        for (int j = 1; j < n + 1; j++) {
+          char[] x = subArray(u, j, j + n);
+          if (uu.length > x.length) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println(new String(s));
+    }
+  }
+
+  private static char min(char[] s) {
+    char min = s[0];
+    for (int i = 1; i < s.length; i++) {
+      if (s[i] < min) {
+        min = s[i];
+      }
+    }
+    return min;
+  }
+
+  private static char[] reverse(char[] s) {
+    char[] t = new char[s.length];
+    for (int i = 0; i < s.length; i++) {
+      t[i] = s[s.length - i - 1];
+    }
+    return t;
+  }
+
+  private static char[] concat(char[] t, char[] s) {
+    char[] u = new char[t.length + s.length];
+    for (int i = 0; i < t.length; i++) {
+      u[i] = t[i];
+    }
+    for (int i = 0; i < s.length; i++) {
+      u[t.length + i] = s[i];
+    }
+    return u;
+  }
+
+  private static char[] subArray(char[] s, int start, int end) {
+    char[] t = new char[end - start];
+    for (int i = 0; i < t.length; i++) {
+      t[i] = s[start + i];
+    }
+    return t;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    char[] s = sc.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == s[0]) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    s = reverse(s);
+    if (Math.pow(2, k - 1) * l > n) {
+      System.out.println(s[0] * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = reverse(s);
+        char[] u = concat(t, s);
+        char[] uu = u.clone();
+        for (int j = 1; j <= n; j++) {
+          char[] x = subArray(u, j, j + n);
+          if (uu.length > x.length) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println(new String(s));
+    }
+  }
+
+  private static char[] reverse(char[] s) {
+    char[] t = new char[s.length];
+    for (int i = 0; i < s.length; i++) {
+      t[i] = s[s.length - i - 1];
+    }
+    return t;
+  }
+
+  private static char[] concat(char[] t, char[] s) {
+    char[] u = new char[t.length + s.length];
+    for (int i = 0; i < t.length; i++) {
+      u[i] = t[i];
+    }
+    for (int i = 0; i < s.length; i++) {
+      u[i + t.length] = s[i];
+    }
+    return u;
+  }
+
+  private static char[] subArray(char[] s, int start, int end) {
+    char[] t = new char[end - start];
+    for (int i = 0; i < t.length; i++) {
+      t[i] = s[i + start];
+    }
+    return t;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        char[] s = sc.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if (Math.pow(2, k - 1) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concatenate(t, s);
+                char[] uu = u.clone();
+                for (int j = 1; j <= n; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.length > x.length) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println("".join(s));
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] t = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            t[i] = s[s.length - i - 1];
+        }
+        return t;
+    }
+
+    public static char[] concatenate(char[] t, char[] s) {
+        char[] u = new char[t.length + s.length];
+        for (int i = 0; i < t.length; i++) {
+            u[i] = t[i];
+        }
+        for (int i = 0; i < s.length; i++) {
+            u[i + t.length] = s[i];
+        }
+        return u;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    char[] s = scanner.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == min(s)) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    s = reverse(s);
+    if ((1 << (k - 1)) * l > n) {
+      System.out.println(min(s) * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = reverse(s);
+        char[] u = concat(t, s);
+        char[] uu = u.length > n ? Arrays.copyOf(u, n) : u;
+        for (int j = 1; j <= n; j++) {
+          char[] x = Arrays.copyOfRange(u, j, j + n);
+          if (uu.compareTo(x) > 0) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println(new String(s));
+    }
+  }
+
+  private static char min(char[] s) {
+    char min = s[0];
+    for (int i = 1; i < s.length; i++) {
+      if (s[i] < min) {
+        min = s[i];
+      }
+    }
+    return min;
+  }
+
+  private static char[] reverse(char[] s) {
+    char[] reversed = new char[s.length];
+    for (int i = 0; i < s.length; i++) {
+      reversed[i] = s[s.length - i - 1];
+    }
+    return reversed;
+  }
+
+  private static char[] concat(char[] a, char[] b) {
+    char[] c = new char[a.length + b.length];
+    System.arraycopy(a, 0, c, 0, a.length);
+    System.arraycopy(b, 0, c, a.length, b.length);
+    return c;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    char[] s = sc.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == min(s)) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    s = reverse(s);
+    if (Math.pow(2, k - 1) * l > n) {
+      System.out.println(min(s) * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = reverse(s);
+        char[] u = concat(t, s);
+        char[] uu = u.clone();
+        for (int j = 1; j <= n; j++) {
+          char[] x = Arrays.copyOfRange(u, j, j + n);
+          if (uu.length > x.length) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println("".join(s));
+    }
+  }
+  
+  public static char min(char[] s) {
+    char min = s[0];
+    for (int i = 1; i < s.length; i++) {
+      if (s[i] < min) {
+        min = s[i];
+      }
+    }
+    return min;
+  }
+  
+  public static char[] reverse(char[] s) {
+    char[] r = new char[s.length];
+    for (int i = 0; i < s.length; i++) {
+      r[i] = s[s.length - i - 1];
+    }
+    return r;
+  }
+  
+  public static char[] concat(char[] a, char[] b) {
+    char[] c = new char[a.length + b.length];
+    System.arraycopy(a, 0, c, 0, a.length);
+    System.arraycopy(b, 0, c, a.length, b.length);
+    return c;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        char[] s = sc.nextLine().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if (Math.pow(2, k - 1) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = new char[n];
+                for (int j = 0; j < n; j++) {
+                    t[j] = s[n - j - 1];
+                }
+                char[] u = new char[n * 2];
+                System.arraycopy(t, 0, u, 0, n);
+                System.arraycopy(s, 0, u, n, n);
+                char[] uu = new char[n];
+                for (int j = 1; j < n + 1; j++) {
+                    char[] x = new char[n];
+                    System.arraycopy(u, j, x, 0, n);
+                    if (uu > x) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(new String(s));
+        }
+    }
+    
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+    
+    public static char[] reverse(char[] s) {
+        char[] t = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            t[i] = s[s.length - i - 1];
+        }
+        return t;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    char[] s = sc.next().toCharArray();
+    int l = 0;
+    int c = 0;
+    for (int i = 0; i < n; i++) {
+      if (s[i] == s[0]) {
+        c++;
+        l = Math.max(l, c);
+      } else {
+        c = 0;
+      }
+    }
+    if (Math.pow(2, k - 1) * l > n) {
+      System.out.println(s[0] * n);
+    } else {
+      for (int i = 0; i < Math.min(k, 13); i++) {
+        char[] t = new char[s.length];
+        for (int j = 0; j < s.length; j++) {
+          t[j] = s[s.length - j - 1];
+        }
+        char[] u = new char[s.length * 2];
+        System.arraycopy(t, 0, u, 0, t.length);
+        System.arraycopy(s, 0, u, t.length, s.length);
+        char[] uu = new char[n];
+        System.arraycopy(u, 0, uu, 0, n);
+        for (int j = 1; j <= n; j++) {
+          char[] x = new char[n];
+          System.arraycopy(u, j, x, 0, n);
+          if (uu[0] > x[0]) {
+            uu = x;
+          }
+        }
+        s = uu;
+      }
+      System.out.println(new String(s));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        char[] s = sc.nextLine().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = u.clone();
+                for (int j = 1; j < n + 1; j++) {
+                    char[] x = u.clone();
+                    x = Arrays.copyOfRange(x, j, j + n);
+                    if (uu.length > x.length) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(new String(s));
+        }
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] t = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            t[i] = s[s.length - i - 1];
+        }
+        return t;
+    }
+
+    public static char[] concat(char[] t, char[] s) {
+        char[] u = new char[t.length + s.length];
+        System.arraycopy(t, 0, u, 0, t.length);
+        System.arraycopy(s, 0, u, t.length, s.length);
+        return u;
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if ((1 << (k - 1)) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = u.clone();
+                for (int j = 1; j < n + 1; j++) {
+                    char[] x = Arrays.copyOfRange(u, j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(new String(s));
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] rev = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            rev[i] = s[s.length - 1 - i];
+        }
+        return rev;
+    }
+
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        System.arraycopy(a, 0, c, 0, a.length);
+        System.arraycopy(b, 0, c, a.length, b.length);
+        return c;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        char[] s = scanner.next().toCharArray();
+        int l = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == min(s)) {
+                c++;
+                l = Math.max(l, c);
+            } else {
+                c = 0;
+            }
+        }
+        s = reverse(s);
+        if (Math.pow(2, k - 1) * l > n) {
+            System.out.println(min(s) * n);
+        } else {
+            for (int i = 0; i < Math.min(k, 13); i++) {
+                char[] t = reverse(s);
+                char[] u = concat(t, s);
+                char[] uu = subarray(u, 0, n);
+                for (int j = 1; j <= n; j++) {
+                    char[] x = subarray(u, j, j + n);
+                    if (uu.compareTo(x) > 0) {
+                        uu = x;
+                    }
+                }
+                s = uu;
+            }
+            System.out.println(new String(s));
+        }
+    }
+
+    public static char min(char[] s) {
+        char min = s[0];
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] < min) {
+                min = s[i];
+            }
+        }
+        return min;
+    }
+
+    public static char[] reverse(char[] s) {
+        char[] reversed = new char[s.length];
+        for (int i = 0; i < s.length; i++) {
+            reversed[i] = s[s.length - i - 1];
+        }
+        return reversed;
+    }
+
+    public static char[] concat(char[] a, char[] b) {
+        char[] c = new char[a.length + b.length];
+        for (int i = 0; i < a.length; i++) {
+            c[i] = a[i];
+        }
+        for (int i = 0; i < b.length; i++) {
+            c[a.length + i] = b[i];
+        }
+        return c;
+    }
+
+    public static char[] subarray(char[] s, int start, int end) {
+        char[] subarray = new char[end - start];
+        for (int i = start; i < end; i++) {
+            subarray[i - start] = s[i];
+        }
+        return subarray;
+    }
+}
+
+[/JAVA]
+======

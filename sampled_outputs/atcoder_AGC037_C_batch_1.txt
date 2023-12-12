@@ -1,0 +1,861 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<Integer>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    for (int i = 0; i < N; i++) {
+      B[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (!C.isEmpty()) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = B[(i - 1 + N) % N] + B[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    String[] B = scanner.nextLine().split(" ");
+    List<Integer> C = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      pq.add(C.get(i));
+    }
+    int[] B_array = new int[N];
+    for (int i = 0; i < N; i++) {
+      B_array[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int v = pq.poll();
+      if (v == 0) {
+        break;
+      }
+      int i = pq.poll();
+      int nv = B_array[(i - 1 + N) % N] + B_array[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B_array[i] -= n * nv;
+      pq.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        String[] B = new String[N];
+        PriorityQueue<Integer> C = new PriorityQueue<>();
+
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+            B[i] = sc.next();
+            C.add(A[i] - Integer.parseInt(B[i]));
+        }
+
+        int ans = 0;
+        while (!C.isEmpty()) {
+            int v = C.poll();
+            if (v == 0) {
+                break;
+            }
+            int nv = Integer.parseInt(B[(i - 1 + N) % N]) + Integer.parseInt(B[(i + 1) % N]);
+            int n = -v / nv;
+            if (n <= 0) {
+                System.out.println(-1);
+                return;
+            }
+            v += n * nv;
+            B[i] = (v - nv) + "";
+            C.add(v);
+            ans += n;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    String[] B = scanner.nextLine().split(" ");
+    List<Integer> C = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      heapq.heappush(C, (A[i] - Integer.parseInt(B[i]), i));
+    }
+    B = scanner.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = heapq.heappop(C).intValue();
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[i - 1]) + Integer.parseInt(B[(i + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        System.exit(0);
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      heapq.heappush(C, (v, i));
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    String[] B = scanner.nextLine().split(" ");
+    PriorityQueue<int[]> C = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+    for (int i = 0; i < N; i++) {
+      C.add(new int[] {A[i] - Integer.parseInt(B[i]), i});
+    }
+    for (int i = 0; i < N; i++) {
+      B[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int[] v = C.poll();
+      if (v[0] == 0) {
+        break;
+      }
+      int nv = B[v[1] - 1] + B[(v[1] + 1) % N];
+      int n = -v[0] / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v[0] += n * nv;
+      B[v[1]] -= n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    int[] BInt = new int[N];
+    for (int i = 0; i < N; i++) {
+      BInt[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = BInt[(i - 1 + N) % N] + BInt[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      BInt[i] -= n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    B = sc.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[v - 1]) + Integer.parseInt(B[(v + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    int[] BInt = new int[N];
+    for (int i = 0; i < N; i++) {
+      BInt[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int i = C.poll();
+      int nv = BInt[i - 1] + BInt[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      BInt[i] -= n * nv;
+      C.add(v);
+      C.add(i);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    List<Integer> C = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      C.add((A[i] - Integer.parseInt(B[i])));
+    }
+    B = sc.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = C.get(0);
+      int i = 0;
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[i - 1]) + Integer.parseInt(B[(i + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      C.set(0, v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    ArrayList<Integer> C = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    Collections.sort(C);
+    PriorityQueue<Integer> queue = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      queue.add(C.get(i));
+    }
+    int[] B_int = new int[N];
+    for (int i = 0; i < N; i++) {
+      B_int[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (!queue.isEmpty()) {
+      int v = queue.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = B_int[(i - 1 + N) % N] + B_int[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B_int[i] -= n * nv;
+      queue.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    for (int i = 0; i < N; i++) {
+      B[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = B[i - 1] + B[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    B = sc.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[v]) + Integer.parseInt(B[(v + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        System.exit(0);
+      }
+      v += n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        String[] B = sc.nextLine().split(" ");
+        PriorityQueue<Integer> C = new PriorityQueue<>();
+        for (int i = 0; i < N; i++) {
+            C.add(A[i] - Integer.parseInt(B[i]));
+        }
+        B = sc.nextLine().split(" ");
+        int ans = 0;
+        while (!C.isEmpty()) {
+            int v = C.poll();
+            if (v == 0) {
+                break;
+            }
+            int nv = Integer.parseInt(B[v - 1]) + Integer.parseInt(B[(v + 1) % N]);
+            int n = -v / nv;
+            if (n <= 0) {
+                System.out.println(-1);
+                return;
+            }
+            v += n * nv;
+            C.add(v);
+            ans += n;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    B = sc.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[(i - 1 + N) % N]) + Integer.parseInt(B[(i + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      C.add(v);
+      B[i] -= n * nv;
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    B = new String[N];
+    for (int i = 0; i < N; i++) {
+      B[i] = Integer.parseInt(B[i]);
+    }
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = B[(i - 1 + N) % N] + B[(i + 1) % N];
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    String[] B = scanner.nextLine().split(" ");
+    ArrayList<Integer> C = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      heapq.heappush(C, A[i] - Integer.parseInt(B[i]));
+    }
+    B = scanner.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = heapq.heappop(C);
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[i - 1]) + Integer.parseInt(B[(i + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      B[i] -= n * nv;
+      heapq.heappush(C, v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A[i] - Integer.parseInt(B[i]));
+    }
+    B = sc.nextLine().split(" ");
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int nv = Integer.parseInt(B[v - 1]) + Integer.parseInt(B[(v + 1) % N]);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        String[] B = new String[N];
+        ArrayList<Integer> C = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+            B[i] = sc.next();
+            C.add(A[i] - Integer.parseInt(B[i]));
+        }
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int i = 0; i < N; i++) {
+            heap.add(C.get(i));
+        }
+        int[] BInt = new int[N];
+        for (int i = 0; i < N; i++) {
+            BInt[i] = Integer.parseInt(B[i]);
+        }
+        int ans = 0;
+        while (true) {
+            int v = heap.poll();
+            if (v == 0) {
+                break;
+            }
+            int nv = BInt[(i - 1 + N) % N] + BInt[(i + 1) % N];
+            int n = -v / nv;
+            if (n <= 0) {
+                System.out.println(-1);
+                return;
+            }
+            v += n * nv;
+            BInt[i] -= n * nv;
+            heap.add(v);
+            ans += n;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    String[] B = sc.nextLine().split(" ");
+    PriorityQueue<Integer> C = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      C.add(A.get(i) - Integer.parseInt(B[i]));
+    }
+    List<Integer> BList = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      BList.add(Integer.parseInt(B[i]));
+    }
+    int ans = 0;
+    while (true) {
+      int v = C.poll();
+      if (v == 0) {
+        break;
+      }
+      int i = C.poll();
+      int nv = BList.get(i - 1) + BList.get((i + 1) % N);
+      int n = -v / nv;
+      if (n <= 0) {
+        System.out.println(-1);
+        return;
+      }
+      v += n * nv;
+      BList.set(i, BList.get(i) - n * nv);
+      C.add(v);
+      ans += n;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        String[] B = sc.nextLine().split(" ");
+        ArrayList<Integer> C = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            C.add(A[i] - Integer.parseInt(B[i]));
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a));
+        for (int i = 0; i < N; i++) {
+            pq.add(C.get(i));
+        }
+        B = sc.nextLine().split(" ");
+        int ans = 0;
+        while (true) {
+            int v = pq.poll();
+            if (v == 0) {
+                break;
+            }
+            int nv = Integer.parseInt(B[v - 1]) + Integer.parseInt(B[(v + 1) % N]);
+            int n = -v / nv;
+            if (n <= 0) {
+                System.out.println(-1);
+                return;
+            }
+            v += n * nv;
+            C.set(v, n);
+            pq.add(v);
+            ans += n;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======

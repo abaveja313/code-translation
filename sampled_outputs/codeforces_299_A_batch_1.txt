@@ -1,0 +1,744 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String[] array = sc.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] array = sc.nextLine().split(" ");
+    int[] intArray = new int[n];
+    for (int i = 0; i < n; i++) {
+      intArray[i] = Integer.parseInt(array[i]);
+    }
+    int smallest = Integer.MAX_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (intArray[i] < smallest) {
+        smallest = intArray[i];
+      }
+    }
+    boolean allDivisible = true;
+    for (int i = 0; i < n; i++) {
+      if (intArray[i] % smallest != 0) {
+        allDivisible = false;
+        break;
+      }
+    }
+    if (allDivisible) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int[] intArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            intArray[i] = Integer.parseInt(array[i]);
+        }
+        int smallest = findSmallest(intArray);
+        int[] sortedArray = sortArray(intArray);
+        boolean isDivisible = true;
+        for (int i = 1; i < n; i++) {
+            if (sortedArray[i] / smallest != (int) (sortedArray[i] / smallest)) {
+                isDivisible = false;
+                break;
+            }
+        }
+        if (isDivisible) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+
+    private static int findSmallest(int[] array) {
+        int smallest = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        return smallest;
+    }
+
+    private static int[] sortArray(int[] array) {
+        int[] sortedArray = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            sortedArray[i] = array[i];
+        }
+        for (int i = 1; i < sortedArray.length; i++) {
+            for (int j = 0; j < sortedArray.length - i; j++) {
+                if (sortedArray[j] > sortedArray[j + 1]) {
+                    int temp = sortedArray[j];
+                    sortedArray[j] = sortedArray[j + 1];
+                    sortedArray[j + 1] = temp;
+                }
+            }
+        }
+        return sortedArray;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int[] intArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            intArray[i] = Integer.parseInt(array[i]);
+        }
+        int smallest = intArray[0];
+        for (int i = 1; i < n; i++) {
+            if (intArray[i] < smallest) {
+                smallest = intArray[i];
+            }
+        }
+        boolean tOrF = true;
+        for (int i = 1; i < n; i++) {
+            if (intArray[i] / smallest != (int) (intArray[i] / smallest)) {
+                tOrF = false;
+                break;
+            }
+        }
+        if (tOrF) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String[] array = scanner.nextLine().split(" ");
+    int a = 0;
+    while (a < n) {
+      array[a] = Integer.parseInt(array[a]);
+      a++;
+    }
+    int smallest = Integer.MAX_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    boolean tOrF = true;
+    for (int i = 1; i < n; i++) {
+      if (array[i] % smallest != 0) {
+        tOrF = false;
+        break;
+      }
+    }
+    if (tOrF) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] array = sc.nextLine().split(" ");
+    int[] intArray = new int[n];
+    for (int i = 0; i < n; i++) {
+      intArray[i] = Integer.parseInt(array[i]);
+    }
+    int smallest = Arrays.stream(intArray).min().getAsInt();
+    Arrays.sort(intArray);
+    boolean tOrF = true;
+    for (int i = 1; i < n; i++) {
+      if (intArray[i] / smallest != (int) (intArray[i] / smallest)) {
+        tOrF = false;
+        break;
+      }
+    }
+    if (tOrF) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] array = sc.nextLine().split(" ");
+    int a = 0;
+    while (a < n) {
+      array[a] = Integer.parseInt(array[a]);
+      a++;
+    }
+    int smallest = Integer.MAX_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    boolean t_or_f = true;
+    for (int i = 1; i < n; i++) {
+      if (array[i] / smallest != (int) (array[i] / smallest)) {
+        t_or_f = false;
+        break;
+      }
+    }
+    if (t_or_f) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int[] intArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            intArray[i] = Integer.parseInt(array[i]);
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (intArray[i] < smallest) {
+                smallest = intArray[i];
+            }
+        }
+        boolean isValid = true;
+        for (int i = 1; i < n; i++) {
+            if (intArray[i] / smallest != intArray[i] / smallest) {
+                isValid = false;
+                break;
+            }
+        }
+        if (isValid) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String[] array = scanner.nextLine().split(" ");
+    for (int i = 0; i < n; i++) {
+      array[i] = Integer.parseInt(array[i]);
+    }
+    int smallest = Integer.MAX_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    boolean t_or_f = true;
+    for (int i = 1; i < n; i++) {
+      if (array[i] / smallest != (int) (array[i] / smallest)) {
+        t_or_f = false;
+        break;
+      }
+    }
+    if (t_or_f) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+
+Explanation:
+
+1. The `Scanner` class is used to read input from the user.
+2. The `nextInt()` method is used to read an integer value from the user.
+3. The `nextLine()` method is used to read a string value from the user.
+4. The `split()` method is used to split the string into an array of strings.
+5. The `parseInt()` method is used to convert a string to an integer.
+6. The `min()` method is used to find the smallest value in the array.
+7. The `sort()` method is used to sort the array in ascending order.
+8. The `for` loop is used to iterate over the array and check if each element is a multiple of the smallest value.
+9. The `if` statement is used to check if the current element is a multiple of the smallest value. If it is not, the `t_or_f` variable is set to `false`.
+10. The `System.out.println()` method is used to print the result. If the `t_or_f` variable is `true`, the smallest value is printed. If it is `false`, `-1` is printed.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String[] array = sc.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean t_or_f = true;
+        for (int i = 0; i < n; i++) {
+            if (array[i] % smallest != 0) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+
+I have converted the Python code to Java code. The code is functionally identical to the Python code and obeys the constraints you specified. The Java code is within a driver class called Solution, with an executable main(String[] args) method. The code contains all necessary imports and is between the [JAVA] and [/JAVA] tags.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        for (int i = 0; i < n; i++) {
+            array[i] = Integer.parseInt(array[i]);
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            smallest = Math.min(smallest, array[i]);
+        }
+        Arrays.sort(array);
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String[] array = sc.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            smallest = Math.min(smallest, array[i]);
+        }
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code to the Python code provided. The code first prompts the user to input an integer `n`, and then prompts the user to input a list of `n` integers separated by spaces. The code then converts the input string to an array of integers, and then finds the smallest integer in the array.
+
+The code then checks if all the integers in the array are divisible by the smallest integer, and if so, it prints the smallest integer. If any of the integers are not divisible by the smallest integer, the code prints `-1`.
+
+Note that in Java, we need to use the `Scanner` class to read input from the user, and we need to use the `Integer.parseInt()` method to convert a string to an integer. Additionally, we need to use the `Math.min()` method to find the smallest integer in the array, and the `(int)` cast to convert a floating-point number to an integer.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            smallest = Math.min(smallest, array[i]);
+        }
+        boolean t_or_f = true;
+        for (int i = 0; i < n; i++) {
+            if (array[i] % smallest != 0) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean t_or_f = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] % smallest != 0) {
+                t_or_f = false;
+                break;
+            }
+        }
+        if (t_or_f) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] array = sc.nextLine().split(" ");
+    for (int i = 0; i < n; i++) {
+      array[i] = Integer.parseInt(array[i]);
+    }
+    int smallest = Integer.MAX_VALUE;
+    for (int i = 0; i < n; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    boolean t_or_f = true;
+    for (int i = 1; i < n; i++) {
+      if (array[i] / smallest != (int) (array[i] / smallest)) {
+        t_or_f = false;
+        break;
+      }
+    }
+    if (t_or_f) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] array = new int[n];
+    for (int i = 0; i < n; i++) {
+      array[i] = scanner.nextInt();
+    }
+    int smallest = array[0];
+    for (int i = 1; i < n; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    boolean t_or_f = true;
+    for (int i = 1; i < n; i++) {
+      if (array[i] / smallest != (int) (array[i] / smallest)) {
+        t_or_f = false;
+        break;
+      }
+    }
+    if (t_or_f) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String[] array = scanner.nextLine().split(" ");
+        int a = 0;
+        while (a < n) {
+            array[a] = Integer.parseInt(array[a]);
+            a++;
+        }
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        boolean tOrF = true;
+        for (int i = 1; i < n; i++) {
+            if (array[i] / smallest != (int) (array[i] / smallest)) {
+                tOrF = false;
+                break;
+            }
+        }
+        if (tOrF) {
+            System.out.println(smallest);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}
+[/JAVA]
+
+Explanation:
+
+1. The `Scanner` class is used to read input from the user.
+2. The `split()` method is used to split the input string into an array of strings.
+3. The `parseInt()` method is used to convert each string in the array to an integer.
+4. The `min()` method is used to find the smallest number in the array.
+5. The `sort()` method is used to sort the array in ascending order.
+6. The `for` loop is used to iterate through the array and check if each element is divisible by the smallest number.
+7. The `if` statement is used to check if the current element is divisible by the smallest number. If it is not, the `tOrF` variable is set to `false`.
+8. The `System.out.println()` method is used to print the smallest number if all elements are divisible by it, or `-1` if any element is not divisible by the smallest number.
+
+Note: The `Integer.MAX_VALUE` constant is used to initialize the `smallest` variable to the maximum possible value of an integer. This is necessary because the `min()` method returns the minimum value in the array, which may be smaller than the initial value of `smallest`.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String[] array = sc.nextLine().split(" ");
+    int[] intArray = new int[n];
+    for (int i = 0; i < n; i++) {
+      intArray[i] = Integer.parseInt(array[i]);
+    }
+    int smallest = findSmallest(intArray);
+    if (allEqual(intArray, smallest)) {
+      System.out.println(smallest);
+    } else {
+      System.out.println(-1);
+    }
+  }
+
+  private static int findSmallest(int[] array) {
+    int smallest = array[0];
+    for (int i = 1; i < array.length; i++) {
+      if (array[i] < smallest) {
+        smallest = array[i];
+      }
+    }
+    return smallest;
+  }
+
+  private static boolean allEqual(int[] array, int smallest) {
+    for (int i = 1; i < array.length; i++) {
+      if (array[i] / smallest != (int) (array[i] / smallest)) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======

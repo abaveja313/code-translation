@@ -1,0 +1,1203 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    // Initialize adjacency matrix and visited matrix
+    boolean[][][] adj = new boolean[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    // Read input and populate adjacency matrix
+    for (int i = 0; i < z; i++) {
+      String[] input = sc.nextLine().split(" ");
+      for (int j = 0; j < n; j++) {
+        char[] c = input[j].toCharArray();
+        for (int l = 0; l < m; l++) {
+          adj[i][j][l] = c[l] == '#';
+        }
+      }
+    }
+
+    // Read starting position and populate visited matrix
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    vis[1][x][y] = true;
+
+    // Perform DFS and count number of visited cells
+    int out = 0;
+    dfs(1, x, y, z, adj, vis);
+    for (int i = 0; i < z; i++) {
+      for (int j = 0; j < n; j++) {
+        for (int l = 0; l < m; l++) {
+          if (vis[i][j][l]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    // Print number of visited cells
+    System.out.println(out);
+  }
+
+  private static void dfs(int l, int x, int y, int z, boolean[][][] adj, boolean[][][] vis) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y]) {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z, adj, vis);
+      dfs(l - 1, x, y, z, adj, vis);
+      dfs(l, x + 1, y, z, adj, vis);
+      dfs
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    String[][][] adj = new String[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String c = sc.nextLine();
+        for (int l = 1; l <= c.length(); l++) {
+          adj[i][j][l] = c.charAt(l - 1);
+        }
+      }
+    }
+
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    dfs(1, x, y, z);
+
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int l = 1; l <= m; l++) {
+          if (vis[i][j][l]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z);
+      dfs(l - 1, x, y, z);
+      dfs(l, x + 1, y, z);
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int z = scanner.nextInt();
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        scanner.nextLine();
+
+        String[][][] adj = new String[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                adj[i][j] = new String[15];
+                vis[i][j] = new boolean[15];
+            }
+        }
+
+        for (int i = 1; i <= z; i++) {
+            scanner.nextLine();
+            for (int j = 1; j <= n; j++) {
+                String c = scanner.nextLine();
+                for (int l = 1; l <= c.length(); l++) {
+                    adj[i][j][l] = c.charAt(l - 1);
+                }
+            }
+        }
+
+        scanner.nextLine();
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+
+        dfs(1, x, y, z);
+
+        int out = 0;
+        for (int i = 1; i <= z; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= m; l++) {
+                    if (vis[i][j][l]) {
+                        out++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(out);
+    }
+
+    private static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y].equals("#")) {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l - 1, x, y, z);
+            dfs(l, x + 1,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = sc.next().charAt(k);
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    dfs(1, x, y, z, adj, vis);
+
+    int out = 0;
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z, char[][][] adj, boolean[][][] vis) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z, adj, vis);
+      dfs(l - 1, x, y, z, adj, vis);
+      dfs(l, x + 1, y, z, adj, vis);
+      dfs(l, x - 1, y, z, adj, vis);
+      dfs(l, x, y + 1, z, adj, vis);
+      dfs(l, x, y - 1, z, adj, vis);
+    }
+  }
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String line = sc.nextLine();
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = line.charAt(k - 1);
+        }
+      }
+    }
+
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    dfs(1, x, y, z, adj, vis);
+
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z, char[][][] adj, boolean[][][] vis) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z, adj, vis);
+      dfs(l - 1, x, y,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        sc.nextLine();
+
+        String[][][] adj = new String[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = "";
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+
+        for (int i = 1; i <= z; i++) {
+            sc.nextLine();
+            for (int j = 1; j <= n; j++) {
+                String c = sc.nextLine();
+                for (int l = 1; l <= c.length(); l++) {
+                    adj[i][j][l] = c.charAt(l - 1);
+                }
+            }
+        }
+
+        sc.nextLine();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        sc.nextLine();
+
+        dfs(1, x, y, z);
+
+        int out = 0;
+        for (int i = 1; i <= z; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= m; l++) {
+                    if (vis[i][j][l]) {
+                        out++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(out);
+    }
+
+    public static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y].equals("#")) {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l - 1, x, y
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        char[][][] adj = new char[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = "";
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+
+        for (int i = 1; i <= z; i++) {
+            String input = sc.nextLine();
+            char[] c = input.toCharArray();
+
+            for (int j = 1; j <= n; j++) {
+                for (int k = 1; k <= m; k++) {
+                    adj[i][j][k] = c[k - 1];
+                }
+            }
+        }
+
+        sc.nextLine();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+
+        dfs(1, x, y, z);
+
+        int out = 0;
+        for (int i = 1; i <= z; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int k = 1; k <= m; k++) {
+                    if (vis[i][j][k]) {
+                        out++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(out);
+    }
+
+    private static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y] == '#') {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l - 1, x, y, z);
+            dfs(l, x
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    // Initialize 2D array for adjacency matrix
+    String[][][] adj = new String[z + 1][n + 1][m + 1];
+
+    // Initialize 2D array for visited matrix
+    boolean[][][] vis = new boolean[z + 1][n + 1][m + 1];
+
+    // Fill adjacency matrix with input data
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        String[] row = sc.nextLine().split(" ");
+        for (int l = 1; l <= m; l++) {
+          adj[i][j][l] = row[l - 1];
+        }
+      }
+    }
+
+    // Fill visited matrix with false values
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int l = 1; l <= m; l++) {
+          vis[i][j][l] = false;
+        }
+      }
+    }
+
+    // Read starting position
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    // Call depth-first search function
+    dfs(1, x, y, z);
+
+    // Count number of visited cells
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int l = 1; l <= m; l++) {
+          if (vis[i][j][l]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    // Print result
+    System.out.println(out);
+  }
+
+  // Depth-first search function
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = " ";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String line = sc.nextLine();
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = line.charAt(k - 1);
+        }
+      }
+    }
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    int z = sc.nextInt();
+    dfs(1, x, y, z);
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z);
+      dfs(l - 1, x, y, z);
+      dfs(l, x + 1, y,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    // Adjacency matrix
+    String[][][] adj = new String[15][15][15];
+
+    // Visited matrix
+    boolean[][][] vis = new boolean[15][15][15];
+
+    // Initialize adjacency matrix and visited matrix
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    // Read input
+    for (int i = 1; i <= z; i++) {
+      String line = sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        char c = line.charAt(j - 1);
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = c;
+        }
+      }
+    }
+
+    // Get starting position
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    // Depth-first search
+    dfs(1, x, y, z);
+
+    // Count visited cells
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    // Print result
+    System.out.println(out);
+  }
+
+  // Depth-first search
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+      }
+      vis[l][
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String c = sc.nextLine();
+        for (int l = 1; l <= c.length(); l++) {
+          adj[i][j][l] = c.charAt(l - 1);
+        }
+      }
+    }
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    int z = sc.nextInt();
+    dfs(1, x, y, z);
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int l = 1; l <= m; l++) {
+          if (vis[i][j][l]) {
+            out++;
+          }
+        }
+      }
+    }
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z);
+      dfs(l - 1, x, y, z);
+      dfs(l, x + 1, y
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    // Initialize adjacency matrix and visited matrix
+    boolean[][][] vis = new boolean[15][15][15];
+    String[][][] adj = new String[15][15][15];
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    // Read input
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String[] c = sc.nextLine().split("");
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = c[k - 1];
+        }
+      }
+    }
+
+    // Get starting coordinates
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    // Perform DFS
+    dfs(1, x, y, z);
+
+    // Count visited cells
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    // Print result
+    System.out.println(out);
+  }
+
+  // DFS function
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        sc.nextLine();
+
+        String[][][] adj = new String[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = "";
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+
+        for (int i = 1; i <= z; i++) {
+            sc.nextLine();
+            for (int j = 1; j <= n; j++) {
+                String c = sc.nextLine();
+                for (int l = 1; l <= c.length(); l++) {
+                    adj[i][j][l] = c.charAt(l - 1);
+                }
+            }
+        }
+
+        sc.nextLine();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int z = sc.nextInt();
+
+        dfs(1, x, y, z);
+
+        int out = 0;
+        for (int i = 1; i <= z; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= m; l++) {
+                    if (vis[i][j][l]) {
+                        out++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(out);
+    }
+
+    public static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y].equals("#")) {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l - 1
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    sc.nextLine();
+
+    // Create adjacency matrix
+    String[][][] adj = new String[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    // Read input
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String[] c = sc.nextLine().split("");
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = c[k - 1];
+        }
+      }
+    }
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    sc.nextLine();
+
+    // Perform DFS
+    dfs(1, x, y, z, adj, vis);
+
+    // Count visited cells
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    // Print result
+    System.out.println(out);
+  }
+
+  // DFS function
+  public static void dfs(int l, int x, int y, int z, String[][][] adj, boolean[][][] vis) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String line = sc.nextLine();
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = line.charAt(k - 1);
+        }
+      }
+    }
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    int z = sc.nextInt();
+    dfs(1, x, y, z);
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z);
+      dfs(l - 1, x, y, z);
+      dfs(l, x + 1, y, z
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+
+    char[][][] adj = new char[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = " ";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String line = sc.nextLine();
+        for (int k = 1; k <= m; k++) {
+          adj[i][j][k] = line.charAt(k - 1);
+        }
+      }
+    }
+
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    int out = 0;
+    dfs(1, x, y, z, adj, vis);
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int k = 1; k <= m; k++) {
+          if (vis[i][j][k]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z, char[][][] adj, boolean[][][] vis) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y] == '#') {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z, adj, vis);
+      dfs(l - 1, x, y,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        int[][][] adj = new int[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = sc.nextInt();
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+
+        dfs(1, x, y, z, adj, vis);
+
+        int out = 0;
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    if (vis[i][j][k]) {
+                        out++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(out);
+    }
+
+    public static void dfs(int l, int x, int y, int z, int[][][] adj, boolean[][][] vis) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y] == '#') {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z, adj, vis);
+            dfs(l - 1, x, y, z, adj, vis);
+            dfs(l, x + 1, y, z, adj, vis);
+            dfs(l, x - 1, y, z, adj, vis);
+            dfs(l, x, y + 1, z, adj, vis);
+            dfs(l, x, y - 1, z, adj, vis);
+        }
+   
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        String[][][] adj = new String[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                adj[i][j] = new String[15];
+                vis[i][j] = new boolean[15];
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = "";
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+        for (int i = 1; i <= z; i++) {
+            String[] c = sc.nextLine().split("");
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= m; l++) {
+                    adj[i][j][l] = c[l - 1];
+                }
+            }
+        }
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int z = sc.nextInt();
+        dfs(1, x, y, z);
+        int out = 0;
+        for (int i = 1; i <= z; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= m; l++) {
+                    if (vis[i][j][l]) {
+                        out++;
+                    }
+                }
+            }
+        }
+        System.out.println(out);
+    }
+
+    public static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y].equals("#")) {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l -
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int z = sc.nextInt();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    String[][][] adj = new String[15][15][15];
+    boolean[][][] vis = new boolean[15][15][15];
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        for (int k = 0; k < 15; k++) {
+          adj[i][j][k] = "";
+          vis[i][j][k] = false;
+        }
+      }
+    }
+
+    for (int i = 1; i <= z; i++) {
+      sc.nextLine();
+      for (int j = 1; j <= n; j++) {
+        String c = sc.nextLine();
+        for (int l = 1; l <= c.length(); l++) {
+          adj[i][j][l] = c.charAt(l - 1);
+        }
+      }
+    }
+
+    sc.nextLine();
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+
+    dfs(1, x, y, z);
+
+    int out = 0;
+    for (int i = 1; i <= z; i++) {
+      for (int j = 1; j <= n; j++) {
+        for (int l = 1; l <= m; l++) {
+          if (vis[i][j][l]) {
+            out++;
+          }
+        }
+      }
+    }
+
+    System.out.println(out);
+  }
+
+  public static void dfs(int l, int x, int y, int z) {
+    if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+      if (adj[l][x][y].equals("#")) {
+        return;
+      }
+      vis[l][x][y] = true;
+      dfs(l + 1, x, y, z);
+      dfs(l - 1, x, y, z);
+      dfs(l, x + 1, y, z);
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int z = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][][] adj = new int[15][15][15];
+        boolean[][][] vis = new boolean[15][15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    adj[i][j][k] = sc.nextInt();
+                    vis[i][j][k] = false;
+                }
+            }
+        }
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int z = sc.nextInt();
+        dfs(1, x, y, z);
+        int out = 0;
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                for (int k = 0; k < 15; k++) {
+                    if (vis[i][j][k]) {
+                        out++;
+                    }
+                }
+            }
+        }
+        System.out.println(out);
+    }
+
+    public static void dfs(int l, int x, int y, int z) {
+        if (x > 0 && y > 0 && l > 0 && l <= z && x <= n && y <= m && !vis[l][x][y]) {
+            if (adj[l][x][y] == '#') {
+                return;
+            }
+            vis[l][x][y] = true;
+            dfs(l + 1, x, y, z);
+            dfs(l - 1, x, y, z);
+            dfs(l, x + 1, y, z);
+            dfs(l, x - 1, y, z);
+            dfs(l, x, y + 1, z);
+            dfs(l, x, y - 1, z);
+        }
+    }
+}
+
+[/JAVA]
+======

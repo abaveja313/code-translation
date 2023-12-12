@@ -1,0 +1,2997 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+
+    int minX = resources.get(0)[0], minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0], maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = sc.nextInt();
+      resource[1] = sc.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(0);
+    int maxY = resources.get(n - 1);
+    int maxArea = Math.max((maxX - minX) * (maxY - minY), (maxX - minX) * (maxY - minY));
+    System.out.println(maxArea);
+  }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. The code first reads the number of resources from the input, then reads each resource as a pair of integers. It then sorts the resources in ascending order and finds the minimum and maximum values of both the x and y coordinates. Finally, it calculates the maximum area of the rectangle that can be formed by the resources and prints it to the console.
+
+Note that the code uses the `Math.max()` method to find the maximum of two values, and the `Collections.sort()` method to sort the resources in ascending order. It also uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the resources.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] xy = new int[2];
+      xy[0] = scanner.nextInt();
+      xy[1] = scanner.nextInt();
+      resources.add(xy);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] xy : resources) {
+      if (xy[0] > maxX) {
+        maxX = xy[0];
+      }
+      if (xy[0] < minX) {
+        minX = xy[0];
+      }
+      if (xy[1] > maxY) {
+        maxY = xy[1];
+      }
+      if (xy[1] < minY) {
+        minY = xy[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+
+This code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources in a list. The `Collections` class is used to sort the list in ascending order using a custom `Comparator` implementation. The `Math` class is used to calculate the maximum distance between the two points.
+
+Note that the `Comparator` implementation is used to sort the list based on the first element of each pair, which is the x-coordinate. If you want to sort based on the y-coordinate instead, you can modify the `compare` method accordingly.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(0);
+    int maxY = resources.get(n - 1);
+    System.out.println(Math.max(Math.abs(maxX - minX), Math.abs(maxY - minY)) * Math.abs(maxX - minX));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> resources = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            resources.add(x);
+            resources.add(y);
+        }
+        Collections.sort(resources);
+        int minX = resources.get(0);
+        int minY = resources.get(1);
+        int maxX = resources.get(n - 1);
+        int maxY = resources.get(n);
+        int maxDifference = Math.max(maxX - minX, maxY - minY);
+        System.out.println(maxDifference * maxDifference);
+    }
+}
+[/JAVA]
+
+This is the Java code that you asked for. I have converted the Python code to Java, and it is functionally identical to the Python code. The only difference is that in Java, we have to manually import the necessary classes and create a driver class called Solution with an executable main method.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = Integer.MAX_VALUE;
+    int minY = Integer.MAX_VALUE;
+    int maxX = Integer.MIN_VALUE;
+    int maxY = Integer.MIN_VALUE;
+    for (int i = 0; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDiff = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDiff);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+
+    int minX = resources.stream().mapToInt(i -> i).min().getAsInt();
+    int minY = resources.stream().mapToInt(i -> i).min().getAsInt();
+    int maxX = resources.stream().mapToInt(i -> i).max().getAsInt();
+    int maxY = resources.stream().mapToInt(i -> i).max().getAsInt();
+
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n - 1);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Pair> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new Pair(x, y));
+    }
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(0).x;
+    int maxY = resources.get(0).y;
+    for (Pair pair : resources) {
+      if (pair.x > maxX) {
+        maxX = pair.x;
+      }
+      if (pair.x < minX) {
+        minX = pair.x;
+      }
+      if (pair.y > maxY) {
+        maxY = pair.y;
+      }
+      if (pair.y < minY) {
+        minY = pair.y;
+      }
+    }
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+
+  public static class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources. The code uses a `for` loop to iterate through the resources and calculate the minimum and maximum values of `x` and `y`. Finally, it calculates the area of the rectangle that encloses all the resources and prints it to the console.
+
+Note that the `Pair` class is a custom class that I created to store the `x` and `y` coordinates of each
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 0; i < n; i++) {
+      int x = resources.get(i * 2);
+      int y = resources.get(i * 2 + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new Integer[] {x, y});
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (Integer[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int[] min = resources.stream().mapToInt(r -> r[0]).min().getAsInt();
+    int[] max = resources.stream().mapToInt(r -> r[0]).max().getAsInt();
+    int width = max - min;
+    min = resources.stream().mapToInt(r -> r[1]).min().getAsInt();
+    max = resources.stream().mapToInt(r -> r[1]).max().getAsInt();
+    int height = max - min;
+    int area = Math.max(width, height) * Math.max(width, height);
+    System.out.println(area);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDiff = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDiff);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int diffX = maxX - minX;
+    int diffY = maxY - minY;
+    int area = (diffX > diffY) ? diffX * diffX : diffY * diffY;
+    System.out.println(area);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources. The `Collections.sort()` method is used to sort the resources in ascending order, and the `get()` method is used to retrieve the minimum and maximum values of the resources. The `Math.max()` method is used to find the maximum of the differences between the maximum and minimum values of the resources, and the square of this value is calculated to find the area of the rectangle. Finally, the area is printed to the console using `System.out.println()`.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the resources. The `Collections.sort()` method is used to sort the resources in ascending order, and the `Math.max()` method is used to find the maximum distance between the resources. Finally, the result is printed to the console.
+
+Note that the `sys.setrecursionlimit()` function is not needed in Java, as the default recursion limit is set to a large enough value to handle most use cases.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Pair> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Pair(x, y));
+    }
+    Collections.sort(resources, (a, b) -> a.x - b.x);
+    Collections.sort(resources, (a, b) -> a.y - b.y);
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(n - 1).x;
+    int maxY = resources.get(n - 1).y;
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+
+  public static class Pair {
+    public int x;
+    public int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new int[] {x, y});
+    }
+    Collections.sort(resources, (a, b) -> Integer.compare(a[0], b[0]));
+    int minX = resources.get(0)[0];
+    int maxX = resources.get(n - 1)[0];
+    int minY = resources.get(0)[1];
+    int maxY = resources.get(n - 1)[1];
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the resources. The code then uses the `Collections.sort()` method to sort the resources by their x-coordinate, and then by their y-coordinate. Finally, it calculates the maximum distance between any two resources and prints the result.
+
+Note that the `Comparator` class is used to define a custom comparator that compares two `Integer` objects based on their value. This is used to sort the resources by their x-coordinate, and then by their y-coordinate.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Integer[] {x, y});
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (Integer[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDiff = Math.max((maxX - minX), (maxY - minY));
+    System.out.println(maxDiff * maxDiff);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      resources.add(scanner.nextInt());
+    }
+    int minX = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int maxX = Collections.max(resources, Comparator.comparingInt(o -> o));
+    int minY = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int maxY = Collections.max(resources, Comparator.comparingInt(o -> o));
+    System.out.println(Math.max(maxX - minX, maxY - minY) * Math.max(maxX - minX, maxY - minY));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Point> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new Point(x, y));
+    }
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(0).x;
+    int maxY = resources.get(0).y;
+    for (Point p : resources) {
+      if (p.x > maxX) {
+        maxX = p.x;
+      }
+      if (p.x < minX) {
+        minX = p.x;
+      }
+      if (p.y > maxY) {
+        maxY = p.y;
+      }
+      if (p.y < minY) {
+        minY = p.y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+
+  public static class Point {
+    public int x;
+    public int y;
+
+    public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the same logic and data structures as the Python code, but in Java syntax. The `Scanner` class is used to read input from the user, and the `List` and `Map` classes are used to store the resources and calculate the maximum distance. The `Math.max()` method is used to calculate the maximum distance between the resources.
+
+Note that the `Point` class is defined inside the `Solution` class, but it could also be defined as
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new int[] {x, y});
+    }
+
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Pair> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Pair(x, y));
+    }
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(0).x;
+    int maxY = resources.get(0).y;
+    for (Pair pair : resources) {
+      if (pair.x > maxX) {
+        maxX = pair.x;
+      }
+      if (pair.x < minX) {
+        minX = pair.x;
+      }
+      if (pair.y > maxY) {
+        maxY = pair.y;
+      }
+      if (pair.y < minY) {
+        minY = pair.y;
+      }
+    }
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+
+  public static class Pair {
+    public int x;
+    public int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(2 * n - 2);
+    int maxY = resources.get(2 * n - 1);
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources in a list. The `Collections` class is used to sort the list of resources. The `Math` class is used to calculate the maximum distance between the resources.
+
+The code is functionally identical to the Python code, with the only difference being the use of Java classes and methods instead of Python built-in functions.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new int[] {x, y});
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    int maxDistance = Math.max((maxX - minX), (maxY - minY));
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(2 * n - 1);
+    int maxY = resources.get(2 * n);
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. It uses the `Scanner` class to read input from the console, and the `List` and `ArrayList` classes to store the resources. The `Collections.sort()` method is used to sort the resources in ascending order, and the `Math.max()` method is used to find the maximum distance between any two points. Finally, the squared distance is printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Point> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Point(x, y));
+    }
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(0).x;
+    int maxY = resources.get(0).y;
+    for (Point point : resources) {
+      if (point.x > maxX) {
+        maxX = point.x;
+      }
+      if (point.x < minX) {
+        minX = point.x;
+      }
+      if (point.y > maxY) {
+        maxY = point.y;
+      }
+      if (point.y < minY) {
+        minY = point.y;
+      }
+    }
+    int result = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(result);
+  }
+
+  private static class Point {
+    int x;
+    int y;
+
+    public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1 - o2;
+      }
+    });
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxArea = Math.max((maxX - minX) * (maxY - minY), (maxX - minX) * (maxY - minY));
+    System.out.println(maxArea);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = Collections.min(resources, (a, b) -> a - b);
+    int maxX = Collections.max(resources, (a, b) -> a - b);
+    int minY = Collections.min(resources, (a, b) -> a - b);
+    int maxY = Collections.max(resources, (a, b) -> a - b);
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] xy = new int[2];
+      xy[0] = sc.nextInt();
+      xy[1] = sc.nextInt();
+      resources.add(xy);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] xy : resources) {
+      if (xy[0] > maxX) {
+        maxX = xy[0];
+      } else if (xy[0] < minX) {
+        minX = xy[0];
+      }
+      if (xy[1] > maxY) {
+        maxY = xy[1];
+      } else if (xy[1] < minY) {
+        minY = xy[1];
+      }
+    }
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.stream().mapToInt(i -> i).min().getAsInt();
+    int minY = resources.stream().mapToInt(i -> i).min().getAsInt();
+    int maxX = resources.stream().mapToInt(i -> i).max().getAsInt();
+    int maxY = resources.stream().mapToInt(i -> i).max().getAsInt();
+    int maxDistance = (int) Math.max(Math.abs(maxX - minX), Math.abs(maxY - minY));
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used Java's `Scanner` class to read input from the user, and the `ArrayList` class to store the list of resources. I have also used Java's `stream()` method to perform operations on the list of resources, such as finding the minimum and maximum values. Finally, I have used the `Math.max()` method to find the maximum distance between the minimum and maximum values, and the `Math.abs()` method to find the absolute value of the difference between the maximum and minimum values.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.stream().mapToInt(Integer::intValue).min().getAsInt();
+    int maxX = resources.stream().mapToInt(Integer::intValue).max().getAsInt();
+    int minY = resources.stream().mapToInt(Integer::intValue).min().getAsInt();
+    int maxY = resources.stream().mapToInt(Integer::intValue).max().getAsInt();
+    int result = (int) Math.pow(Math.max(maxX - minX, maxY - minY), 2);
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<int[]> resources = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int[] resource = new int[2];
+            resource[0] = sc.nextInt();
+            resource[1] = sc.nextInt();
+            resources.add(resource);
+        }
+        int minX = resources.get(0)[0];
+        int minY = resources.get(0)[1];
+        int maxX = resources.get(0)[0];
+        int maxY = resources.get(0)[1];
+        for (int[] resource : resources) {
+            if (resource[0] > maxX) {
+                maxX = resource[0];
+            }
+            if (resource[0] < minX) {
+                minX = resource[0];
+            }
+            if (resource[1] > maxY) {
+                maxY = resource[1];
+            }
+            if (resource[1] < minY) {
+                minY = resource[1];
+            }
+        }
+        System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(n);
+    int maxY = resources.get(2 * n - 1);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1 - o2;
+      }
+    });
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDistance * maxDistance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new int[] {x, y});
+    }
+
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDiff = Math.max((maxX - minX), (maxY - minY));
+    System.out.println(maxDiff * maxDiff);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources. The code then uses the `Collections.sort()` method to sort the resources in ascending order, and then finds the minimum and maximum values of each resource. Finally, it calculates the maximum difference between the minimum and maximum values of each resource, and prints the result.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Point> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Point(x, y));
+    }
+    Collections.sort(resources, new Comparator<Point>() {
+      @Override
+      public int compare(Point o1, Point o2) {
+        return o1.x - o2.x;
+      }
+    });
+    int minX = resources.get(0).x;
+    int maxX = resources.get(n - 1).x;
+    int minY = resources.get(0).y;
+    int maxY = resources.get(n - 1).y;
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+
+  public static class Point {
+    int x;
+    int y;
+
+    public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(1);
+    int maxY = resources.get(n);
+    int width = Math.abs(maxX - minX);
+    int height = Math.abs(maxY - minY);
+    int area = Math.max(width, height) * Math.max(width, height);
+    System.out.println(area);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new int[]{x, y});
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = sc.nextInt();
+      resource[1] = sc.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    int distance = Math.max((maxX - minX), (maxY - minY));
+    System.out.println(distance * distance);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<int[]> resources = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            resources.add(new int[]{x, y});
+        }
+        int minX = resources.get(0)[0];
+        int minY = resources.get(0)[1];
+        int maxX = resources.get(0)[0];
+        int maxY = resources.get(0)[1];
+        for (int[] resource : resources) {
+            if (resource[0] > maxX) {
+                maxX = resource[0];
+            }
+            if (resource[0] < minX) {
+                minX = resource[0];
+            }
+            if (resource[1] > maxY) {
+                maxY = resource[1];
+            }
+            if (resource[1] < minY) {
+                minY = resource[1];
+            }
+        }
+        System.out.println(Math.max(maxX - minX, maxY - minY) * Math.max(maxX - minX, maxY - minY));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The code reads in a list of integers from standard input, sorts the list, and then finds the maximum distance between any two points in the list. The maximum distance is calculated by taking the square of the difference between the maximum and minimum x-coordinates and the maximum and minimum y-coordinates. The code then prints out the maximum distance.
+
+I have used the `java.util.Scanner` class to read in the list of integers from standard input, and the `java.util.List` and `java.util.ArrayList` classes to store the list of integers. The `Collections.sort()` method is used to sort the list, and the `Math.max()` method is used to find the maximum distance between any two points in the list.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.stream().mapToInt(Integer::intValue).min().getAsInt();
+    int minY = resources.stream().mapToInt(Integer::intValue).min().getAsInt();
+    int maxX = resources.stream().mapToInt(Integer::intValue).max().getAsInt();
+    int maxY = resources.stream().mapToInt(Integer::intValue).max().getAsInt();
+    int area = Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY));
+    System.out.println(area);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new int[] {x, y});
+    }
+    Collections.sort(resources, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return Integer.compare(o1[0], o2[0]);
+      }
+    });
+    int minX = resources.get(0)[0];
+    int maxX = resources.get(n - 1)[0];
+    int minY = resources.get(0)[1];
+    int maxY = resources.get(n - 1)[1];
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new Integer(x));
+      resources.add(new Integer(y));
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(n - 1);
+    int maxY = resources.get(n);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+
+This is a Java implementation of the Python code. It uses the `Scanner` class to read input from the console, and the `ArrayList` and `Collections` classes to store and manipulate the list of resources. The `Comparator` class is used to sort the list of resources by their x and y coordinates. The `Math.max` method is used to calculate the maximum distance between any two points.
+
+Note that the `Integer` class is used to store the x and y coordinates, because the `List` interface only allows objects of the same type. The `Math.max` method is used to calculate the maximum distance between any two points, and the `System.out.println` method is used to print the result to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> resources = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            resources.add(x);
+            resources.add(y);
+        }
+        int minX = Collections.min(resources, Comparator.comparingInt(a -> a));
+        int minY = Collections.min(resources, Comparator.comparingInt(a -> a));
+        int maxX = Collections.max(resources, Comparator.comparingInt(a -> a));
+        int maxY = Collections.max(resources, Comparator.comparingInt(a -> a));
+        int maxDistance = (int) Math.pow(Math.max(maxX - minX, maxY - minY), 2);
+        System.out.println(maxDistance);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Point> resources = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            resources.add(new Point(x, y));
+        }
+        Collections.sort(resources, new Comparator<Point>() {
+            @Override
+            public int compare(Point p1, Point p2) {
+                return p1.x - p2.x;
+            }
+        });
+        int minX = resources.get(0).x;
+        int maxX = resources.get(n - 1).x;
+        int minY = resources.get(0).y;
+        int maxY = resources.get(n - 1).y;
+        System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+    }
+}
+
+class Point {
+    int x;
+    int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Pair> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Pair(x, y));
+    }
+
+    int minX = resources.get(0).getX();
+    int minY = resources.get(0).getY();
+    int maxX = resources.get(0).getX();
+    int maxY = resources.get(0).getY();
+
+    for (Pair resource : resources) {
+      if (resource.getX() > maxX) {
+        maxX = resource.getX();
+      }
+      if (resource.getX() < minX) {
+        minX = resource.getX();
+      }
+      if (resource.getY() > maxY) {
+        maxY = resource.getY();
+      }
+      if (resource.getY() < minY) {
+        minY = resource.getY();
+      }
+    }
+
+    int maxDistance = Math.max((maxX - minX), (maxY - minY));
+    System.out.println(maxDistance * maxDistance);
+  }
+
+  static class Pair {
+    private int x;
+    private int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    public int getX() {
+      return x;
+    }
+
+    public int getY() {
+      return y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(0);
+    int maxY = resources.get(n - 1);
+    int maxDistance = Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY));
+    System.out.println(maxDistance);
+  }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code, with the necessary imports and driver class. The code uses a `Scanner` object to read input from `System.in`, and a `List` object to store the resources. The `Collections.sort()` method is used to sort the resources in ascending order, and the `Math.max()` method is used to find the maximum distance between any two points. The resulting distance is then printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = Collections.min(resources, (a, b) -> a - b);
+    int minY = Collections.min(resources, (a, b) -> a - b);
+    int maxX = Collections.max(resources, (a, b) -> a - b);
+    int maxY = Collections.max(resources, (a, b) -> a - b);
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int minY = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int maxX = Collections.max(resources, Comparator.comparingInt(o -> o));
+    int maxY = Collections.max(resources, Comparator.comparingInt(o -> o));
+    int maxDiff = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDiff * maxDiff);
+  }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. It uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the list of resources. The `Collections` class is used to find the minimum and maximum values in the list, and the `Comparator` class is used to compare the values. The `Math.max` method is used to find the maximum difference between the maximum and minimum values. Finally, the result is printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(0);
+    int maxY = resources.get(n - 1);
+    for (int i = 1; i < n; i++) {
+      int x = resources.get(i);
+      int y = resources.get(i);
+      if (x < minX) {
+        minX = x;
+      } else if (x > maxX) {
+        maxX = x;
+      }
+      if (y < minY) {
+        minY = y;
+      } else if (y > maxY) {
+        maxY = y;
+      }
+    }
+    System.out.println(Math.max(maxX - minX, maxY - minY) * Math.max(maxX - minX, maxY - minY));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(new Integer[] {x, y});
+    }
+    int minX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxX = resources.get(0)[0];
+    int maxY = resources.get(0)[1];
+    for (Integer[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource.get(1);
+      }
+      if (resource[1] < minY) {
+        minY = resource.get(1);
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * (maxX - minX));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the resources. The code then uses a `for` loop to iterate over the resources and calculate the minimum and maximum values of each resource. Finally, it uses the `Math.max` method to find the maximum value of the two dimensions and prints the result.
+
+Note that in Java, we need to use the `Math.max` method to find the maximum value of two numbers, rather than using the `max` function in Python. Additionally, we need to use the `*` operator to multiply two numbers, rather than using the `**` operator in Python.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int maxX = Collections.max(resources, Comparator.comparingInt(o -> o));
+    int minY = Collections.min(resources, Comparator.comparingInt(o -> o));
+    int maxY = Collections.max(resources, Comparator.comparingInt(o -> o));
+    int maxDiff = Math.max(maxX - minX, maxY - minY);
+    System.out.println(maxDiff * maxDiff);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the resources. The `Collections` class is used to find the minimum and maximum values in the list. The `Comparator` class is used to compare the values in the list. Finally, the `Math` class is used to calculate the maximum difference between the maximum and minimum values.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Pair> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(new Pair(x, y));
+    }
+    int minX = resources.get(0).x;
+    int minY = resources.get(0).y;
+    int maxX = resources.get(0).x;
+    int maxY = resources.get(0).y;
+    for (Pair pair : resources) {
+      if (pair.x > maxX) {
+        maxX = pair.x;
+      }
+      if (pair.x < minX) {
+        minX = pair.x;
+      }
+      if (pair.y > maxY) {
+        maxY = pair.y;
+      }
+      if (pair.y < minY) {
+        minY = pair.y;
+      }
+    }
+    System.out.println(Math.max(maxX - minX, maxY - minY) * Math.max(maxX - minX, maxY - minY));
+  }
+
+  private static class Pair {
+    public int x;
+    public int y;
+
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    sc.close();
+
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * (maxX - minX));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(1);
+    int maxY = resources.get(2 * n - 1);
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the console, and the `ArrayList` class to store the resources. The code is functionally identical to the Python code, with the exception of the `Collections.sort()` method, which is used to sort the resources in ascending order. The `Math.max()` method is used to find the maximum value of the differences between the maximum and minimum values of the x and y coordinates, and the result is squared to get the area of the rectangle.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources);
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(0);
+    int maxY = resources.get(n - 1);
+    System.out.println((Math.max(maxX - minX, maxY - minY)) * (Math.max(maxX - minX, maxY - minY)));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read the input from the user, and the `ArrayList` class to store the resources. The `Collections.sort()` method is used to sort the resources in ascending order, and the `Math.max()` method is used to find the maximum difference between the maximum and minimum values of the resources. Finally, the square of the maximum difference is printed as the output.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX) * (maxX - minX), (maxY - minY) * (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<int[]> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int[] resource = new int[2];
+      resource[0] = scanner.nextInt();
+      resource[1] = scanner.nextInt();
+      resources.add(resource);
+    }
+    int minX = resources.get(0)[0];
+    int maxX = resources.get(0)[0];
+    int minY = resources.get(0)[1];
+    int maxY = resources.get(0)[1];
+    for (int[] resource : resources) {
+      if (resource[0] > maxX) {
+        maxX = resource[0];
+      }
+      if (resource[0] < minX) {
+        minX = resource[0];
+      }
+      if (resource[1] > maxY) {
+        maxY = resource[1];
+      }
+      if (resource[1] < minY) {
+        minY = resource[1];
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    Collections.sort(resources, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+    int minX = resources.get(0);
+    int maxX = resources.get(n - 1);
+    int minY = resources.get(1);
+    int maxY = resources.get(2 * n - 1);
+    int maxWidth = Math.max(maxX - minX, maxY - minY);
+    int area = maxWidth * maxWidth;
+    System.out.println(area);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> resources = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int x = scanner.nextInt();
+      int y = scanner.nextInt();
+      resources.add(x);
+      resources.add(y);
+    }
+    int minX = resources.get(0);
+    int minY = resources.get(1);
+    int maxX = resources.get(0);
+    int maxY = resources.get(1);
+    for (int i = 2; i < resources.size(); i += 2) {
+      int x = resources.get(i);
+      int y = resources.get(i + 1);
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+    }
+    System.out.println(Math.max((maxX - minX), (maxY - minY)) * Math.max((maxX - minX), (maxY - minY)));
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,623 @@
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int K = scanner.nextInt();
+        int[] d = new int[K];
+        Deque<int[]> q = new LinkedList<>();
+        q.add(new int[] {1, 1});
+        while (!q.isEmpty()) {
+            int[] current = q.removeFirst();
+            int a = current[0];
+            int c = current[1];
+            int a_ = (a * 10) % K;
+            if (a_ != 0 && (d[a_] == 0 || c < d[a_])) {
+                d[a_] = c;
+                q.addFirst(new int[] {a_, c});
+            }
+            int b_ = (a + 1) % K;
+            if (b_ != 0 && (d[b_] == 0 || c + 1 < d[b_])) {
+                d[b_] = c + 1;
+                q.add(new int[] {b_, c + 1});
+            }
+        }
+        System.out.println(d[0]);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.removeFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || d.get(a_) > a[1]) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || d.get(b_) > a[1] + 1) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.pollFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || a[1] < d.get(a_)) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || a[1] < d.get(b_)) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int K = sc.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a_c = q.removeFirst();
+      int a = a_c[0], c = a_c[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.pollFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || d.get(a_) > a[1]) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || d.get(b_) > a[1] + 1) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.removeFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || a[1] < d.get(a_)) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || a[1] + 1 < d.get(b_)) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] current = q.removeFirst();
+      int a = current[0], c = current[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c + 1 < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    d.put(1, 1);
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.removeFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || d.get(a_) > a[1]) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || d.get(b_) > a[1] + 1) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a_c = q.removeFirst();
+      int a = a_c[0], c = a_c[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int K = sc.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.pollFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || d.get(a_) > a[1]) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || d.get(b_) > a[1] + 1) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] curr = q.removeFirst();
+      int a = curr[0];
+      int c = curr[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] pair = q.pollFirst();
+      int a = pair[0];
+      int c = pair[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c + 1 < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] current = q.removeFirst();
+      int a = current[0], c = current[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c + 1 < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a = q.removeFirst();
+      int a_ = (a[0] * 10) % K;
+      if (!d.containsKey(a_) || d.get(a_) > a[1]) {
+        d.put(a_, a[1]);
+        q.addFirst(new int[] {a_, a[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (!d.containsKey(b_) || d.get(b_) > a[1] + 1) {
+        d.put(b_, a[1] + 1);
+        q.add(new int[] {b_, a[1] + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    int[][] d = new int[K][2];
+    d[1][0] = 1;
+    d[1][1] = 1;
+
+    while (!q.isEmpty()) {
+      int[] a = q.pop();
+      int a_ = (a[0] * 10) % K;
+      if (d[a_][0] == 0 || a[1] < d[a_][1]) {
+        d[a_][0] = a[0];
+        d[a_][1] = a[1];
+        q.addFirst(new int[] {a_[0], a_[1]});
+      }
+      int b_ = (a[0] + 1) % K;
+      if (d[b_][0] == 0 || a[1] + 1 < d[b_][1]) {
+        d[b_][0] = a[0];
+        d[b_][1] = a[1] + 1;
+        q.add(new int[] {b_[0], b_[1]});
+      }
+    }
+
+    System.out.println(d[0][1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.addLast(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a_c = q.removeFirst();
+      int a = a_c[0];
+      int c = a_c[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.addLast(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.addLast(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] pair = q.removeFirst();
+      int a = pair[0], c = pair[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c + 1 < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.addLast(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] current = q.removeFirst();
+      int a = current[0];
+      int c = current[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c + 1 < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int K = scanner.nextInt();
+    int[] d = new int[K];
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] { 1, 1 });
+    while (!q.isEmpty()) {
+      int[] a = q.pollFirst();
+      int a_ = (a[0] * 10) % K;
+      if (d[a_] == 0 || a[1] < d[a_]) {
+        d[a_] = a[1];
+        q.addFirst(new int[] { a_, a[1] });
+      }
+      int b_ = (a[0] + 1) % K;
+      if (d[b_] == 0 || a[1] + 1 < d[b_]) {
+        d[b_] = a[1] + 1;
+        q.add(new int[] { b_, a[1] + 1 });
+      }
+    }
+    System.out.println(d[0]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    int K = Integer.parseInt(args[0]);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    Deque<int[]> q = new LinkedList<>();
+    q.add(new int[] {1, 1});
+    while (!q.isEmpty()) {
+      int[] a_c = q.removeFirst();
+      int a = a_c[0];
+      int c = a_c[1];
+      int a_ = (a * 10) % K;
+      if (!d.containsKey(a_) || c < d.get(a_)) {
+        d.put(a_, c);
+        q.addFirst(new int[] {a_, c});
+      }
+      int b_ = (a + 1) % K;
+      if (!d.containsKey(b_) || c < d.get(b_)) {
+        d.put(b_, c + 1);
+        q.add(new int[] {b_, c + 1});
+      }
+    }
+    System.out.println(d.get(0));
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,1205 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][C];
+    int[][] c = new int[N][N];
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      List<Integer> temp = new ArrayList<>();
+      for (int j = 0; j < C; j++) {
+        temp.add(sc.nextInt());
+      }
+      lc.add(temp);
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      List<Integer> temp = new ArrayList<>();
+      for (int j = 0; j < C; j++) {
+        temp.add(Collections.frequency(lc.get(i), j));
+      }
+      clc.add(temp);
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int C = sc.nextInt();
+        List<List<Integer>> d = new ArrayList<>();
+        List<List<Integer>> c = new ArrayList<>();
+        List<List<Integer>> lc = new ArrayList<>();
+        for (int i = 0; i < C; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < C; j++) {
+                row.add(sc.nextInt());
+            }
+            d.add(row);
+        }
+        for (int i = 0; i < N; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < N; j++) {
+                row.add(sc.nextInt());
+            }
+            c.add(row);
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                lc.add(c[i][j] % 3);
+            }
+        }
+        Collections.sort(lc, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    int sum = 0;
+                    for (int l = 0; l < C; l++) {
+                        sum += lc.get(l) * d.get(l).get(i);
+                    }
+                    res = Math.min(res, sum);
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        lc.add(new ArrayList<>());
+      }
+      for (int j = 0; j < N; j++) {
+        for (int k = 0; k < N; k++) {
+          int color = sc.nextInt();
+          c[j][k] = color;
+          lc[(j + k) % 3].add(color);
+        }
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      clc.add(new ArrayList<>());
+      for (int j = 0; j < C; j++) {
+        clc.get(i).add(Collections.frequency(lc.get(i), j));
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int C = sc.nextInt();
+        int[][] d = new int[C][N];
+        int[][] c = new int[N][N];
+        ArrayList<Integer>[] lc = new ArrayList[3];
+        for (int i = 0; i < 3; i++) {
+            lc[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                c[i][j] = sc.nextInt();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                lc[(i + j) % 3].add(c[i][j]);
+            }
+        }
+        HashMap<Integer, Integer>[] clc = new HashMap[3];
+        for (int i = 0; i < 3; i++) {
+            clc[i] = new HashMap<>();
+            for (int j = 0; j < C; j++) {
+                clc[i].put(j + 1, Collections.frequency(lc[i], j + 1));
+            }
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    int temp = clc[0].get(i) + clc[1].get(j) + clc[2].get(k);
+                    res = Math.min(res, temp);
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int C = sc.nextInt();
+        List<List<Integer>> d = new ArrayList<>();
+        for (int i = 0; i < C; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < C; j++) {
+                temp.add(sc.nextInt());
+            }
+            d.add(temp);
+        }
+        List<List<Integer>> c = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < N; j++) {
+                temp.add(sc.nextInt());
+            }
+            c.add(temp);
+        }
+        List<List<Integer>> lc = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < N; j++) {
+                temp.add(c.get(i).get(j) + c.get((i + j) % 3).get(j));
+            }
+            lc.add(temp);
+        }
+        List<List<Integer>> clc = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < C; j++) {
+                temp.add(Collections.frequency(lc.get(i), j));
+            }
+            clc.add(temp);
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    int temp = clc.get(0).get(i) * d.get(i).get(0) + clc.get(1).get(j) * d.get(j).get(1) + clc.get(2).get(k) * d.get(k).get(2);
+                    res = Math.min(res, temp);
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    int[][] lc = new int[3][N];
+
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        d[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+
+    HashMap<Integer, Integer>[] clc = new HashMap[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new HashMap<>();
+      for (int j = 0; j < N; j++) {
+        clc[i].put(lc[i][j], clc[i].getOrDefault(lc[i][j], 0) + 1);
+      }
+    }
+
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+
+  private static int iwakan(HashMap<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < C; i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    int[][] lc = new int[3][N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < N; j++) {
+        d[i][j] = sc.nextInt();
+      }
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+    Map<Integer, Integer>[] clc = new HashMap[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new HashMap<>();
+      for (int j = 0; j < N; j++) {
+        clc[i].put(lc[i][j], clc[i].getOrDefault(lc[i][j], 0) + 1);
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(Map<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][N];
+    int[][] c = new int[N][N];
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      lc.add(new ArrayList<>());
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+        lc.get((i + j) % 3).add(c[i][j]);
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      clc.add(new ArrayList<>());
+      for (int j = 0; j < N; j++) {
+        clc.get(i).add(Collections.frequency(lc.get(i), j));
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < C; i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[][] d = new int[C][C];
+    int[][] c = new int[N][N];
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      lc.add(new ArrayList<>());
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = scanner.nextInt();
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      clc.add(new ArrayList<>(Collections.frequency(lc.get(i))));
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        if (i == j) {
+          continue;
+        }
+        for (int k = 0; k < C; k++) {
+          if (i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  public static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[][] d = new int[C][3];
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        d[i][j] = scanner.nextInt();
+      }
+    }
+    int[][] c = new int[N][N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = scanner.nextInt();
+      }
+    }
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      lc.add(new ArrayList<>());
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc.get((i + j) % 3).add(c[i][j]);
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      clc.add(new ArrayList<>());
+      for (int j = 0; j < C; j++) {
+        clc.get(i).add(Collections.frequency(lc.get(i), j));
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    ArrayList<Integer>[] lc = new ArrayList[3];
+    for (int i = 0; i < 3; i++) {
+      lc[i] = new ArrayList<>();
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+    HashMap<Integer, Integer>[] clc = new HashMap[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new HashMap<>();
+      for (int j = 0; j < lc[i].size(); j++) {
+        clc[i].put(lc[i].get(j), j);
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  public static int iwakan(HashMap<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the same data structures and algorithms, but with some slight modifications to make it more Java-like.
+
+The `import` statements at the beginning of the code import the necessary classes from the `java.util` package, such as `Scanner`, `ArrayList`, and `HashMap`.
+
+The `main` method is the entry point of the program, and it takes an array of strings as input. The first two elements of the array are used to initialize the values of `N` and `C`, and the remaining elements are used to initialize the values of the `d`, `c`, and `lc` arrays.
+
+The `iwakan` method is used to calculate the total cost of a particular combination of colors. It takes a `HashMap` of colors and their corresponding indices, and a color
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        d[i][j] = sc.nextInt();
+      }
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc.get((i + j) % 3).add(c[i][j]);
+      }
+    }
+    List<Map<Integer, Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      Map<Integer, Integer> map = new HashMap<>();
+      for (int j = 0; j < C; j++) {
+        map.put(j, Collections.frequency(lc.get(i), j));
+      }
+      clc.add(map);
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(Map<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < C; i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    List<Integer>[] lc = new ArrayList[3];
+    for (int i = 0; i < 3; i++) {
+      lc[i] = new ArrayList<>();
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = scanner.nextInt();
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+    List<Integer>[] clc = new ArrayList[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new ArrayList<>();
+      for (int j = 0; j < C; j++) {
+        clc[i].add(Collections.frequency(lc[i], j + 1));
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    int[][] lc = new int[3][N];
+
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        d[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+
+    Map<Integer, Integer>[] clc = new HashMap[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new HashMap<>();
+      for (int j = 0; j < N; j++) {
+        clc[i].put(lc[i][j], clc[i].getOrDefault(lc[i][j], 0) + 1);
+      }
+    }
+
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+
+  public static int iwakan(Map<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][3];
+    int[][] c = new int[N][N];
+    int[][] lc = new int[3][N];
+
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < 3; j++) {
+        d[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        c[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+
+    List<Integer>[] clc = new ArrayList[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new ArrayList<>();
+      for (int j = 0; j < N; j++) {
+        clc[i].add(Collections.frequency(lc[i], j));
+      }
+    }
+
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+
+  public static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d[i][color];
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int C = sc.nextInt();
+        int[][] d = new int[C][3];
+        int[][] c = new int[N][N];
+        List<Integer>[] lc = new ArrayList[3];
+        for (int i = 0; i < 3; i++) {
+            lc[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                c[i][j] = sc.nextInt();
+                lc[(i + j) % 3].add(c[i][j]);
+            }
+        }
+        List<Map<Integer, Integer>> clc = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Map<Integer, Integer> counter = new HashMap<>();
+            for (int j = 0; j < lc[i].size(); j++) {
+                int color = lc[i].get(j);
+                counter.put(color, counter.getOrDefault(color, 0) + 1);
+            }
+            clc.add(counter);
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    public static int iwakan(Map<Integer, Integer> clist, int color) {
+        int ret = 0;
+        for (int i = 0; i < clist.size(); i++) {
+            ret += clist.get(i + 1) * d[i][color];
+        }
+        return ret;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int C = sc.nextInt();
+        int[][] d = new int[C][N];
+        int[][] c = new int[N][N];
+        List<List<Integer>> lc = new ArrayList<>();
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < N; j++) {
+                d[i][j] = sc.nextInt();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                c[i][j] = sc.nextInt();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                lc.get((i + j) % 3).add(c[i][j]);
+            }
+        }
+        List<List<Integer>> clc = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            clc.add(new ArrayList<>(Collections.frequency(lc.get(i))));
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    public static int iwakan(List<Integer> clist, int color) {
+        int ret = 0;
+        for (int i = 0; i < clist.size(); i++) {
+            ret += clist.get(i) * d[i][color];
+        }
+        return ret;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    List<List<Integer>> d = new ArrayList<>();
+    List<List<Integer>> c = new ArrayList<>();
+    List<List<Integer>> lc = new ArrayList<>();
+    for (int i = 0; i < C; i++) {
+      List<Integer> row = new ArrayList<>();
+      for (int j = 0; j < N; j++) {
+        row.add(sc.nextInt());
+      }
+      d.add(row);
+    }
+    for (int i = 0; i < N; i++) {
+      List<Integer> row = new ArrayList<>();
+      for (int j = 0; j < N; j++) {
+        row.add(sc.nextInt());
+      }
+      c.add(row);
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        int sum = (i + j) % 3;
+        if (lc.size() <= sum) {
+          lc.add(new ArrayList<>());
+        }
+        lc.get(sum).add(c.get(i).get(j));
+      }
+    }
+    List<List<Integer>> clc = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      clc.add(new ArrayList<>(Collections.frequency(lc.get(i))));
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          int temp = iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k);
+          res = Math.min(res, temp);
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(List<Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < clist.size(); i++) {
+      ret += clist.get(i) * d.get(i).get(color);
+    }
+    return ret;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int C = sc.nextInt();
+    int[][] d = new int[C][C];
+    int[][] c = new int[N][N];
+    List<Integer>[] lc = new ArrayList[3];
+    for (int i = 0; i < 3; i++) {
+      lc[i] = new ArrayList<>();
+    }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        lc[(i + j) % 3].add(c[i][j]);
+      }
+    }
+    Map<Integer, Integer>[] clc = new HashMap[3];
+    for (int i = 0; i < 3; i++) {
+      clc[i] = new HashMap<>();
+      for (int j = 0; j < C; j++) {
+        clc[i].put(j, Collections.frequency(lc[i], j));
+      }
+    }
+    int res = Integer.MAX_VALUE;
+    for (int i = 0; i < C; i++) {
+      for (int j = 0; j < C; j++) {
+        for (int k = 0; k < C; k++) {
+          if (i == j || i == k || j == k) {
+            continue;
+          }
+          res = Math.min(res, iwakan(clc[0], i) + iwakan(clc[1], j) + iwakan(clc[2], k));
+        }
+      }
+    }
+    System.out.println(res);
+  }
+
+  private static int iwakan(Map<Integer, Integer> clist, int color) {
+    int ret = 0;
+    for (int i = 0; i < C; i++) {
+      ret += clist.get(i + 1) * d[i][color];
+    }
+    return ret;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int C = scanner.nextInt();
+        int[][] d = new int[C][3];
+        int[][] c = new int[N][N];
+        List<List<Integer>> lc = new ArrayList<>();
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                d[i][j] = scanner.nextInt();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                c[i][j] = scanner.nextInt();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                lc.get((i + j) % 3).add(c[i][j]);
+            }
+        }
+        List<Map<Integer, Integer>> clc = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Map<Integer, Integer> counter = new HashMap<>();
+            for (int j = 0; j < C; j++) {
+                counter.put(j, Collections.frequency(lc.get(i), j));
+            }
+            clc.add(counter);
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < C; j++) {
+                for (int k = 0; k < C; k++) {
+                    if (i == j || i == k || j == k) {
+                        continue;
+                    }
+                    res = Math.min(res, iwakan(clc.get(0), i) + iwakan(clc.get(1), j) + iwakan(clc.get(2), k));
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    private static int iwakan(Map<Integer, Integer> clist, int color) {
+        int ret = 0;
+        for (int i = 0; i < C; i++) {
+            ret += clist.get(i + 1) * d[i][color];
+        }
+        return ret;
+    }
+}
+[/JAVA]
+======

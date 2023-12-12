@@ -1,0 +1,916 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    boolean[] d = new boolean[n];
+    for (int i = 0; i < m; i++) {
+      if (d[b[i] - 1]) {
+        System.out.println("Ambiguity");
+        return;
+      }
+      d[b[i] - 1] = true;
+    }
+    for (int i = 0; i < n; i++) {
+      if (!d[i]) {
+        System.out.println("Impossible");
+        return;
+      }
+    }
+    System.out.println("Possible");
+    for (int i = 0; i < n; i++) {
+      System.out.print(f[i] + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    boolean[] seen = new boolean[n];
+    for (int i = 0; i < m; i++) {
+      if (seen[b[i] - 1]) {
+        System.out.println("Ambiguity");
+        return;
+      }
+      seen[b[i] - 1] = true;
+    }
+    for (int i = 0; i < n; i++) {
+      if (!seen[i]) {
+        System.out.println("Impossible");
+        return;
+      }
+    }
+    System.out.println("Possible");
+    for (int i = 0; i < n; i++) {
+      System.out.print(f[i] + " ");
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!d.containsKey(f[i])) {
+        d.put(f[i], new ArrayList<>());
+      }
+      d.get(f[i]).add(i + 1);
+    }
+    HashSet<Integer> sb = new HashSet<>();
+    HashSet<Integer> fb = new HashSet<>();
+    for (int i : b) {
+      sb.add(i);
+    }
+    for (int i : f) {
+      fb.add(i);
+    }
+    if (!sb.containsAll(fb)) {
+      System.out.println("Impossible");
+    } else {
+      ArrayList<Integer> ans = new ArrayList<>();
+      for (int i : b) {
+        if (d.get(i).size() > 1) {
+          System.out.println("Ambiguity");
+          return;
+        } else {
+          ans.add(d.get(i).get(0));
+        }
+      }
+      System.out.println("Possible");
+      for (int i : ans) {
+        System.out.print(i + " ");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = scanner.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = scanner.nextInt();
+    }
+    scanner.close();
+
+    // Create a map to store the indices of the elements in f
+    Map<Integer, List<Integer>> d = new HashMap<>();
+    for (int i = 0; i < f.length; i++) {
+      if (!d.containsKey(f[i])) {
+        d.put(f[i], new ArrayList<>());
+      }
+      d.get(f[i]).add(i + 1);
+    }
+
+    // Check if the elements in b are a subset of the elements in f
+    Set<Integer> sb = new HashSet<>(b.length);
+    Set<Integer> fb = new HashSet<>(f.length);
+    for (int i : b) {
+      sb.add(i);
+    }
+    for (int i : f) {
+      fb.add(i);
+    }
+    if (!sb.containsAll(fb)) {
+      System.out.println("Impossible");
+      return;
+    }
+
+    // Check for ambiguity
+    List<Integer> ans = new ArrayList<>();
+    for (int i : b) {
+      if (d.get(i).size() > 1) {
+        System.out.println("Ambiguity");
+        return;
+      }
+      ans.add(d.get(i).get(0));
+    }
+
+    // Print the answer
+    System.out.println("Possible");
+    for (int i : ans) {
+      System.out.print(i + " ");
+    }
+    System.out.println();
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, List<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>();
+        Set<Integer> fb = new HashSet<>();
+        for (int i : b) {
+            sb.add(i);
+        }
+        for (int i : f) {
+            fb.add(i);
+        }
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                }
+                ans.add(d.get(i).get(0));
+            }
+            System.out.println("Possible");
+            System.out.println(String.join(" ", ans));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], i + 1);
+            }
+        }
+        Set<Integer> sb = new HashSet<>(Arrays.asList(b));
+        Set<Integer> fb = new HashSet<>(Arrays.asList(f));
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i) != null) {
+                    ans.add(d.get(i));
+                } else {
+                    System.out.println("Ambiguity");
+                    return;
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(String.join(" ", ans));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!d.containsKey(f[i])) {
+        d.put(f[i], new ArrayList<>());
+      }
+      d.get(f[i]).add(i + 1);
+    }
+    HashSet<Integer> sb = new HashSet<>();
+    HashSet<Integer> fb = new HashSet<>();
+    for (int i : b) {
+      sb.add(i);
+    }
+    for (int i : f) {
+      fb.add(i);
+    }
+    if (!sb.containsAll(fb)) {
+      System.out.println("Impossible");
+    } else {
+      ArrayList<Integer> ans = new ArrayList<>();
+      for (int i : b) {
+        if (d.get(i).size() > 1) {
+          System.out.println("Ambiguity");
+          return;
+        } else {
+          ans.add(d.get(i).get(0));
+        }
+      }
+      System.out.println("Possible");
+      System.out.println(String.join(" ", ans));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    boolean[] visited = new boolean[n];
+    for (int i = 0; i < m; i++) {
+      if (!visited[b[i] - 1]) {
+        visited[b[i] - 1] = true;
+      } else {
+        System.out.println("Ambiguity");
+        return;
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      if (!visited[i]) {
+        System.out.println("Impossible");
+        return;
+      }
+    }
+    System.out.println("Possible");
+    for (int i = 0; i < n; i++) {
+      if (visited[i]) {
+        System.out.print(i + 1 + " ");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, List<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(Arrays.asList(b));
+        Set<Integer> fb = new HashSet<>(Arrays.asList(f));
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                } else {
+                    ans.add(d.get(i).get(0));
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(String.join(" ", ans));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(b);
+        Set<Integer> fb = new HashSet<>(f);
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+            return;
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        for (int i : b) {
+            if (d.get(i).size() > 1) {
+                System.out.println("Ambiguity");
+                return;
+            } else {
+                ans.add(d.get(i).get(0));
+            }
+        }
+        System.out.println("Possible");
+        System.out.println(String.join(" ", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Set;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        HashMap<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], i + 1);
+            }
+        }
+        Set<Integer> sb = new HashSet<>();
+        Set<Integer> fb = new HashSet<>();
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+            fb.add(b[i]);
+        }
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            for (int i = 0; i < m; i++) {
+                if (d.get(b[i]).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                }
+            }
+            System.out.println("Possible");
+            for (int i = 0; i < m; i++) {
+                System.out.print(d.get(b[i]) + " ");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!d.containsKey(f[i])) {
+        d.put(f[i], new ArrayList<>());
+      }
+      d.get(f[i]).add(i + 1);
+    }
+    Set<Integer> sb = new HashSet<>(b);
+    Set<Integer> fb = new HashSet<>(f);
+    if (!sb.containsAll(fb)) {
+      System.out.println("Impossible");
+    } else {
+      for (int i : b) {
+        if (d.get(i).size() > 1) {
+          System.out.println("Ambiguity");
+          return;
+        }
+      }
+      System.out.println("Possible");
+      for (int i : b) {
+        System.out.print(d.get(i).get(0) + " ");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = scanner.nextInt();
+        }
+        HashMap<Integer, List<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(Arrays.asList(b));
+        Set<Integer> fb = new HashSet<>(Arrays.asList(f));
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                } else {
+                    ans.add(d.get(i).get(0));
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(String.join(" ", ans.stream().map(Object::toString).collect(Collectors.toList())));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        HashSet<Integer> sb = new HashSet<>();
+        HashSet<Integer> fb = new HashSet<>();
+        for (int i : b) {
+            sb.add(i);
+        }
+        for (int i : f) {
+            fb.add(i);
+        }
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            ArrayList<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                } else {
+                    ans.add(d.get(i).get(0));
+                }
+            }
+            System.out.println("Possible");
+            for (int i : ans) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        Set<Integer> fSet = new HashSet<>();
+        for (int i : f) {
+            fSet.add(i);
+        }
+        Set<Integer> bSet = new HashSet<>();
+        for (int i : b) {
+            bSet.add(i);
+        }
+        if (!bSet.containsAll(fSet)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (fSet.contains(i)) {
+                    ans.add(i);
+                } else {
+                    System.out.println("Ambiguity");
+                    return;
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = scanner.nextInt();
+        }
+        HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(b);
+        Set<Integer> fb = new HashSet<>(f);
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            ArrayList<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                } else {
+                    ans.add(d.get(i).get(0));
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, ArrayList<Integer>> d = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(Arrays.asList(b));
+        Set<Integer> fb = new HashSet<>(Arrays.asList(f));
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                }
+            }
+            System.out.println("Possible");
+            for (int i : b) {
+                System.out.print(d.get(i).get(0) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    List<Integer>[] d = new ArrayList[n];
+    for (int i = 0; i < n; i++) {
+      d[i] = new ArrayList<>();
+    }
+    for (int i = 0; i < n; i++) {
+      if (!d[f[i]].contains(i + 1)) {
+        d[f[i]].add(i + 1);
+      }
+    }
+    Set<Integer> sb = new HashSet<>();
+    Set<Integer> fb = new HashSet<>();
+    for (int i = 0; i < m; i++) {
+      sb.add(b[i]);
+    }
+    for (int i = 0; i < n; i++) {
+      fb.add(f[i]);
+    }
+    if (!sb.containsAll(fb)) {
+      System.out.println("Impossible");
+    } else {
+      List<Integer> ans = new ArrayList<>();
+      for (int i = 0; i < m; i++) {
+        if (d[b[i]].size() > 1) {
+          System.out.println("Ambiguity");
+          return;
+        } else {
+          ans.add(d[b[i]].get(0));
+        }
+      }
+      System.out.println("Possible");
+      System.out.println(String.join(" ", ans));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[] f = new int[n];
+    int[] b = new int[m];
+    for (int i = 0; i < n; i++) {
+      f[i] = sc.nextInt();
+    }
+    for (int i = 0; i < m; i++) {
+      b[i] = sc.nextInt();
+    }
+    boolean[] visited = new boolean[n];
+    for (int i = 0; i < m; i++) {
+      if (visited[b[i] - 1]) {
+        System.out.println("Ambiguity");
+        return;
+      }
+      visited[b[i] - 1] = true;
+    }
+    for (int i = 0; i < n; i++) {
+      if (visited[i]) {
+        System.out.print(f[i] + " ");
+      }
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] f = new int[n];
+        int[] b = new int[m];
+        for (int i = 0; i < n; i++) {
+            f[i] = sc.nextInt();
+        }
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+        HashMap<Integer, List<Integer>> d = new HashMap<>();
+        for (int i = 0; i < f.length; i++) {
+            if (!d.containsKey(f[i])) {
+                d.put(f[i], new ArrayList<>());
+            }
+            d.get(f[i]).add(i + 1);
+        }
+        Set<Integer> sb = new HashSet<>(Arrays.asList(b));
+        Set<Integer> fb = new HashSet<>(Arrays.asList(f));
+        if (!sb.containsAll(fb)) {
+            System.out.println("Impossible");
+        } else {
+            List<Integer> ans = new ArrayList<>();
+            for (int i : b) {
+                if (d.get(i).size() > 1) {
+                    System.out.println("Ambiguity");
+                    return;
+                } else {
+                    ans.add(d.get(i).get(0));
+                }
+            }
+            System.out.println("Possible");
+            System.out.println(String.join(" ", ans));
+        }
+    }
+}
+[/JAVA]
+======

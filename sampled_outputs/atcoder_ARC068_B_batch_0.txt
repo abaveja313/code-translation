@@ -1,0 +1,894 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        aList.sort(Comparator.comparingInt(a -> a[0]));
+        int s = 0;
+        int c = 0;
+        for (int[] i : aList) {
+            if (i[1] == 2) {
+                c++;
+            }
+            s += i[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        int[][] a2 = new int[c.size()][2];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            a2[i][0] = entry.getKey();
+            a2[i][1] = entry.getValue();
+            i++;
+        }
+        Arrays.sort(a2, (a, b) -> a[0] - b[0]);
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < a2.length; i++) {
+            if (a2[i][1] == 2) {
+                c++;
+            }
+            s += a2[i][1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<List<Integer>> a2 = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            a2.add(Arrays.asList(entry.getKey(), 2 - (entry.getValue() & 1)));
+        }
+        Collections.sort(a2, new Comparator<List<Integer>>() {
+            @Override
+            public int compare(List<Integer> o1, List<Integer> o2) {
+                return o1.get(0) - o2.get(0);
+            }
+        });
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < a2.size(); i++) {
+            if (a2.get(i).get(1) == 2) {
+                c++;
+            }
+            s += a2.get(i).get(1);
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        aList.sort((a1, a2) -> a1[0] - a2[0]);
+        int s = 0;
+        int c = 0;
+        for (int[] a1 : aList) {
+            if (a1[1] == 2) {
+                c++;
+            }
+            s += a1[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] {entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return Integer.compare(o1[0], o2[0]);
+            }
+        });
+        int s = 0;
+        int c = 0;
+        for (int[] entry : aList) {
+            if (entry[1] == 2) {
+                c++;
+            }
+            s += entry[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, (o1, o2) -> o1[0] - o2[0]);
+        int s = 0;
+        int c = 0;
+        for (int[] i : aList) {
+            if (i[1] == 2) {
+                c++;
+            }
+            s += i[1];
+        }
+        s -= c;
+        if ((c & 1) == 1) {
+            s -= 1;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    HashMap<Integer, Integer> c = new HashMap<>();
+    for (int i : a) {
+      c.put(i, c.getOrDefault(i, 0) + 1);
+    }
+    ArrayList<int[]> aList = new ArrayList<>();
+    for (int i : c.keySet()) {
+      aList.add(new int[] {i, 2 - (c.get(i) & 1)});
+    }
+    Collections.sort(aList, (a, b) -> a[0] - b[0]);
+    int s = 0;
+    int c = 0;
+    for (int i = 0; i < aList.size(); i++) {
+      if (aList.get(i)[1] == 2) {
+        c++;
+      }
+      s += aList.get(i)[1];
+    }
+    s -= c;
+    if (c & 1) {
+      s--;
+    }
+    System.out.println(s);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] { entry.getKey(), 2 - (entry.getValue() & 1) });
+        }
+        Collections.sort(aList, (o1, o2) -> o1[0] - o2[0]);
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < aList.size(); i++) {
+            if (aList.get(i)[1] == 2) {
+                c++;
+            }
+            s += aList.get(i)[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, (a1, a2) -> a1[0] - a2[0]);
+        int s = 0;
+        int c = 0;
+        for (int[] arr : aList) {
+            if (arr[1] == 2) {
+                c++;
+            }
+            s += arr[1];
+        }
+        s -= c;
+        if ((c & 1) == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(reader.readLine());
+        int[] a = Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        int[][] b = new int[c.size()][2];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            b[i][0] = entry.getKey();
+            b[i][1] = 2 - (entry.getValue() & 1);
+            i++;
+        }
+        Arrays.sort(b, (a, b) -> a[0] - b[0]);
+        int s = 0;
+        int cnt = 0;
+        for (int i = 0; i < b.length; i++) {
+            if (b[i][1] == 2) {
+                cnt++;
+            }
+            s += b[i][1];
+        }
+        s -= cnt;
+        if (cnt % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int[][] b = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            b[i][0] = a[i];
+            b[i][1] = 2 - (i & 1);
+        }
+        Arrays.sort(b, (a, b) -> Integer.compare(a[0], b[0]));
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            if (b[i][1] == 2) {
+                c++;
+            }
+            s += b[i][1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, (a, b) -> Integer.compare(a[0], b[0]));
+        int s = 0;
+        int c = 0;
+        for (int[] entry : aList) {
+            if (entry[1] == 2) {
+                c++;
+            }
+            s += entry[1];
+        }
+        s -= c;
+        if ((c & 1) == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> c = new HashMap<>();
+    for (int i : a) {
+      c.put(i, c.getOrDefault(i, 0) + 1);
+    }
+    int[][] b = new int[c.size()][2];
+    int i = 0;
+    for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+      b[i][0] = entry.getKey();
+      b[i][1] = 2 - (entry.getValue() & 1);
+      i++;
+    }
+    Arrays.sort(b, (a, b) -> a[0] - b[0]);
+    int s = 0;
+    int c = 0;
+    for (int i = 0; i < b.length; i++) {
+      if (b[i][1] == 2) {
+        c++;
+      }
+      s += b[i][1];
+    }
+    s -= c;
+    if (c % 2 == 1) {
+      s--;
+    }
+    System.out.println(s);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] { entry.getKey(), entry.getValue() });
+        }
+        Collections.sort(aList, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return Integer.compare(o1[0], o2[0]);
+            }
+        });
+        int s = 0;
+        int c = 0;
+        for (int[] entry : aList) {
+            if (entry[1] == 2) {
+                c++;
+            }
+            s += entry[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] { entry.getKey(), 2 - (entry.getValue() & 1) });
+        }
+        Collections.sort(aList, (a, b) -> a[0] - b[0]);
+        int s = 0;
+        int c = 0;
+        for (int[] arr : aList) {
+            if (arr[1] == 2) {
+                c++;
+            }
+            s += arr[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        int[][] b = new int[c.size()][2];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            b[i][0] = entry.getKey();
+            b[i][1] = entry.getValue();
+            i++;
+        }
+        Arrays.sort(b, (a, b) -> a[0] - b[0]);
+        int s = 0;
+        int cnt = 0;
+        for (int i = 0; i < b.length; i++) {
+            if (b[i][1] == 2) {
+                cnt++;
+            }
+            s += b[i][1];
+        }
+        s -= cnt;
+        if (cnt % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            c.put(a[i], c.getOrDefault(a[i], 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] { entry.getKey(), 2 - (entry.getValue() & 1) });
+        }
+        Collections.sort(aList, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return Integer.compare(o1[0], o2[0]);
+            }
+        });
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < aList.size(); i++) {
+            if (aList.get(i)[1] == 2) {
+                c++;
+            }
+            s += aList.get(i)[1];
+        }
+        s -= c;
+        if ((c & 1) == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] { entry.getKey(), 2 - (entry.getValue() & 1) });
+        }
+        aList.sort(Comparator.comparingInt(a -> a[0]));
+        int s = 0;
+        int c = 0;
+        for (int[] entry : aList) {
+            if (entry[1] == 2) {
+                c++;
+            }
+            s += entry[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[] {entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        int s = 0;
+        int c = 0;
+        for (int[] arr : aList) {
+            if (arr[1] == 2) {
+                c++;
+            }
+            s += arr[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> c = new HashMap<>();
+        for (int i : a) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
+        }
+        List<int[]> aList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : c.entrySet()) {
+            aList.add(new int[]{entry.getKey(), 2 - (entry.getValue() & 1)});
+        }
+        Collections.sort(aList, (a1, a2) -> a1[0] - a2[0]);
+        int s = 0;
+        int c = 0;
+        for (int[] entry : aList) {
+            if (entry[1] == 2) {
+                c++;
+            }
+            s += entry[1];
+        }
+        s -= c;
+        if (c % 2 == 1) {
+            s--;
+        }
+        System.out.println(s);
+    }
+}
+[/JAVA]
+======

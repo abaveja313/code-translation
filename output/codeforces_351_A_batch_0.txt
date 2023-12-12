@@ -1,0 +1,2269 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextFloat());
+    }
+    arr = arr.stream().sorted().collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    float arrSum = arr.stream().mapToDouble(Float::doubleValue).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+I have converted the Python code to Java code, obeying the constraints you mentioned. The Java code is functionally identical to the Python code and should produce the same output for the same input.
+
+Note that I have used Java 8's Stream API to perform the sorting and summing of the list, which is more concise and efficient than the Python code.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is a line-by-line conversion of the Python code to Java. I have used the `Scanner` class to read input from the user, and the `Arrays.stream()` method to convert the array to a stream and perform the necessary operations. The `Math.min()` and `Math.abs()` methods are used to find the minimum and absolute value of the input, respectively. The `System.out.printf()` method is used to print the output with the specified format.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr = arr.stream().sorted().filter(x -> x - Math.floor(x) != 0).collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(x -> x).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextFloat());
+    }
+    arr.sort((a, b) -> a.compareTo(b));
+    int o = 2 * n - arr.size();
+    float arrSum = 0;
+    for (float x : arr) {
+      arrSum += x;
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the list of numbers. The `sort` method is used to sort the list in ascending order, and the `for` loop is used to iterate over the list and calculate the sum. The `Math.min` method
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = sorted(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i < n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `Scanner` class is used to read input from the user, and the `Math` class is used for mathematical operations such as `abs()` and `min()`. The `String.format()` method is used to format the output as a floating-point number with 3 decimal places.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = Double.MAX_VALUE;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the Java code that is equivalent to the Python code. It uses the `Scanner` class to read input, `Arrays.stream()` to sort the array, and `Math.min()` and `Math.abs()` to calculate the minimum absolute difference between the sum of the array and the values of the array.
+
+The code first reads the input from the user, which is the number of elements in the array and the values of the array. Then, it sorts the array using `Arrays.stream()`
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = Stream.of(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        double[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+        arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+        int o = 2 * n - arr.length;
+        double arrSum = Arrays.stream(arr).sum();
+        double res = 2e9;
+        for (int i = 0; i <= n; i++) {
+            if (i + o >= n) {
+                res = Math.min(res, Math.abs(i - arrSum));
+            }
+        }
+        System.out.println(String.format("%.3f", res));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = Arrays.stream(scanner.nextLine().split(" "))
+        .mapToDouble(Double::parseDouble)
+        .sorted()
+        .collect(Collectors.toList())
+        .stream()
+        .map(x -> x - Math.floor(x))
+        .filter(x -> x != 0)
+        .toArray(Double[]::new);
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextFloat());
+    }
+    arr = sorted(arr, (a, b) -> (int) (a - b));
+    int o = 2 * n - arr.size();
+    float arrSum = 0;
+    for (float x : arr) {
+      arrSum += x;
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code given. The only difference is that in Java, we use the `Math.min()` and `Math.abs()` methods to perform the minimum and absolute value operations, respectively. We also use the `String.format()` method to format the output to the required number of decimal places.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr = sorted(arr.stream().map(x -> x - Math.floor(x)).collect(Collectors.toList()));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. The `Scanner` class is used to read the input from the user, and the `ArrayList` class is used to store the list of numbers. The `sorted` method is used to sort the list, and the `stream` and `map` methods are used to perform the necessary operations on the list. The
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = Arrays.stream(scanner.nextLine().split(" "))
+      .map(Double::parseDouble)
+      .collect(Collectors.toList())
+      .stream()
+      .map(x -> x - Math.floor(x))
+      .filter(x -> x != 0)
+      .sorted()
+      .toArray(Double[]::new);
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextFloat());
+    }
+    arr = sorted(arr, (a, b) -> Float.compare(a - (int) a, b - (int) b));
+    int o = 2 * n - arr.size();
+    float arrSum = arr.stream().mapToDouble(Float::doubleValue).sum();
+    float res = 2e9f;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the input numbers. The `sorted` method is used to sort the array in ascending order based on the difference between the number and its integer part. The `o` variable is used to keep track of the number of non-
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `Arrays` class to sort and sum the array. The `Math` class is used for mathematical operations such as `abs` and `min`. The `String.format` method is used to format the output to 3 decimal places.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+    arr = Arrays.stream(arr).sorted().filter(x -> x - Math.floor(x) != 0).toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    long res = (long) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = Arrays.stream(scanner.nextLine().split(" ")).map(Double::parseDouble).sorted().toList();
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(x -> x).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `java.util.Scanner` class to read input from the user, the `java.util.Arrays` class to sort the array of doubles, and the `java.util.List` interface to store the sorted array. The code also uses the `Math.min` and `Math.abs` methods to calculate the minimum absolute difference between the sum of the array and the index of the array. Finally, it uses the `String.format` method to format the output to three decimal places.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextDouble());
+    }
+    arr.removeIf(x -> x - Math.floor(x) == 0);
+    Collections.sort(arr);
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(x -> x).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr = arr.stream().sorted().filter(x -> x - Math.floor(x) != 0).toList();
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(x -> x).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextFloat());
+    }
+    arr = arr.stream().sorted().collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    float arrSum = arr.stream().mapToDouble(x -> x).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `Scanner` class is used to read input from the user, and the `ArrayList` class is used to store the input values. The `List` interface is used to sort the list of input values, and the `stream()` method is used to perform the sorting and summing operations. The `Math.min()` method is used to find the minimum
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextDouble());
+    }
+    arr.sort(Comparator.comparingDouble(x -> x - Math.floor(x)));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    long res = (long) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextFloat());
+    }
+    arr.removeIf(x -> x - (int) x == 0);
+    Collections.sort(arr);
+    int o = 2 * n - arr.size();
+    float arrSum = arr.stream().mapToDouble(x -> x).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The main differences are:
+
+* In Java, we use the `Scanner` class to read input from the user, rather than the `input()` function in Python.
+* In Java, we use the `ArrayList` class to store the array of floating-point numbers, rather than the `list()` function in Python.
+* In
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        double[] arr = new double[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextDouble();
+        }
+        Arrays.sort(arr);
+        int o = 2 * n - arr.length;
+        double arrSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            arrSum += arr[i];
+        }
+        double res = 2e9;
+        for (int i = 0; i < n + 1; i++) {
+            if (i + o >= n) {
+                res = Math.min(res, Math.abs(i - arrSum));
+            }
+        }
+        System.out.println(String.format("%.3f", res));
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `Arrays` class to sort the array of doubles. The `Math.min` method is used to find the minimum of two values, and the `Math.abs` method is used to find the absolute value of a number. The `String.format` method is used to format the output
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code, with the following changes:
+
+* The `input()` function is replaced with `Scanner` to read input from the console.
+* The `list()` function is replaced with an array of doubles to store the input values.
+* The `sorted()` function is replaced with `Arrays.stream()` to sort the array.
+* The `map()` function is replaced with a lambda expression to convert the input values
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr, (a, b) -> (int) (a - (int) a) - (int) (b - (int) b));
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextDouble());
+    }
+    arr.sort((a, b) -> a - b);
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. I have used the `Scanner` class to read input from the user, and the `ArrayList` class to store the input values. The `sort` method is used to sort the array in ascending order, and the `stream` method is used to calculate the sum of the array. The `Math.min` method is used to find the minimum value of two numbers, and the `Math.abs`
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr = arr.stream().filter(x -> x - Math.floor(x) != 0).sorted().collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f%n", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        double[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+        arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+        int o = 2 * n - arr.length;
+        double arrSum = Arrays.stream(arr).sum();
+        double res = 2e9;
+        for (int i = 0; i <= n; i++) {
+            if (i + o >= n) {
+                res = Math.min(res, Math.abs(i - arrSum));
+            }
+        }
+        System.out.println(String.format("%.3f", res));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextDouble());
+    }
+    arr.sort((a, b) -> a.compareTo(b));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the input values. The `List` interface is used to store the sorted array of input values. The `Arrays` class is used to perform the sorting operation on the array. The `Math` class is used to calculate the absolute difference between the input values and the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Float> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextFloat());
+    }
+    arr = sorted(arr, (a, b) -> a - b);
+    int o = 2 * n - arr.size();
+    float arrSum = arr.stream().mapToDouble(x -> x).sum();
+    long res = (long) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+
+This is the equivalent Java code to the Python code provided. I have used the `Scanner` class to read input from the user, `ArrayList` to store the input as a list of floating-point numbers, and `Arrays.sort` to sort the list in ascending order. I have also used the `Math.min` and `Math.abs` methods to find the minimum value of the difference between the input and the sum of the input. Finally, I have used the `
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `Arrays.sort()` method to sort the array. The rest of the code is similar to the Python code, with some minor changes to account for the differences in syntax between the two languages.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+Explanation:
+
+1. First, we create a `Scanner` object to read input from the user.
+2. We then read the first input as an integer using `nextInt()` and store it in a variable called `n`.
+3. We create a double array `arr` with length `n` and read the next `n` inputs as doubles using `nextDouble()` and store them in the array.
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The only difference is that in Java, we need to import the `Scanner` class from the `java.util` package to read input from the user, and we need to use the `Math.min()` method to find the minimum of two numbers. The rest of the code is similar to the Python code.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+    arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    String input = scanner.nextLine();
+    String[] inputArr = input.split(" ");
+    for (String s : inputArr) {
+      arr.add(Double.parseDouble(s));
+    }
+    arr = arr.stream().sorted((a, b) -> a.compareTo(b)).collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = Double.MAX_VALUE;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr.sort((a, b) -> a.compareTo(b));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = Double.MAX_VALUE;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        double[] arr = new double[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextDouble();
+        }
+        double[] sortedArr = Arrays.stream(arr).sorted().toArray();
+        int o = 2 * n - sortedArr.length;
+        double arrSum = Arrays.stream(sortedArr).sum();
+        long res = (long) 2e9;
+        for (int i = 0; i < n + 1; i++) {
+            if (i + o >= n) {
+                res = Math.min(res, Math.abs(i - arrSum));
+            }
+        }
+        System.out.println(String.format("%.3f", res));
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, the `Arrays.stream()` method to sort the input array, and the `Math.min()` method to find the minimum value of the result. The `Math.abs()` method is used to calculate the absolute difference between the sum of the array and each element of the array. Finally, the result is printed to the console using `System.out.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(Double.parseDouble(scanner.next()));
+    }
+    arr.sort((a, b) -> a - b);
+    int o = 2 * n - arr.size();
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and the `Arrays` class to sort the array. The `Math` class is used for mathematical operations such as `abs()` and `min()`. The `printf()` method is used to print the result with a precision of 3 decimal places.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    long res = (long) 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr.sort((a, b) -> a.compareTo(b));
+    int o = 2 * n - arr.size();
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is a direct translation of the Python code to Java. The `map()` function is replaced with a for-each loop, and the `sorted()` function is replaced with the `sort()` method of the `List` class. The `int()` function is replaced with the `Math.round()` method, and the `%.3f` format is replaced with the `String.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        double[] arr = new double[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextDouble();
+        }
+        arr = Arrays.stream(arr).sorted().collect(Collectors.toList()).stream().filter(x -> x - Math.floor(x) != 0).collect(Collectors.toList()).toArray(new Double[0]);
+        int o = 2 * n - arr.length;
+        double arrSum = Arrays.stream(arr).sum();
+        int res = (int) 2e9;
+        for (int i = 0; i < n + 1; i++) {
+            if (i + o >= n) {
+                res = Math.min(res, Math.abs(i - arrSum));
+            }
+        }
+        System.out.println(String.format("%.3f", res));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).filter(x -> x - Math.floor(x) != 0).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `Arrays` class to sort the array of doubles. The `Math.min` and `Math.abs` methods are used to calculate the minimum absolute difference between the sum of the array and the number of elements in the array. Finally, the result is printed to the console using `
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr.sort((a, b) -> a.compareTo(b));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextDouble());
+    }
+    arr.sort(Comparator.comparingDouble(x -> x - Math.floor(x)));
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(x -> x).sum();
+    double res = Double.MAX_VALUE;
+    for (int i = 0; i <= n; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+
+Explanation:
+
+1. We first import the necessary libraries for input and sorting.
+2. We define a `Solution` class with a `main` method that takes a `String[] args` parameter.
+3. We create a `Scanner` object to read input from the user.
+4. We read the value of `n` from the user and convert
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arrSum += arr[i];
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    List<Double> sortedArr = Arrays.stream(arr).sorted().collect(Collectors.toList());
+    int o = 2 * n - sortedArr.size();
+    double arrSum = sortedArr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = Arrays.stream(scanner.nextLine().split(" "))
+                         .mapToDouble(Double::parseDouble)
+                         .sorted()
+                         .collect(Collectors.toList());
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    long res = (long) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextDouble();
+    }
+    arr = Arrays.stream(arr).sorted().toArray();
+    int o = 2 * n - arr.length;
+    double arrSum = Arrays.stream(arr).sum();
+    int res = (int) 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Double> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextDouble());
+    }
+    arr = arr.stream().sorted((a, b) -> a - b).collect(Collectors.toList());
+    int o = 2 * n - arr.size();
+    double arrSum = arr.stream().mapToDouble(Double::doubleValue).sum();
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.println(String.format("%.3f", res));
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The code uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the list of numbers. The `stream()` method is used to sort the list and calculate the sum of the numbers. The `Math.min()` method is used to find the minimum absolute difference between the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    double[] arr = new double[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = scanner.nextDouble();
+    }
+    Arrays.sort(arr);
+    int o = 2 * n - arr.length;
+    double arrSum = 0;
+    for (double x : arr) {
+      arrSum += x;
+    }
+    double res = 2e9;
+    for (int i = 0; i < n + 1; i++) {
+      if (i + o >= n) {
+        res = Math.min(res, Math.abs(i - arrSum));
+      }
+    }
+    System.out.printf("%.3f", res);
+  }
+}
+[/JAVA]
+======

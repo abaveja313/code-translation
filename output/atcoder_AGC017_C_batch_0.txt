@@ -1,0 +1,4852 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        System.out.println(solve(A, X, Y));
+    }
+
+    private static int solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length)
+                .filter(i -> covered[i] == 0)
+                .sum();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0)
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        solve(A, X, Y);
+    }
+
+    private static void solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(i -> i == 0).sum();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = y - count[y] + 1;
+            count[y]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after];
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length).filter(i -> covered[i] == 0).sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(i -> i == 0).count();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] line = reader.readLine().split(" ");
+        int N = Integer.parseInt(line[0]);
+        int M = Integer.parseInt(line[1]);
+
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(reader.readLine());
+        }
+
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            String[] xy = reader.readLine().split(" ");
+            X[i] = Integer.parseInt(xy[0]);
+            Y[i] = Integer.parseInt(xy[1]);
+        }
+
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
+        int[] X = IntStream.range(0, M).map(i -> scanner.nextInt()).toArray();
+        int[] Y = IntStream.range(0, M).map(i -> scanner.nextInt()).toArray();
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < A.length; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length).filter(i -> covered[i] == 0).count();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        solve(A, X, Y);
+    }
+
+    public static void solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(i -> i == 0).count();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        solve(A, X, Y);
+    }
+
+    private static void solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered).sum();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, N + 1).filter(i -> covered[i] == 0).sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        solve(A, X, Y);
+    }
+
+    public static void solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= A.length; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = Arrays.stream(covered, 1, covered.length).filter(x -> x == 0).count();
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        solve(A, X, Y);
+    }
+
+    public static void solve(int[] A, int[] X, int[] Y) {
+        int[] count = new int[A.length + 1];
+        int[] covered = new int[A.length + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= A.length; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length)
+                             .filter(i -> covered[i] == 0)
+                             .sum();
+
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      count[A[i]]++;
+      int y = A[i] - count[A[i]] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = IntStream.range(1, N + 1).filter(i -> covered[i] == 0).sum();
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(i -> i == 0).count();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = IntStream.range(1, covered.length)
+                         .filter(i -> covered[i] == 0)
+                         .sum();
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = in.nextInt();
+        int M = in.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = in.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = in.nextInt();
+            Y[i] = in.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(i -> i == 0).count();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length)
+                .filter(i -> covered[i] == 0)
+                .sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered).sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        scanner.close();
+
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
+        int[] X = IntStream.range(0, M).map(i -> scanner.nextInt()).toArray();
+        int[] Y = IntStream.range(0, M).map(i -> scanner.nextInt()).toArray();
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before] -= 1;
+            int add = after - count[after] + 1;
+            count[after] += 1;
+            if (rem > 0) {
+                covered[rem] -= 1;
+                if (covered[rem] == 0) {
+                    spell += 1;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell -= 1;
+                }
+                covered[add] += 1;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length)
+                .filter(i -> covered[i] == 0)
+                .sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = IntStream.range(1, N + 1).filter(i -> covered[i] == 0).sum();
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] tokens = reader.readLine().split(" ");
+        int N = Integer.parseInt(tokens[0]);
+        int M = Integer.parseInt(tokens[1]);
+
+        int[] A = Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] X = new int[M];
+        int[] Y = new int[M];
+
+        for (int i = 0; i < M; i++) {
+            tokens = reader.readLine().split(" ");
+            X[i] = Integer.parseInt(tokens[0]);
+            Y[i] = Integer.parseInt(tokens[1]);
+        }
+
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i < covered.length; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]] += 1;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y] += 1;
+            }
+        }
+        int spell = IntStream.range(1, covered.length).filter(i -> covered[i] == 0).sum();
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before] -= 1;
+            int add = after - count[after] + 1;
+            count[after] += 1;
+            if (rem > 0) {
+                covered[rem] -= 1;
+                if (covered[rem] == 0) {
+                    spell += 1;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell -= 1;
+                }
+                covered[add] += 1;
+            }
+            System.out.println(spell
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] NM = reader.readLine().split(" ");
+        int N = Integer.parseInt(NM[0]);
+        int M = Integer.parseInt(NM[1]);
+        int[] A = Arrays.stream(reader.readLine().split(" "))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+        int[] XY = Arrays.stream(reader.readLine().split(" "))
+                         .mapToInt(Integer::parseInt)
+                         .toArray();
+        int[] X = Arrays.copyOf(XY, XY.length / 2);
+        int[] Y = Arrays.copyOfRange(XY, 1, XY.length / 2);
+        main(A, X, Y);
+    }
+
+    public static void main(int[] A, int[] X, int[] Y) {
+        int N = A.length;
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length)
+                          .filter(i -> i == 0)
+                          .count();
+        for (int i = 0; i < X.length; i++) {
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, covered.length).filter(i -> covered[i] == 0).sum();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = IntStream.range(1, N + 1).filter(i -> covered[i] == 0).sum();
+
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < A.length; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = Arrays.stream(covered, 1, covered.length).filter(x -> x == 0).count();
+        for (int i = 0; i < X.length; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = Arrays.stream(covered, 1, N + 1).filter(i -> i == 0).count();
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            count[A[i]]++;
+            int y = A[i] - count[A[i]] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = sc.nextInt();
+      Y[i] = sc.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int x : A) {
+      count[x]++;
+      int y = x - count[x] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < M; i++) {
+            X[i] = scanner.nextInt();
+            Y[i] = scanner.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] X = new int[M];
+    int[] Y = new int[M];
+    for (int i = 0; i < M; i++) {
+      X[i] = scanner.nextInt();
+      Y[i] = scanner.nextInt();
+    }
+    int[] count = new int[N + 1];
+    int[] covered = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      count[A[i]]++;
+      int y = A[i] - count[A[i]] + 1;
+      if (y > 0) {
+        covered[y]++;
+      }
+    }
+    int spell = 0;
+    for (int i = 1; i <= N; i++) {
+      if (covered[i] == 0) {
+        spell++;
+      }
+    }
+    for (int i = 0; i < M; i++) {
+      int x = X[i];
+      int y = Y[i];
+      int before = A[x - 1];
+      int after = y;
+      A[x - 1] = y;
+      int rem = before - count[before] + 1;
+      count[before]--;
+      int add = after - count[after] + 1;
+      count[after]++;
+      if (rem > 0) {
+        covered[rem]--;
+        if (covered[rem] == 0) {
+          spell++;
+        }
+      }
+      if (add > 0) {
+        if (covered[add] == 0) {
+          spell--;
+        }
+        covered[add]++;
+      }
+      System.out.println(spell);
+    }
+  }
+}
+[/JAVA
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        int[] X = new int[M];
+        int[] Y = new int[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        for (int i = 0; i < M; i++) {
+            X[i] = sc.nextInt();
+            Y[i] = sc.nextInt();
+        }
+        int[] count = new int[N + 1];
+        int[] covered = new int[N + 1];
+        for (int x : A) {
+            count[x]++;
+            int y = x - count[x] + 1;
+            if (y > 0) {
+                covered[y]++;
+            }
+        }
+        int spell = 0;
+        for (int i = 1; i <= N; i++) {
+            if (covered[i] == 0) {
+                spell++;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            int x = X[i];
+            int y = Y[i];
+            int before = A[x - 1];
+            int after = y;
+            A[x - 1] = y;
+            int rem = before - count[before] + 1;
+            count[before]--;
+            int add = after - count[after] + 1;
+            count[after]++;
+            if (rem > 0) {
+                covered[rem]--;
+                if (covered[rem] == 0) {
+                    spell++;
+                }
+            }
+            if (add > 0) {
+                if (covered[add] == 0) {
+                    spell--;
+                }
+                covered[add]++;
+            }
+            System.out.println(spell);
+        }
+    }
+}
+[/JAVA]
+======

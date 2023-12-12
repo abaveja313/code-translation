@@ -1,0 +1,989 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+
+        int fx = 1;
+        int fy = 1;
+
+        if (x1 > x2) {
+            fx = -1;
+        }
+
+        if (y1 > y2) {
+            fy = -1;
+        }
+
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+
+        Arrays.sort(f, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[0] == o2[0]) {
+                    return o1[1] - o2[1];
+                } else {
+                    return o1[0] - o2[0];
+                }
+            }
+        });
+
+        int[] lis = new int[N];
+        int lislen = 0;
+
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Arrays.binarySearch(lis, t);
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        Arrays.sort(f, (a, b) -> (a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]));
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Arrays.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int x1 = scanner.nextInt();
+    int y1 = scanner.nextInt();
+    int x2 = scanner.nextInt();
+    int y2 = scanner.nextInt();
+    int fx = 1;
+    int fy = 1;
+    if (x1 > x2) {
+      fx = -1;
+    }
+    if (y1 > y2) {
+      fy = -1;
+    }
+    int N = scanner.nextInt();
+    int[][] f = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      f[i][0] = scanner.nextInt();
+      f[i][1] = scanner.nextInt();
+    }
+    Arrays.sort(f, Comparator.comparingInt(a -> a[0]));
+    int[] lis = new int[N];
+    int lislen = 0;
+    for (int i = 0; i < f.length; i++) {
+      int t = f[i][1];
+      int ind = Arrays.binarySearch(lis, t);
+      lis[ind] = t;
+      lislen = Math.max(lislen, ind + 1);
+    }
+    int result = 0;
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      result = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0);
+    } else {
+      result = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen;
+    }
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int x1 = sc.nextInt();
+    int y1 = sc.nextInt();
+    int x2 = sc.nextInt();
+    int y2 = sc.nextInt();
+    int fx = 1;
+    int fy = 1;
+    if (x1 > x2) {
+      fx = -1;
+    }
+    if (y1 > y2) {
+      fy = -1;
+    }
+    int N = sc.nextInt();
+    int inf = 1000000000;
+    List<List<Integer>> f = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      List<Integer> p = new ArrayList<>();
+      p.add(sc.nextInt());
+      p.add(sc.nextInt());
+      f.add(p);
+    }
+    f.sort(Comparator.comparing(p -> p.get(0)));
+    List<Integer> lis = new ArrayList<>();
+    int lislen = 0;
+    for (int i = 0; i < f.size(); i++) {
+      int t = f.get(i).get(1);
+      int ind = bisect_left(lis, t);
+      lis.set(ind, t);
+      lislen = Math.max(lislen, ind + 1);
+    }
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+    } else {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+    }
+  }
+
+  public static int bisect_left(List<Integer> arr, int x) {
+    int low = 0;
+    int high = arr.size() - 1;
+    while (low <= high) {
+      int mid = (low + high) / 2;
+      if (arr.get(mid) < x) {
+        low = mid
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        ArrayList<Integer> lis = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if (f[i][0] >= x1 && f[i][0] <= x2 && f[i][1] >= y1 && f[i][1] <= y2) {
+                lis.add(f[i][1]);
+            }
+        }
+        Collections.sort(lis, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        int lislen = lis.size();
+        int ans = 0;
+        if (lislen == Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            ans = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0);
+        } else {
+            ans = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int x1 = scanner.nextInt();
+        int y1 = scanner.nextInt();
+        int x2 = scanner.nextInt();
+        int y2 = scanner.nextInt();
+        int N = scanner.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = scanner.nextInt();
+            f[i][1] = scanner.nextInt();
+        }
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        List<Integer> lis = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int t = f[i][1];
+            int ind = Collections.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis.add(ind, t);
+        }
+        int lislen = lis.size();
+        if (lislen == Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int inf = 1000000000;
+        ArrayList<ArrayList<Integer>> f = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            ArrayList<Integer> p = new ArrayList<>();
+            p.add(sc.nextInt());
+            p.add(sc.nextInt());
+            f.add(p);
+        }
+        f.sort((a, b) -> (a.get(0) - b.get(0)) * fx + (a.get(1) - b.get(1)) * fy);
+        ArrayList<Integer> lis = new ArrayList<>();
+        int lislen = 0;
+        for (int i = 0; i < f.size(); i++) {
+            int t = f.get(i).get(1);
+            int ind = Collections.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis.add(ind, t);
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int x1 = scanner.nextInt();
+        int y1 = scanner.nextInt();
+        int x2 = scanner.nextInt();
+        int y2 = scanner.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = scanner.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = scanner.nextInt();
+            f[i][1] = scanner.nextInt();
+        }
+        f = Arrays.stream(f).filter(p -> (Math.min(x1, x2) <= p[0] && p[0] <= Math.max(x1, x2)) && (Math.min(y1, y2) <= p[1] && p[1] <= Math.max(y1, y2))).toArray(int[][]::new);
+        Arrays.sort(f, (a, b) -> {
+            if (a[0] == b[0]) {
+                return -a[1] + b[1];
+            }
+            return a[0] - b[0];
+        });
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Arrays.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        Arrays.sort(f, (a, b) -> a[0] - b[0]);
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Arrays.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int x1 = sc.nextInt();
+    int y1 = sc.nextInt();
+    int x2 = sc.nextInt();
+    int y2 = sc.nextInt();
+    int N = sc.nextInt();
+    int[][] f = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      f[i][0] = sc.nextInt();
+      f[i][1] = sc.nextInt();
+    }
+    int[] lis = new int[N];
+    int lislen = 0;
+    for (int i = 0; i < N; i++) {
+      int t = f[i][1];
+      int ind = Arrays.binarySearch(lis, t);
+      lis[ind] = t;
+      lislen = Math.max(lislen, ind + 1);
+    }
+    int ans = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen;
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      ans += 10 * Math.PI + 5 * Math.PI * (lislen - 1);
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int x1 = sc.nextInt();
+    int y1 = sc.nextInt();
+    int x2 = sc.nextInt();
+    int y2 = sc.nextInt();
+    int N = sc.nextInt();
+    int inf = 1000000000;
+    List<List<Integer>> f = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      if (x1 <= x && x <= x2 && y1 <= y && y <= y2) {
+        f.add(Arrays.asList(x, y));
+      }
+    }
+    f.sort((a, b) -> a.get(1) - b.get(1));
+    int[] lis = new int[N];
+    int lislen = 0;
+    for (int i = 0; i < f.size(); i++) {
+      int t = f.get(i).get(1);
+      int ind = bisect_left(lis, t);
+      lis[ind] = t;
+      lislen = Math.max(lislen, ind + 1);
+    }
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+    } else {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+    }
+  }
+
+  public static int bisect_left(int[] a, int x) {
+    int lo = 0;
+    int hi = a.length;
+    while (lo < hi) {
+      int mid = (lo + hi) / 2;
+      if (a[mid] < x) {
+        lo = mid + 1;
+      } else {
+        hi = mid;
+      }
+    }
+    return lo;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int x1 = scanner.nextInt();
+        int y1 = scanner.nextInt();
+        int x2 = scanner.nextInt();
+        int y2 = scanner.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = scanner.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            f[i] = new int[] {x * fx, y * fy};
+        }
+        Arrays.sort(f, (a, b) -> a[1] - b[1]);
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Collections.binarySearch(Arrays.asList(lis), t);
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int x1 = sc.nextInt();
+    int y1 = sc.nextInt();
+    int x2 = sc.nextInt();
+    int y2 = sc.nextInt();
+    int N = sc.nextInt();
+    int[][] f = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      f[i][0] = sc.nextInt();
+      f[i][1] = sc.nextInt();
+    }
+    int fx = 1;
+    int fy = 1;
+    if (x1 > x2) {
+      fx = -1;
+    }
+    if (y1 > y2) {
+      fy = -1;
+    }
+    Arrays.sort(f, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0] - o2[0];
+      }
+    });
+    int[] lis = new int[N];
+    int lislen = 0;
+    for (int i = 0; i < f.length; i++) {
+      int t = f[i][1];
+      int ind = Arrays.binarySearch(lis, t);
+      if (ind < 0) {
+        ind = -ind - 1;
+      }
+      lis[ind] = t;
+      lislen = Math.max(lislen, ind + 1);
+    }
+    int result = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen;
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      result += 10 * Math.PI + 5 * Math.PI * (lislen - 1);
+    }
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        f = Arrays.stream(f)
+                .filter(p -> (Math.min(x1, x2) <= p[0] && p[0] <= Math.max(x1, x2)) && (Math.min(y1, y2) <= p[1] && p[1] <= Math.max(y1, y2)))
+                .map(p -> new int[] { p[0] * fx, p[1] * fy })
+                .toArray(int[][]::new);
+        Arrays.sort(f, (a, b) -> {
+            if (a[0] != b[0]) {
+                return Integer.compare(a[0], b[0]);
+            } else {
+                return Integer.compare(b[1], a[1]);
+            }
+        });
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < f.length; i++) {
+            int t = f[i][1];
+            int ind = Collections.binarySearch(Arrays.asList(lis), t);
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int x1 = scanner.nextInt();
+    int y1 = scanner.nextInt();
+    int x2 = scanner.nextInt();
+    int y2 = scanner.nextInt();
+    int fx = 1;
+    int fy = 1;
+    if (x1 > x2) {
+      fx = -1;
+    }
+    if (y1 > y2) {
+      fy = -1;
+    }
+    int N = scanner.nextInt();
+    int[][] f = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      f[i][0] = scanner.nextInt();
+      f[i][1] = scanner.nextInt();
+    }
+    Arrays.sort(f, (a, b) -> a[0] - b[0]);
+    List<Integer> lis = new ArrayList<>();
+    int lislen = 0;
+    for (int i = 0; i < f.length; i++) {
+      int t = f[i][1];
+      int ind = bisectLeft(lis, t);
+      lis.add(ind, t);
+      lislen = Math.max(lislen, ind + 1);
+    }
+    if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+    } else {
+      System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+    }
+  }
+
+  public static int bisectLeft(List<Integer> arr, int target) {
+    int low = 0;
+    int high = arr.size() - 1;
+    while (low <= high) {
+      int mid = (low + high) / 2;
+      if (arr.get(mid) < target) {
+        low = mid + 1;
+      } else {
+        high = mid - 1;
+      }
+    }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int N = sc.nextInt();
+        int inf = 1000000000;
+        ArrayList<ArrayList<Integer>> f = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            ArrayList<Integer> point = new ArrayList<>();
+            point.add(sc.nextInt());
+            point.add(sc.nextInt());
+            f.add(point);
+        }
+        f.sort((p1, p2) -> (p1.get(0) - p2.get(0)) * (p1.get(1) - p2.get(1)));
+        ArrayList<Integer> lis = new ArrayList<>();
+        lis.add(inf);
+        int lislen = 0;
+        for (int i = 0; i < f.size(); i++) {
+            int t = f.get(i).get(1);
+            int ind = Collections.binarySearch(lis, t);
+            lis.set(ind, t);
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * (lislen - 1));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < N; i++) {
+            int t = f[i][1];
+            int ind = Collections.binarySearch(lis, t);
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        int result = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen;
+        System.out.println(result);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int inf = 1000000000;
+        List<List<Integer>> f = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            List<Integer> point = new ArrayList<>();
+            point.add(sc.nextInt());
+            point.add(sc.nextInt());
+            f.add(point);
+        }
+        f.sort((p1, p2) -> (p1.get(0) - p2.get(0)) * fx + (p1.get(1) - p2.get(1)) * fy);
+        List<Integer> lis = new ArrayList<>();
+        lis.add(inf);
+        int lislen = 0;
+        for (int i = 0; i < f.size(); i++) {
+            int t = f.get(i).get(1);
+            int ind = Collections.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis.set(ind, t);
+            lislen = Math.max(lislen, ind + 1);
+        }
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int x1 = scanner.nextInt();
+        int y1 = scanner.nextInt();
+        int x2 = scanner.nextInt();
+        int y2 = scanner.nextInt();
+
+        int fx = 1;
+        int fy = 1;
+
+        if (x1 > x2) {
+            fx = -1;
+        }
+
+        if (y1 > y2) {
+            fy = -1;
+        }
+
+        int N = scanner.nextInt();
+        int inf = 1000000000;
+        List<List<Integer>> f = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            List<Integer> point = new ArrayList<>();
+            point.add(scanner.nextInt());
+            point.add(scanner.nextInt());
+            f.add(point);
+        }
+
+        f.sort((p1, p2) -> (p1.get(0) - p2.get(0)) * fx + (p1.get(1) - p2.get(1)) * fy);
+
+        List<Integer> lis = new ArrayList<>();
+        lis.add(inf);
+        int lislen = 0;
+
+        for (int i = 0; i < f.size(); i++) {
+            int t = f.get(i).get(1);
+            int ind = Collections.binarySearch(lis, t);
+            lis.set(ind, t);
+            lislen = Math.max(lislen, ind + 1);
+        }
+
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0));
+        } else {
+            System.out.println((Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen + 5 * Math.PI * lislen);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int fx = 1;
+        int fy = 1;
+        if (x1 > x2) {
+            fx = -1;
+        }
+        if (y1 > y2) {
+            fy = -1;
+        }
+        int N = sc.nextInt();
+        int[][] f = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            f[i][0] = sc.nextInt();
+            f[i][1] = sc.nextInt();
+        }
+        Arrays.sort(f, (a, b) -> a[0] - b[0]);
+        int[] lis = new int[N];
+        int lislen = 0;
+        for (int i = 0; i < N; i++) {
+            int t = f[i][1];
+            int ind = Arrays.binarySearch(lis, t);
+            if (ind < 0) {
+                ind = -ind - 1;
+            }
+            lis[ind] = t;
+            lislen = Math.max(lislen, ind + 1);
+        }
+        int result = (Math.abs(x2 - x1) + Math.abs(y2 - y1)) * 100 - 20 * lislen;
+        if (lislen == Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1)) + 1) {
+            result += 10 * Math.PI + 5 * Math.PI * Math.max(lislen - 1, 0);
+        } else {
+            result += 5 * Math.PI * lislen;
+        }
+        System.out.println(result);
+    }
+}
+[/JAVA]
+======

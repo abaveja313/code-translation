@@ -1,0 +1,3815 @@
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    String[] tokens = reader.readLine().split(" ");
+    int N = Integer.parseInt(tokens[0]);
+    int K = Integer.parseInt(tokens[1]);
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = Integer.parseInt(tokens[i + 2]);
+    }
+
+    // Convert the array to a list for easier manipulation
+    List<Integer> AList = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      AList.add(A[i]);
+    }
+
+    // Replace all elements greater than K with K + 1
+    for (int i = 0; i < N; i++) {
+      if (AList.get(i) > K) {
+        AList.set(i, K + 1);
+      }
+    }
+
+    // Sort the list
+    Collections.sort(AList);
+
+    // Create a mask for the first K elements
+    int mask = (1 << K) - 1;
+
+    // Create a function to test if the value at index x is the minimum
+    // value in the list that is greater than K
+    boolean test(int x) {
+      if (AList.get(x) > K) {
+        return true;
+      }
+      int dp = 1;
+      for (int i = 0; i < x; i++) {
+        dp |= (dp << AList.get(i));
+        dp &= mask;
+      }
+      dp >>= (K - AList.get(x));
+      return (dp > 0);
+    }
+
+    // Perform a binary search to find the minimum value in the list
+    // that is greater than K
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left =
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] tokens = br.readLine().split(" ");
+    int N = Integer.parseInt(tokens[0]);
+    int K = Integer.parseInt(tokens[1]);
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = Integer.parseInt(tokens[i + 2]);
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).sorted().toArray();
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a == A[x]) {
+        continue;
+      }
+      dp |= (dp << a) & mask;
+      dp >>= K - A[x];
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x > K ? K + 1 : x).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.copyOfRange(A, 0, x)) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : Arrays.copyOfRange(A, x + 1, A.length)) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.sort(Integer::compare);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, List<Integer> A, int K, int mask) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A.get(x));
+    }
+    for (int a : A.subList(x + 1, A.size())) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A.get(x));
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.concat(Arrays.stream(A, 0, x), Arrays.stream(A, x + 1, A.length)).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.of(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a) & mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        A = A.stream().map(x -> x <= K ? x : K + 1).collect(Collectors.toList());
+        A.sort(Integer::compareTo);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, A)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x, List<Integer> A) {
+        if (A.get(x) > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A.subList(0, x)) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        for (int a : A.subList(x + 1, A.size())) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A.get(x));
+        return dp > 0;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.sort(Integer::compareTo);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : A.subList(x + 1, N)) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A.get(x));
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    // Replace elements greater than K with K + 1
+    for (int i = 0; i < N; i++) {
+      if (A[i] > K) {
+        A[i] = K + 1;
+      }
+    }
+
+    // Sort the array
+    Arrays.sort(A);
+
+    // Create a mask to check if the sum of the elements is greater than K
+    int mask = (1 << K) - 1;
+
+    // Function to check if the sum of the elements is greater than K
+    boolean test(int x) {
+      if (A[x] > K) {
+        return true;
+      }
+      int dp = 1;
+      for (int i = 0; i < x; i++) {
+        dp |= (dp << A[i]);
+        dp &= mask;
+      }
+      dp >>= (K - A[x]);
+      return (dp > 0);
+    }
+
+    // Binary search to find the minimum number of elements needed to have a sum greater than K
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+
+    // Print the answer
+    System.out.println(left + 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    String[] line = reader.readLine().split(" ");
+    int N = Integer.parseInt(line[0]);
+    int K = Integer.parseInt(line[1]);
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = Integer.parseInt(line[i + 2]);
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).sorted().toArray();
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `java.io` package to read input from the console, and the `java.util` package to perform various operations such as sorting and binary search. The `BufferedReader` class is used to read input from the console, and the `split()` method is used to split the input string into an array of strings. The `Integer.parseInt()` method is used to convert the strings to integers. The `Arrays.stream()` method is used to create a stream of integers from the `A` array, and the `map()` method is used to apply the `x <= K ? x : K + 1` function to each element of the stream. The `sorted()` method
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    A = A.stream().map(x -> x <= K ? x : K + 1).collect(Collectors.toList());
+    A.sort(Integer::compareTo);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, List<Integer> A, int K, int mask) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : A.subList(x + 1, A.size())) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A.get(x));
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a == A[x]) {
+        continue;
+      }
+      dp |= (dp << a) & mask;
+      dp >>= K - A[x];
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = reader.readLine().split(" ");
+        int N = Integer.parseInt(line[0]);
+        int K = Integer.parseInt(line[1]);
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(line[i + 2]);
+        }
+        A = Arrays.stream(A).map(x -> x > K ? K + 1 : x).toArray();
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A[x]);
+        }
+        return dp > 0;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.sort(Integer::compare);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : A.subList(x + 1, A.size())) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A.get(x));
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a == A[x]) {
+        continue;
+      }
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.replaceAll(x -> x > K ? K + 1 : x);
+    A.sort(Integer::compareTo);
+    int mask = (1 << K) - 1;
+
+    IntStream.range(0, N)
+        .filter(x -> A.get(x) > K)
+        .forEach(x -> {
+          int dp = 1;
+          for (int a : A.subList(0, x)) {
+            dp |= (dp << a) & mask;
+          }
+          for (int a : A.subList(x + 1, N)) {
+            dp |= (dp << a) & mask;
+          }
+          dp >>= K - A.get(x);
+          if (dp > 0) {
+            System.out.println(x + 1);
+          }
+        });
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int a = scanner.nextInt();
+            if (a > K) {
+                A.add(K + 1);
+            } else {
+                A.add(a);
+            }
+        }
+        A.sort(Integer::compareTo);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, A, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x, List<Integer> A, int K, int mask) {
+        if (A.get(x) > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A.subList(0, x)) {
+            dp |= (dp << a) & mask;
+        }
+        for (int a : A.subList(x + 1, A.size())) {
+            dp |= (dp << a) & mask;
+        }
+        dp >>= (K - A.get(x));
+        return dp > 0;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int mask = (1 << K) - 1;
+
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a <= K) {
+        dp |= (dp << a);
+        dp &= mask;
+      }
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        A.replaceAll(x -> x > K ? K + 1 : x);
+        Collections.sort(A);
+        int mask = (1 << K) - 1;
+
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(A, x, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(List<Integer> A, int x, int K, int mask) {
+        if (A.get(x) > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A.subList(0, x)) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A.get(x));
+        }
+        for (int a : A.subList(x + 1, A.size())) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A.get(x));
+        }
+        return dp > 0;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.concat(IntStream.range(0, x), IntStream.range(x + 1, A.length)).boxed().map(i -> A[i]).toArray(Integer[]::new)) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a > K) {
+        continue;
+      }
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a <= x) {
+        continue;
+      }
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a <= K) {
+        dp |= (dp << a) & mask;
+      }
+    }
+    dp >>= (K - A[x]);
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x > K ? K + 1 : x).sorted().toArray();
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a == A[x]) {
+        continue;
+      }
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : Stream.concat(Arrays.stream(A, 0, x), Arrays.stream(A, x + 1, A.length)).toArray()) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A[x]);
+        }
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : Arrays.stream(A).skip(x + 1).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : IntStream.range(x + 1, N).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return dp > 0;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).sorted().toArray();
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = IntStream.range(0, N).map(i -> sc.nextInt()).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp = dp >> (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : Arrays.stream(A).limit(x).toArray()) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A[x]);
+        }
+        return (dp > 0);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      if (A[i] > K) {
+        A[i] = K + 1;
+      }
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+  
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).boxed().collect(Collectors.toList())) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : IntStream.range(x + 1, A.length).map(i -> A[i]).boxed().collect(Collectors.toList())) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= K - A[x];
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    int[] sortedA = Arrays.stream(A).sorted().toArray();
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, sortedA, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] sortedA, int mask) {
+    if (sortedA[x] > K) {
+      return true;
+    }
+
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> sortedA[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - sortedA[x]);
+    }
+
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x <= K ? x : K + 1).sorted().toArray();
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(A, x, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    System.out.println(left + 1);
+  }
+
+  public static boolean test(int[] A, int x, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a != A[x]) {
+        dp |= (dp << a) & mask;
+        dp >>= K - A[x];
+      }
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        A = IntStream.of(A).map(x -> x <= K ? x : K + 1).toArray();
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(A, x, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+    
+    private static boolean test(int[] A, int x, int K, int mask) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      if (a != A[x]) {
+        dp |= (dp << a) & mask;
+        dp >>= (K - A[x]);
+      }
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if (A[i] > K) {
+                list.add(i);
+            }
+        }
+        list.sort(Integer::compare);
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, list, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+    
+    private static boolean test(int x, List<Integer> list, int mask) {
+        if (list.get(x) > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int i = 0; i < x; i++) {
+            dp |= (dp << list.get(i));
+            dp &= mask;
+        }
+        for (int i = x + 1; i < list.size(); i++) {
+            dp |= (dp << list.get(i));
+            dp &= mask;
+        }
+        dp >>= (K - list.get(x));
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : Arrays.stream(A).skip(x + 1).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        Arrays.sort(A);
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : IntStream.range(0, x).map(i -> A[i]).collect(Collectors.toList())) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        for (int a : IntStream.range(x + 1, A.length).map(i -> A[i]).collect(Collectors.toList())) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= K - A[x];
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : Arrays.stream(A).skip(x + 1).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    ArrayList<Integer> A = new ArrayList<Integer>();
+    for (int i = 0; i < N; i++) {
+      int x = sc.nextInt();
+      if (x > K) {
+        x = K + 1;
+      }
+      A.add(x);
+    }
+    A.sort(null);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    Iterator<Integer> iter = A.subList(0, x).iterator();
+    while (iter.hasNext()) {
+      int a = iter.next();
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    iter = A.subList(x + 1, A.size()).iterator();
+    while (iter.hasNext()) {
+      int a = iter.next();
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A.get(x));
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : Arrays.stream(A).skip(x + 1).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return dp > 0;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input from the console, and the `Arrays` class to sort the input array. The `IntStream` class is used to iterate over the input array and perform the necessary operations. The `test` method is implemented using a similar approach as the Python code, with the addition of the `mask` variable to ensure that the result of the bitwise operations is within the desired range. The `main` method is similar to the Python code, with the addition of the `mask` variable and the use of the `IntStream` class to iterate over the input array.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x, int[] A, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.sort(Comparator.naturalOrder());
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : A.subList(x + 1, A.size())) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A.get(x));
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if (A[i] > K) {
+                list.add(i);
+            }
+        }
+        list.sort(null);
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, A, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    private static boolean test(int x, int[] A, int K, int mask) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int i = 0; i < x; i++) {
+            dp |= (dp << A[i]);
+            dp &= mask;
+        }
+        for (int i = x + 1; i < A.length; i++) {
+            dp |= (dp << A[i]);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.stream(A).limit(x).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : Arrays.stream(A).skip(x + 1).toArray()) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    A.sort(Integer::compareTo);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A.get(x) > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A.subList(0, x)) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : A.subList(x + 1, N)) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A.get(x));
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a) & mask;
+      dp >>= K - A[x];
+    }
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    for (int a : IntStream.range(x + 1, A.length).map(i -> A[i]).toArray()) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    A = Arrays.stream(A).map(x -> x > K ? K + 1 : x).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : Arrays.copyOfRange(A, 0, x)) {
+      dp |= (dp << a) & mask;
+    }
+    for (int a : Arrays.copyOfRange(A, x + 1, A.length)) {
+      dp |= (dp << a) & mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x, A, K, mask)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  public static boolean test(int x, int[] A, int K, int mask) {
+    if (A[x] > K) {
+      return true;
+    }
+
+    int dp = 1;
+    for (int a : A) {
+      if (a == A[x]) {
+        continue;
+      }
+      dp |= (dp << a);
+      dp &= mask;
+    }
+
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    A = Stream.of(A).map(x -> x <= K ? x : K + 1).toArray();
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      if (A[i] > K) {
+        A[i] = K + 1;
+      }
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : IntStream.range(0, x).map(i -> A[i]).toArray()) {
+      dp |= (dp << a) & mask;
+      dp >>= (K - A[x]);
+    }
+    return dp > 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, A, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+    
+    private static boolean test(int x, int[] A, int K, int mask) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : Arrays.stream(A).limit(x).boxed().collect(Collectors.toList())) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        for (int a : Arrays.stream(A).skip(x + 1).boxed().collect(Collectors.toList())) {
+            dp |= (dp << a);
+            dp &= mask;
+        }
+        dp >>= (K - A[x]);
+        return (dp > 0);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x, A, K, mask)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x, int[] A, int K, int mask) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A[x]);
+        }
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) throws IOException {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    String line = reader.readLine();
+    String[] tokens = line.split(" ");
+    int N = Integer.parseInt(tokens[0]);
+    int K = Integer.parseInt(tokens[1]);
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = Integer.parseInt(tokens[i + 2]);
+    }
+    Arrays.sort(A);
+    int mask = (1 << K) - 1;
+    int left = -1;
+    int right = N;
+    while (left + 1 < right) {
+      int x = (left + right) / 2;
+      if (test(x)) {
+        right = x;
+      } else {
+        left = x;
+      }
+    }
+    int answer = left + 1;
+    System.out.println(answer);
+  }
+
+  private static boolean test(int x) {
+    if (A[x] > K) {
+      return true;
+    }
+    int dp = 1;
+    for (int a : A) {
+      dp |= (dp << a);
+      dp &= mask;
+    }
+    dp >>= (K - A[x]);
+    return (dp > 0);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int mask = (1 << K) - 1;
+        int left = -1;
+        int right = N;
+        while (left + 1 < right) {
+            int x = (left + right) / 2;
+            if (test(x)) {
+                right = x;
+            } else {
+                left = x;
+            }
+        }
+        int answer = left + 1;
+        System.out.println(answer);
+    }
+
+    public static boolean test(int x) {
+        if (A[x] > K) {
+            return true;
+        }
+        int dp = 1;
+        for (int a : A) {
+            dp |= (dp << a) & mask;
+            dp >>= (K - A[x]);
+        }
+        return (dp > 0);
+    }
+}
+[/JAVA]
+======

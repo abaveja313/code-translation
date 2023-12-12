@@ -1,0 +1,685 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+import java.util.function.*;
+import java.util.stream.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[] ppsum = new int[N + 1];
+        int[] psum = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+            psum[i + 1] = psum[i] + a[i];
+        }
+        int ansb = Arrays.stream(ppsum).boxed().max(Comparator.naturalOrder()).get();
+        int answ = Arrays.stream(ppsum).boxed().max(Comparator.naturalOrder()).get();
+        System.out.println(Math.max(ansb, answ));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+    int ansb = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+    }
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = scanner.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = IntStream.range(0, N - K + 1)
+        .map(i -> ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+        .max()
+        .orElse(0);
+
+    int answ = IntStream.range(0, N - K + 1)
+        .map(i -> ppsum[i] + ppsum[N] - ppsum[i + K])
+        .max()
+        .orElse(0);
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int[] ppsum = new int[N + 1];
+        int[] psum = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+            psum[i + 1] = psum[i] + a[i];
+        }
+
+        int ansb = IntStream.range(0, N - K + 1).boxed()
+                .map(i -> ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+                .max(Integer::compareTo)
+                .orElse(0);
+
+        int answ = IntStream.range(0, N - K + 1).boxed()
+                .map(i -> ppsum[i] + ppsum[N] - ppsum[i + K])
+                .max(Integer::compareTo)
+                .orElse(0);
+
+        System.out.println(Math.max(ansb, answ));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = Collections.max(Arrays.stream(ppsum)
+        .map(x -> x + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+        .collect(Collectors.toList()));
+
+    int answ = Collections.max(Arrays.stream(ppsum)
+        .map(x -> x + ppsum[N] - ppsum[i + K])
+        .collect(Collectors.toList()));
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int[] ppsum = new int[N + 1];
+        int[] psum = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+            psum[i + 1] = psum[i] + a[i];
+        }
+
+        int ansb = 0;
+        int answ = 0;
+        for (int i = 0; i < N - K + 1; i++) {
+            ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+            answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+        }
+
+        System.out.println(Math.max(ansb, answ));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = Arrays.stream(ppsum)
+      .limit(N - K + 1)
+      .map(i -> i + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+      .max()
+      .getAsInt();
+
+    int answ = Arrays.stream(ppsum)
+      .limit(N - K + 1)
+      .map(i -> i + ppsum[N] - ppsum[i + K])
+      .max()
+      .getAsInt();
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+    int ansb = Arrays.stream(IntStream.range(0, N - K + 1).map(i -> ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]).toArray()).max().getAsInt();
+    int answ = Arrays.stream(IntStream.range(0, N - K + 1).map(i -> ppsum[i] + ppsum[N] - ppsum[i + K]).toArray()).max().getAsInt();
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int[] ppsum = new int[N + 1];
+        int[] psum = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+            psum[i + 1] = psum[i] + a[i];
+        }
+
+        int ansb = 0;
+        for (int i = 0; i < N - K + 1; i++) {
+            ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+        }
+
+        int answ = 0;
+        for (int i = 0; i < N - K + 1; i++) {
+            answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+        }
+
+        System.out.println(Math.max(ansb, answ));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+    int ansb = Collections.max(
+      Arrays.stream(ppsum)
+        .map(i -> i + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+        .toArray()
+    );
+    int answ = Collections.max(
+      Arrays.stream(ppsum)
+        .map(i -> i + ppsum[N] - ppsum[i + K])
+        .toArray()
+    );
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = Arrays.stream(ppsum).limit(N - K + 1).reduce(Integer::max).get();
+    int answ = Arrays.stream(ppsum).limit(N - K + 1).reduce(Integer::max).get();
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] a = new int[N];
+    for (int i = 0; i < N; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+      psum[i + 1] = psum[i] + a[i];
+    }
+
+    int ansb = Arrays.stream(ppsum)
+      .limit(N - K + 1)
+      .map(i -> i + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K])
+      .max()
+      .orElse(0);
+
+    int answ = Arrays.stream(ppsum)
+      .limit(N - K + 1)
+      .map(i -> i + ppsum[N] - ppsum[i + K] + ppsum[i])
+      .max()
+      .orElse(0);
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = sc.nextInt();
+        }
+        int[] ppsum = new int[N + 1];
+        int[] psum = new int[N + 1];
+        for (int i = 0; i < N; i++) {
+            ppsum[i + 1] = ppsum[i] + Math.max(0, a[i]);
+            psum[i + 1] = psum[i] + a[i];
+        }
+        int ansb = 0;
+        int answ = 0;
+        for (int i = 0; i < N - K + 1; i++) {
+            ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+            answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+        }
+        System.out.println(Math.max(ansb, answ));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      a.add(scanner.nextInt());
+    }
+
+    int[] ppsum = new int[N + 1];
+    int[] psum = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      ppsum[i + 1] = ppsum[i] + Math.max(0, a.get(i));
+      psum[i + 1] = psum[i] + a.get(i);
+    }
+
+    int ansb = 0;
+    int answ = 0;
+    for (int i = 0; i < N - K + 1; i++) {
+      ansb = Math.max(ansb, ppsum[i] + psum[i + K] - psum[i] + ppsum[N] - ppsum[i + K]);
+      answ = Math.max(answ, ppsum[i] + ppsum[N] - ppsum[i + K]);
+    }
+
+    System.out.println(Math.max(ansb, answ));
+  }
+}
+[/JAVA]
+======

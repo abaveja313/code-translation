@@ -1,0 +1,1085 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    int K = Collections.max(a, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return Integer.compare(a.count(o1), a.count(o2));
+      }
+    });
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        int K = Collections.max(a.stream().map(i -> Collections.frequency(a, i)).collect(Collectors.toList()));
+        int i = 0;
+        while (true) {
+            if (Collections.frequency(a, a.get(i)) < K) {
+                int C = Collections.frequency(a, a.get(i));
+                n -= C;
+                int Val = a.get(i);
+                for (int k = 0; k < C; k++) {
+                    a.remove(Val);
+                }
+            } else {
+                i++;
+            }
+            if (i == n) {
+                break;
+            }
+        }
+        int MinI = 1000001;
+        int ID = -1;
+        List<Integer> A = new ArrayList<>(new HashSet<>(a));
+        for (int i = 0; i < A.size(); i++) {
+            int j = n - 1;
+            while (j >= 0 && a.get(j) != A.get(i)) {
+                j--;
+            }
+            if (j < MinI) {
+                MinI = j;
+                ID = A.get(i);
+            }
+        }
+        System.out.println(ID);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int k = Collections.max(a);
+    int i = 0;
+    while (true) {
+      if (Collections.frequency(a, a.get(i)) < k) {
+        int c = Collections.frequency(a, a.get(i));
+        n -= c;
+        int val = a.get(i);
+        for (int j = 0; j < c; j++) {
+          a.remove(val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minI = 1000001;
+    int id = -1;
+    Set<Integer> aSet = new HashSet<>(a);
+    for (int i : aSet) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != i) {
+        j--;
+      }
+      if (j < minI) {
+        minI = j;
+        id = i;
+      }
+    }
+    System.out.println(id);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int K = Collections.max(a, Comparator.comparingInt(a::count));
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    int K = Collections.max(a, Comparator.comparingInt(a::count));
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    int K = Collections.max(a, Comparator.comparingInt(a::count));
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int maxCount = 0;
+    for (int i = 0; i < n; i++) {
+      int count = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[i] == a[j]) {
+          count++;
+        }
+      }
+      if (count > maxCount) {
+        maxCount = count;
+      }
+    }
+    int i = 0;
+    while (i < n) {
+      if (Arrays.asList(a).contains(a[i])) {
+        int count = 0;
+        for (int j = 0; j < n; j++) {
+          if (a[i] == a[j]) {
+            count++;
+          }
+        }
+        if (count < maxCount) {
+          int val = a[i];
+          for (int k = 0; k < count; k++) {
+            a = Arrays.stream(a).filter(x -> x != val).toArray();
+          }
+        } else {
+          i++;
+        }
+      } else {
+        i++;
+      }
+    }
+    int minIndex = 1000001;
+    int id = -1;
+    List<Integer> uniqueValues = new ArrayList<>(Arrays.asList(a));
+    for (int i = 0; i < uniqueValues.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a[j] != uniqueValues.get(i)) {
+        j--;
+      }
+      if (j < minIndex) {
+        minIndex = j;
+        id = uniqueValues.get(i);
+      }
+    }
+    System.out.println(id);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int K = Collections.max(a);
+    int i = 0;
+    while (true) {
+      if (Collections.frequency(a, a.get(i)) < K) {
+        int C = Collections.frequency(a, a.get(i));
+        n -= C;
+        int val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < minI) {
+        minI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int k = Collections.max(a);
+    int i = 0;
+    while (true) {
+      if (Collections.frequency(a, a.get(i)) < k) {
+        int c = Collections.frequency(a, a.get(i));
+        n -= c;
+        int val = a.get(i);
+        for (int j = 0; j < c; j++) {
+          a.remove(val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minI = 1000001;
+    int id = -1;
+    List<Integer> aSet = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < aSet.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != aSet.get(i)) {
+        j--;
+      }
+      if (j < minI) {
+        minI = j;
+        id = aSet.get(i);
+      }
+    }
+    System.out.println(id);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int maxCount = 0;
+    for (int i = 0; i < n; i++) {
+      int count = 0;
+      for (int j = 0; j < n; j++) {
+        if (a[j] == a[i]) {
+          count++;
+        }
+      }
+      if (count > maxCount) {
+        maxCount = count;
+      }
+    }
+    int minIndex = 1000001;
+    int id = -1;
+    for (int i = 0; i < n; i++) {
+      int index = n - 1;
+      while (index >= 0 && a[index] != a[i]) {
+        index--;
+      }
+      if (index < minIndex) {
+        minIndex = index;
+        id = a[i];
+      }
+    }
+    System.out.println(id);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int K = Collections.max(a);
+    int i = 0;
+    while (true) {
+      if (Collections.frequency(a, a.get(i)) < K) {
+        int C = Collections.frequency(a, a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    Set<Integer> A = new HashSet<>(a);
+    for (int i : A) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != i) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = i;
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        int K = a.stream().mapToInt(x -> x).max().getAsInt();
+        int i = 0;
+        while (i < n) {
+            if (a.stream().filter(x -> x == a.get(i)).count() < K) {
+                int C = a.stream().filter(x -> x == a.get(i)).count();
+                n -= C;
+                int Val = a.get(i);
+                for (int k = 0; k < C; k++) {
+                    a.remove(Val);
+                }
+            } else {
+                i++;
+            }
+            if (i == n) {
+                break;
+            }
+        }
+        int MinI = 1000001;
+        int ID = -1;
+        List<Integer> A = new ArrayList<>(new HashSet<>(a));
+        for (int i = 0; i < A.size(); i++) {
+            int j = n - 1;
+            while (j >= 0 && a.get(j) != A.get(i)) {
+                j--;
+            }
+            if (j < MinI) {
+                MinI = j;
+                ID = A.get(i);
+            }
+        }
+        System.out.println(ID);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int K = Collections.max(Collections.frequency(a));
+    int i = 0;
+    while (true) {
+      if (Collections.frequency(a, a.get(i)) < K) {
+        int C = Collections.frequency(a, a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        int K = Collections.max(a, Comparator.comparingInt(a::count));
+        int i = 0;
+        while (true) {
+            if (a.count(a.get(i)) < K) {
+                int C = a.count(a.get(i));
+                n -= C;
+                int Val = a.get(i);
+                for (int k = 0; k < C; k++) {
+                    a.remove(Val);
+                }
+            } else {
+                i++;
+            }
+            if (i == n) {
+                break;
+            }
+        }
+        int MinI = 1000001;
+        int ID = -1;
+        List<Integer> A = new ArrayList<>(new HashSet<>(a));
+        for (int i = 0; i < A.size(); i++) {
+            int j = n - 1;
+            while (j >= 0 && a.get(j) != A.get(i)) {
+                j--;
+            }
+            if (j < MinI) {
+                MinI = j;
+                ID = A.get(i);
+            }
+        }
+        System.out.println(ID);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int K = Collections.max(a, Comparator.comparingInt(a::count));
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int Val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(Val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int MinI = 1000001;
+    int ID = -1;
+    List<Integer> A = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < A.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != A.get(i)) {
+        j--;
+      }
+      if (j < MinI) {
+        MinI = j;
+        ID = A.get(i);
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int maxCount = Collections.max(getCounts(a));
+    int i = 0;
+    while (true) {
+      if (getCount(a, a[i]) < maxCount) {
+        int count = getCount(a, a[i]);
+        n -= count;
+        int val = a[i];
+        for (int k = 0; k < count; k++) {
+          a = remove(a, val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minIndex = 1000001;
+    int id = -1;
+    List<Integer> aSet = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < aSet.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a[j] != aSet.get(i)) {
+        j--;
+      }
+      if (j < minIndex) {
+        minIndex = j;
+        id = aSet.get(i);
+      }
+    }
+    System.out.println(id);
+  }
+
+  private static List<Integer> getCounts(int[] a) {
+    Map<Integer, Integer> counts = new HashMap<>();
+    for (int i = 0; i < a.length; i++) {
+      int val = a[i];
+      counts.put(val, counts.getOrDefault(val, 0) + 1);
+    }
+    return new ArrayList<>(counts.values());
+  }
+
+  private static int getCount(int[] a, int val) {
+    int count = 0;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] == val) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  private static int[] remove(int[] a, int val) {
+    int[] result = new int[a.length - 1];
+    int j = 0;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] != val) {
+        result[j++] = a[i];
+      }
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        int k = Collections.max(a, Comparator.comparingInt(a::count));
+        int i = 0;
+        while (true) {
+            if (a.count(a.get(i)) < k) {
+                int c = a.count(a.get(i));
+                n -= c;
+                int val = a.get(i);
+                for (int j = 0; j < c; j++) {
+                    a.remove(val);
+                }
+            } else {
+                i++;
+            }
+            if (i == n) {
+                break;
+            }
+        }
+        int minI = 1000001;
+        int id = -1;
+        List<Integer> aSet = new ArrayList<>(new HashSet<>(a));
+        for (int i = 0; i < aSet.size(); i++) {
+            int j = n - 1;
+            while (j >= 0 && a.get(j) != aSet.get(i)) {
+                j--;
+            }
+            if (j < minI) {
+                minI = j;
+                id = aSet.get(i);
+            }
+        }
+        System.out.println(id);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int k = Collections.max(a);
+    int i = 0;
+    while (i < n) {
+      if (Collections.frequency(a, a.get(i)) < k) {
+        int c = Collections.frequency(a, a.get(i));
+        n -= c;
+        int val = a.get(i);
+        for (int j = 0; j < c; j++) {
+          a.remove(val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minI = 1000001;
+    int id = -1;
+    List<Integer> aSet = new ArrayList<>(new HashSet<>(a));
+    for (int i = 0; i < aSet.size(); i++) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != aSet.get(i)) {
+        j--;
+      }
+      if (j < minI) {
+        minI = j;
+        id = aSet.get(i);
+      }
+    }
+    System.out.println(id);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int K = getMaxCount(a);
+        int i = 0;
+        while (true) {
+            if (getCount(a, a[i]) < K) {
+                int C = getCount(a, a[i]);
+                n -= C;
+                int val = a[i];
+                for (int k = 0; k < C; k++) {
+                    a = remove(a, val);
+                }
+            } else {
+                i++;
+            }
+            if (i == n) {
+                break;
+            }
+        }
+        int minI = 1000001;
+        int ID = -1;
+        List<Integer> A = new ArrayList<>(new HashSet<>(Arrays.asList(a)));
+        for (int i = 0; i < A.size(); i++) {
+            int j = n - 1;
+            while (j >= 0 && a[j] != A.get(i)) {
+                j--;
+            }
+            if (j < minI) {
+                minI = j;
+                ID = A.get(i);
+            }
+        }
+        System.out.println(ID);
+    }
+
+    private static int[] remove(int[] a, int val) {
+        int[] result = new int[a.length - 1];
+        int j = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != val) {
+                result[j++] = a[i];
+            }
+        }
+        return result;
+    }
+
+    private static int getCount(int[] a, int val) {
+        int count = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == val) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static int getMaxCount(int[] a) {
+        int maxCount = 0;
+        for (int i = 0; i < a.length; i++) {
+            int count = getCount(a, a[i]);
+            if (count > maxCount) {
+                maxCount = count;
+            }
+        }
+        return maxCount;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    int K = Collections.max(a, Comparator.comparingInt(a::count));
+    int i = 0;
+    while (true) {
+      if (a.count(a.get(i)) < K) {
+        int C = a.count(a.get(i));
+        n -= C;
+        int val = a.get(i);
+        for (int k = 0; k < C; k++) {
+          a.remove(val);
+        }
+      } else {
+        i++;
+      }
+      if (i == n) {
+        break;
+      }
+    }
+    int minI = 1000001;
+    int ID = -1;
+    Set<Integer> A = new HashSet<>(a);
+    for (int i : A) {
+      int j = n - 1;
+      while (j >= 0 && a.get(j) != i) {
+        j--;
+      }
+      if (j < minI) {
+        minI = j;
+        ID = i;
+      }
+    }
+    System.out.println(ID);
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,1402 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            String[] input = scanner.nextLine().split(" ");
+            row.add(Integer.parseInt(input[0]));
+            row.add(Integer.parseInt(input[1]));
+            graph.add(row);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        double check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+                // ignore
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            int x1 = graph.get(ls.get(i)).get(0);
+            int y1 = graph.get(ls.get(i)).get(1);
+            int x2 = graph.get(ls.get(i + 1)).get(0);
+            int y2 = graph.get(ls.get(i + 1)).get(1);
+            ans += Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.lang.Math;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] graph = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            String[] input = sc.nextLine().split(" ");
+            graph[i][0] = Integer.parseInt(input[0]);
+            graph[i][1] = Integer.parseInt(input[1]);
+        }
+
+        int check = 0;
+        int count = 0;
+
+        int[] pls = new int[n];
+        int[] ls = new int[n];
+        for (int i = 0; i < n; i++) {
+            ls[i] = i;
+        }
+
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, int[] pls, int[] ls) {
+        if (ls.length == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+        for (int i = 0; i < ls.length; i++) {
+            pls[pls.length - 1] = ls[i];
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls[pls.length - 1] = 0;
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static int[] inasi(int[] ls, int i) {
+        int[] n = new int[ls.length - 1];
+        for (int j = 0; j < ls.length; j++) {
+            if (j == i) {
+                continue;
+            }
+            n[j] = ls[j];
+        }
+        return n;
+    }
+
+    public static double kyori(int[] pls) {
+        double ans = 0;
+        for (int i = 0; i < pls.length - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph[pls[i]][0] - graph[pls[i + 1]][0], 2) + Math.pow(graph[pls[i]][1] - graph[pls[i + 1]][1], 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            String[] input = sc.nextLine().split(" ");
+            for (int j = 0; j < input.length; j++) {
+                row.add(Integer.parseInt(input[j]));
+            }
+            graph.add(row);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        double check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            int x1 = graph.get(ls.get(i)).get(0);
+            int y1 = graph.get(ls.get(i)).get(1);
+            int x2 = graph.get(ls.get(i + 1)).get(0);
+            int y2 = graph.get(ls.get(i + 1)).get(1);
+            ans += Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
+        return ans;
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<List<Integer>> graph = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      List<Integer> list = new ArrayList<>();
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      list.add(a);
+      list.add(b);
+      graph.add(list);
+    }
+
+    double check = 0;
+    int count = 0;
+
+    List<Integer> pls = new ArrayList<>();
+    List<Integer> ls = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      ls.add(i);
+    }
+
+    keisan(n, pls, ls);
+
+    System.out.println(check / count);
+  }
+
+  public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+    if (ls.size() == 0) {
+      check += kyori(pls);
+      count++;
+      return;
+    }
+
+    for (int i = 0; i < ls.size(); i++) {
+      pls.add(ls.get(i));
+      keisan(n - 1, pls, inasi(ls, i));
+      try {
+        pls.remove(pls.size() - 1);
+      } catch (Exception e) {
+      }
+    }
+  }
+
+  public static List<Integer> inasi(List<Integer> ls, int i) {
+    List<Integer> n = new ArrayList<>();
+    for (int j = 0; j < ls.size(); j++) {
+      if (j == i) {
+        continue;
+      }
+      n.add(ls.get(j));
+    }
+    return n;
+  }
+
+  public static double kyori(List<Integer> ls) {
+    double ans = 0;
+    for (int i = 0; i < ls.size() - 1; i++) {
+      ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+    }
+    return ans;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            row.add(a);
+            row.add(b);
+            graph.add(row);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        List<Integer> n = new ArrayList<>();
+        double check = 0;
+        int count = 0;
+
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(List<Integer> n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+                // do nothing
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            int a = ls.get(i);
+            int b = ls.get(i + 1);
+            ans += Math.sqrt(Math.pow(graph.get(a).get(0) - graph.get(b).get(0), 2) + Math.pow(graph.get(a).get(1) - graph.get(b).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            row.add(scanner.nextInt());
+            row.add(scanner.nextInt());
+            graph.add(row);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        int check = 0;
+        int count = 0;
+
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            int x1 = graph.get(ls.get(i)).get(0);
+            int y1 = graph.get(ls.get(i)).get(1);
+            int x2 = graph.get(ls.get(i + 1)).get(0);
+            int y2 = graph.get(ls.get(i + 1)).get(1);
+            ans += Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            row.add(a);
+            row.add(b);
+            graph.add(row);
+        }
+
+        double check = 0;
+        int count = 0;
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[][] graph = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            graph[i] = new int[] { a, b };
+        }
+
+        double check = 0;
+        int count = 0;
+        keisan(10, new int[0], new int[n], 0);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, int[] pls, int[] ls, int i) {
+        if (ls.length == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int j = 0; j < ls.length; j++) {
+            pls = Arrays.copyOf(pls, pls.length + 1);
+            pls[pls.length - 1] = ls[j];
+            keisan(n - 1, pls, inasi(ls, j), i + 1);
+            try {
+                pls = Arrays.copyOf(pls, pls.length - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static int[] inasi(int[] ls, int i) {
+        int[] n = new int[ls.length - 1];
+        for (int j = 0; j < ls.length; j++) {
+            if (j == i) {
+                continue;
+            }
+            n[j] = ls[j];
+        }
+        return n;
+    }
+
+    public static double kyori(int[] pls) {
+        double ans = 0;
+        for (int i = 0; i < pls.length - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph[pls[i]][0] - graph[pls[i + 1]][0], 2) + Math.pow(graph[pls[i]][1] - graph[pls[i + 1]][1], 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] graph = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            String[] input = sc.nextLine().split(" ");
+            graph[i][0] = Integer.parseInt(input[0]);
+            graph[i][1] = Integer.parseInt(input[1]);
+        }
+
+        double check = 0;
+        int count = 0;
+        int[] pls = new int[n];
+        int[] ls = new int[n];
+        for (int i = 0; i < n; i++) {
+            ls[i] = i;
+        }
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, int[] pls, int[] ls) {
+        if (ls.length == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.length; i++) {
+            pls[n - 1] = ls[i];
+            keisan(n - 1, pls, inasi(ls, i));
+        }
+    }
+
+    public static int[] inasi(int[] ls, int i) {
+        int[] n = new int[ls.length - 1];
+        for (int j = 0; j < ls.length; j++) {
+            if (j == i) {
+                continue;
+            }
+            n[j] = ls[j];
+        }
+        return n;
+    }
+
+    public static double kyori(int[] pls) {
+        double ans = 0;
+        for (int i = 0; i < pls.length - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph[pls[i]][0] - graph[pls[i + 1]][0], 2) + Math.pow(graph[pls[i]][1] - graph[pls[i + 1]][1], 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> node = new ArrayList<>();
+            String[] input = scanner.nextLine().split(" ");
+            node.add(Integer.parseInt(input[0]));
+            node.add(Integer.parseInt(input[1]));
+            graph.add(node);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        double check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            row.add(a);
+            row.add(b);
+            graph.add(row);
+        }
+
+        double check = 0;
+        int count = 0;
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Collections;
+import java.util.BitSet;
+import java.util.NoSuchElementException;
+import java.util.IllegalArgumentException;
+import java.util.InputMismatchException;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] graph = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph[i] = new int[] { a, b };
+        }
+
+        double check = 0;
+        int count = 0;
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        keisan(10, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (NoSuchElementException e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> temp = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            temp.add(a);
+            temp.add(b);
+            graph.add(temp);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        double check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.lang.Math;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[][] graph = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      graph[i][0] = a;
+      graph[i][1] = b;
+    }
+
+    int check = 0;
+    int count = 0;
+
+    keisan(10, new int[0], new int[n], 0, graph, check, count);
+
+    System.out.println(check / count);
+  }
+
+  public static void keisan(int n, int[] pls, int[] ls, int i, int[][] graph, int check, int count) {
+    if (i == n) {
+      check += kyori(pls, graph);
+      count++;
+      return;
+    }
+
+    for (int j = 0; j < n; j++) {
+      pls[j] = ls[j];
+      keisan(n, pls, inasi(ls, j), j + 1, graph, check, count);
+      pls[j] = 0;
+    }
+  }
+
+  public static int[] inasi(int[] ls, int i) {
+    int[] n = new int[ls.length - 1];
+    for (int j = 0; j < ls.length - 1; j++) {
+      if (j == i) {
+        continue;
+      }
+      n[j] = ls[j];
+    }
+    return n;
+  }
+
+  public static int kyori(int[] pls, int[][] graph) {
+    int ans = 0;
+    for (int i = 0; i < pls.length - 1; i++) {
+      ans += (int) Math.sqrt(Math.pow(graph[pls[i]][0] - graph[pls[i + 1]][0], 2) + Math.pow(graph[pls[i]][1] - graph[pls[i + 1]][1], 2));
+    }
+    return ans;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<List<Integer>>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<Integer>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            row.add(a);
+            row.add(b);
+            graph.add(row);
+        }
+
+        List<Integer> pls = new ArrayList<Integer>();
+        List<Integer> ls = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        int check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<Integer>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
+import java.util.function.IntUnaryOperator;
+import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> edge = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            edge.add(a);
+            edge.add(b);
+            graph.add(edge);
+        }
+
+        double check = 0;
+        int count = 0;
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = IntStream.range(0, n).boxed().collect(Collectors.toList());
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    private static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    private static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> temp = new ArrayList<>();
+            String[] input = sc.nextLine().split(" ");
+            temp.add(Integer.parseInt(input[0]));
+            temp.add(Integer.parseInt(input[1]));
+            graph.add(temp);
+        }
+
+        double check = 0;
+        int count = 0;
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> edge = new ArrayList<>();
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            edge.add(a);
+            edge.add(b);
+            graph.add(edge);
+        }
+
+        int check = 0;
+        int count = 0;
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        keisan(n, pls, ls);
+
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count++;
+            return;
+        }
+
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            ans += Math.sqrt(Math.pow(graph.get(ls.get(i)).get(0) - graph.get(ls.get(i + 1)).get(0), 2) + Math.pow(graph.get(ls.get(i)).get(1) - graph.get(ls.get(i + 1)).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> temp = new ArrayList<>();
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            temp.add(a);
+            temp.add(b);
+            graph.add(temp);
+        }
+
+        List<Integer> pls = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ls.add(i);
+        }
+
+        int check = 0;
+        int count = 0;
+        keisan(n, pls, ls);
+        System.out.println(check / count);
+    }
+
+    public static void keisan(int n, List<Integer> pls, List<Integer> ls) {
+        if (ls.size() == 0) {
+            check += kyori(pls);
+            count += 1;
+            return;
+        }
+        for (int i = 0; i < ls.size(); i++) {
+            pls.add(ls.get(i));
+            keisan(n - 1, pls, inasi(ls, i));
+            try {
+                pls.remove(pls.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+                // do nothing
+            }
+        }
+    }
+
+    public static List<Integer> inasi(List<Integer> ls, int i) {
+        List<Integer> n = new ArrayList<>();
+        for (int j = 0; j < ls.size(); j++) {
+            if (j == i) {
+                continue;
+            }
+            n.add(ls.get(j));
+        }
+        return n;
+    }
+
+    public static double kyori(List<Integer> ls) {
+        double ans = 0;
+        for (int i = 0; i < ls.size() - 1; i++) {
+            int a = ls.get(i);
+            int b = ls.get(i + 1);
+            ans += Math.sqrt(Math.pow(graph.get(a).get(0) - graph.get(b).get(0), 2) + Math.pow(graph.get(a).get(1) - graph.get(b).get(1), 2));
+        }
+        return ans;
+    }
+}
+
+[/JAVA]
+======

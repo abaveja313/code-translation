@@ -1,0 +1,4508 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] inputs = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(inputs[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(inputs[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] strings = input.split("\n");
+        String string = strings[0];
+        int n = Integer.parseInt(strings[1]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(string.split(" ")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+}
+[/J
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] inputs = new String[2];
+    for (int i = 0; i < inputs.length; i++) {
+      inputs[i] = scanner.nextLine();
+    }
+    System.out.println(solve(inputs));
+  }
+
+  public static String solve(String[] inputs) {
+    int n = Integer.parseInt(inputs[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(inputs[1].split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c), slr = sum(a, l, r), srl = sum(a, c, r), srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i < r; i++) {
+      sum += a[i];
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        String output = solve(input1 + "\n" + input2);
+        System.out.println(output);
+    }
+
+    public static String solve(String string) {
+        int n = string.length();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(string.substring(i, i + 1));
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l, c);
+        int slr = sum(a, l, r);
+        int srl = sum(a, r, c);
+        int srr = sum(a, r, n);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int l, int r) {
+        int sum = 0;
+        for (int i = l; i < r; i++) {
+            sum += a[i];
+        }
+        return sum
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+
+    int l = 0, c = 1, r = 2;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      s
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(tokens[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c);
+    int slr = sum(a, l, r);
+    int srl = sum(a, c, r);
+    int srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String string = scanner.nextLine();
+    System.out.println(solve(string));
+  }
+
+  public static String solve(String string) {
+    int n = string.length();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = string.charAt(i) - '0';
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l += 1;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r += 1;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c += 1;
+    }
+    return String.valueOf(ans
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = Integer.parseInt(tokens[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += arr[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += arr[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += arr[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += arr[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * arr[l] - slr);
+      while (dn < d) {
+        sll += arr[l];
+        slr -= arr[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * arr[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * arr[r] - srr);
+      while (dn < d) {
+        srl += arr[r];
+        srr -= arr[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * arr[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += arr[c];
+      srl -= arr[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(input[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String line1 = scanner.nextLine();
+    String line2 = scanner.nextLine();
+    System.out.println(solve(line1 + "\n" + line2));
+  }
+
+  public static String solve(String input) {
+    int n = input.length();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = input.charAt(i) - '0';
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int l = 1;
+    int c = 2;
+    int r = 3;
+    int sll = sum(a, 0, l - 1);
+    int slr = sum(a, l, c - 1);
+    int srl = sum(a, c, r - 1);
+    int srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] strings = input.split("\n");
+    String string1 = strings[0];
+    String string2 = strings[1];
+    int n = Integer.parseInt(string1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string2.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l), slr = sum(a, l, c), srl = sum(a, c, r), srr = sum(a, r);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i < end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+
+  private static int sum(int[] a, int start) {
+    return sum(a, start, a.length);
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String line1 = scanner.nextLine();
+    String line2 = scanner.nextLine();
+    System.out.println(solve(line1 + "\n" + line2));
+  }
+
+  public static String solve(String string) {
+    int n, l, c, r;
+    int[] a = new int[n];
+    int sll, slr, srl, srr;
+    int ans;
+
+    n = Integer.parseInt(string.split(" ")[0]);
+    a = Arrays.stream(string.split(" ")).mapToInt(Integer::parseInt).toArray();
+    l = 1;
+    c = 2;
+    r = 3;
+    sll = sum(a, 0, l);
+    slr = sum(a, l, c);
+    srl = sum(a, c, r);
+    srr = sum(a, r, n);
+    ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i < end
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1 + "\n" + input2));
+    }
+
+    public static String solve(String string) {
+        int n, l, c, r;
+        int[] a = new int[string.length()];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = Integer.parseInt(string.substring(i, i + 1));
+        }
+        n = a.length;
+        l = 1;
+        c = 2;
+        r = 3;
+        int sll = a[0] + a[1];
+        int slr = a[n - 1] + a[n - 2];
+        int srl = a[1] + a[2];
+        int srr = a[n - 2] + a[n - 3];
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1, input2));
+    }
+
+    public static String solve(String input1, String input2) {
+        int n = Integer.parseInt(input1.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(input1.split(" ")[i + 1]);
+        }
+        int l = 0, c = 1, r = 2;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] numbers = input.split(" ");
+    int n = Integer.parseInt(numbers[0]);
+    int[] arr = new int[n];
+    for (int i = 1; i <= n; i++) {
+      arr[i - 1] = Integer.parseInt(numbers[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += arr[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += arr[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += arr[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += arr[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * arr[l] - slr);
+      while (dn < d) {
+        sll += arr[l];
+        slr -= arr[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * arr[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * arr[r] - srr);
+      while (dn < d) {
+        srl += arr[r];
+        srr -= arr[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * arr[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += arr[c];
+      srl -= arr[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String line1 = sc.nextLine();
+    String line2 = sc.nextLine();
+    int n = Integer.parseInt(line1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(line2.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c);
+    int slr = sum(a, l, r);
+    int srl = sum(a, c, r);
+    int srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i < r; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input1 = sc.nextLine();
+    String input2 = sc.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+
+    int l = 0;
+    int c = 1;
+    int r = 2;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] inputs = new String[2];
+        for (int i = 0; i < inputs.length; i++) {
+            inputs[i] = scanner.nextLine();
+        }
+        System.out.println(solve(inputs));
+    }
+
+    public static String solve(String[] inputs) {
+        int n = Integer.parseInt(inputs[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(inputs[1].split(" ")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, s
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] inputs = new String[2];
+    for (int i = 0; i < inputs.length; i++) {
+      inputs[i] = scanner.nextLine();
+    }
+    System.out.println(solve(inputs));
+  }
+
+  public static String solve(String[] inputs) {
+    int n = Integer.parseInt(inputs[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(inputs[1].split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1);
+    int slr = sum(a, l, c - 1);
+    int srl = sum(a, c, r - 1);
+    int srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l += 1;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r += 1;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c += 1;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+   
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    int n = Integer.parseInt(input.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input.split(" ")[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c - 1);
+    int slr = sum(a, c, r - 1);
+    int srl = sum(a, r, n - 1);
+    int srr = sum(a, r + 1, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < tokens.length; i++) {
+      a[i - 1] = Integer.parseInt(tokens[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c);
+    int slr = sum(a, l, r);
+    int srl = sum(a, r, c);
+    int srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i < r; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String s1 = sc.nextLine();
+    String s2 = sc.nextLine();
+    System.out.println(solve(s1 + "\n" + s2));
+  }
+
+  public static String solve(String s) {
+    int n = s.length();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = s.charAt(i) - '0';
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+   
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] splitInput = input.split(" ");
+        int n = Integer.parseInt(splitInput[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(splitInput[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] numbers = input.split(" ");
+        int n = Integer.parseInt(numbers[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i-1] = Integer.parseInt(numbers[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1, input2));
+    }
+
+    public static int solve(String input1, String input2) {
+        int n = Integer.parseInt(input1);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(input2.split(" ")[i]);
+        }
+
+        int l = 0, c = 1, r = 2;
+        int sll = a[l], slr = a[l] + a[r], srl = a[r], srr = a[r] + a[c];
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return ans;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] strings = input.split("\n");
+    System.out.println(solve(strings[0], strings[1]));
+  }
+
+  public static String solve(String string1, String string2) {
+    int n = Integer.parseInt(string1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string2.split(" ")[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] numbers = input.split(" ");
+    int n = Integer.parseInt(numbers[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(numbers[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c);
+    int slr = sum(a, l, r);
+    int srl = sum(a, r, c);
+    int srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i++) {
+      sum += a[i - 1];
+    }
+    return sum;
+  }
+}
+[/JAVA]
+
+This is the Java code that implements the same logic as the Python code. It uses the same variable names and data
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] inputs = new String[2];
+    for (int i = 0; i < inputs.length; i++) {
+      inputs[i] = scanner.nextLine();
+    }
+    String output = solve(inputs[0], inputs[1]);
+    System.out.println(output);
+  }
+
+  private static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c - 1), slr = sum(a, c, r - 1), srl = sum(a, r, n - 1), srr = sum(a, n, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] inputs = new String[2];
+        for (int i = 0; i < inputs.length; i++) {
+            inputs[i] = sc.nextLine();
+        }
+        System.out.println(solve(inputs));
+    }
+
+    public static String solve(String[] inputs) {
+        int n = Integer.parseInt(inputs[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(inputs[1].split(" ")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(input1.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c - 1);
+    int slr = sum(a, c, r - 1);
+    int srl = sum(a, r, n - 1);
+    int srr = sum(a, n, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i++) {
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s1 = scanner.nextLine();
+    String s2 = scanner.nextLine();
+    int n = Integer.parseInt(s1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(s2.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1);
+    int slr = sum(a, l, c - 1);
+    int srl = sum(a, c, r - 1);
+    int srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(tokens[i + 1]);
+    }
+    int l = 1;
+    int c = 2;
+    int r = 3;
+    int sll = 0;
+    int slr = 0;
+    int srl = 0;
+    int srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+ 
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String line1 = scanner.nextLine();
+    String line2 = scanner.nextLine();
+    String result = solve(line1 + "\n" + line2);
+    System.out.println(result);
+  }
+
+  private static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+    }
+
+    int l = 1;
+    int c = 2;
+    int r = 3;
+    int sll = sum(a, l);
+    int slr = sum(a, l, c);
+    int srl = sum(a, c, r);
+    int srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i < end;
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String string = scanner.nextLine();
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c), slr = sum(a, l, r), srl = sum(a, c, r), srr = sum(a, r, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i < r; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1);
+    int slr = sum(a, l, c - 1);
+    int srl = sum(a, c, r - 1);
+    int srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1 + "\n" + input2));
+    }
+
+    public static String solve(String string) {
+        int n = Integer.parseInt(string.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll = sll + a[l];
+                slr = slr - a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl = srl + a[r];
+                srr = srr - a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr = slr + a[c];
+            srl = srl - a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i =
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String line1 = scanner.nextLine();
+        String line2 = scanner.nextLine();
+        System.out.println(solve(line1 + "\n" + line2));
+    }
+
+    public static String solve(String string) {
+        int n = Integer.parseInt(string.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(string.split(" ")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1);
+        int slr = sum(a, l, c - 1);
+        int srl = sum(a, c, r - 1);
+        int srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] numbers = input.split(" ");
+    int n = Integer.parseInt(numbers[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(numbers[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+     
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] numbers = input.split(" ");
+    int n = Integer.parseInt(numbers[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(numbers[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] inputs = new String[2];
+        for (int i = 0; i < inputs.length; i++) {
+            inputs[i] = scanner.nextLine();
+        }
+        System.out.println(solve(inputs));
+    }
+
+    public static String solve(String[] inputs) {
+        int n = Integer.parseInt(inputs[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < inputs.length; i++) {
+            a[i - 1] = Integer.parseInt(inputs[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l, c - 1);
+        int slr = sum(a, c, r - 1);
+        int srl = sum(a, r, n - 1);
+        int srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] tokens = input.split(" ");
+        int n = Integer.parseInt(tokens[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(tokens[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1);
+        int slr = sum(a, l, c - 1);
+        int srl = sum(a, c, r - 1);
+        int srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+
+    private static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            sum += a[i];
+        }
+        return sum;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] inputs = new String[2];
+        for (int i = 0; i < inputs.length; i++) {
+            inputs[i] = scanner.nextLine();
+        }
+        System.out.println(solve(inputs));
+    }
+
+    private static String solve(String[] inputs) {
+        int n = Integer.parseInt(inputs[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < inputs.length; i++) {
+            a[i] = Integer.parseInt(inputs[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l);
+        int slr = sum(a, l, c);
+        int srl = sum(a, c, r);
+        int srr = sum(a, r);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    private static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i < end; i++) {
+            sum += a[i
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] input = scanner.nextLine().split(" ");
+        int n = Integer.parseInt(input[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(input[i + 1]);
+        }
+        int l = 0, c = 1, r = 2;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < n; i++) {
+            if (i < l) {
+                sll += a[i];
+            } else if (i < c) {
+                slr += a[i];
+            } else if (i < r) {
+                srl += a[i];
+            } else {
+                srr += a[i];
+            }
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1 + "\n" + input2));
+    }
+
+    public static String solve(String string) {
+        int n = Integer.parseInt(string.substring(0, string.indexOf("\n")));
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(string.substring(string.indexOf("\n") + 1 + i, string.indexOf("\n") + 2 + i));
+        }
+        int l = 0, c = 1, r = 2;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      int d = Math.abs(srl - srr);
+      int dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int l = 0, c = 1, r = 2;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] strings = new String[2];
+    for (int i = 0; i < 2; i++) {
+      strings[i] = scanner.nextLine();
+    }
+    System.out.println(solve(strings));
+  }
+
+  public static String solve(String[] strings) {
+    int n = strings[0].length();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(strings[0].charAt(i) + "");
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] numbers = input.split(" ");
+        int n = Integer.parseInt(numbers[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(numbers[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1);
+        int slr = sum(a, l, c - 1);
+        int srl = sum(a, c, r - 1);
+        int srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+    
+    private static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            sum += a[i];
+        }
+        return sum;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] numbers = input.split(" ");
+        int n = Integer.parseInt(numbers[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < n + 1; i++) {
+            a[i - 1] = Integer.parseInt(numbers[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l, c - 1), slr = sum(a, c, r - 1), srl = sum(a, r, n - 1), srr = sum(a, n, n);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+
+    private static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            sum += a[i];
+        }
+        return sum;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n, l, c, r;
+    int[] a;
+    int sll, slr, srl, srr;
+    int ans;
+
+    n = Integer.parseInt(string.split(" ")[0]);
+    a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+    }
+
+    l = 1;
+    c = 2;
+    r = 3;
+    sll = sum(a, 0, l - 1);
+    slr = sum(a, l, c - 1);
+    srl = sum(a, c, r - 1);
+    srr = sum(a, r, n - 1);
+    ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  public static
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(tokens[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int n = Integer.parseInt(input[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(input[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n, l, c, r;
+    int[] a = new int[n];
+    int sll, slr, srl, srr;
+    int ans;
+
+    n = Integer.parseInt(string.split(" ")[0]);
+    a = Arrays.stream(string.split(" ")).mapToInt(Integer::parseInt).toArray();
+    l = 1;
+    c = 2;
+    r = 3;
+    sll = sum(a, l, c);
+    slr = sum(a, l, r);
+    srl = sum(a, c, r);
+    srr = sum(a, r, n);
+    ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i < n + 1; i++) {
+      a[i - 1] = Integer.parseInt(string.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  public static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(string.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        String output = solve(input1 + "\n" + input2);
+        System.out.println(output);
+    }
+
+    private static String solve(String string) {
+        int n = Integer.parseInt(string.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            sl
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    int n = Integer.parseInt(input);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String string = scanner.nextLine();
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  private static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, 0, l - 1);
+    int slr = sum(a, l, c - 1);
+    int srl = sum(a, c, r - 1);
+    int srr = sum(a, r, n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+
+    return String.valueOf(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1, input2));
+  }
+
+  public static String solve(String input1, String input2) {
+    int n = Integer.parseInt(input1);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input2.split(" ")[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      s
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] numbers = input.split(" ");
+        int n = Integer.parseInt(numbers[0]);
+        int[] a = new int[n];
+        for (int i = 1; i <= n; i++) {
+            a[i - 1] = Integer.parseInt(numbers[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l, c - 1);
+        int slr = sum(a, c, r - 1);
+        int srl = sum(a, r, n - 1);
+        int srr = sum(a, n, n);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+
+    private static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            sum += a[i];
+        }
+        return sum;
+    }
+}
+
+[/JAVA]
+
+I have converted the Python code to Java code as requested. I have used the `Scanner
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String line1 = scanner.nextLine();
+    String line2 = scanner.nextLine();
+    System.out.println(solve(line1 + "\n" + line2));
+  }
+
+  public static String solve(String input) {
+    int n = input.length();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = input.charAt(i) - '0';
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+
+      slr += a[c];
+      srl -= a
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    int n = Integer.parseInt(input.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(input.split(" ")[i + 1]);
+    }
+    int l = 0, c = 1, r = 2;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String line1 = scanner.nextLine();
+    String line2 = scanner.nextLine();
+    String result = solve(line1 + "\n" + line2);
+    System.out.println(result);
+  }
+
+  private static String solve(String string) {
+    int n = Integer.parseInt(string.split("\n")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(string.split("\n")[i]);
+    }
+
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, s
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] array = input.split(" ");
+    int n = Integer.parseInt(array[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(array[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(tokens[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(tokens[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c - 1);
+    int slr = sum(a, c, r - 1);
+    int srl = sum(a, r, n - 1);
+    int srr = sum(a, n, 2 * n - 1);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+
+  private static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+      sum += a[i];
+    }
+    return sum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        String result = solve(input1 + "\n" + input2);
+        System.out.println(result);
+    }
+
+    public static String solve(String string) {
+        int n = Integer.parseInt(string.split("\n")[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < string.split("\n").length; i++) {
+            a[i - 1] = Integer.parseInt(string.split("\n")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, 0, l - 1), slr = sum(a, l, c - 1), srl = sum(a, c, r - 1), srr = sum(a, r, n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    System.out.println(solve(input1 + "\n" + input2));
+  }
+
+  private static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(string.split(" ")[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input1 = scanner.nextLine();
+    String input2 = scanner.nextLine();
+    String output = solve(input1 + "\n" + input2);
+    System.out.println(output);
+  }
+
+  public static String solve(String string) {
+    int n = Integer.parseInt(string.split(" ")[0]);
+    int[] a = new int[n];
+    for (int i = 1; i <= n; i++) {
+      a[i - 1] = Integer.parseInt(string.split(" ")[i]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = sum(a, l, c - 1);
+    int slr = sum(a, c, r - 1);
+    int srl = sum(a, r, n - 1);
+    int srr = sum(a, n - 1, n);
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    return String.valueOf(ans);
+  }
+
+  public static int sum(int[] a, int start, int end) {
+    int sum = 0;
+    for (int i = start;
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input1 = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        System.out.println(solve(input1 + "\n" + input2));
+    }
+
+    public static String solve(String string) {
+        int n = Integer.parseInt(string.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 1; i < n + 1; i++) {
+            a[i - 1] = Integer.parseInt(string.split(" ")[i]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = sum(a, l, c - 1);
+        int slr = sum(a, c, r - 1);
+        int srl = sum(a, r, n - 1);
+        int srr = sum(a, n, 2 * n - 1);
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        return String.valueOf(ans);
+    }
+
+    public static int sum(int[] a, int start, int end) {
+        int sum = 0;
+        for (int i = start; i
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int n = Integer.parseInt(tokens[0]);
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(tokens[i + 1]);
+    }
+    int l = 1, c = 2, r = 3;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] input = scanner.nextLine().split(" ");
+        int n = Integer.parseInt(input[0]);
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(input[i + 1]);
+        }
+        System.out.println(solve(arr));
+    }
+
+    public static int solve(int[] arr) {
+        int n = arr.length;
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += arr[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += arr[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += arr[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += arr[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * arr[l] - slr);
+            while (dn < d) {
+                sll += arr[l];
+                slr -= arr[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * arr[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * arr[r] - srr);
+            while (dn < d) {
+                srl += arr[r];
+                srr -= arr[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * arr[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += arr[c];
+            srl -= arr[c];
+            c++;
+       
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int l = 0, c = 1, r = 2;
+    int sll = 0, slr = 0, srl = 0, srr = 0;
+    for (int i = 0; i < l; i++) {
+      sll += a[i];
+    }
+    for (int i = l; i < c; i++) {
+      slr += a[i];
+    }
+    for (int i = c; i < r; i++) {
+      srl += a[i];
+    }
+    for (int i = r; i < n; i++) {
+      srr += a[i];
+    }
+    int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+    while (c < n - 1) {
+      int d = Math.abs(sll - slr);
+      int dn = Math.abs(sll + 2 * a[l] - slr);
+      while (dn < d) {
+        sll += a[l];
+        slr -= a[l];
+        l++;
+        d = Math.abs(sll - slr);
+        dn = Math.abs(sll + 2 * a[l] - slr);
+      }
+      d = Math.abs(srl - srr);
+      dn = Math.abs(srl + 2 * a[r] - srr);
+      while (dn < d) {
+        srl += a[r];
+        srr -= a[r];
+        r++;
+        d = Math.abs(srl - srr);
+        dn = Math.abs(srl + 2 * a[r] - srr);
+      }
+      ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+      slr += a[c];
+      srl -= a[c];
+      c++;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        int n = Integer.parseInt(input.split(" ")[0]);
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(input.split(" ")[i + 1]);
+        }
+        int l = 1, c = 2, r = 3;
+        int sll = 0, slr = 0, srl = 0, srr = 0;
+        for (int i = 0; i < l; i++) {
+            sll += a[i];
+        }
+        for (int i = l; i < c; i++) {
+            slr += a[i];
+        }
+        for (int i = c; i < r; i++) {
+            srl += a[i];
+        }
+        for (int i = r; i < n; i++) {
+            srr += a[i];
+        }
+        int ans = Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr);
+        while (c < n - 1) {
+            int d = Math.abs(sll - slr);
+            int dn = Math.abs(sll + 2 * a[l] - slr);
+            while (dn < d) {
+                sll += a[l];
+                slr -= a[l];
+                l++;
+                d = Math.abs(sll - slr);
+                dn = Math.abs(sll + 2 * a[l] - slr);
+            }
+            d = Math.abs(srl - srr);
+            dn = Math.abs(srl + 2 * a[r] - srr);
+            while (dn < d) {
+                srl += a[r];
+                srr -= a[r];
+                r++;
+                d = Math.abs(srl - srr);
+                dn = Math.abs(srl + 2 * a[r] - srr);
+            }
+            ans = Math.min(ans, Math.max(sll, slr, srl, srr) - Math.min(sll, slr, srl, srr));
+            slr += a[c];
+            srl -= a[c];
+            c++;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======

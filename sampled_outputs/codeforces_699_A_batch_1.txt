@@ -1,0 +1,612 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i) == 'R' ? 1 : -1;
+      tuples[i][1] = distance[i];
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (tuples[idx][0] == 1 && tuples[idx + 1][0] == -1) {
+        minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i);
+      tuples[i][1] = distance[i];
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (tuples[idx][0] == 'R' && tuples[idx + 1][0] == 'L') {
+        minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int idx = 0;
+    int minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i) == 'R' ? 1 : -1;
+      tuples[i][1] = distance[i];
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < tuples.length) {
+      if (tuples[idx][0] == 1 && tuples[idx + 1][0] == -1) {
+        minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String direction = scanner.next();
+        int[] distance = new int[n];
+        for (int i = 0; i < n; i++) {
+            distance[i] = scanner.nextInt();
+        }
+        scanner.close();
+
+        int minDist = Integer.MAX_VALUE;
+        for (int i = 0; i < n - 1; i++) {
+            if (direction.charAt(i) == 'R' && direction.charAt(i + 1) == 'L') {
+                minDist = Math.min(minDist, (distance[i + 1] - distance[i]) / 2);
+            }
+        }
+
+        if (minDist == Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(minDist);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int idx = 0;
+    int minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int idx = 0;
+    int minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int idx = 0;
+    int minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String direction = scanner.next();
+        int[] distance = new int[n];
+        for (int i = 0; i < n; i++) {
+            distance[i] = scanner.nextInt();
+        }
+        int idx = 0;
+        int minDist = Integer.MAX_VALUE;
+        while (idx + 1 < n) {
+            if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+                minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+            }
+            idx++;
+        }
+        if (minDist == Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(minDist);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i) == 'R' ? 1 : -1;
+      tuples[i][1] = distance[i];
+    }
+    int minDist = Integer.MAX_VALUE;
+    for (int i = 0; i < n - 1; i++) {
+      if (tuples[i][0] == 1 && tuples[i + 1][0] == -1) {
+        minDist = Math.min(minDist, (tuples[i + 1][1] - tuples[i][1]) / 2);
+      }
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String direction = sc.next();
+        int[] distance = new int[n];
+        for (int i = 0; i < n; i++) {
+            distance[i] = sc.nextInt();
+        }
+        int[][] tuples = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            tuples[i][0] = direction.charAt(i) == 'R' ? 1 : 0;
+            tuples[i][1] = distance[i];
+        }
+        int idx = 0;
+        int minDist = Integer.MAX_VALUE;
+        while (idx + 1 < n) {
+            if (tuples[idx][0] == 1 && tuples[idx + 1][0] == 0) {
+                minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+            }
+            idx++;
+        }
+        if (minDist == Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(minDist);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i) == 'R' ? 1 : -1;
+      tuples[i][1] = distance[i];
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (tuples[idx][0] == 1 && tuples[idx + 1][0] == -1) {
+        minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i) == 'R' ? 1 : -1;
+      tuples[i][1] = distance[i];
+    }
+    int minDist = Integer.MAX_VALUE;
+    for (int i = 0; i < n - 1; i++) {
+      if (tuples[i][0] == 1 && tuples[i + 1][0] == -1) {
+        minDist = Math.min(minDist, (tuples[i + 1][1] - tuples[i][1]) / 2);
+      }
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String direction = scanner.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = scanner.nextInt();
+    }
+    int idx = 0;
+    int minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int[][] tuples = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      tuples[i][0] = direction.charAt(i);
+      tuples[i][1] = distance[i];
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < n) {
+      if (tuples[idx][0] == 'R' && tuples[idx + 1][0] == 'L') {
+        minDist = Math.min(minDist, (tuples[idx + 1][1] - tuples[idx][1]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String direction = scanner.next();
+        int[] distance = new int[n];
+        for (int i = 0; i < n; i++) {
+            distance[i] = scanner.nextInt();
+        }
+        int idx = 0;
+        int minDist = Integer.MAX_VALUE;
+        while (idx + 1 < n) {
+            if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+                minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+            }
+            idx++;
+        }
+        if (minDist == Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(minDist);
+        }
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `Scanner` class to read input from the user, and it uses the `Math.min()` method to find the minimum value of two integers. The code also uses the `Integer.MAX_VALUE` constant to represent the maximum possible value of an integer.
+
+Note that the code uses the `charAt()` method to get the character at a specific index in a string, and it uses the `nextInt()` method to read an integer from the input. The `next()` method is used to read a string from the input.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String direction = sc.next();
+    int[] distance = new int[n];
+    for (int i = 0; i < n; i++) {
+      distance[i] = sc.nextInt();
+    }
+    int idx = 0, minDist = Integer.MAX_VALUE;
+    while (idx + 1 < distance.length) {
+      if (direction.charAt(idx) == 'R' && direction.charAt(idx + 1) == 'L') {
+        minDist = Math.min(minDist, (distance[idx + 1] - distance[idx]) / 2);
+      }
+      idx++;
+    }
+    if (minDist == Integer.MAX_VALUE) {
+      System.out.println(-1);
+    } else {
+      System.out.println(minDist);
+    }
+  }
+}
+[/JAVA]
+======

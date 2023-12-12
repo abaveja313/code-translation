@@ -1,0 +1,732 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+        for (int i = 0; i < n; i++) {
+            lin[i] = scanner.next().toCharArray();
+            int k = 0;
+            for (int j = 0; j < lin[i].length; j++) {
+                if (lin[i][j] == '*') {
+                    k++;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] += k;
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+        for (int i = 0; i < n; i++) {
+            String[] input = sc.nextLine().split(" ");
+            for (int j = 0; j < m; j++) {
+                lin[i][j] = input[j].equals("*") ? 1 : 0;
+            }
+            int k = 0;
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == 1) {
+                    k++;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] += k;
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == 1) {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+
+    for (int i = 0; i < n; i++) {
+      String line = sc.nextLine();
+      lin[i] = line.split("");
+      int k = 0;
+      for (int j = 0; j < lin[i].length; j++) {
+        if (lin[i][j].equals("*")) {
+          k++;
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] += k;
+    }
+
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j].equals("*")) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            String input = scanner.nextLine();
+            lin[i] = input.toCharArray();
+            int k = 0;
+            for (int j = 0; j < lin[i].length; j++) {
+                if (lin[i][j] == '*') {
+                    k++;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] += k;
+        }
+
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+    for (int i = 0; i < n; i++) {
+      String line = scanner.nextLine();
+      for (int j = 0; j < m; j++) {
+        if (line.charAt(j) == '*') {
+          lin[i][j] = 1;
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] = (int) line.chars().filter(c -> c == '*').count();
+    }
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j] == 1) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        sc.nextLine();
+
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            for (int j = 0; j < m; j++) {
+                if (line.charAt(j) == '*') {
+                    lin[i][j] = 1;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] = line.replaceAll("[^\\*]", "").length();
+        }
+
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == 1) {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] matrix = new int[n][m];
+        int[] rowCount = new int[n];
+        int[] colCount = new int[m];
+        for (int i = 0; i < n; i++) {
+            String line = scanner.nextLine();
+            for (int j = 0; j < m; j++) {
+                if (line.charAt(j) == '*') {
+                    matrix[i][j] = 1;
+                    colCount[j]++;
+                    rowCount[i]++;
+                }
+            }
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 1) {
+                    counter += (rowCount[i] - 1) * (colCount[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+        for (int i = 0; i < n; i++) {
+            String[] row = scanner.nextLine().split("");
+            for (int j = 0; j < row.length; j++) {
+                if (row[j].equals("*")) {
+                    kolStroka[i]++;
+                    kolStolb[j]++;
+                }
+            }
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+    for (int i = 0; i < n; i++) {
+      String line = sc.nextLine();
+      for (int j = 0; j < m; j++) {
+        if (line.charAt(j) == '*') {
+          kolStolb[j]++;
+          kolStroka[i]++;
+        }
+      }
+    }
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j] == '*') {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read the input, and the `String.charAt()` method to check if a character is a `'*'`. The `int[][]` and `int[]` arrays are used to store the number of `'*'` characters in each row and column, respectively. The `counter` variable is used to keep track of the number of `'*'` characters in each row and column, and it is incremented accordingly. Finally, the `System.out.println()` method is used to print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            for (int j = 0; j < m; j++) {
+                if (line.charAt(j) == '*') {
+                    lin[i][j] = 1;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] = line.replaceAll("[^\\*]", "").length();
+        }
+
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == 1) {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] matrix = new int[n][m];
+    int[] rowCount = new int[n];
+    int[] colCount = new int[m];
+
+    for (int i = 0; i < n; i++) {
+      String line = sc.nextLine();
+      matrix[i] = line.split("");
+      int k = 0;
+      for (int j = 0; j < line.length(); j++) {
+        if (matrix[i][j].equals("*")) {
+          k++;
+          colCount[j]++;
+        }
+      }
+      rowCount[i] += k;
+    }
+
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (matrix[i][j].equals("*")) {
+          counter += (rowCount[i] - 1) * (colCount[j] - 1);
+        }
+      }
+    }
+
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    scanner.nextLine();
+
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+    String[][] lin = new String[n][];
+
+    for (int i = 0; i < n; i++) {
+      lin[i] = scanner.nextLine().split(" ");
+      int k = 0;
+      for (int j = 0; j < lin[i].length; j++) {
+        if (lin[i][j].equals("*")) {
+          k++;
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] += k;
+    }
+
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j].equals("*")) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+
+    for (int i = 0; i < n; i++) {
+      lin[i] = sc.nextLine().toCharArray();
+      int k = 0;
+      for (int j = 0; j < lin[i].length; j++) {
+        if (lin[i][j] == '*') {
+          k++;
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] += k;
+    }
+
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j] == '*') {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+        for (int i = 0; i < n; i++) {
+            String input = scanner.nextLine();
+            for (int j = 0; j < m; j++) {
+                if (input.charAt(j) == '*') {
+                    kolStolb[j]++;
+                    kolStroka[i]++;
+                }
+            }
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+    for (int i = 0; i < n; i++) {
+      String line = scanner.nextLine();
+      lin[i] = line.split("");
+      int k = 0;
+      for (int j = 0; j < lin[i].length; j++) {
+        if (lin[i][j].equals("*")) {
+          k++;
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] += k;
+    }
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j].equals("*")) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            lin[i] = line.split(" ");
+            int k = 0;
+            for (int j = 0; j < lin[i].length; j++) {
+                if (lin[i][j].equals("*")) {
+                    k++;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] += k;
+        }
+
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j].equals("*")) {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            lin[i] = line.toCharArray();
+            int k = 0;
+            for (int j = 0; j < line.length(); j++) {
+                if (line.charAt(j) == '*') {
+                    k++;
+                    kolStolb[j]++;
+                }
+            }
+            kolStroka[i] += k;
+        }
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+    for (int i = 0; i < n; i++) {
+      String[] row = sc.nextLine().split(" ");
+      for (int j = 0; j < m; j++) {
+        lin[i][j] = row[j].equals("*") ? 1 : 0;
+        if (lin[i][j] == 1) {
+          kolStolb[j]++;
+        }
+      }
+      kolStroka[i] = lin[i].length;
+    }
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j] == 1) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the same logic and data structures to solve the problem. The only difference is that in Java, we use `nextInt()` and `nextLine()` to read the input, and we use `split(" ")` to split the input string into an array of strings. We also use `equals()` to compare strings instead of `==`.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] lin = new int[n][m];
+        int[] kolStroka = new int[n];
+        int[] kolStolb = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            for (int j = 0; j < m; j++) {
+                if (line.charAt(j) == '*') {
+                    kolStroka[i]++;
+                    kolStolb[j]++;
+                }
+            }
+        }
+
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (lin[i][j] == '*') {
+                    counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+                }
+            }
+        }
+
+        System.out.println(counter);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] lin = new int[n][m];
+    int[] kolStroka = new int[n];
+    int[] kolStolb = new int[m];
+
+    for (int i = 0; i < n; i++) {
+      String[] line = sc.nextLine().split("");
+      for (int j = 0; j < line.length; j++) {
+        if (line[j].equals("*")) {
+          kolStolb[j]++;
+          kolStroka[i]++;
+        }
+      }
+    }
+
+    int counter = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (lin[i][j].equals("*")) {
+          counter += (kolStroka[i] - 1) * (kolStolb[j] - 1);
+        }
+      }
+    }
+
+    System.out.println(counter);
+  }
+}
+[/JAVA]
+======

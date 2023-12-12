@@ -1,0 +1,1457 @@
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i <= n; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.remove();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Room {
+    int number;
+    boolean frontier;
+    List<Integer> neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new ArrayList<>();
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor.add(room);
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new ArrayDeque<>();
+        List<Room> rooms = new ArrayList<>();
+        for (int i = 0; i < n + 1; i++) {
+            rooms.add(new Room(i));
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.size(); i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int INF = 100050;
+    Deque<Integer> q = new LinkedList<>();
+
+    class Room {
+      int number;
+      boolean frontier;
+      int[] neighbor;
+      int arrow;
+      int deepness;
+
+      public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[n];
+        this.arrow = 0;
+        this.deepness = INF;
+      }
+
+      public void set(int room) {
+        this.neighbor[room] = 1;
+      }
+
+      public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+      }
+
+      public void dfs() {
+        for (int i = 0; i < n; i++) {
+          if (rooms[i].frontier) {
+            rooms[i].search(this.number, this.deepness + 1);
+            q.add(i);
+          }
+        }
+      }
+    }
+
+    Room[] rooms = new Room[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      rooms[i] = new Room(i);
+    }
+
+    for (int i = 0; i < m; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      rooms[a].set(b);
+      rooms[b].set(a);
+    }
+
+    q.add(1);
+    while (!q.isEmpty()) {
+      rooms[q.pop()].dfs();
+    }
+
+    System.out.println("Yes");
+    for (int i = 2; i < n + 1; i++) {
+      if (!rooms[i].frontier) {
+        System.out.println(rooms[i].arrow);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i <= n; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[100000];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor[room] = 1;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i = 0; i < this.neighbor.length; i++) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < rooms.length; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i <= n; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.removeFirst();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i = 0; i < this.neighbor.length; i++) {
+            if (rooms[this.neighbor[i]].frontier) {
+                rooms[this.neighbor[i]].search(this.number, this.deepness + 1);
+                q.add(this.neighbor[i]);
+            }
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < rooms.length; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Room {
+    int number;
+    boolean frontier;
+    List<Integer> neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new ArrayList<>();
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor.add(room);
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new ArrayDeque<>();
+        List<Room> rooms = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            rooms.add(new Room(i));
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int current = q.pop();
+            rooms[current].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.size(); i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    void set(int room) {
+        this.neighbor = room;
+    }
+
+    void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.pop();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < rooms.length; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.removeFirst();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new ArrayDeque<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.removeFirst();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Room {
+    int number;
+    boolean frontier;
+    List<Integer> neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new ArrayList<>();
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor.add(room);
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new ArrayDeque<>();
+        List<Room> rooms = new ArrayList<>();
+
+        for (int i = 0; i < n + 1; i++) {
+            rooms.add(new Room(i));
+        }
+
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+
+        q.add(1);
+
+        while (!q.isEmpty()) {
+            int room = q.pop();
+            rooms[room].dfs();
+        }
+
+        System.out.println("Yes");
+
+        for (int i = 2; i < rooms.size(); i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.addLast(i);
+            }
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.addLast(1);
+        while (!q.isEmpty()) {
+            int room = q.removeFirst();
+            rooms[room].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int INF = 100050;
+    Deque<Integer> q = new LinkedList<>();
+
+    class Room {
+      int number;
+      boolean frontier;
+      int[] neighbor;
+      int arrow;
+      int deepness;
+
+      Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[n];
+        this.arrow = 0;
+        this.deepness = INF;
+      }
+
+      void set(int room) {
+        this.neighbor[room] = 1;
+      }
+
+      void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+      }
+
+      void dfs() {
+        for (int i = 0; i < this.neighbor.length; i++) {
+          if (rooms[i].frontier) {
+            rooms[i].search(this.number, this.deepness + 1);
+            q.addLast(i);
+          }
+        }
+      }
+    }
+
+    Room[] rooms = new Room[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      rooms[i] = new Room(i);
+    }
+
+    for (int i = 0; i < m; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      rooms[a].set(b);
+      rooms[b].set(a);
+    }
+
+    q.addLast(1);
+    while (!q.isEmpty()) {
+      int room = q.removeFirst();
+      rooms[room].dfs();
+    }
+
+    System.out.println("Yes");
+    for (int i = 2; i < rooms.length; i++) {
+      if (!rooms[i].frontier) {
+        System.out.println(rooms[i].arrow);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    void set(int room) {
+        this.neighbor = room;
+    }
+
+    void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i <= n; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+
+        class Room {
+            int number;
+            boolean frontier;
+            int[] neighbor;
+            int arrow;
+            int deepness;
+
+            public Room(int num) {
+                this.number = num;
+                this.frontier = true;
+                this.neighbor = new int[n];
+                this.arrow = 0;
+                this.deepness = INF;
+            }
+
+            public void set(int room) {
+                this.neighbor[room] = 1;
+            }
+
+            public void search(int num, int deps) {
+                this.arrow = num;
+                this.deepness = deps;
+                this.frontier = false;
+            }
+
+            public void dfs() {
+                for (int i = 0; i < n; i++) {
+                    if (rooms[i].frontier) {
+                        rooms[i].search(this.number, this.deepness + 1);
+                        q.add(i);
+                    }
+                }
+            }
+        }
+
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+
+        q.add(1);
+        while (!q.isEmpty()) {
+            int i = q.removeFirst();
+            rooms[i].dfs();
+        }
+
+        System.out.println("Yes");
+        for (int i = 2; i < n + 1; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Room {
+    public int number;
+    public boolean frontier;
+    public int[] neighbor;
+    public int arrow;
+    public int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.pop()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    void set(int room) {
+        this.neighbor = room;
+    }
+
+    void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    void dfs() {
+        for (int i : this.neighbor) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new ArrayDeque<>();
+
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i <= n; i++) {
+            rooms[i] = new Room(i);
+        }
+
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+
+        q.add(1);
+        while (!q.isEmpty()) {
+            int room = q.pop();
+            rooms[room].dfs();
+        }
+
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+
+class Room {
+    int number;
+    boolean frontier;
+    int[] neighbor;
+    int arrow;
+    int deepness;
+
+    public Room(int num) {
+        this.number = num;
+        this.frontier = true;
+        this.neighbor = new int[0];
+        this.arrow = 0;
+        this.deepness = 100050;
+    }
+
+    public void set(int room) {
+        this.neighbor = room;
+    }
+
+    public void search(int num, int deps) {
+        this.arrow = num;
+        this.deepness = deps;
+        this.frontier = false;
+    }
+
+    public void dfs() {
+        for (int i = 0; i < this.neighbor.length; i++) {
+            if (rooms[i].frontier) {
+                rooms[i].search(this.number, this.deepness + 1);
+                q.add(i);
+            }
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int INF = 100050;
+        Deque<Integer> q = new LinkedList<>();
+        Room[] rooms = new Room[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            rooms[i] = new Room(i);
+        }
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            rooms[a].set(b);
+            rooms[b].set(a);
+        }
+        q.add(1);
+        while (!q.isEmpty()) {
+            rooms[q.removeFirst()].dfs();
+        }
+        System.out.println("Yes");
+        for (int i = 2; i < rooms.length; i++) {
+            if (!rooms[i].frontier) {
+                System.out.println(rooms[i].arrow);
+            }
+        }
+    }
+}
+[/JAVA]
+======

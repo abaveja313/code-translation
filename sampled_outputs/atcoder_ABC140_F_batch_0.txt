@@ -1,0 +1,998 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    int N = scanner.nextInt();
+    int N2 = 1 << N;
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[N];
+    slimes[0] = S[0];
+    S[0] = S[0] + 1;
+    int num = 1;
+    int minIdx = 1;
+    for (int i = 0; i < N; i++) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = S[idx] + 1;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < S[0]) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    List<Integer> slimes = new ArrayList<>();
+    slimes.add(S[0]);
+    S[0] = Integer.MAX_VALUE;
+    int num = 1;
+    int minIdx = 1;
+    while (num <= N) {
+      Collections.sort(slimes);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes.get(n - 1)) {
+          slimes.add(S[idx]);
+          S[idx] = Integer.MAX_VALUE;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    ArrayList<Integer> S = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    Collections.sort(S, Collections.reverseOrder());
+    ArrayList<Integer> slimes = new ArrayList<>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      slimes.sort(null);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          min_idx += isContinuous ? 1 : 0;
+        } else {
+          if (S.get(idx) < S.get(0)) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous ? 1 : 0;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    List<Integer> S = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    S.sort(Collections.reverseOrder());
+    List<Integer> slimes = new ArrayList<>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int minIdx = 1;
+    while (num <= N) {
+      slimes.sort(Collections.reverseOrder());
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          minIdx += isContinuous ? 1 : 0;
+        } else {
+          if (S.get(idx) < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous ? 1 : 0;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[N2];
+    slimes[0] = S[0];
+    S[0] = Integer.MAX_VALUE;
+    int num = 1;
+    int minIdx = 1;
+    for (int i = 0; i < N; i++) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = Integer.MAX_VALUE;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int N = scanner.nextInt();
+        int N2 = (int) Math.pow(2, N);
+        int[] S = new int[N2];
+        for (int i = 0; i < N2; i++) {
+            S[i] = scanner.nextInt();
+        }
+        Arrays.sort(S, Collections.reverseOrder());
+        int[] slimes = new int[1];
+        slimes[0] = S[0];
+        S[0] = S[0] + 1;
+        int num = 1;
+        int min_idx = 1;
+        while (num <= N) {
+            Arrays.sort(slimes);
+            int n = num;
+            int idx = min_idx;
+            boolean isContinuous = true;
+            while (n > 0 && idx <= N2 - 1) {
+                if (S[idx] < slimes[n - 1]) {
+                    slimes[n - 1] = S[idx];
+                    S[idx] = S[idx] + 1;
+                    idx++;
+                    n--;
+                    min_idx += isContinuous;
+                } else {
+                    if (S[idx] < S[0]) {
+                        isContinuous = false;
+                    }
+                    idx++;
+                    min_idx += isContinuous;
+                }
+            }
+            if (n > 0) {
+                System.out.println("No");
+                return;
+            }
+            num *= 2;
+        }
+        System.out.println("Yes");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = S[0] + 1;
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = S[idx] + 1;
+          idx++;
+          n--;
+          min_idx += isContinuous;
+        } else {
+          if (S[idx] < S[0]) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, 0, N2 - 1);
+    int[] slimes = new int[N];
+    slimes[0] = S[0];
+    S[0] = Integer.MAX_VALUE;
+    int num = 1;
+    int minIdx = 1;
+    for (int i = 0; i < N; i++) {
+      slimes.sort();
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = Integer.MAX_VALUE;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = 1 << N;
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = sc.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = Integer.MAX_VALUE;
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = Integer.MAX_VALUE;
+          idx++;
+          n--;
+          min_idx += isContinuous ? 1 : 0;
+        } else {
+          if (S[idx] < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous ? 1 : 0;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    List<Integer> S = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    S.sort(Collections.reverseOrder());
+    List<Integer> slimes = new ArrayList<>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int minIdx = 1;
+    while (num <= N) {
+      slimes.sort(Collections.reverseOrder());
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S.get(idx) < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    ArrayList<Integer> S = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    Collections.sort(S, Collections.reverseOrder());
+    ArrayList<Integer> slimes = new ArrayList<>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      slimes.sort(null);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          min_idx += isContinuous;
+        } else {
+          if (S.get(idx) < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    Arrays.sort(S, Collections.reverseOrder());
+    int[] slimes = new int[N];
+    int INF = S[0] + 1;
+    S[0] = INF;
+    int num = 1;
+    int min_idx = 1;
+    for (int i = 0; i < N; i++) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean is_continuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = INF;
+          idx++;
+          n--;
+          min_idx += is_continuous;
+        } else {
+          if (S[idx] < INF) {
+            is_continuous = false;
+          }
+          idx++;
+          min_idx += is_continuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = scanner.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = S[0] + 1;
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = S[idx] + 1;
+          idx++;
+          n--;
+          min_idx += isContinuous;
+        } else {
+          if (S[idx] < S[0]) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    ArrayList<Integer> S = new ArrayList<Integer>();
+    for (int i = 0; i < N; i++) {
+      S.add(sc.nextInt());
+    }
+    Collections.sort(S, Collections.reverseOrder());
+    ArrayList<Integer> slimes = new ArrayList<Integer>();
+    slimes.add(S.get(0));
+    int INF = S.get(0) + 1;
+    S.set(0, INF);
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      slimes.sort(null);
+      int n = num;
+      int idx = min_idx;
+      boolean is_continuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, INF);
+          idx++;
+          n--;
+          min_idx += is_continuous;
+        } else {
+          if (S.get(idx) < INF) {
+            is_continuous = false;
+          }
+          idx++;
+          min_idx += is_continuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    ArrayList<Integer> S = new ArrayList<Integer>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    S.sort(Collections.reverseOrder());
+    ArrayList<Integer> slimes = new ArrayList<Integer>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      slimes.sort(Collections.reverseOrder());
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          min_idx += isContinuous ? 1 : 0;
+        } else {
+          if (S.get(idx) < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous ? 1 : 0;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    Arrays.sort(S, 0, S.length, Integer::compare);
+    int[] slimes = new int[S.length];
+    int INF = S[0] + 1;
+    S[0] = INF;
+    int num = 1;
+    int minIdx = 1;
+    for (int i = 0; i < N; i++) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = INF;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < INF) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    ArrayList<Integer> S = new ArrayList<Integer>();
+    for (int i = 0; i < N; i++) {
+      S.add(scanner.nextInt());
+    }
+    Collections.sort(S, Collections.reverseOrder());
+    ArrayList<Integer> slimes = new ArrayList<Integer>();
+    slimes.add(S.get(0));
+    S.set(0, S.get(0) + 1);
+    int num = 1;
+    int minIdx = 1;
+    while (num <= N) {
+      slimes.sort(null);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S.get(idx) < slimes.get(n - 1)) {
+          slimes.add(S.get(idx));
+          S.set(idx, S.get(idx) + 1);
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S.get(idx) < Integer.MAX_VALUE) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = sc.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = Integer.MAX_VALUE;
+    int num = 1;
+    int min_idx = 1;
+    for (int i = 0; i < N; i++) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean is_continuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = Integer.MAX_VALUE;
+          idx++;
+          n--;
+          min_idx += is_continuous;
+        } else {
+          if (S[idx] < Integer.MAX_VALUE) {
+            is_continuous = false;
+          }
+          idx++;
+          min_idx += is_continuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = sc.nextInt();
+    }
+    Arrays.sort(S, Collections.reverseOrder());
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = S[0] + 1;
+    int num = 1;
+    int minIdx = 1;
+    while (num <= N) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = minIdx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = S[idx] + 1;
+          idx++;
+          n--;
+          minIdx += isContinuous;
+        } else {
+          if (S[idx] < S[0]) {
+            isContinuous = false;
+          }
+          idx++;
+          minIdx += isContinuous;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int N2 = (int) Math.pow(2, N);
+    int[] S = new int[N2];
+    for (int i = 0; i < N2; i++) {
+      S[i] = sc.nextInt();
+    }
+    Arrays.sort(S, (a, b) -> b - a);
+    int[] slimes = new int[1];
+    slimes[0] = S[0];
+    S[0] = S[0] + 1;
+    int num = 1;
+    int min_idx = 1;
+    while (num <= N) {
+      Arrays.sort(slimes);
+      int n = num;
+      int idx = min_idx;
+      boolean isContinuous = true;
+      while (n > 0 && idx <= N2 - 1) {
+        if (S[idx] < slimes[n - 1]) {
+          slimes[n - 1] = S[idx];
+          S[idx] = S[idx] + 1;
+          idx++;
+          n--;
+          min_idx += isContinuous ? 1 : 0;
+        } else {
+          if (S[idx] < S[0]) {
+            isContinuous = false;
+          }
+          idx++;
+          min_idx += isContinuous ? 1 : 0;
+        }
+      }
+      if (n > 0) {
+        System.out.println("No");
+        return;
+      }
+      num *= 2;
+    }
+    System.out.println("Yes");
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,1218 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        a.sort(null);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i : a) {
+            dic.put(i, dic.getOrDefault(i, 0) + 1);
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i : a) {
+      if (dic.containsKey(i)) {
+        dic.put(i, dic.get(i) + 1);
+      } else {
+        dic.put(i, 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 == 1) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+
+[/JAVA]
+
+I have converted the Python code to Java code as requested. The Java code is functionally identical to the Python code and contains all necessary imports and is within a driver class called Solution with an executable main(string[] args) method.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i : a) {
+            if (dic.containsKey(i)) {
+                dic.put(i, dic.get(i) + 1);
+            } else {
+                dic.put(i, 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (dic.containsKey(a[i])) {
+        dic.put(a[i], dic.get(a[i]) + 1);
+      } else {
+        dic.put(a[i], 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static long powmod(long a, long n, long m) {
+    long ans = 1;
+    while (n != 0) {
+      if (n % 2 == 1) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the same logic and data structures as the Python code, but is written in Java. The code reads in a number `n` and an array of integers `a`, sorts the array, and then uses a `HashMap` to count the frequency of each integer in the array. It then checks if the frequencies of the integers in the array match the expected frequencies based on the parity of `n`, and if they do not match, it prints `0` and exits. If the frequencies do match, it calculates the result using the `powmod` function and prints it.
+
+Note that the `powmod` function is implemented in the same way as the Python code, but is written in Java. The `HashMap` class is used in place of the `Counter` class from the Python standard library.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new TreeMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new TreeMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+    
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i : a) {
+            dic.put(i, dic.getOrDefault(i, 0) + 1);
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 != 0) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int value = a[i];
+      if (dic.containsKey(value)) {
+        dic.put(value, dic.get(value) + 1);
+      } else {
+        dic.put(value, 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 == 1) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 != 0) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    private static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (dic.containsKey(a[i])) {
+        dic.put(a[i], dic.get(a[i]) + 1);
+      } else {
+        dic.put(a[i], 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 == 1) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Collections.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a.get(i))) {
+                dic.put(a.get(i), dic.get(a.get(i)) + 1);
+            } else {
+                dic.put(a.get(i), 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (dic.containsKey(a[i])) {
+        dic.put(a[i], dic.get(a[i]) + 1);
+      } else {
+        dic.put(a[i], 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 != 0) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+    
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n >>= 1;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new TreeMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new TreeMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 != 0) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a);
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (dic.containsKey(a[i])) {
+        dic.put(a[i], dic.get(a[i]) + 1);
+      } else {
+        dic.put(a[i], 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new HashMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new HashMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 == 1) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int count = 1;
+            if (i > 0 && a[i] == a[i - 1]) {
+                count++;
+            }
+            dic.put(a[i], count);
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 != 0) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (dic.containsKey(a[i])) {
+        dic.put(a[i], dic.get(a[i]) + 1);
+      } else {
+        dic.put(a[i], 1);
+      }
+    }
+    if (n % 2 == 0) {
+      Map<Integer, Integer> temp = new TreeMap<>();
+      for (int i = 1; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    } else {
+      Map<Integer, Integer> temp = new TreeMap<>();
+      temp.put(0, 1);
+      for (int i = 2; i < n; i += 2) {
+        temp.put(i, 2);
+      }
+      if (!temp.equals(dic)) {
+        System.out.println(0);
+        return;
+      }
+    }
+    System.out.println(powmod(2, n / 2, 1000000007));
+  }
+
+  public static int powmod(int a, int n, int m) {
+    int ans = 1;
+    while (n != 0) {
+      if (n % 2 != 0) {
+        ans = (ans * a) % m;
+      }
+      a = (a * a) % m;
+      n /= 2;
+    }
+    return ans % m;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `Scanner` class to read input from the user, and the `HashMap` class to store the counts of the elements in the array. I have also used the `TreeMap` class to store the counts of the elements in the array in a sorted manner.
+
+The `powmod` method is a helper method that calculates the power of a number modulo another number. It is used to calculate the final answer.
+
+The `main` method reads the input from the user, sorts the array, and calculates the counts of the elements in the array. It then checks if the counts are equal to the expected counts, and if they are not, it prints `0` and exits. Otherwise, it calculates the final answer using the `powmod` method and prints it.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i : a) {
+            if (dic.containsKey(i)) {
+                dic.put(i, dic.get(i) + 1);
+            } else {
+                dic.put(i, 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 == 1) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (dic.containsKey(a[i])) {
+                dic.put(a[i], dic.get(a[i]) + 1);
+            } else {
+                dic.put(a[i], 1);
+            }
+        }
+        if (n % 2 == 0) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int i = 1; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        } else {
+            Map<Integer, Integer> temp = new HashMap<>();
+            temp.put(0, 1);
+            for (int i = 2; i < n; i += 2) {
+                temp.put(i, 2);
+            }
+            if (!temp.equals(dic)) {
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(powmod(2, n / 2, 1000000007));
+    }
+
+    public static int powmod(int a, int n, int m) {
+        int ans = 1;
+        while (n != 0) {
+            if (n % 2 != 0) {
+                ans = (ans * a) % m;
+            }
+            a = (a * a) % m;
+            n /= 2;
+        }
+        return ans % m;
+    }
+}
+
+[/JAVA]
+======

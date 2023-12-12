@@ -1,0 +1,751 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0, l, ans);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      int min = Math.min(a, Math.min(b, c));
+      if (min > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int C = sc.nextInt();
+        int[] l = new int[N];
+        for (int i = 0; i < N; i++) {
+            l[i] = sc.nextInt();
+        }
+        int ans = Integer.MAX_VALUE;
+
+        dfs(0, 0, 0, 0, N, A, B, C, l, ans);
+
+        System.out.println(ans);
+    }
+
+    private static void dfs(int x, int a, int b, int c, int N, int A, int B, int C, int[] l, int ans) {
+        if (x == N) {
+            int min = Math.min(a, Math.min(b, c));
+            if (min > 0) {
+                ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+            }
+            return;
+        }
+
+        dfs(x + 1, a, b, c, N, A, B, C, l, ans);
+        dfs(x + 1, a + l[x], b, c, N, A, B, C, l, ans);
+        dfs(x + 1, a, b + l[x], c, N, A, B, C, l, ans);
+        dfs(x + 1, a, b, c + l[x], N, A, B, C, l, ans);
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and it uses the `Math` class to perform mathematical operations such as `abs` and `min`. The `dfs` method is the recursive function that performs the depth-first search, and it uses the `Math.min` method to compute the minimum of three values. The `ans` variable is used to store the final answer, and it is initialized to `Integer.MAX_VALUE` to represent infinity. The `main` method is the entry point of the program, and it calls the `dfs` method with the initial values of `x`, `a`, `b`, and `c`, and it prints the final answer.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, l, ans);
+
+    System.out.println(ans);
+  }
+
+  public static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      if (Math.min(a, b, c) > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0, l, ans);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      if (Math.min(a, b, c) > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `Math` class to perform mathematical operations. The `dfs` method is a recursive function that implements the depth-first search algorithm, and it takes the current state of the game (represented by the `x`, `a`, `b`, and `c` variables) and the list of remaining numbers (`l`) as input. The `ans` variable is used to keep track of the minimum cost of the current state, and it is initialized to `Integer.MAX_VALUE` to represent infinity. The `dfs` method returns the minimum cost of the current state, and it is printed to the console at the end of the program.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0);
+
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      int minValue = Math.min(a, b, c);
+      if (minValue > 0) {
+        return Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30;
+      } else {
+        return Integer.MAX_VALUE;
+      }
+    }
+    int ret0 = dfs(x + 1, a, b, c);
+    int ret1 = dfs(x + 1, a + l[x], b, c) + 10;
+    int ret2 = dfs(x + 1, a, b + l[x], c) + 10;
+    int ret3 = dfs(x + 1, a, b, c + l[x]) + 10;
+    return Math.min(ret0, ret1, ret2, ret3);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `Math` class to perform mathematical operations. The `dfs` method is implemented recursively, with the `x`, `a`, `b`, and `c` variables representing the current state of the algorithm. The `ans` variable is used to store the final result, and the `main` method is used to call the `dfs` method and print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, ans);
+    System.out.println(ans);
+  }
+
+  public static void dfs(int x, int a, int b, int c, int ans) {
+    if (x == N) {
+      if (min(a, b, c) > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, ans);
+    dfs(x + 1, a + l[x], b, c, ans + 10);
+    dfs(x + 1, a, b + l[x], c, ans + 10);
+    dfs(x + 1, a, b, c + l[x], ans + 10);
+  }
+
+  public static int min(int a, int b, int c) {
+    return Math.min(a, Math.min(b, c));
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The code uses the `Scanner` class to read input from the user, and the `Math` class for mathematical operations. The `min` function is defined separately to avoid repetition. The `dfs` function is defined recursively, with the `x`, `a`, `b`, and `c` variables representing the current state of the recursion, and the `ans` variable representing the minimum distance found so far. The `dfs` function is called with the initial state of `x = 0`, `a = 0`, `b = 0`, and `c = 0`, and the initial value of `ans` is set to `Integer.MAX_VALUE`. The `dfs` function returns the minimum distance found by the recursion, which is then printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, N, A, B, C, l, ans);
+
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int N, int A, int B, int C, int[] l, int ans) {
+    if (x == N) {
+      int minValue = Math.min(a, Math.min(b, c));
+      if (minValue > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, N, A, B, C, l, ans);
+    dfs(x + 1, a + l[x], b, c, N, A, B, C, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, N, A, B, C, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], N, A, B, C, l, ans + 10);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      int minValue = Math.min(a, b, c);
+      if (minValue > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c);
+    dfs(x + 1, a + l[x], b, c);
+    dfs(x + 1, a, b + l[x], c);
+    dfs(x + 1, a, b, c + l[x]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, l, ans);
+
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      int minVal = Math.min(a, Math.min(b, c));
+      if (minVal > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = dfs(0, 0, 0, 0);
+    System.out.println(ans);
+  }
+
+  private static int dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      return Math.min(Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30, 0);
+    }
+    int ret0 = dfs(x + 1, a, b, c);
+    int ret1 = dfs(x + 1, a + l[x], b, c) + 10;
+    int ret2 = dfs(x + 1, a, b + l[x], c) + 10;
+    int ret3 = dfs(x + 1, a, b, c + l[x]) + 10;
+    return Math.min(ret0, ret1, ret2, ret3);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0, ans);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int ans) {
+    if (x == N) {
+      if (Math.min(a, b, c) > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c, ans);
+    dfs(x + 1, a + l[x], b, c, ans + 10);
+    dfs(x + 1, a, b + l[x], c, ans + 10);
+    dfs(x + 1, a, b, c + l[x], ans + 10);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0, ans);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int ans) {
+    if (x == N) {
+      if (Math.min(a, b, c) > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c, ans);
+    dfs(x + 1, a + l[x], b, c, ans + 10);
+    dfs(x + 1, a, b + l[x], c, ans + 10);
+    dfs(x + 1, a, b, c + l[x], ans + 10);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the given Python code. The code uses the `Scanner` class to read input from the user, and the `Math` class to perform mathematical operations. The `dfs` method is a recursive function that simulates the depth-first search algorithm used in the Python code. The `ans` variable is used to keep track of the minimum distance between the starting point and the destination point. The `main` method is the driver class that calls the `dfs` method and prints the final answer.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
+        int C = scanner.nextInt();
+        int[] l = new int[N];
+        for (int i = 0; i < N; i++) {
+            l[i] = scanner.nextInt();
+        }
+        int ans = Integer.MAX_VALUE;
+        dfs(0, 0, 0, 0, ans);
+        System.out.println(ans);
+    }
+    
+    private static void dfs(int x, int a, int b, int c, int ans) {
+        if (x == N) {
+            int min = Math.min(a, b, c);
+            if (min > 0) {
+                ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+            }
+            return;
+        }
+        dfs(x + 1, a, b, c, ans);
+        dfs(x + 1, a + l[x], b, c, ans + 10);
+        dfs(x + 1, a, b + l[x], c, ans + 10);
+        dfs(x + 1, a, b, c + l[x], ans + 10);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, l, ans);
+
+    System.out.println(ans);
+  }
+
+  public static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      int minVal = Math.min(a, Math.min(b, c));
+      if (minVal > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      int minValue = Math.min(a, b, c);
+      if (minValue > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c);
+    dfs(x + 1, a + l[x], b, c);
+    dfs(x + 1, a, b + l[x], c);
+    dfs(x + 1, a, b, c + l[x]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0);
+
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      int min = Math.min(a, b, c);
+      if (min > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c);
+    dfs(x + 1, a + l[x], b, c);
+    dfs(x + 1, a, b + l[x], c);
+    dfs(x + 1, a, b, c + l[x]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int C = sc.nextInt();
+        int[] l = new int[N];
+        for (int i = 0; i < N; i++) {
+            l[i] = sc.nextInt();
+        }
+        int ans = Integer.MAX_VALUE;
+        dfs(0, 0, 0, 0);
+        System.out.println(ans);
+    }
+
+    private static void dfs(int x, int a, int b, int c) {
+        if (x == N) {
+            int minVal = Math.min(a, Math.min(b, c));
+            if (minVal > 0) {
+                ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+            }
+            return;
+        }
+        dfs(x + 1, a, b, c);
+        dfs(x + 1, a + l[x], b, c);
+        dfs(x + 1, a, b + l[x], c);
+        dfs(x + 1, a, b, c + l[x]);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c) {
+    if (x == N) {
+      int min = Math.min(a, b, c);
+      if (min > 0) {
+        return (Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      } else {
+        return Integer.MAX_VALUE;
+      }
+    }
+    int ret0 = dfs(x + 1, a, b, c);
+    int ret1 = dfs(x + 1, a + l[x], b, c) + 10;
+    int ret2 = dfs(x + 1, a, b + l[x], c) + 10;
+    int ret3 = dfs(x + 1, a, b, c + l[x]) + 10;
+    return Math.min(ret0, ret1, ret2, ret3);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the given Python code. The code uses the `Scanner` class to read input from the user, and it uses the `Math.min()` method to find the minimum of three numbers. The `dfs()` method is a recursive method that is called with the initial values of `x`, `a`, `b`, and `c`, and it returns the minimum cost of the path from the starting point to the ending point. The `main()` method calls the `dfs()` method with the initial values of `x`, `a`, `b`, and `c`, and it prints the minimum cost of the path.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int A = sc.nextInt();
+    int B = sc.nextInt();
+    int C = sc.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = sc.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+    dfs(0, 0, 0, 0, ans);
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int ans) {
+    if (x == N) {
+      int minVal = Math.min(a, Math.min(b, c));
+      if (minVal > 0) {
+        ans = Math.min(ans, Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30);
+      }
+      return;
+    }
+    dfs(x + 1, a, b, c, ans);
+    dfs(x + 1, a + l[x], b, c, ans + 10);
+    dfs(x + 1, a, b + l[x], c, ans + 10);
+    dfs(x + 1, a, b, c + l[x], ans + 10);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int A = scanner.nextInt();
+    int B = scanner.nextInt();
+    int C = scanner.nextInt();
+    int[] l = new int[N];
+    for (int i = 0; i < N; i++) {
+      l[i] = scanner.nextInt();
+    }
+    int ans = Integer.MAX_VALUE;
+
+    dfs(0, 0, 0, 0, l, ans);
+
+    System.out.println(ans);
+  }
+
+  private static void dfs(int x, int a, int b, int c, int[] l, int ans) {
+    if (x == N) {
+      int sum = Math.abs(a - A) + Math.abs(b - B) + Math.abs(c - C) - 30;
+      if (sum > 0 && sum < ans) {
+        ans = sum;
+      }
+      return;
+    }
+
+    dfs(x + 1, a, b, c, l, ans);
+    dfs(x + 1, a + l[x], b, c, l, ans + 10);
+    dfs(x + 1, a, b + l[x], c, l, ans + 10);
+    dfs(x + 1, a, b, c + l[x], l, ans + 10);
+  }
+}
+[/JAVA]
+======

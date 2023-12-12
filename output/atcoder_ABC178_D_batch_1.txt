@@ -1,0 +1,3271 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) Math.pow(n, r);
+            int under = (int) Math.pow(r + 1, r);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.function.BiFunction;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        BigInteger mod = BigInteger.valueOf(10).pow(9).add(BigInteger.valueOf(7));
+        BiFunction<BigInteger, BigInteger, BigInteger> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return BigInteger.ONE;
+            }
+            BigInteger over = BigInteger.valueOf(n).subtract(BigInteger.valueOf(r)).subtract(BigInteger.ONE);
+            BigInteger under = BigInteger.valueOf(r).add(BigInteger.ONE);
+            return over.divide(under);
+        };
+        BigInteger ans = BigInteger.ZERO;
+        while (a >= 1) {
+            ans = ans.add(cmb.apply(BigInteger.valueOf(a - 1 + b), BigInteger.valueOf(b)));
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans = ans.add(BigInteger.ONE);
+                break;
+            }
+        }
+        System.out.println(ans.mod(mod));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = reduce(n - r + 1, n, (x, y) -> x * y);
+            int under = reduce(1, r + 1, (x, y) -> x * y);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+
+    private static int reduce(int n, int r, BinaryOperator<Integer> operator) {
+        int result = 1;
+        for (int i = n; i >= r; i--) {
+            result = operator.apply(result, i);
+        }
+        return result;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            int under = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      IntUnaryOperator over = i -> i * (n - r + 1);
+      IntUnaryOperator under = i -> i * (r + 1);
+      return over.applyAsInt(n) / under.applyAsInt(r);
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) reduce(multiply(), range(n, n - r, -1));
+            int under = (int) reduce(multiply(), range(1, r + 1));
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    public static BinaryOperator<Integer> multiply() {
+        return (a, b) -> a * b;
+    }
+
+    public static int reduce(BinaryOperator<Integer> operator, int[] range) {
+        int result = 1;
+        for (int i : range) {
+            result = operator.apply(result, i);
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      BinaryOperator<Integer> mul = (x, y) -> x * y;
+      int over = IntStream.rangeClosed(n, n - r).reduce(mul).getAsInt();
+      int under = IntStream.rangeClosed(1, r).reduce(mul).getAsInt();
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator mul = (x, y) -> x * y;
+
+        int ans = 0;
+        while (a >= 1) {
+            int r = Math.min(a - 1 + b, b);
+            int over = range(N, N - r, -1).reduce(mul).orElse(1);
+            int under = range(1, r + 1).reduce(mul).orElse(1);
+            ans += over / under;
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    public static IntStream range(int start, int end, int step) {
+        return IntStream.range(start, end).filter(i -> i % step == 0);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = reduce(n, r, (a, b) -> a * b);
+            int under = reduce(1, r + 1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    private static int reduce(int n, int r, Function<Integer, Integer> func) {
+        int result = 1;
+        for (int i = n; i >= n - r + 1; i--) {
+            result = func.apply(result, i);
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    long ans = 0;
+    while (a >= 1) {
+      ans += comb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+
+  public static long comb(int n, int r) {
+    r = Math.min(n - r, r);
+    if (r == 0) return 1;
+    long over = 1;
+    for (int i = n - r + 1; i <= n; i++) {
+      over *= i;
+    }
+    long under = 1;
+    for (int i = 1; i <= r; i++) {
+      under *= i;
+    }
+    return over / under;
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code to the given Python code. The `comb` method is implemented using the formula for the binomial coefficient, and the `main` method is identical to the Python code. The `java.util.Scanner` class is used to read input from the user, and the `Math.min` and `Math.max` methods are used to ensure that the values of `r` and `n - r` are within the bounds of the array. The `mod` variable is used to store the value of 10^9 + 7, which is used to prevent
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = n -> r -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.rangeClosed(n, n - r).reduce(1, (a, b) -> a * b);
+      int under = IntStream.rangeClosed(1, r).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    BinaryOperator<Integer> mul = (x, y) -> (x * y) % mod;
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += IntStream.rangeClosed(a - 1 + b, b).reduce(mul).getAsInt();
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            IntUnaryOperator over = x -> x * (n - r + 1);
+            IntUnaryOperator under = x -> x * (r + 1);
+            return over.applyAsInt(n) / under.applyAsInt(r);
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        long ans = 0;
+        while (a >= 1) {
+            long over = 1;
+            long under = 1;
+            for (int i = a - 1 + b; i > b; i--) {
+                over *= i;
+            }
+            for (int i = 1; i <= b; i++) {
+                under *= i;
+            }
+            ans += over / under;
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        BinaryOperator<Integer> mul = (x, y) -> x * y;
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += comb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    public static int comb(int n, int r) {
+        r = Math.min(n - r, r);
+        if (r == 0) {
+            return 1;
+        }
+        int over = IntStream.range(n, n - r).reduce(mul).orElse(1);
+        int under = IntStream.range(1, r + 1).reduce(mul).orElse(1);
+        return over / under;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      BinaryOperator<Integer> mul = (x, y) -> x * y;
+      int over = IntStream.rangeClosed(n, n - r).reduce(mul).getAsInt();
+      int under = IntStream.rangeClosed(1, r).reduce(mul).getAsInt();
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n; i > n - r; i--) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = IntStream.rangeClosed(n, n - r).reduce(1, (x, y) -> x * y);
+            int under = IntStream.rangeClosed(1, r).reduce(1, (x, y) -> x * y);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) (Math.pow(n, r + 1) / (Math.pow(n - r, r) * r));
+            int under = (int) (Math.pow(r + 1, r) / r);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntFunction<Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            BinaryOperator<Integer> mul = (x, y) -> x * y;
+            int over = (int) reduce(mul, range(n, n - r, -1));
+            int under = (int) reduce(mul, range(1, r + 1));
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = (int) Stream.iterate(n, i -> i - 1).limit(r).reduce(1, (a, b) -> a * b);
+      int under = (int) Stream.iterate(1, i -> i + 1).limit(r + 1).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n; i >= n - r + 1; i--) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.range(n, n - r).reduce(1, (a, b) -> a * b);
+      int under = IntStream.range(1, r + 1).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.range(n, n - r).reduce(1, (a, b) -> a * b);
+      int under = IntStream.range(1, r + 1).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        BigInteger mod = BigInteger.valueOf(1000000007);
+
+        Function<Integer, BigInteger> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return BigInteger.ONE;
+            }
+            BigInteger over = BigInteger.valueOf(n).subtract(BigInteger.valueOf(r)).subtract(BigInteger.ONE);
+            BigInteger under = BigInteger.valueOf(r).add(BigInteger.ONE);
+            return over.divide(under);
+        };
+
+        BigInteger ans = BigInteger.ZERO;
+        while (a >= 1) {
+            ans = ans.add(cmb.apply(a - 1 + b, b));
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans = ans.add(BigInteger.ONE);
+                break;
+            }
+        }
+
+        System.out.println(ans.mod(mod));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) return 1;
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.math.BigInteger;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        BigInteger mod = new BigInteger("1000000007");
+
+        long ans = 0;
+        while (a >= 1) {
+            long r = Math.min(a - 1 + b, b);
+            long over = 1;
+            for (int i = a - 1; i >= a - r; i--) {
+                over *= i;
+            }
+            long under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            ans += over / under;
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n) -> {
+            int r = Math.min(n - b, b);
+            if (r == 0) {
+                return 1;
+            }
+            int over = reduce(n, r, (x, y) -> x * y);
+            int under = reduce(1, r + 1, (x, y) -> x * y);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+
+    private static int reduce(int n, int r, BinaryOperator<Integer> operator) {
+        int result = 1;
+        for (int i = n; i > n - r; i--) {
+            result = operator.apply(result, i);
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            IntUnaryOperator over = i -> i;
+            IntUnaryOperator under = i -> i;
+            for (int j = n - r + 1; j <= n; j++) {
+                over = over.andThen(j);
+            }
+            for (int j = 1; j <= r; j++) {
+                under = under.andThen(j);
+            }
+            return over.applyAsInt(n) / under.applyAsInt(r);
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    long ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BiFunction;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        BiFunction<Integer, Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            int under = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = IntStream.rangeClosed(n, n - r).reduce(1, (a, b) -> a * b);
+            int under = IntStream.rangeClosed(1, r).reduce(1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int a = n / 3;
+    int b = n % 3;
+    int mod = 1000000007;
+
+    IntUnaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) return 1;
+      int over = (int) Math.pow(n, r) / r;
+      int under = (int) Math.pow(r + 1, n - r);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = n -> {
+      int r = Math.min(n - r, r);
+      if (r == 0) return 1;
+      int over = IntStream.range(n, n - r).reduce(1, (a, b) -> a * b);
+      int under = IntStream.range(1, r + 1).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) Math.pow(n, r);
+            int under = (int) Math.pow(r + 1, r);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = IntStream.range(n, n - r).reduce(1, (a, b) -> a * b);
+            int under = IntStream.range(1, r + 1).reduce(1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Stream;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator mul = (x, y) -> x * y;
+
+        int ans = 0;
+        while (a >= 1) {
+            int r = Math.min(a - 1 + b, b);
+            if (r == 0) {
+                ans += 1;
+                break;
+            }
+            int over = Stream.iterate(N, x -> x - 1).limit(r).reduce(mul).getAsInt();
+            int under = Stream.iterate(1, x -> x + 1).limit(r).reduce(mul).getAsInt();
+            ans += over / under;
+            a -= 1;
+            b += 3;
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = (int) Arrays.stream(Range.of(n, n - r, -1)).reduce(1, (a, b) -> a * b);
+            int under = (int) Arrays.stream(Range.of(1, r + 1)).reduce(1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            BinaryOperator<Integer> mul = (x, y) -> (int) (x * y);
+            int over = reduce(mul, range(n, n - r, -1));
+            int under = reduce(mul, range(1, r + 1));
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    private static int reduce(BinaryOperator<Integer> operator, int[] range) {
+        int result = 1;
+        for (int i : range) {
+            result = operator.apply(result, i);
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntFunction<Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      BinaryOperator<Integer> mul = (x, y) -> x * y;
+      int over = IntStream.rangeClosed(n, n - r).reduce(mul).getAsInt();
+      int under = IntStream.rangeClosed(1, r).reduce(mul).getAsInt();
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      BiFunction<Integer, Integer, Integer> mul = (x, y) -> (x * y) % mod;
+      return reduce(mul, range(n, n - r, -1), 1) / reduce(mul, range(1, r + 1), 1);
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `java.util.Scanner` class to read input from the user, and the `java.util.function.BiFunction` and `java.util.function.Function` classes to define the `cmb` function. The `reduce` function is defined using the `java.util.function.BinaryOperator` class. The `range` function is defined using the `java.util.stream.IntStream` class
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) return 1;
+      int over = 1;
+      int under = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.range(n, n - r).reduce(1, (x, y) -> x * y);
+      int under = IntStream.range(1, r + 1).reduce(1, (x, y) -> x * y);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = reduce(n - r, n - r + 1, (a, b) -> a * b);
+            int under = reduce(1, r + 1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+
+    public static <T> T reduce(T identity, T[] array, BinaryOperator<T> accumulator) {
+        T result = identity;
+        for (T element : array) {
+            result = accumulator.apply(result, element);
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            int under = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = reduce(n, r, (a, b) -> a * b);
+      int under = reduce(1, r + 1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+
+  private static int reduce(int n, int r, BinaryOperator<Integer> operator) {
+    int result = 1;
+    for (int i = n; i >= n - r + 1; i--) {
+      result = operator.apply(result, i);
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BiFunction;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    BiFunction<Integer, Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator mul = (x, y) -> (x * y) % mod;
+
+        int ans = 0;
+        while (a >= 1) {
+            int r = Math.min(a - 1 + b, b);
+            if (r == 0) {
+                ans += 1;
+                break;
+            }
+            int over = 1;
+            int under = 1;
+            for (int i = a - 1; i >= 1; i--) {
+                over = (over * i) % mod;
+            }
+            for (int i = 1; i <= r; i++) {
+                under = (under * i) % mod;
+            }
+            ans += over / under;
+            a -= 1;
+            b += 3;
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      IntUnaryOperator over = i -> i * (n - r + 1);
+      IntUnaryOperator under = i -> i * (r + 1);
+      return over.applyAsInt(n) / under.applyAsInt(n);
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.rangeClosed(n, n - r).reduce(1, (x, y) -> x * y);
+      int under = IntStream.rangeClosed(1, r).reduce(1, (x, y) -> x * y);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            BinaryOperator<Integer> mul = (x, y) -> x * y;
+            int over = mul.apply(n, n - r);
+            int under = mul.apply(1, r + 1);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) Math.pow(n - r + 1, n);
+            int under = (int) Math.pow(1, r);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n; i >= n - r + 1; i--) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = (int) Arrays.stream(new int[n - r]).reduce(1, (x, y) -> x * y);
+            int under = (int) Arrays.stream(new int[r + 1]).reduce(1, (x, y) -> x * y);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        long ans = 0;
+        while (a >= 1) {
+            ans += comb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+
+    public static long comb(long n, long r) {
+        r = Math.min(n - r, r);
+        if (r == 0) return 1;
+        long over = 1;
+        long under = 1;
+        for (long i = n - r + 1; i <= n; i++) {
+            over *= i;
+        }
+        for (long i = 1; i <= r; i++) {
+            under *= i;
+        }
+        return over / under;
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The `comb` method is a helper method that calculates the binomial coefficient, which is used in the `main` method to calculate the final answer. The `main` method takes the input from the user, calculates the answer, and prints it out. The `mod` variable is used to handle the modulo operation.
+
+Note that the `comb` method is a bit different from the Python version, as it uses `long` instead of `int` to handle larger values. Additionally, the `comb` method uses a different
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = r * (n - r + 1) / 2;
+            int under = 1;
+            for (int i = 2; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        long ans = 0;
+        while (a >= 1) {
+            ans += cmb.applyAsInt(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    long ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = (int) (1e9 + 7);
+
+        IntBinaryOperator cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = IntStream.range(n, n - r).reduce(1, (a, b) -> a * b);
+            int under = IntStream.range(1, r + 1).reduce(1, (a, b) -> a * b);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) return 1;
+      BinaryOperator<Integer> mul = (x, y) -> (x * y) % mod;
+      return (reduce(mul, range(n, n - r, -1)) / reduce(mul, range(1, r + 1))) % mod;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    IntBinaryOperator cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      IntUnaryOperator over = n1 -> (int) Math.pow(n1, n - r);
+      IntUnaryOperator under = r1 -> (int) Math.pow(r1, r);
+      return over.applyAsInt(n) / under.applyAsInt(r1);
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.applyAsInt(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            BinaryOperator<Integer> mul = (x, y) -> x * y;
+            int over = 1;
+            for (int i = n; i >= n - r + 1; i--) {
+                over = mul.apply(over, i);
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under = mul.apply(under, i);
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      int under = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = 1;
+      for (int i = n - r + 1; i <= n; i++) {
+        over *= i;
+      }
+      int under = 1;
+      for (int i = 1; i <= r; i++) {
+        under *= i;
+      }
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans++;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = (int) (1e9 + 7);
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            int over = 1;
+            int under = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = (int) Stream.iterate(n, i -> i - 1).limit(r).reduce(1, (a, b) -> a * b);
+      int under = (int) Stream.iterate(1, i -> i + 1).limit(r).reduce(1, (a, b) -> a * b);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      int over = IntStream.range(n, n - r).reduce(1, (x, y) -> x * y);
+      int under = IntStream.range(1, r + 1).reduce(1, (x, y) -> x * y);
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb.apply(a - 1 + b, b);
+      a--;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+    System.out.println(ans % mod);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            int under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = 1;
+            int under = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        BinaryOperator<Integer> mul = (x, y) -> (x * y) % mod;
+        Function<Integer, Integer> factorial = n -> {
+            int result = 1;
+            for (int i = 2; i <= n; i++) {
+                result = (result * i) % mod;
+            }
+            return result;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += factorial.apply(a - 1 + b) * factorial.apply(b) % mod;
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = n -> {
+            int r = Math.min(n - r, r);
+            if (r == 0) return 1;
+            int over = IntStream.rangeClosed(n, n - r + 1).reduce(1, (x, y) -> x * y);
+            int under = IntStream.rangeClosed(1, r + 1).reduce(1, (x, y) -> x * y);
+            return over / under;
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb(a - 1 + b, b);
+            a -= 1;
+            b += 3;
+            if (a == 1) {
+                ans += 1;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.Function;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int a = N / 3;
+        int b = N % 3;
+        int mod = 1000000007;
+
+        Function<Integer, Integer> cmb = (n, r) -> {
+            r = Math.min(n - r, r);
+            if (r == 0) {
+                return 1;
+            }
+            long over = 1;
+            for (int i = n - r + 1; i <= n; i++) {
+                over *= i;
+            }
+            long under = 1;
+            for (int i = 1; i <= r; i++) {
+                under *= i;
+            }
+            return (int) (over / under);
+        };
+
+        int ans = 0;
+        while (a >= 1) {
+            ans += cmb.apply(a - 1 + b, b);
+            a--;
+            b += 3;
+            if (a == 1) {
+                ans++;
+                break;
+            }
+        }
+        System.out.println(ans % mod);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int a = N / 3;
+    int b = N % 3;
+    int mod = 1000000007;
+
+    Function<Integer, Integer> cmb = (n, r) -> {
+      r = Math.min(n - r, r);
+      if (r == 0) {
+        return 1;
+      }
+      BinaryOperator<Integer> mul = (x, y) -> x * y;
+      int over = reduce(mul, range(n, n - r, -1));
+      int under = reduce(mul, range(1, r + 1));
+      return over / under;
+    };
+
+    int ans = 0;
+    while (a >= 1) {
+      ans += cmb(a - 1 + b, b);
+      a -= 1;
+      b += 3;
+      if (a == 1) {
+        ans += 1;
+        break;
+      }
+    }
+
+    System.out.println(ans % mod);
+  }
+
+  public static <T> T reduce(BinaryOperator<T> op, T[] arr) {
+    T result = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      result = op.apply(result, arr[i]);
+    }
+    return result;
+  }
+
+  public static int[] range(int start, int end, int step) {
+    int[] arr = new int[(end - start) / step];
+    for (int i = 
+======

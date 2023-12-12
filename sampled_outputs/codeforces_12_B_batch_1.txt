@@ -1,0 +1,336 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = 0;
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '0') {
+        k++;
+      }
+    }
+    s = s.substring(k);
+    System.out.println(s);
+    scanner.close();
+  }
+}
+[/JAVA]
+
+This is a basic implementation of the Python code in Java. It uses the `Scanner` class to read input from the user, and the `String` class to manipulate the input string. The `substring` method is used to extract the substring starting from the `k`th character. Finally, the resulting string is printed to the console.
+
+Note that the `String` class in Java is 0-indexed, so the `k`th character is actually at index `k-1`. This is why we subtract 1 from `k` when calling `substring`.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("0") ? "OK" : "WRONG_ANSWER");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = String.join("", s.split(""));
+    System.out.println(s.equals("") ? "OK" : s.charAt(0) + "0".repeat(k) + s.substring(1));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = s.substring(k);
+    System.out.println(s.equals(s.charAt(0) + "0".repeat(k) + s.substring(1)) ? "OK" : "WRONG_ANSWER");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = String.join("", s.chars().sorted().mapToObj(c -> (char) c).collect(Collectors.toList()));
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+
+Explanation:
+
+1. `import java.util.Scanner;` - This line imports the `Scanner` class from the `java.util` package, which is used to read input from the user.
+2. `class Solution {` - This line starts the definition of a class called `Solution`.
+3. `public static void main(String[] args) {` - This line defines the `main` method, which is the entry point of the program. The `public` access modifier means that the method can be accessed from outside the class, and the `static` keyword means that the method can be called without creating an instance of the class. The `void` return type means that the method does not return any value. The `String[] args` parameter is an array of strings that contains the command-line arguments passed to the program.
+4. `Scanner scanner = new Scanner(System.in);` - This line creates a new `Scanner` object that reads input from the standard input stream (i.e., the keyboard).
+5. `String s = scanner.nextLine();` - This line reads a line of input from the user and stores it in the `s` variable.
+6. `int k = s.length() - s.replace("0", "").length();` - This line calculates the number of occurrences of the character `'0'` in the input string `s`.
+7. `s = String.join("", s.chars().sorted().mapToObj(c -> (char) c).collect(Collectors.toList()));` - This line sorts the characters in the input string `s` and joins them into a new string using the empty string as the separator.
+8. `s = s.substring(k);` - This line removes the first `k` characters from the sorted string.
+9. `System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");` - This line checks if the sorted string is empty, and if it is, it prints "WRONG_ANSWER", otherwise it prints "OK".
+10. `}` - This line ends the definition of the `main` method.
+11. `}` - This line ends the definition of the `Solution` class.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = String.join("", s.chars().sorted().mapToObj(c -> (char) c).toArray(String[]::new));
+    if (s.isEmpty()) {
+      System.out.println("OK");
+    } else {
+      System.out.println(s.charAt(0) + "0".repeat(k) + s.substring(1));
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = new StringBuilder(s).reverse().toString();
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(ch -> ch == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = String.join("", s.split(""));
+    s = s.substring(k);
+    System.out.println(s.equals("0") ? "OK" : "WRONG_ANSWER");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "OK" : "WRONG_ANSWER");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("0") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = s.replaceAll("0", "");
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = s.replaceAll("0", "");
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It uses the `Scanner` class to read input from the user, and then uses the `String` class to manipulate the input string. The `String.length()` method is used to count the number of characters in the string, and the `String.replace()` method is used to count the number of occurrences of a specific character in the string. The `String.substring()` method is used to extract a substring from the original string. Finally, the `String.equals()` method is used to compare the extracted substring with the expected output.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    String input = scanner.nextLine();
+    if (input.equals("0") && s.isEmpty()) {
+      System.out.println("OK");
+    } else if (input.equals(s.charAt(0) + "0".repeat(k) + s.substring(1))) {
+      System.out.println("OK");
+    } else {
+      System.out.println("WRONG_ANSWER");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = s.chars().sorted().collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+    s = s.substring(k);
+    System.out.println(s.equals(s.isEmpty() ? "" : s.charAt(0) + "0".repeat(k) + s.substring(1)) ? "OK" : "WRONG_ANSWER");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int k = s.length() - s.replace("0", "").length();
+        s = s.substring(k);
+        System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+    }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It first prompts the user to enter a string, then it counts the number of '0' characters in the string and stores it in the variable `k`. It then sorts the string and removes the first `k` characters, and finally it checks if the resulting string is equal to the original string, and prints "WRONG_ANSWER" if it is not, and "OK" if it is.
+
+Note that in Java, the `input()` function is replaced with `Scanner` class, which is used to read input from the user. Also, the `count()` function is replaced with `length()` and `replace()` functions, which are used to count the number of '0' characters and remove them from the string.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.length() - s.replace("0", "").length();
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It uses the `Scanner` class to read input from the user, and then uses the `String` class to manipulate the input string. The `String.length()` method is used to count the number of characters in the string, and the `String.replace()` method is used to count the number of occurrences of a specific character in the string. The `String.substring()` method is used to extract a substring from the original string, starting at the specified index. Finally, the `String.equals()` method is used to compare the extracted substring with an empty string, and the `System.out.println()` method is used to print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.nextLine();
+    int k = s.chars().filter(c -> c == '0').count();
+    s = String.join("", s.chars().sorted().toArray());
+    s = s.substring(k);
+    System.out.println(s.equals("") ? "WRONG_ANSWER" : "OK");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        int k = s.length() - s.replace("0", "").length();
+        s = s.substring(k);
+        System.out.println(s.equals("") ? "WRONG_ANSWER" : (s.charAt(0) + "0".repeat(k) + s.substring(1)));
+    }
+}
+[/JAVA]
+======

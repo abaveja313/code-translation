@@ -1,0 +1,2172 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> map = new TreeMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : map.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> charCountMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+        }
+        Comparator<Entry<Character, Integer>> comparator = Comparator.comparing(Entry::getValue).reversed();
+        charCountMap.entrySet().stream().sorted(comparator).limit(n).forEach(entry -> {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        });
+    }
+}
+[/JAVA]
+
+This Java code uses the `Scanner` class to read input from
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine();
+    Map<Character, Integer> charCounts = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      char c = s.charAt(i);
+      if (!charCounts.containsKey(c)) {
+        charCounts.put(c, 1);
+      } else {
+        charCounts.put(c, charCounts.get(c) + 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : charCounts.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!charCount.containsKey(c)) {
+                charCount.put(c, 1);
+            } else {
+                charCount.put(c, charCount.get(c) + 1);
+            }
+        }
+        Collections.sort(charCount.entrySet(), new Comparator<Entry<Character, Integer>>() {
+            @Override
+            public int compare(Entry<Character, Integer> e1, Entry<Character, Integer> e2) {
+                return e2.getValue().compareTo
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        Arrays.sort(charCount.entrySet().toArray(), new Comparator<Entry<Character, Integer>>() {
+            public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) %
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> counter = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : counter.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This code uses the `Scanner` class to read the input, and the `TreeMap` class to keep track of the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    List<Map.Entry<Character, Integer>> sortedCounter = new ArrayList<>(counter.entrySet());
+    Collections.sort(sortedCounter, (a, b) -> b.getValue() - a.getValue());
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : sortedCounter) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!charCount.containsKey(c)) {
+                charCount.put(c, 1);
+            } else {
+                charCount.put(c, charCount.get(c) + 1);
+            }
+        }
+        Collections.sort(charCount.entrySet(), new Comparator<Entry<Character, Integer>>() {
+            @Override
+            public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+                return o2.getValue().compareTo
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+    }
+    int ans = 1;
+    for (Entry<Character, Integer> entry : charCount.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (charCount.containsKey(c)) {
+                charCount.put(c, charCount.get(c) + 1);
+            } else {
+                charCount.put(c, 1);
+            }
+        }
+        List<Map.Entry<Character, Integer>> sortedCharCount = new ArrayList<>(charCount.entrySet());
+        Collections.sort(sortedCharCount, (o1, o2) -> o2.getValue() - o1.getValue());
+        long ans = 1;
+        for
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> sc = new Counter(s).mostCommon();
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : sc.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `Counter` class is replaced with a `Map` to store the frequency of each character in the string. The `most_common` method is replaced with the `entrySet` method to iterate over the key-value pairs in the map. The modulo operation is performed using the `java.lang.Math.floorMod` method to avoid integer overflow.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        sc.close();
+
+        Map<Character, Integer> sc = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (sc.containsKey(c)) {
+                sc.put(c, sc.get(c) + 1);
+            } else {
+                sc.put(c, 1);
+            }
+        }
+
+        long ans = 1;
+        for (Entry<Character, Integer> e : sc.entrySet()) {
+            ans = (ans * (e.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    Collections.sort(counter.entrySet(), (e1, e2) -> e2.getValue() - e1.getValue());
+    long ans = 1;
+    for (Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCounts = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (charCounts.containsKey(c)) {
+        charCounts.put(c, charCounts.get(c) + 1);
+      } else {
+        charCounts.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : charCounts.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/J
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> freq = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      char c = s.charAt(i);
+      freq.put(c, freq.getOrDefault(c, 0) + 1);
+    }
+    int ans = 1;
+    for (Entry<Character, Integer> entry : freq.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Sc
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> count = new TreeMap<>();
+    for (int i = 0; i < n; i++) {
+      char c = s.charAt(i);
+      count.put(c, count.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : count.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It first prompts the user to enter a string and then calculates the frequency of each character in the string using a
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> sc = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            sc.put(c, sc.getOrDefault(c, 0) + 1);
+        }
+        int ans = 1;
+        for (Entry<Character, Integer> entry : sc.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the Java code that is functionally equivalent to
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> map = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      map.put(c, map.getOrDefault(c, 0) + 1);
+    }
+    Collections.sort(map.values());
+    long ans = 1;
+    for (int i = 0; i < map.size(); i++) {
+      ans = (ans * (map.values().get(i) + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        int ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It uses the `HashMap` class from the Java Standard
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> frequencyMap = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : frequencyMap.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `HashMap` class to store the frequency of each character in the input string. The code then
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCounts = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      charCounts.put(c, charCounts.getOrDefault(c, 0) + 1);
+    }
+    Collections.sort(charCounts.entrySet(), Map.Entry.comparingByValue());
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : charCounts.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/J
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> count = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (count.containsKey(c)) {
+                count.put(c, count.get(c) + 1);
+            } else {
+                count.put(c, 1);
+            }
+        }
+        int ans = 1;
+        for (Map.Entry<Character, Integer> entry : count.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!charCount.containsKey(c)) {
+                charCount.put(c, 1);
+            } else {
+                charCount.put(c, charCount.get(c) + 1);
+            }
+        }
+        Collections.sort(charCount.entrySet(), (o1, o2) -> o2.getValue() - o1.getValue());
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code to the given Python code. The `Counter` class from the `collections` module is replaced with a `
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> frequency = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            frequency.put(c, frequency.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : frequency.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It uses a `Scanner` to read input from the user, a `TreeMap` to store the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (counter.containsKey(c)) {
+        counter.put(c, counter.get(c) + 1);
+      } else {
+        counter.put(c, 1);
+      }
+    }
+    int ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        int ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. We first import the necessary libraries, including `Scanner`
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (counter.containsKey(c)) {
+                counter.put(c, counter.get(c) + 1);
+            } else {
+                counter.put(c, 1);
+            }
+        }
+        Collections.sort(counter.entrySet(), Comparator.comparing(Map.Entry::getValue));
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 10000000
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> counter = new TreeMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code to the Python code you provided. It uses the `Scanner` class to read input from the user, and the `TreeMap` class to
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+
+        Map<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
+        }
+
+        int ans = 1;
+        for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The main differences are:
+
+* In Java,
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String s = scanner.nextLine();
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (charCount.containsKey(c)) {
+        charCount.put(c, charCount.get(c) + 1);
+      } else {
+        charCount.put(c, 1);
+      }
+    }
+    List<Map.Entry<Character, Integer>> charCountList = new ArrayList<>(charCount.entrySet());
+    Collections.sort(charCountList, (e1, e2) -> e2.getValue() - e1.getValue());
+   
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine();
+    Map<Character, Integer> counter = new Counter<>(s);
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This code is functionally identical to the Python code, but it uses Java's `Map` interface and the `Counter` class from the `java.util` package instead of the `Counter` class from the `collections` module in Python. The `Map` interface is used to store the characters and their corresponding frequencies, and the `Counter` class is used to count the frequency of each character in the input string. The
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+Explanation:
+
+* In Java, we use the `Scanner` class to read input from the user.
+* We use a
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.next();
+    Map<Character, Integer> sc = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      sc.put(c, sc.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : sc.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code, with the following changes:
+
+* The `collections.Counter` class is replaced by a `TreeMap` to store
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        Map<Character, Integer> sc = new TreeMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            sc.put(c, sc.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : sc.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. The `TreeMap` class is used to store the character counts, and the `Entry` class
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.nextLine();
+        Map<Character, Integer> freq = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : freq.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It uses the `Scanner` class to read input, `HashMap` to store the frequency of each character
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    ArrayList<Entry<Character, Integer>> sc = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      int count = 0;
+      for (int j = 0; j < s.length(); j++) {
+        if (c == s.charAt(j)) {
+          count++;
+        }
+      }
+      sc.add(new Entry<>(c, count));
+    }
+    Collections.sort(sc, (o1, o2) -> o2.getValue() - o1.getValue());
+    long ans = 1;
+    for (Entry<Character, Integer> entry : sc) {
+      ans = (ans * (entry.getValue() + 1)) %
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (charCount.containsKey(c)) {
+                charCount.put(c, charCount.get(c) + 1);
+            } else {
+                charCount.put(c, 1);
+            }
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/J
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input, and
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCount = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (charCount.containsKey(c)) {
+        charCount.put(c, charCount.get(c) + 1);
+      } else {
+        charCount.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        Comparator<Entry<Character, Integer>> comparator = Comparator.comparing(Entry::getValue);
+        Collections.sort(charCount.entrySet(), comparator.reversed());
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 10
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+    }
+    Collections.sort(charCount.entrySet(), new Comparator<Entry<Character, Integer>>() {
+      public int compare(Entry<Character, Integer> e1, Entry<Character, Integer> e2) {
+        return e2.getValue().compareTo(e1.getValue());
+      }
+    });
+    long ans = 1;
+    for (Entry<Character, Integer> entry : charCount.entrySet()) {
+     
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (counter.containsKey(c)) {
+        counter.put(c, counter.get(c) + 1);
+      } else {
+        counter.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!charCount.containsKey(c)) {
+                charCount.put(c, 0);
+            }
+            charCount.put(c, charCount.get(c) + 1);
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This Java code is functionally identical
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        TreeMap<Integer, Integer> sortedCharCount = new TreeMap<>();
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            sortedCharCount.put(entry.getValue(), entry.getKey());
+        }
+        long ans = 1;
+        for (Entry<Integer, Character> entry : sortedCharCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1))
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (charCount.containsKey(c)) {
+                charCount.put(c, charCount.get(c) + 1);
+            } else {
+                charCount.put(c, 1);
+            }
+        }
+        Comparator<Entry<Character, Integer>> comparator = new Comparator<Entry<Character, Integer>>() {
+            @Override
+            public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+                return o2.getValue().compare
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> map = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        char[] chars = charCount.keySet().toArray(new char[0]);
+        Arrays.sort(chars, Comparator.comparingInt(charCount::get));
+        long ans = 1;
+        for (char c : chars) {
+            ans = (ans * (charCount.get(c) + 1)) % 1000000007;
+        }
+        System.out.println(
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> count = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            count.put(c, count.getOrDefault(c, 0) + 1);
+        }
+        int ans = 1;
+        for (Map.Entry<Character, Integer> entry : count.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is a straightforward translation of the Python code to Java. The `from collections import Counter
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> charCount = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (charCount.containsKey(c)) {
+                charCount.put(c, charCount.get(c) + 1);
+            } else {
+                charCount.put(c, 1);
+            }
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+    }
+    List<Map.Entry<Character, Integer>> sortedCharCount = new ArrayList<>(charCount.entrySet());
+    Collections.sort(sortedCharCount, (a, b) -> b.getValue() - a.getValue());
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : sortedCharCount) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+    }
+
+    int ans = 1;
+    for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        char[] sortedChars = charCount.keySet().toArray(new char[0]);
+        Arrays.sort(sortedChars);
+        long ans = 1;
+        for (char c : sortedChars) {
+            ans = (ans * (charCount.get(c) + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> sc = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      sc.put(c, sc.getOrDefault(c, 0) + 1);
+    }
+    int ans = 1;
+    for (Entry<Character, Integer> entry : sc.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> count = new TreeMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            count.put(c, count.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Entry<Character, Integer> entry : count.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code to the given Python code. The `Scanner` class is used to read the input from the user,
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    List<Entry<Character, Integer>> sorted = new ArrayList<>(counter.entrySet());
+    Collections.sort(sorted, (a, b) -> b.getValue() - a.getValue());
+    long ans = 1;
+    for (Entry<Character, Integer> entry : sorted) {
+      ans = (ans * (entry.getValue() + 1)) % 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCounts = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCounts.put(c, charCounts.getOrDefault(c, 0) + 1);
+        }
+        List<Map.Entry<Character, Integer>> sortedEntries = new ArrayList<>(charCounts.entrySet());
+        sortedEntries.sort(Map.Entry.comparingByValue());
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : sortedEntries) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String s = scanner.nextLine();
+
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (charCount.containsKey(c)) {
+        charCount.put(c, charCount.get(c) + 1);
+      } else {
+        charCount.put(c, 1);
+      }
+    }
+
+    int ans = 1;
+    for (Entry<Character, Integer> entry : charCount.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 10000000
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    List<String> count = Collections.frequency(s);
+    long ans = 1;
+    for (String c : count) {
+      ans = (ans * (Long.parseLong(c) + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It uses the `Scanner` class to read input from the user, and the `Collections.frequency()` method to count the frequency of each character in the input string. The rest of the code is similar to the Python code, with the exception of the `Long.parseLong()` method used to convert the character count to a long integer.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> counter = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
+        }
+        TreeMap<Integer, Integer> sortedCounter = new TreeMap<>(counter);
+        long ans = 1;
+        for (Map.Entry<Integer, Integer> entry : sortedCounter.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is the Java code that is functionally identical to the Python code. The `Scanner` class is used
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (counter.containsKey(c)) {
+                counter.put(c, counter.get(c) + 1);
+            } else {
+                counter.put(c, 1);
+            }
+        }
+        Collections.sort(counter.entrySet(), new Comparator<Entry<Character, Integer>>() {
+            @Override
+            public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+           
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        ArrayList<Map.Entry<Character, Integer>> sc = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            int count = 0;
+            for (int j = 0; j < s.length(); j++) {
+                if (s.charAt(j) == c) {
+                    count++;
+                }
+            }
+            sc.add(new AbstractMap.SimpleEntry<>(c, count));
+        }
+        Collections.sort(sc, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : sc) {
+            ans = (ans *
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> charCounts = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            charCounts.put(c, charCounts.getOrDefault(c, 0) + 1);
+        }
+        int ans = 1;
+        for (Map.Entry<Character, Integer> entry : charCounts.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This code uses the `TreeMap` class from the `java.util` package to store the character counts. The `get
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    scanner.close();
+
+    List<Character> characters = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      characters.add(s.charAt(i));
+    }
+
+    Collections.sort(characters);
+
+    long ans = 1;
+    for (int i = 0; i < characters.size(); i++) {
+      ans = (ans * (i + 1)) % 1000000007;
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code to the Python code you provided. It uses the same logic and data structures, but with the necessary imports and a driver class called `Solution
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This Java code achieves the same functionality as the Python code, with the following changes:
+
+* The `Counter` class is replaced with a `HashMap` to store the
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine();
+        Map<Character, Integer> charCount = new TreeMap<>();
+        for (char c : s.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.next();
+    Map<Character, Integer> counts = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      counts.merge(c, 1, Integer::sum);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counts.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.next();
+    Map<Character, Integer> sc = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (sc.containsKey(c)) {
+        sc.put(c, sc.get(c) + 1);
+      } else {
+        sc.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : sc.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new Counter<Character>(s).mostCommon();
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Counter` class from the `java.util` package to count the frequency of each character in the input string, and then uses a `for` loop to calculate the result. The `ans` variable is declared as a `long` to handle the large numbers involved in the calculation. The
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> countMap = new TreeMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (countMap.containsKey(c)) {
+                countMap.put(c, countMap.get(c) + 1);
+            } else {
+                countMap.put(c, 1);
+            }
+        }
+        long ans = 1;
+        for (Map.Entry<Character, Integer> entry : countMap.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+
+This is
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> charCount = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+    }
+    char[] chars = new char[charCount.size()];
+    int[] counts = new int[charCount.size()];
+    int i = 0;
+    for (Entry<Character, Integer> entry : charCount.entrySet()) {
+      chars[i] = entry.getKey();
+      counts[i] = entry.getValue();
+      i++;
+    }
+    Arrays.sort(chars, Comparator.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine();
+    Map<Character, Integer> freq = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      freq.put(c, freq.getOrDefault(c, 0) + 1);
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The `Scanner` class is used to read input from the user, and the `HashMap` class is used to store the frequency of each character in the input string. The
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (counter.containsKey(c)) {
+                counter.put(c, counter.get(c) + 1);
+            } else {
+                counter.put(c, 1);
+            }
+        }
+        List<Map.Entry<Character, Integer>> sorted = new ArrayList<>(counter.entrySet());
+        Collections.sort(sorted, new Comparator<Map.Entry<Character, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Character, Integer> o
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> count = new TreeMap<>();
+    for (int i = 0; i < n; i++) {
+      char c = s.charAt(i);
+      if (count.containsKey(c)) {
+        count.put(c, count.get(c) + 1);
+      } else {
+        count.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : count.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        Map<Character, Integer> count = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (count.containsKey(c)) {
+                count.put(c, count.get(c) + 1);
+            } else {
+                count.put(c, 1);
+            }
+        }
+        int ans = 1;
+        for (Entry<Character, Integer> entry : count.entrySet()) {
+            ans = (ans * (entry.getValue() + 1)) % 1000000007;
+        }
+        System.out.println(ans - 1);
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine();
+    HashMap<Character, Integer> charCounts = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (charCounts.containsKey(c)) {
+        charCounts.put(c, charCounts.get(c) + 1);
+      } else {
+        charCounts.put(c, 1);
+      }
+    }
+    Collections.sort(charCounts.keySet());
+    long ans = 1;
+    for (char c : charCounts.keySet()) {
+      ans = (ans * (charCounts.get(c) + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new Counter(s).mostCommon();
+    long ans = 1;
+    for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+
+[/JAVA]
+
+Explanation:
+
+* The `import` statements at the beginning of the file import the necessary Java libraries for the program to run.
+* The `Solution` class is the driver class that contains the `main` method.
+* The `main` method takes a `String[] args` parameter, which is not used in this program.
+* The `Scanner` class is used to read input
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (!counter.containsKey(c)) {
+        counter.put(c, 1);
+      } else {
+        counter.put(c, counter.get(c) + 1);
+      }
+    }
+    Collections.sort(counter.entrySet(), new Comparator<Entry<Character, Integer>>() {
+      @Override
+      public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+        return o2.getValue().compareTo(o1.getValue());
+      }
+    });
+    long
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      counter.put(c, counter.getOrDefault(c, 0) + 1);
+    }
+    Collections.sort(counter.entrySet(), new Comparator<Entry<Character, Integer>>() {
+      @Override
+      public int compare(Entry<Character, Integer> e1, Entry<Character, Integer> e2) {
+        return e2.getValue().compareTo(e1.getValue());
+      }
+    });
+    long ans = 1;
+    for (Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> counter = new TreeMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (counter.containsKey(c)) {
+        counter.put(c, counter.get(c) + 1);
+      } else {
+        counter.put(c, 1);
+      }
+    }
+    long ans = 1;
+    for (Entry<Character, Integer> entry : counter.entrySet()) {
+      ans = (ans * (entry.getValue() + 1)) % 1000000007;
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+
+
+======

@@ -1,0 +1,671 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] currentValue = t.get(c);
+        if ((currentValue[0] - i) % 2 == 1) {
+          currentValue[1]++;
+          t.put(c, currentValue);
+        }
+      }
+    }
+    int maxValue = 0;
+    for (int[] value : t.values()) {
+      maxValue = Math.max(maxValue, value[1]);
+    }
+    System.out.println(maxValue);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] count = t.get(c);
+        if ((count[0] - i) % 2 == 0) {
+          count[1]++;
+          t.put(c, count);
+        }
+      }
+    }
+
+    int max = 0;
+    for (int[] count : t.values()) {
+      if (count[1] > max) {
+        max = count[1];
+      }
+    }
+
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] currentValue = t.get(c);
+        if ((currentValue[0] - i) % 2 == 1) {
+          currentValue[1]++;
+          t.put(c, currentValue);
+        }
+      }
+    }
+    int maxValue = 0;
+    for (int[] value : t.values()) {
+      maxValue = Math.max(maxValue, value[1]);
+    }
+    System.out.println(maxValue);
+  }
+}
+[/JAVA]
+
+This code first reads a line of input from the user using a Scanner. It then creates a HashMap called `t` to store the characters and their corresponding indices and counts.
+
+For each character in the input string, the code checks if the character is already in the HashMap. If it is not, it adds the character and its index to the HashMap with a count of 1. If the character is already in the HashMap, the code checks if the difference between the character's current index and its previous index is odd. If it is, the code increments the count for that character and updates the HashMap.
+
+Finally, the code iterates through the values in the HashMap and finds the maximum count. It then prints the maximum count to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 0) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Map<Character, int[]> t = new HashMap<>();
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      if (value[1] > max) {
+        max = value[1];
+      }
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, Integer> map = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!map.containsKey(c)) {
+        map.put(c, i);
+      } else if ((map.get(c) - i) % 2 == 1) {
+        map.put(c, map.get(c) + 1);
+      }
+    }
+    int max = 0;
+    for (int value : map.values()) {
+      if (value > max) {
+        max = value;
+      }
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+
+This code uses a `Scanner` to read a line of input from the user, and then uses a `HashMap` to store the characters and their indices. The code iterates over the characters in the input string, and if a character is not already in the map, it adds it with its index. If the character is already in the map, and the difference between its index and the current index is odd, it increments the value associated with the character. Finally, the code finds the maximum value in the map and prints it.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 0) {
+          t.put(c, new int[] {i, value[1] + 1});
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Map<Character, int[]> t = new HashMap<>();
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = Collections.max(t.values(), (a, b) -> Integer.compare(a[1], b[1]));
+    System.out.println(max[1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    Map<Character, int[]> t = new HashMap<>();
+    String input = scanner.nextLine();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+        }
+        t.put(c, value);
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[]{i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+        }
+        t.put(c, value);
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 0) {
+          t.put(c, new int[] {i, value[1] + 1});
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 1) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      if (value[1] > max) {
+        max = value[1];
+      }
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        scanner.close();
+
+        Map<Character, int[]> t = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!t.containsKey(c)) {
+                t.put(c, new int[] {i, 1});
+            } else {
+                int[] value = t.get(c);
+                if ((value[0] - i) % 2 == 0) {
+                    value[1]++;
+                }
+                t.put(c, value);
+            }
+        }
+
+        int max = 0;
+        for (int[] value : t.values()) {
+            max = Math.max(max, value[1]);
+        }
+
+        System.out.println(max);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        Map<Character, int[]> t = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!t.containsKey(c)) {
+                t.put(c, new int[] {i, 1});
+            } else {
+                int[] value = t.get(c);
+                if ((value[0] - i) % 2 == 0) {
+                    value[1]++;
+                    t.put(c, value);
+                }
+            }
+        }
+
+        int max = 0;
+        for (int[] value : t.values()) {
+            max = Math.max(max, value[1]);
+        }
+        System.out.println(max);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+
+    Map<Character, Pair<Integer, Integer>> t = new HashMap<>();
+
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+
+      if (!t.containsKey(c)) {
+        t.put(c, new Pair<>(i, 1));
+      } else {
+        Pair<Integer, Integer> pair = t.get(c);
+
+        if ((pair.getFirst() - i) % 2 == 0) {
+          pair.setFirst(i);
+          pair.setSecond(pair.getSecond() + 1);
+        }
+
+        t.put(c, pair);
+      }
+    }
+
+    int max = 0;
+
+    for (Pair<Integer, Integer> pair : t.values()) {
+      if (pair.getSecond() > max) {
+        max = pair.getSecond();
+      }
+    }
+
+    System.out.println(max);
+  }
+}
+
+class Pair<T, U> {
+  private T first;
+  private U second;
+
+  public Pair(T first, U second) {
+    this.first = first;
+    this.second = second;
+  }
+
+  public T getFirst() {
+    return first;
+  }
+
+  public void setFirst(T first) {
+    this.first = first;
+  }
+
+  public U getSecond() {
+    return second;
+  }
+
+  public void setSecond(U second) {
+    this.second = second;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    Map<Character, int[]> t = new HashMap<>();
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      if (!t.containsKey(c)) {
+        t.put(c, new int[] {i, 1});
+      } else {
+        int[] value = t.get(c);
+        if ((value[0] - i) % 2 == 0) {
+          value[1]++;
+          t.put(c, value);
+        }
+      }
+    }
+    int max = 0;
+    for (int[] value : t.values()) {
+      max = Math.max(max, value[1]);
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,759 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt() * 2;
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!c.containsKey(a.get(i))) {
+        c.put(a.get(i), new ArrayList<>());
+      }
+      c.get(a.get(i)).add(i + 1);
+    }
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      List<Integer> values = entry.getValue();
+      if (values.size() % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < values.size() - 1; i += 2) {
+        ans.add(values.get(i) + " " + values.get(i + 1));
+      }
+    }
+    Collections.sort(ans);
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> values = entry.getValue();
+            int l = values.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(values.get(i) + " " + values.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt() * 2;
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!c.containsKey(a[i])) {
+        c.put(a[i], new ArrayList<>());
+      }
+      c.get(a[i]).add(i + 1);
+    }
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      int l = entry.getValue().size();
+      if (l % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < l - 1; i += 2) {
+        ans.add(entry.getValue().get(i) + " " + entry.getValue().get(i + 1));
+      }
+    }
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt() * 2;
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!c.containsKey(a[i])) {
+        c.put(a[i], new ArrayList<>());
+      }
+      c.get(a[i]).add(i + 1);
+    }
+
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      int l = entry.getValue().size();
+      if (l % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < l - 1; i += 2) {
+        ans.add(entry.getValue().get(i) + " " + entry.getValue().get(i + 1));
+      }
+    }
+
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        PrintWriter pw = new PrintWriter(new FileWriter("output.txt"));
+
+        int n = Integer.parseInt(br.readLine()) * 2;
+        String[] a = br.readLine().split(" ");
+        Map<Integer, List<Integer>> c = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int key = Integer.parseInt(a[i]);
+            if (!c.containsKey(key)) {
+                c.put(key, new ArrayList<>());
+            }
+            c.get(key).add(i + 1);
+        }
+
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> values = entry.getValue();
+            int l = values.size();
+            if (l % 2 != 0) {
+                pw.println("-1");
+                pw.close();
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(values.get(i) + " " + values.get(i + 1));
+            }
+        }
+
+        pw.println(String.join("\n", ans));
+        pw.close();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt() * 2;
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a.get(i))) {
+                c.put(a.get(i), new ArrayList<>());
+            }
+            c.get(a.get(i)).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> values = entry.getValue();
+            if (values.size() % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < values.size() - 1; i += 2) {
+                ans.add(values.get(i) + " " + values.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            int l = entry.getValue().size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(entry.getValue().get(i) + " " + entry.getValue().get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new FileReader("input.txt"));
+        BufferedWriter out = new BufferedWriter(new FileWriter("output.txt"));
+
+        int n = Integer.parseInt(in.readLine()) * 2;
+        String[] a = in.readLine().split(" ");
+        Map<Integer, List<Integer>> c = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int key = Integer.parseInt(a[i]);
+            if (!c.containsKey(key)) {
+                c.put(key, new ArrayList<>());
+            }
+            c.get(key).add(i + 1);
+        }
+
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> values = entry.getValue();
+            if (values.size() % 2 != 0) {
+                out.write("-1");
+                break;
+            }
+            for (int i = 0; i < values.size() - 1; i += 2) {
+                ans.add(values.get(i) + " " + values.get(i + 1));
+            }
+        }
+
+        out.write(String.join("\n", ans));
+        in.close();
+        out.close();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!c.containsKey(a.get(i))) {
+        c.put(a.get(i), new ArrayList<>());
+      }
+      c.get(a.get(i)).add(i + 1);
+    }
+
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      List<Integer> v = entry.getValue();
+      if (v.size() % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < v.size() - 1; i += 2) {
+        ans.add(v.get(i) + " " + v.get(i + 1));
+      }
+    }
+
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            c.computeIfAbsent(a.get(i), k -> new ArrayList<>()).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt() * 2;
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (!c.containsKey(a[i])) {
+        c.put(a[i], new ArrayList<>());
+      }
+      c.get(a[i]).add(i + 1);
+    }
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      List<Integer> v = entry.getValue();
+      int l = v.size();
+      if (l % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < l - 1; i += 2) {
+        ans.add(v.get(i) + " " + v.get(i + 1));
+      }
+    }
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt() * 2;
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Map<Integer, List<Integer>> c = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      c.computeIfAbsent(a.get(i), k -> new ArrayList<>()).add(i + 1);
+    }
+    List<String> ans = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+      List<Integer> v = entry.getValue();
+      int l = v.size();
+      if (l % 2 != 0) {
+        System.out.println("-1");
+        return;
+      }
+      for (int i = 0; i < l - 1; i += 2) {
+        ans.add(v.get(i) + " " + v.get(i + 1));
+      }
+    }
+    System.out.println(String.join("\n", ans));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a.get(i))) {
+                c.put(a.get(i), new ArrayList<>());
+            }
+            c.get(a.get(i)).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            int l = entry.getValue().size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(entry.getValue().get(i) + " " + entry.getValue().get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt() * 2;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Map<Integer, List<Integer>> c = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (!c.containsKey(a[i])) {
+                c.put(a[i], new ArrayList<>());
+            }
+            c.get(a[i]).add(i + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : c.entrySet()) {
+            List<Integer> v = entry.getValue();
+            int l = v.size();
+            if (l % 2 != 0) {
+                System.out.println("-1");
+                return;
+            }
+            for (int i = 0; i < l - 1; i += 2) {
+                ans.add(v.get(i) + " " + v.get(i + 1));
+            }
+        }
+        System.out.println(String.join("\n", ans));
+    }
+}
+[/JAVA]
+======

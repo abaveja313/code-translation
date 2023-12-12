@@ -1,0 +1,3816 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum_ = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum_ + cnd[d][offset]);
+                    sum_ += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if (K & (1 << d)) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 1; d < lim; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d][i] = nex[d - 1][nex[d - 1][i]];
+                val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+                cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum_ = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum_ + cnd[d][offset]);
+                    sum_ += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 1; d < lim; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d][i] = nex[d - 1][nex[d - 1][i]];
+                val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+                cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = scanner.nextInt();
+      C[i] = scanner.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum_ = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum_ + cnd[d][offset]);
+                    sum_ += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = scanner.nextInt();
+      C[i] = scanner.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum_ = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum_ + cnd[d][offset]);
+                    sum_ += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 1; d < lim; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d][i] = nex[d - 1][nex[d - 1][i]];
+                val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+                cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        int[][] nex = new int[60][N];
+        int[][] val = new int[60][N];
+        int[][] cnd = new int[60][N];
+
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+
+        for (int d = 1; d < 60; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d][i] = nex[d - 1][nex[d - 1][i]];
+                val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+                cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+            }
+        }
+
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = 59; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = scanner.nextInt();
+            C[i] = scanner.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum_ = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum_ + cnd[d][offset]);
+                    sum_ += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & 1 << d) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] P = new int[N];
+        int[] C = new int[N];
+        for (int i = 0; i < N; i++) {
+            P[i] = sc.nextInt();
+            C[i] = sc.nextInt();
+        }
+        int lim = 60;
+        int[][] nex = new int[lim][N];
+        int[][] val = new int[lim][N];
+        int[][] cnd = new int[lim][N];
+        for (int i = 0; i < N; i++) {
+            nex[0][i] = P[i] - 1;
+            val[0][i] = C[i];
+            cnd[0][i] = C[i];
+        }
+        for (int d = 0; d < lim - 1; d++) {
+            for (int i = 0; i < N; i++) {
+                nex[d + 1][i] = nex[d][nex[d][i]];
+                val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+                cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+            }
+        }
+        int res = -1000000000;
+        for (int i = 0; i < N; i++) {
+            int sum = 0;
+            int offset = i;
+            for (int d = lim - 1; d >= 0; d--) {
+                if ((K & (1 << d)) != 0) {
+                    res = Math.max(res, sum + cnd[d][offset]);
+                    sum += val[d][offset];
+                    offset = nex[d][offset];
+                }
+            }
+        }
+        System.out.println(res);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum_ = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & 1 << d) != 0) {
+          res = Math.max(res, sum_ + cnd[d][offset]);
+          sum_ += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 1; d < lim; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d][i] = nex[d - 1][nex[d - 1][i]];
+        val[d][i] = val[d - 1][i] + val[d - 1][nex[d - 1][i]];
+        cnd[d][i] = Math.max(cnd[d - 1][i], val[d - 1][i] + cnd[d - 1][nex[d - 1][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] P = new int[N];
+    int[] C = new int[N];
+    for (int i = 0; i < N; i++) {
+      P[i] = sc.nextInt();
+      C[i] = sc.nextInt();
+    }
+    int lim = 60;
+    int[][] nex = new int[lim][N];
+    int[][] val = new int[lim][N];
+    int[][] cnd = new int[lim][N];
+    for (int i = 0; i < N; i++) {
+      nex[0][i] = P[i] - 1;
+      val[0][i] = C[i];
+      cnd[0][i] = C[i];
+    }
+    for (int d = 0; d < lim - 1; d++) {
+      for (int i = 0; i < N; i++) {
+        nex[d + 1][i] = nex[d][nex[d][i]];
+        val[d + 1][i] = val[d][i] + val[d][nex[d][i]];
+        cnd[d + 1][i] = Math.max(cnd[d][i], val[d][i] + cnd[d][nex[d][i]]);
+      }
+    }
+    int res = -1000000000;
+    for (int i = 0; i < N; i++) {
+      int sum = 0;
+      int offset = i;
+      for (int d = lim - 1; d >= 0; d--) {
+        if ((K & (1 << d)) != 0) {
+          res = Math.max(res, sum + cnd[d][offset]);
+          sum += val[d][offset];
+          offset = nex[d][offset];
+        }
+      }
+    }
+    System.out.println(res);
+  }
+}
+[/JAVA]
+======

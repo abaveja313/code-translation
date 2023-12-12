@@ -1,0 +1,882 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Combinations;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine().replaceAll("\\s+", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        Iterator<List<Integer>> combs = Combinations.combinations(indices, 2).iterator();
+        while (combs.hasNext()) {
+          List<Integer> x = combs.next();
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Combinations;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.nextLine().replace(" ", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') {
+                    indices.add(i);
+                }
+            }
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                Iterator<List<Integer>> combs = Combinations.of(indices).iterator();
+                while (combs.hasNext()) {
+                    List<Integer> x = combs.next();
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+                }
+                System.out.println(s.length() - s.replace("1", "").length() + maximum);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.next();
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+          }
+        }
+        System.out.println(s.replace("0", "").length() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine().replaceAll("", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      int[] indices = find(s, '0');
+      if (indices.length == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        Stream<int[]> combs = IntStream.range(0, indices.length - 1)
+            .mapToObj(i -> IntStream.range(i + 1, indices.length)
+                .mapToObj(j -> new int[] {indices[i], indices[j]})
+                .filter(x -> x[0] != x[1])
+                .toArray(int[][]::new))
+            .flatMap(Stream::of)
+            .toArray(int[][]::new);
+        for (int[] x : combs) {
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x[0]) - indices.indexOf(x[1])) - 1) - (Math.abs(x[0] - x[1]) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+
+  private static int[] find(String s, char ch) {
+    int[] indices = new int[s.length()];
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == ch) {
+        indices[i] = i;
+      }
+    }
+    return indices;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') {
+                    indices.add(i);
+                }
+            }
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                List<List<Integer>> combs = combinations(indices, 2);
+                for (List<Integer> x : combs) {
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+                }
+                System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+            }
+        }
+    }
+
+    public static <T> List<List<T>> combinations(List<T> list, int r) {
+        List<List<T>> result = new ArrayList<>();
+        if (r == 0) {
+            result.add(new ArrayList<>());
+            return result;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            List<T> remaining = new ArrayList<>(list.subList(i + 1, list.size()));
+            for (List<T> comb : combinations(remaining, r - 1)) {
+                List<T> newComb = new ArrayList<>();
+                newComb.add(list.get(i));
+                newComb.addAll(comb);
+                result.add(newComb);
+            }
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine().replaceAll("\\s+", "");
+
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      ArrayList<Integer> indices = find(s, '0');
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+          }
+        }
+        System.out.println(s.length() - 1 + maximum);
+      }
+    }
+  }
+
+  public static ArrayList<Integer> find(String s, char ch) {
+    ArrayList<Integer> indices = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == ch) {
+        indices.add(i);
+      }
+    }
+    return indices;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine().replaceAll("\\s+", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') {
+                    indices.add(i);
+                }
+            }
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                for (int i = 0; i < indices.size() - 1; i++) {
+                    for (int j = i + 1; j < indices.size(); j++) {
+                        maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+                    }
+                }
+                System.out.println(s.length() - s.replace("1", "").length() + maximum);
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine().replaceAll(" ", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') {
+                    indices.add(i);
+                }
+            }
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                List<List<Integer>> combs = combinations(indices, 2);
+                for (List<Integer> x : combs) {
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+                }
+                System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+            }
+        }
+    }
+
+    public static <T> List<List<T>> combinations(List<T> elements, int k) {
+        List<List<T>> combinations = new ArrayList<>();
+        if (k == 0) {
+            combinations.add(new ArrayList<>());
+        } else {
+            for (int i = 0; i < elements.size(); i++) {
+                T element = elements.get(i);
+                List<T> remainingElements = elements.subList(i + 1, elements.size());
+                List<List<T>> subCombinations = combinations(remainingElements, k - 1);
+                for (List<T> subCombination : subCombinations) {
+                    subCombination.add(0, element);
+                    combinations.add(subCombination);
+                }
+            }
+        }
+        return combinations;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine().replace("", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        List<List<Integer>> combs = getCombinations(indices, 2);
+        for (List<Integer> x : combs) {
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+
+  private static List<List<Integer>> getCombinations(List<Integer> indices, int r) {
+    List<List<Integer>> combs = new ArrayList<>();
+    for (int i = 0; i < indices.size(); i++) {
+      for (int j = i + 1; j < indices.size(); j++) {
+        combs.add(Arrays.asList(indices.get(i), indices.get(j)));
+      }
+    }
+    return combs;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine().replaceAll("\\s+", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = find(s, '0');
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                List<List<Integer>> combs = combinations(indices, 2);
+                for (List<Integer> x : combs) {
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+                }
+                System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+            }
+        }
+    }
+
+    public static List<Integer> find(String s, char ch) {
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ch) {
+                indices.add(i);
+            }
+        }
+        return indices;
+    }
+
+    public static <T> List<List<T>> combinations(List<T> list, int r) {
+        List<List<T>> combs = new ArrayList<>();
+        if (r > list.size()) {
+            return combs;
+        }
+        if (r == 0) {
+            combs.add(new ArrayList<>());
+            return combs;
+        }
+        for (int i = 0; i < list.size() - r + 1; i++) {
+            List<T> head = list.subList(i, i + 1);
+            List<List<T>> tailCombs = combinations(list.subList(i + 1, list.size()), r - 1);
+            for (List<T> tail : tailCombs) {
+                List<T> comb = new ArrayList<>();
+                comb.addAll(head);
+                comb.addAll(tail);
+                combs.add(comb);
+            }
+        }
+        return combs;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine().replaceAll("\\s+", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = find(s, '0');
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        List<List<Integer>> combs = combinations(indices, 2);
+        for (List<Integer> x : combs) {
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+
+  private static List<Integer> find(String s, char ch) {
+    List<Integer> indices = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == ch) {
+        indices.add(i);
+      }
+    }
+    return indices;
+  }
+
+  private static List<List<Integer>> combinations(List<Integer> indices, int k) {
+    List<List<Integer>> combs = new ArrayList<>();
+    for (int i = 0; i < indices.size(); i++) {
+      for (int j = i + 1; j < indices.size(); j++) {
+        combs.add(Arrays.asList(indices.get(i), indices.get(j)));
+      }
+    }
+    return combs;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine().replaceAll("\\s+", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            int[] indices = find(s, '0');
+            if (indices.length == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                for (int[] x : combinations(indices, 2)) {
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x[0]) - indices.indexOf(x[1])) - 1) - (Math.abs(x[0] - x[1]) - 1));
+                }
+                System.out.println(s.length() - s.replaceAll("1", "").length() + maximum);
+            }
+        }
+    }
+
+    private static int[] find(String s, char ch) {
+        return IntStream.range(0, s.length())
+                .filter(i -> s.charAt(i) == ch)
+                .toArray();
+    }
+
+    private static int[][] combinations(int[] indices, int r) {
+        return IntStream.range(0, indices.length - r + 1)
+                .mapToObj(i -> Arrays.copyOfRange(indices, i, i + r))
+                .toArray(int[][]::new);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine().replace(" ", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+          }
+        }
+        System.out.println(s.length() - s.replace("1", "").length() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine().replace(" ", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        List<List<Integer>> combs = new ArrayList<>();
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            combs.add(Arrays.asList(indices.get(i), indices.get(j)));
+          }
+        }
+        for (List<Integer> x : combs) {
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine().replaceAll("\\s+", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+          }
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.next();
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        List<List<Integer>> combs = getCombinations(indices, 2);
+        for (List<Integer> x : combs) {
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.chars().filter(c -> c == '1').count() + maximum);
+      }
+    }
+  }
+
+  private static List<List<Integer>> getCombinations(List<Integer> indices, int r) {
+    List<List<Integer>> combs = new ArrayList<>();
+    for (int i = 0; i < indices.size(); i++) {
+      for (int j = i + 1; j < indices.size(); j++) {
+        List<Integer> comb = new ArrayList<>();
+        comb.add(indices.get(i));
+        comb.add(indices.get(j));
+        combs.add(comb);
+      }
+    }
+    return combs;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.next();
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = new ArrayList<>();
+      for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == '0') {
+          indices.add(i);
+        }
+      }
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        for (int i = 0; i < indices.size() - 1; i++) {
+          for (int j = i + 1; j < indices.size(); j++) {
+            maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.get(i) - indices.get(j)) - 1) - (Math.abs(i - j) - 1));
+          }
+        }
+        System.out.println(s.replace("1", "").length() + maximum);
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.nextLine().replaceAll("", "");
+        if (!s.contains("0")) {
+            System.out.println(n - 1);
+        } else {
+            List<Integer> indices = find(s, '0');
+            if (indices.size() == 1) {
+                System.out.println(n);
+            } else {
+                int maximum = 0;
+                List<Integer> combs = combinations(indices, 2);
+                for (int[] x : combs) {
+                    maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x[0]) - indices.indexOf(x[1])) - 1) - (Math.abs(x[0] - x[1]) - 1));
+                }
+                System.out.println(s.length() - s.replace("1", "").length() + maximum);
+            }
+        }
+    }
+
+    public static List<Integer> find(String s, char ch) {
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ch) {
+                indices.add(i);
+            }
+        }
+        return indices;
+    }
+
+    public static List<Integer> combinations(List<Integer> indices, int r) {
+        List<Integer> result = new ArrayList<>();
+        if (r == 0) {
+            result.add(0);
+            return result;
+        }
+        for (int i = 0; i < indices.size(); i++) {
+            for (int j = i + 1; j < indices.size(); j++) {
+                result.add(Arrays.asList(indices.get(i), indices.get(j)));
+            }
+        }
+        return result.stream().map(x -> x.get(0) * 10 + x.get(1)).collect(Collectors.toList());
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Combinations;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    String s = sc.nextLine().replace(" ", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = find(s, '0');
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        Iterator<List<Integer>> combs = Combinations.combinations(indices, 2).iterator();
+        while (combs.hasNext()) {
+          List<Integer> x = combs.next();
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x.get(0)) - indices.indexOf(x.get(1))) - 1) - (Math.abs(x.get(0) - x.get(1)) - 1));
+        }
+        System.out.println(s.length() - s.replace("1", "").length() + maximum);
+      }
+    }
+  }
+
+  public static List<Integer> find(String s, char ch) {
+    List<Integer> indices = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == ch) {
+        indices.add(i);
+      }
+    }
+    return indices;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Combinations;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    String s = scanner.nextLine().replace("", "");
+    if (!s.contains("0")) {
+      System.out.println(n - 1);
+    } else {
+      List<Integer> indices = find(s, '0');
+      if (indices.size() == 1) {
+        System.out.println(n);
+      } else {
+        int maximum = 0;
+        Combinations<Integer> combs = new Combinations<>(indices, 2);
+        for (Iterator<Integer> it = combs.iterator(); it.hasNext();) {
+          Integer[] x = it.next();
+          maximum = Math.max(maximum, 2 + 2 * (Math.abs(indices.indexOf(x[0]) - indices.indexOf(x[1])) - 1) - (Math.abs(x[0] - x[1]) - 1));
+        }
+        System.out.println(s.length() - 1 + maximum);
+      }
+    }
+  }
+
+  public static List<Integer> find(String s, char ch) {
+    List<Integer> indices = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == ch) {
+        indices.add(i);
+      }
+    }
+    return indices;
+  }
+}
+[/JAVA]
+======

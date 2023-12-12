@@ -1,0 +1,1095 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, elems.length - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[elems.length - 1];
+        int toDelete = 0;
+        for (int i = 0; i < k - 1; i++) {
+            if (elems[i] == target) {
+                toDelete++;
+            }
+        }
+
+        System.out.println(toDelete);
+    }
+
+    public static boolean allSame(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] != arr[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean allSame(int[] arr, int start, int end) {
+        for (int i = start; i <= end; i++) {
+            if (arr[i] != arr[start]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = 0;
+        for (int i = 0; i < k - 1; i++) {
+            if (elems[i] == target) {
+                toDelete++;
+            }
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems) {
+        return allSame(elems, 0, elems.length - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int[] toDelete = new int[k - 1];
+        for (int i = 0; i < k - 1; i++) {
+            toDelete[i] = elems[i];
+        }
+        while (toDelete.length > 0 && toDelete[toDelete.length - 1] == target) {
+            toDelete = Arrays.copyOf(toDelete, toDelete.length - 1);
+        }
+        System.out.println(toDelete.length);
+    }
+
+    private static boolean allSame(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] != arr[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] arr, int start) {
+        for (int i = start; i < arr.length; i++) {
+            if (arr[i] != arr[start]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = k - 1;
+        while (toDelete > 0 && elems[toDelete - 1] == target) {
+            toDelete--;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        return allSame(elems, 0, elems.length - 1);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        if (elems[start] != elems[start + 1]) {
+            return false;
+        }
+        return allSame(elems, start + 1, end);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = k - 1;
+        while (toDelete > 0 && elems[toDelete - 1] == target) {
+            toDelete--;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, elems.length - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[elems.length - 1];
+        int toDelete = 0;
+        for (int i = 0; i < k - 1; i++) {
+            if (elems[i] == target) {
+                toDelete++;
+            }
+        }
+
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        return allSame(elems, 0, elems.length - 1);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+
+        if (elems[start] != elems[start + 1]) {
+            return false;
+        }
+
+        return allSame(elems, start + 1, end);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(Arrays.copyOfRange(elems, k - 1, n))) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int[] toDelete = Arrays.copyOfRange(elems, 0, k - 1);
+        while (toDelete.length > 0 && toDelete[toDelete.length - 1] == target) {
+            toDelete = Arrays.copyOfRange(toDelete, 0, toDelete.length - 1);
+        }
+        System.out.println(toDelete.length);
+    }
+
+    private static boolean allSame(int[] arr) {
+        return Arrays.stream(arr).allMatch(x -> x == arr[0]);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the given Python code. It uses the `Scanner` class to read input from the user, and the `Arrays` class to perform various array operations. The `allSame` method is used to check if all the elements in an array are the same, and the `main` method is the driver class that contains the main logic of the program.
+
+Note that in Java, we need to import the `Scanner` and `Arrays` classes at the beginning of the code, and we need to create a `Scanner` object to read input from the user. Additionally, we need to use the `Arrays.copyOfRange` method to create a new array with the same elements as the original array, but with a different length.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = k - 1;
+        while (toDelete > 0 && elems[toDelete - 1] == target) {
+            toDelete--;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != elems[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        for (int i = start; i <= end; i++) {
+            if (elems[i] != elems[start]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, elems.length - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[elems.length - 1];
+        int toDelete = elems[0];
+        while (toDelete != target) {
+            toDelete = elems[toDelete];
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        return allSame(elems, 0, elems.length - 1);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        if (start == end) {
+            return true;
+        }
+        return elems[start] == elems[start + 1] && allSame(elems, start + 1, end);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = 0;
+        while (toDelete < k - 1 && elems[toDelete] == target) {
+            toDelete++;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != elems[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        for (int i = start; i <= end; i++) {
+            if (elems[i] != elems[start]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int[] toDelete = new int[k - 1];
+        for (int i = 0; i < k - 1; i++) {
+            toDelete[i] = elems[i];
+        }
+        while (toDelete.length > 0 && toDelete[toDelete.length - 1] == target) {
+            toDelete = Arrays.copyOf(toDelete, toDelete.length - 1);
+        }
+        System.out.println(toDelete.length);
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[n - 1];
+        int toDelete = 0;
+        for (int i = 0; i < k - 1; i++) {
+            if (elems[i] == target) {
+                toDelete++;
+            }
+        }
+
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[n - 1];
+        int toDelete = k - 1;
+        while (toDelete > 0 && elems[toDelete - 1] == target) {
+            toDelete--;
+        }
+
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] != arr[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] arr, int start, int end) {
+        for (int i = start; i <= end; i++) {
+            if (arr[i] != arr[start]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, and the `System.out.println()` method to print the output. The `allSame()` method is used to check if all elements in an array are the same, and the `allSame()` method overload is used to check if all elements in a range of an array are the same. The `main()` method is the driver class, and it contains the logic for the program.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] elems = new int[n];
+    for (int i = 0; i < n; i++) {
+      elems[i] = sc.nextInt();
+    }
+    if (allSame(elems)) {
+      System.out.println(0);
+      return;
+    }
+    if (k == 1) {
+      System.out.println(-1);
+      return;
+    }
+    if (!allSame(elems, k - 1, n - 1)) {
+      System.out.println(-1);
+      return;
+    }
+    int target = elems[n - 1];
+    int[] toDelete = new int[k - 1];
+    for (int i = 0; i < k - 1; i++) {
+      toDelete[i] = elems[i];
+    }
+    while (toDelete.length > 0 && toDelete[toDelete.length - 1] == target) {
+      toDelete = Arrays.copyOf(toDelete, toDelete.length - 1);
+    }
+    System.out.println(toDelete.length);
+  }
+
+  public static boolean allSame(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] != arr[0]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean allSame(int[] arr, int start, int end) {
+    for (int i = start; i <= end; i++) {
+      if (arr[i] != arr[start]) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[n - 1];
+        int toDelete = 0;
+        for (int i = 0; i < k - 1; i++) {
+            if (elems[i] == target) {
+                toDelete++;
+            }
+        }
+
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the given Python code. It uses the `Scanner` class to read input from the user, and the `System.out.println()` method to print the output. The `allSame()` method is used to check if all the elements in an array are the same, and the `main()` method is the driver class that contains the main logic of the program.
+
+Note that the `allSame()` method has two overloaded versions, one that takes a single `int[]` array as input, and another that takes a `int[]` array, a start index, and an end index as input. The first version is used to check if all the elements in the array are the same, while the second version is used to check if all the elements in a subarray are the same.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int target = elems[n - 1];
+        int toDelete = k - 1;
+        while (toDelete > 0 && elems[toDelete - 1] == target) {
+            toDelete--;
+        }
+
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int i = 1; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = scanner.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = 0;
+        while (toDelete < k - 1 && elems[toDelete] == target) {
+            toDelete++;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems) {
+        int first = elems[0];
+        for (int elem : elems) {
+            if (elem != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems, int k) {
+        int first = elems[k - 1];
+        for (int i = k; i < elems.length; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] elems = new int[n];
+    for (int i = 0; i < n; i++) {
+      elems[i] = sc.nextInt();
+    }
+    if (allSame(elems)) {
+      System.out.println(0);
+      return;
+    }
+    if (k == 1) {
+      System.out.println(-1);
+      return;
+    }
+    if (!allSame(elems, k - 1, elems.length - 1)) {
+      System.out.println(-1);
+      return;
+    }
+    int target = elems[elems.length - 1];
+    int toDelete = 0;
+    while (toDelete < k - 1 && elems[toDelete] == target) {
+      toDelete++;
+    }
+    System.out.println(toDelete);
+  }
+
+  private static boolean allSame(int[] elems) {
+    int first = elems[0];
+    for (int i = 1; i < elems.length; i++) {
+      if (elems[i] != first) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean allSame(int[] elems, int start, int end) {
+    int first = elems[start];
+    for (int i = start + 1; i <= end; i++) {
+      if (elems[i] != first) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int[] toDelete = new int[k - 1];
+        for (int i = 0; i < k - 1; i++) {
+            toDelete[i] = elems[i];
+        }
+        while (toDelete.length > 0 && toDelete[toDelete.length - 1] == target) {
+            toDelete = Arrays.copyOf(toDelete, toDelete.length - 1);
+        }
+        System.out.println(toDelete.length);
+    }
+    
+    public static boolean allSame(int[] arr) {
+        return arr[0] == arr[1] && arr[1] == arr[2];
+    }
+    
+    public static boolean allSame(int[] arr, int k) {
+        for (int i = 0; i < k; i++) {
+            if (arr[i] != arr[k]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] elems = new int[n];
+        for (int i = 0; i < n; i++) {
+            elems[i] = sc.nextInt();
+        }
+
+        if (allSame(elems)) {
+            System.out.println(0);
+            return;
+        }
+        if (k == 1) {
+            System.out.println(-1);
+            return;
+        }
+        if (!allSame(elems, k - 1, n - 1)) {
+            System.out.println(-1);
+            return;
+        }
+        int target = elems[n - 1];
+        int toDelete = 0;
+        while (toDelete < k - 1 && elems[toDelete] == target) {
+            toDelete++;
+        }
+        System.out.println(toDelete);
+    }
+
+    private static boolean allSame(int[] elems, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        int first = elems[start];
+        for (int i = start + 1; i <= end; i++) {
+            if (elems[i] != first) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean allSame(int[] elems) {
+        return allSame(elems, 0, elems.length - 1);
+    }
+}
+[/JAVA]
+======

@@ -1,0 +1,4118 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = scanner.nextLine().toLowerCase();
+    }
+    String oString = scanner.nextLine();
+    String lowString = oString.toLowerCase();
+    char letter1 = scanner.nextLine().charAt(0);
+    char letter2 = letter1 != 'a' ? 'b' : 'a';
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      if (lowString.indexOf(x) >= 0) {
+        int wat = 0;
+        while (true) {
+          int index = lowString.indexOf(x, wat);
+          if (index < 0) {
+            break;
+          }
+          for (int i = index; i < index + x.length(); i++) {
+            setcito.add(i);
+          }
+          wat = index + 1;
+        }
+      }
+    }
+    char[] oStringArr = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1 != oStringArr[i] ? letter1 : letter2;
+      oStringArr[i] = Character.isLowerCase(oStringArr[i]) ? letter : Character.toUpperCase(letter);
+    }
+    for (char x : oStringArr) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.contains(x)) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArr[i])) {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().toLowerCase().charAt(0);
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      oStringArray[i] = letter;
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.nextLine().toLowerCase();
+    }
+    String oString = sc.nextLine();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.nextLine().charAt(0);
+    char letter2 = (letter1 == 'a') ? 'b' : 'a';
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = (lowString.charAt(i) == letter1) ? letter1 : letter2;
+      oStringArray[i] = (oStringArray[i] == Character.toLowerCase(letter)) ? letter : Character.toUpperCase(letter);
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+
+        String letter1 = scanner.nextLine().toLowerCase();
+        String letter2 = letter1.equals("a") ? "b" : "a";
+
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        boolean[] valid = new boolean[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.contains(x)) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        for (int i = 0; i < arre.length; i++) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(arre[i], wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int j = index; j < index + arre[i].length(); j++) {
+                    valid[j] = 1;
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i = 0; i < oString.length(); i++) {
+            if (valid[i] == 1) {
+                if (lowString.charAt(i) == letter1) {
+                    oStringArray[i] = letter1;
+                } else {
+                    oStringArray[i] = letter2;
+                }
+            }
+        }
+        for (char c : oStringArray) {
+            System.out.print(c);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    List<String> arre = new ArrayList<>();
+    while (pya > 0) {
+      pya--;
+      arre.add(scanner.next().toLowerCase());
+    }
+    String oString = scanner.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = scanner.next().toLowerCase().charAt(0);
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+      oStringArray[i] = letter;
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1.toLowerCase() != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1.toLowerCase() != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.nextLine().toLowerCase().charAt(0);
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.contains(x)) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = Character.isLowerCase(oStringArray[i]) ? letter : Character.toUpperCase(letter);
+        }
+        System.out.println(String.valueOf(oStringArray));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = sc.next().toLowerCase();
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    int[] valid = new int[lowString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+      oStringArray[i] = Character.isLowerCase(oStringArray[i]) ? letter : Character.toUpperCase(letter);
+    }
+    String result = new String(oStringArray);
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        boolean[] valid = new boolean[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArr[i] = letter;
+        }
+
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = sc.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        boolean[] valid = new boolean[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+            if (Character.isLowerCase(oStringArr[i])) {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[lowString.length()];
+        for (int i = 0; i < lowString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = letter.toUpperCase();
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase().charAt(0);
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.contains(x)) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = letter;
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = sc.next().toLowerCase();
+        String letter2 = "a";
+        if (letter1.equals("a")) {
+            letter2 = "b";
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter1.charAt(0)) {
+                letter = letter2.charAt(0);
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        sc.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        boolean[] valid = new boolean[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = false;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter) {
+                letter = letter2.charAt(0);
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    ArrayList<String> arre = new ArrayList<>();
+    while (pya > 0) {
+      pya--;
+      arre.add(sc.next().toLowerCase());
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0).toLowerCase();
+    char letter2 = letter1 == 'a' ? 'b' : 'a';
+    int[] valid = new int[lowString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) break;
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      oStringArray[i] = letter;
+    }
+    String result = new String(oStringArray);
+    System.out.println(result);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        boolean[] valid = new boolean[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = false;
+        }
+        for (int i = 0; i < arre.length; i++) {
+            int index = lowString.indexOf(arre[i]);
+            while (index >= 0) {
+                for (int j = index; j < index + arre[i].length(); j++) {
+                    valid[j] = true;
+                }
+                index = lowString.indexOf(arre[i], index + 1);
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i = 0; i < oStringArr.length; i++) {
+            if (valid[i]) {
+                if (Character.isLowerCase(oStringArr[i])) {
+                    oStringArr[i] = Character.toUpperCase(oStringArr[i]);
+                } else {
+                    oStringArr[i] = Character.toLowerCase(oStringArr[i]);
+                }
+            }
+        }
+        System.out.println(String.valueOf(oStringArr));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.nextLine().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter1.charAt(0)) {
+                letter = letter2.charAt(0);
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = Character.toLowerCase(letter);
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        List<String> arre = new ArrayList<>();
+        while (pya > 0) {
+            pya--;
+            arre.add(scanner.next().toLowerCase());
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1.toLowerCase() != 'a') {
+            letter2 = 'b';
+        }
+        boolean[] valid = new boolean[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = false;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i].isLowerCase()) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = sc.next().toLowerCase();
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) break;
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (Integer i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+      if (Character.isLowerCase(oStringArray[i])) {
+        oStringArray[i] = letter;
+      } else {
+        oStringArray[i] = Character.toUpperCase(letter);
+      }
+    }
+    System.out.println(oStringArray);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0).toLowerCase();
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[oString.length()];
+    for (int i = 0; i < oString.length(); i++) {
+      valid[i] = 0;
+    }
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+        oStringArray[i] = letter;
+      } else {
+        oStringArray[i] = Character.toUpperCase(letter);
+      }
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[lowString.length()];
+        for (int i = 0; i < lowString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = Character.isLowerCase(oStringArray[i]) ? letter : Character.toUpperCase(letter);
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = letter1 == 'a' ? 'b' : 'a';
+
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = 0;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.indexOf(x) >= 0) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1 == oStringArray[i] ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().toLowerCase().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArr[i])) {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = letter1 == 'a' ? 'b' : 'a';
+        int[] valid = new int[lowString.length()];
+        for (int i = 0; i < lowString.length(); i++) {
+            valid[i] = 0;
+        }
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    valid[i] = 1;
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i = 0; i < valid.length; i++) {
+            if (valid[i] == 1) {
+                char letter = letter1;
+                if (lowString.charAt(i) != letter1) {
+                    letter = letter2;
+                }
+                if (Character.isLowerCase(oStringArray[i])) {
+                    oStringArray[i] = letter;
+                } else {
+                    oStringArray[i] = Character.toUpperCase(letter);
+                }
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    int pya = scanner.nextInt();
+    scanner.nextLine();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = scanner.nextLine().toLowerCase();
+    }
+
+    String oString = scanner.nextLine();
+    String lowString = oString.toLowerCase();
+    char letter1 = scanner.next().charAt(0);
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+
+    int[] valid = new int[oString.length()];
+    for (int i = 0; i < oString.length(); i++) {
+      valid[i] = 0;
+    }
+
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+
+    char[] oStringArr = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (Character.isLowerCase(oStringArr[i])) {
+        oStringArr[i] = letter;
+      } else {
+        oStringArr[i] = Character.toUpperCase(letter);
+      }
+    }
+
+    System.out.println(String.valueOf(oStringArr));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        boolean[] valid = new boolean[lowString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1.toLowerCase() != 'a') {
+            letter2 = 'b';
+        }
+        boolean[] valid = new boolean[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        List<String> arre = new ArrayList<>();
+        while (pya > 0) {
+            pya--;
+            arre.add(scanner.next().toLowerCase());
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            if (lowString.contains(x)) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(x, wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int i = index; i < index + x.length(); i++) {
+                        setcito.add(i);
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+        List<Character> oStringList = new ArrayList<>();
+        for (int i = 0; i < oString.length(); i++) {
+            oStringList.add(oString.charAt(i));
+        }
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringList.set(i, letter);
+        }
+        for (char x : oStringList) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.nextLine().toLowerCase();
+        String letter2 = "a";
+        if (letter1.charAt(0) != 'a') {
+            letter2 = "b";
+        }
+        int[] valid = new int[lowString.length()];
+        for (int i = 0; i < lowString.length(); i++) {
+            valid[i] = 0;
+        }
+        for (int i = 0; i < lowString.length(); i++) {
+            if (lowString.charAt(i) == letter1.charAt(0)) {
+                valid[i] = 1;
+            }
+        }
+        for (int i = 0; i < lowString.length(); i++) {
+            if (valid[i] == 1) {
+                oString = oString.substring(0, i) + letter1 + oString.substring(i + 1);
+            }
+        }
+        System.out.println(oString);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = sc.next().toLowerCase();
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      if (lowString.contains(x)) {
+        int wat = 0;
+        while (true) {
+          int index = lowString.indexOf(x, wat);
+          if (index < 0) {
+            break;
+          }
+          for (int i = index; i < index + x.length(); i++) {
+            setcito.add(i);
+          }
+          wat = index + 1;
+        }
+      }
+    }
+    char[] oStringArr = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+      oStringArr[i] = letter;
+    }
+    for (char x : oStringArr) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0).toLowerCase();
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArr = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+        oStringArr[i] = letter;
+      } else {
+        oStringArr[i] = Character.toUpperCase(letter);
+      }
+    }
+    for (char x : oStringArr) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter) {
+                letter = letter2.charAt(0);
+            }
+            if (Character.isLowerCase(oStringArr[i])) {
+                oStringArr[i] = Character.toLowerCase(letter);
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = sc.nextLine().toLowerCase().charAt(0);
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        System.out.println(String.valueOf(oStringArray));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+
+        boolean[] valid = new boolean[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = true;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = letter;
+        }
+
+        System.out.println(oStringArray);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = scanner.next().toLowerCase();
+    }
+    String oString = scanner.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = scanner.next().charAt(0);
+    char letter2 = 'a';
+    if (letter1.toLowerCase() != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[oString.length()];
+    for (int i = 0; i < oString.length(); i++) {
+      valid[i] = 0;
+    }
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (Character.isLowerCase(oStringArray[i])) {
+        oStringArray[i] = letter;
+      } else {
+        oStringArray[i] = Character.toUpperCase(letter);
+      }
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = (char) (letter - 32);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    scanner.nextLine(); // Consume newline character
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = scanner.nextLine().toLowerCase();
+    }
+    String oString = scanner.nextLine();
+    String lowString = oString.toLowerCase();
+    char letter1 = scanner.nextLine().charAt(0);
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[lowString.length()];
+    for (int i = 0; i < lowString.length(); i++) {
+      valid[i] = 0;
+    }
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (Character.isLowerCase(oStringArray[i])) {
+        oStringArray[i] = letter;
+      } else {
+        oStringArray[i] = Character.toUpperCase(letter);
+      }
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0);
+    char letter2 = letter1 == 'a' ? 'b' : 'a';
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) break;
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArr = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1 == oStringArr[i] ? letter2 : letter1;
+      oStringArr[i] = Character.isLowerCase(oStringArr[i]) ? letter : Character.toUpperCase(letter);
+    }
+    for (char x : oStringArr) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a";
+        if (letter1.charAt(0) != 'a') {
+            letter2 = "b";
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter1.charAt(0)) {
+                letter = letter2.charAt(0);
+            }
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    List<String> arre = new ArrayList<>();
+    while (pya > 0) {
+      pya--;
+      arre.add(scanner.next().toLowerCase());
+    }
+    String oString = scanner.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = scanner.next().toLowerCase();
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    boolean[] valid = new boolean[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      if (lowString.contains(x)) {
+        int wat = 0;
+        while (true) {
+          int index = lowString.indexOf(x, wat);
+          if (index < 0) {
+            break;
+          }
+          for (int i = index; i < index + x.length(); i++) {
+            setcito.add(i);
+          }
+          wat = index + 1;
+        }
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+      oStringArray[i] = letter;
+    }
+    System.out.println(oStringArray);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = sc.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().toLowerCase().charAt(0);
+        char letter2 = letter1 == 'a' ? 'b' : 'a';
+
+        boolean[] valid = new boolean[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+
+        System.out.println(String.valueOf(oStringArray));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (Integer i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringChars = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter) {
+                letter = letter2.charAt(0);
+            }
+            if (Character.isLowerCase(oStringChars[i])) {
+                oStringChars[i] = letter;
+            } else {
+                oStringChars[i] = Character.toUpperCase(letter);
+            }
+        }
+        System.out.println(new String(oStringChars));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.nextLine().toLowerCase();
+        }
+        String oString = sc.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = sc.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        for (int i = 0; i < arre.length; i++) {
+            if (lowString.contains(arre[i])) {
+                int wat = 0;
+                while (true) {
+                    int index = lowString.indexOf(arre[i], wat);
+                    if (index < 0) {
+                        break;
+                    }
+                    for (int j = index; j < index + arre[i].length(); j++) {
+                        valid[j] = 1;
+                    }
+                    wat = index + 1;
+                }
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i = 0; i < oString.length(); i++) {
+            if (valid[i] == 1) {
+                if (oStringArr[i] == letter1) {
+                    oStringArr[i] = letter2;
+                } else {
+                    oStringArr[i] = Character.toUpperCase(oStringArr[i]);
+                }
+            }
+        }
+        for (char c : oStringArr) {
+            System.out.print(c);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (oStringArray[i] >= 'a' && oStringArray[i] <= 'z') {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        for (int i = 0; i < oString.length(); i++) {
+            valid[i] = 0;
+        }
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = sc.next().toLowerCase();
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0).toLowerCase();
+    char letter2 = 'a';
+    if (letter1 != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[oString.length()];
+    for (int i = 0; i < oString.length(); i++) {
+      valid[i] = 0;
+    }
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      oStringArray[i] = letter;
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.next().toLowerCase();
+        }
+        String oString = scanner.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int pya = sc.nextInt();
+    ArrayList<String> arre = new ArrayList<String>();
+    while (pya > 0) {
+      pya--;
+      arre.add(sc.next().toLowerCase());
+    }
+    String oString = sc.next();
+    String lowString = oString.toLowerCase();
+    char letter1 = sc.next().charAt(0);
+    char letter2 = 'a';
+    if (letter1.toLowerCase() != 'a') {
+      letter2 = 'b';
+    }
+    int[] valid = new int[lowString.length()];
+    for (int i = 0; i < lowString.length(); i++) {
+      valid[i] = 0;
+    }
+    HashSet<Integer> setcito = new HashSet<Integer>();
+    for (String x : arre) {
+      int wat = 0;
+      while (true) {
+        int index = lowString.indexOf(x, wat);
+        if (index < 0) {
+          break;
+        }
+        for (int i = index; i < index + x.length(); i++) {
+          setcito.add(i);
+        }
+        wat = index + 1;
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1;
+      if (lowString.charAt(i) != letter1) {
+        letter = letter2;
+      }
+      if (Character.isLowerCase(oStringArray[i])) {
+        oStringArray[i] = letter;
+      } else {
+        oStringArray[i] = Character.toUpperCase(letter);
+      }
+    }
+    for (char x : oStringArray) {
+      System.out.print(x);
+    }
+    System.out.println();
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int pya = scanner.nextInt();
+    String[] arre = new String[pya];
+    for (int i = 0; i < pya; i++) {
+      arre[i] = scanner.next().toLowerCase();
+    }
+    String oString = scanner.next();
+    String lowString = oString.toLowerCase();
+    String letter1 = scanner.next().toLowerCase();
+    String letter2 = "a".equals(letter1) ? "b" : "a";
+    int[] valid = new int[oString.length()];
+    Set<Integer> setcito = new HashSet<>();
+    for (String x : arre) {
+      if (lowString.contains(x)) {
+        int wat = 0;
+        while (true) {
+          int index = lowString.indexOf(x, wat);
+          if (index < 0) {
+            break;
+          }
+          for (int i = index; i < index + x.length(); i++) {
+            setcito.add(i);
+          }
+          wat = index + 1;
+        }
+      }
+    }
+    char[] oStringArray = oString.toCharArray();
+    for (int i : setcito) {
+      char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+      oStringArray[i] = letter;
+    }
+    System.out.println(new String(oStringArray));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        List<String> arre = new ArrayList<>();
+        while (pya > 0) {
+            pya--;
+            arre.add(scanner.nextLine().toLowerCase());
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.nextLine().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+
+        int[] valid = new int[lowString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            oStringArr[i] = letter;
+        }
+
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.nextLine().toLowerCase();
+        String letter2 = "a";
+        if (letter1.equals("a")) {
+            letter2 = "b";
+        }
+
+        int[] valid = new int[lowString.length()];
+        for (int i = 0; i < lowString.length(); i++) {
+            valid[i] = 0;
+        }
+
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.charAt(0);
+            if (lowString.charAt(i) != letter1.charAt(0)) {
+                letter = letter2.charAt(0);
+            }
+            if (oStringArr[i] >= 'a' && oStringArr[i] <= 'z') {
+                oStringArr[i] = letter;
+            } else {
+                oStringArr[i] = Character.toUpperCase(letter);
+            }
+        }
+
+        for (char x : oStringArr) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        char letter1 = scanner.next().charAt(0);
+        char letter2 = 'a';
+        if (letter1 != 'a') {
+            letter2 = 'b';
+        }
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1;
+            if (lowString.charAt(i) != letter1) {
+                letter = letter2;
+            }
+            if (Character.isLowerCase(oStringArray[i])) {
+                oStringArray[i] = letter;
+            } else {
+                oStringArray[i] = Character.toUpperCase(letter);
+            }
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter2 : letter1;
+            oStringArray[i] = letter;
+        }
+
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pya = sc.nextInt();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = sc.next().toLowerCase();
+        }
+        String oString = sc.next();
+        String lowString = oString.toLowerCase();
+        String letter1 = sc.next().charAt(0) + "";
+        String letter2 = "a".equals(letter1.toLowerCase()) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArr = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i) + "") ? letter2.charAt(0) : letter1.charAt(0);
+            oStringArr[i] = (char) (oStringArr[i] == Character.toLowerCase(oStringArr[i]) ? letter : Character.toUpperCase(letter));
+        }
+        System.out.println(oStringArr);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pya = scanner.nextInt();
+        scanner.nextLine();
+        String[] arre = new String[pya];
+        for (int i = 0; i < pya; i++) {
+            arre[i] = scanner.nextLine().toLowerCase();
+        }
+        String oString = scanner.nextLine();
+        String lowString = oString.toLowerCase();
+        String letter1 = scanner.next().toLowerCase();
+        String letter2 = "a".equals(letter1) ? "b" : "a";
+        int[] valid = new int[oString.length()];
+        Set<Integer> setcito = new HashSet<>();
+        for (String x : arre) {
+            int wat = 0;
+            while (true) {
+                int index = lowString.indexOf(x, wat);
+                if (index < 0) {
+                    break;
+                }
+                for (int i = index; i < index + x.length(); i++) {
+                    setcito.add(i);
+                }
+                wat = index + 1;
+            }
+        }
+        char[] oStringArray = oString.toCharArray();
+        for (int i : setcito) {
+            char letter = letter1.equals(lowString.charAt(i)) ? letter1 : letter2;
+            oStringArray[i] = letter;
+        }
+        for (char x : oStringArray) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
+}
+[/JAVA]
+======

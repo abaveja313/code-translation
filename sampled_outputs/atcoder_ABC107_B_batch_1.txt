@@ -1,0 +1,824 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        sc.nextLine();
+
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < w; i++) {
+            alldot[i] = true;
+        }
+
+        String[] lst = new String[h];
+        for (int i = 0; i < h; i++) {
+            String s = sc.nextLine();
+            if (s.chars().filter(ch -> ch == '#').count() >= 1) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    alldot[j] = alldot[j] && s.charAt(j) == '.';
+                }
+            } else {
+                h--;
+            }
+        }
+
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    res[i] += ".";
+                } else {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+
+        for (String s : res) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        String[] lst = new String[h];
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < h; i++) {
+            String s = sc.next();
+            if (s.replaceAll("\\D", "").length() >= 1) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    alldot[j] = alldot[j] && s.charAt(j) == '.';
+                }
+            } else {
+                h--;
+            }
+        }
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    continue;
+                } else {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+        for (String i : res) {
+            System.out.println(i);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    scanner.nextLine();
+    boolean[] alldot = new boolean[w];
+    String[] lst = new String[h];
+    for (int i = 0; i < h; i++) {
+      String s = scanner.nextLine();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += '.';
+        } else {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < w; i++) {
+            alldot[i] = true;
+        }
+
+        String[] lst = new String[h];
+        for (int i = 0; i < h; i++) {
+            String s = scanner.nextLine();
+            if (s.length() > 0) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    if (s.charAt(j) == '#') {
+                        alldot[j] = false;
+                    }
+                }
+            } else {
+                h--;
+            }
+        }
+
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            res[i] = "";
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+
+        for (String s : res) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < w; i++) {
+            alldot[i] = true;
+        }
+
+        List<String> lst = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            String s = scanner.nextLine();
+            if (s.chars().filter(c -> c == '#').count() >= 1) {
+                lst.add(s);
+                for (int j = 0; j < w; j++) {
+                    alldot[j] = alldot[j] && s.charAt(j) == '.';
+                }
+            } else {
+                h--;
+            }
+        }
+
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            res[i] = "";
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    res[i] += lst.get(i).charAt(j);
+                }
+            }
+        }
+
+        for (String s : res) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.next();
+      if (s.length() > 0) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += ".";
+        } else {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    sc.nextLine();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.nextLine();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input from the user, and it uses the `String` and `boolean` classes to store the input and the results. The logic is the same as the Python code, with the exception that Java uses 0-based indexing instead of 1-based indexing, so the `for` loops start at 0 instead of 1.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    scanner.nextLine();
+
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < w; i++) {
+      alldot[i] = true;
+    }
+
+    List<String> lst = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      String s = scanner.nextLine();
+      if (s.length() > 0 && s.charAt(0) == '#') {
+        lst.add(s);
+        for (int j = 0; j < w; j++) {
+          if (s.charAt(j) != '.') {
+            alldot[j] = false;
+          }
+        }
+      } else {
+        h--;
+      }
+    }
+
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      res[i] = "";
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += ".";
+        } else {
+          res[i] += lst.get(i).charAt(j);
+        }
+      }
+    }
+
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        sc.nextLine();
+
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < w; i++) {
+            alldot[i] = true;
+        }
+
+        String[] lst = new String[h];
+        for (int i = 0; i < h; i++) {
+            String s = sc.nextLine();
+            if (s.contains("#")) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    if (s.charAt(j) == '.') {
+                        alldot[j] = false;
+                    }
+                }
+            } else {
+                h--;
+            }
+        }
+
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    res[i] += ".";
+                } else {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+
+        for (int i = 0; i < h; i++) {
+            System.out.println(res[i]);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    sc.nextLine();
+
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < w; i++) {
+      alldot[i] = true;
+    }
+
+    String[] lst = new String[h];
+    for (int i = 0; i < h; i++) {
+      String s = sc.nextLine();
+      if (s.length() > 0 && s.charAt(0) == '#') {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          if (s.charAt(j) == '.') {
+            alldot[j] = false;
+          }
+        }
+      } else {
+        h--;
+      }
+    }
+
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      res[i] = "";
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    sc.nextLine();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.nextLine();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.next();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String i : res) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    sc.nextLine();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.nextLine();
+      if (s.chars().filter(c -> c == '#').count() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    scanner.nextLine();
+
+    List<String> lst = new ArrayList<>();
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = scanner.nextLine();
+      if (s.chars().filter(c -> c == '#').count() >= 1) {
+        lst.add(s);
+        for (int t = 0; t < w; t++) {
+          alldot[t] = alldot[t] && s.charAt(t) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += ".";
+        } else {
+          res[i] += lst.get(i).charAt(j);
+        }
+      }
+    }
+
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.nextLine();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += ".";
+        } else {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    scanner.nextLine();
+
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < w; i++) {
+      alldot[i] = true;
+    }
+
+    String[] lst = new String[h];
+    for (int i = 0; i < h; i++) {
+      String s = scanner.nextLine();
+      if (s.length() >= 1 && s.contains("#")) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          if (s.charAt(j) == '.') {
+            alldot[j] = false;
+          }
+        }
+      } else {
+        h--;
+      }
+    }
+
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      res[i] = "";
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+
+    for (int i = 0; i < h; i++) {
+      System.out.println(res[i]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        String[] lst = new String[h];
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < h; i++) {
+            String s = sc.next();
+            if (s.chars().filter(ch -> ch == '#').count() >= 1) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    alldot[j] = alldot[j] && s.charAt(j) == '.';
+                }
+            } else {
+                h--;
+            }
+        }
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+        for (String s : res) {
+            System.out.println(s);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.next();
+      if (s.chars().filter(c -> c == '#').count() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          // pass
+        } else {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String i : res) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    String[] lst = new String[h];
+    boolean[] alldot = new boolean[w];
+    for (int i = 0; i < h; i++) {
+      String s = sc.next();
+      if (s.length() >= 1) {
+        lst[i] = s;
+        for (int j = 0; j < w; j++) {
+          alldot[j] = alldot[j] && s.charAt(j) == '.';
+        }
+      } else {
+        h--;
+      }
+    }
+    String[] res = new String[h];
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (alldot[j]) {
+          res[i] += ".";
+        } else {
+          res[i] += lst[i].charAt(j);
+        }
+      }
+    }
+    for (String s : res) {
+      System.out.println(s);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        String[] lst = new String[h];
+        boolean[] alldot = new boolean[w];
+        for (int i = 0; i < h; i++) {
+            String s = sc.next();
+            if (s.length() >= 1) {
+                lst[i] = s;
+                for (int j = 0; j < w; j++) {
+                    alldot[j] = alldot[j] && s.charAt(j) == '.';
+                }
+            } else {
+                h--;
+            }
+        }
+        String[] res = new String[h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (alldot[j]) {
+                    // pass
+                } else {
+                    res[i] += lst[i].charAt(j);
+                }
+            }
+        }
+        for (String i : res) {
+            System.out.println(i);
+        }
+    }
+}
+[/JAVA]
+======

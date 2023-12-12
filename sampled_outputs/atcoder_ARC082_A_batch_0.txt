@@ -1,0 +1,794 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < a.size(); i++) {
+      counter.put(a.get(i), counter.getOrDefault(a.get(i), 0) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      counter.put(a.get(i) - 1, counter.getOrDefault(a.get(i) - 1, 0) + 1);
+      counter.put(a.get(i) + 1, counter.getOrDefault(a.get(i) + 1, 0) + 1);
+    }
+    int maxValue = Collections.max(counter.values());
+    System.out.println(maxValue);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        ArrayList<Integer> aPlusOne = new ArrayList<>();
+        ArrayList<Integer> aMinusOne = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            aPlusOne.add(a.get(i) + 1);
+            aMinusOne.add(a.get(i) - 1);
+        }
+        Map<Integer, Integer> counter = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            counter.put(a.get(i), counter.getOrDefault(a.get(i), 0) + 1);
+            counter.put(aPlusOne.get(i), counter.getOrDefault(aPlusOne.get(i), 0) + 1);
+            counter.put(aMinusOne.get(i), counter.getOrDefault(aMinusOne.get(i), 0) + 1);
+        }
+        int max = Collections.max(counter.values());
+        System.out.println(max);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        int[] b = new int[n];
+        for (int i = 0; i < n; i++) {
+            b[i] = a.get(i) - 1;
+        }
+        for (int i = 0; i < n; i++) {
+            b[i] = a.get(i) + 1;
+        }
+        Map<Integer, Integer> counter = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            counter.put(a.get(i), counter.getOrDefault(a.get(i), 0) + 1);
+        }
+        for (int i = 0; i < n; i++) {
+            counter.put(b[i], counter.getOrDefault(b[i], 0) + 1);
+        }
+        int max = Collections.max(counter.values());
+        System.out.println(max);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] aPlusOne = new int[n];
+    int[] aMinusOne = new int[n];
+    for (int i = 0; i < n; i++) {
+      aPlusOne[i] = a[i] + 1;
+      aMinusOne[i] = a[i] - 1;
+    }
+    int[] allValues = new int[n * 3];
+    for (int i = 0; i < n; i++) {
+      allValues[i] = a[i];
+      allValues[i + n] = aPlusOne[i];
+      allValues[i + n * 2] = aMinusOne[i];
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int value : allValues) {
+      if (counter.containsKey(value)) {
+        counter.put(value, counter.get(value) + 1);
+      } else {
+        counter.put(value, 1);
+      }
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] b = new int[n];
+    for (int i = 0; i < n; i++) {
+      b[i] = a[i] - 1;
+    }
+    int[] c = new int[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = a[i] + 1;
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      counter.put(a[i], counter.getOrDefault(a[i], 0) + 1);
+      counter.put(b[i], counter.getOrDefault(b[i], 0) + 1);
+      counter.put(c[i], counter.getOrDefault(c[i], 0) + 1);
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    List<Integer> b = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) - 1);
+    }
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) + 1);
+    }
+    Collections.sort(b);
+    int maxCount = 0;
+    for (int i = 0; i < n; i++) {
+      int count = 1;
+      for (int j = i + 1; j < n; j++) {
+        if (b.get(j) == b.get(i)) {
+          count++;
+        } else {
+          break;
+        }
+      }
+      if (count > maxCount) {
+        maxCount = count;
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Map<Integer, Integer> counts = new HashMap<>();
+        for (int i = 0; i < a.size(); i++) {
+            int count = counts.getOrDefault(a.get(i), 0) + 1;
+            counts.put(a.get(i), count);
+        }
+        int maxCount = Collections.max(counts.values());
+        System.out.println(maxCount);
+    }
+}
+[/JAVA]
+
+This code first reads in the input from the user, which is the number of elements in the list `n` and the list of elements `a` separated by spaces. It then creates a `Map` called `counts` to store the counts of each element in the list.
+
+The code then iterates over the elements in the list `a` and for each element, it checks if it is already in the `counts` map. If it is not, it adds it to the map with a count of 1. If it is already in the map, it increments the count by 1.
+
+Finally, the code prints out the maximum count of all the elements in the list.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int[] b = new int[n];
+    for (int i = 0; i < n; i++) {
+      b[i] = a[i] - 1;
+    }
+    int[] c = new int[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = a[i] + 1;
+    }
+    int[] d = new int[n * 3];
+    for (int i = 0; i < n; i++) {
+      d[i] = a[i];
+      d[i + n] = b[i];
+      d[i + n * 2] = c[i];
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < d.length; i++) {
+      if (counter.containsKey(d[i])) {
+        counter.put(d[i], counter.get(d[i]) + 1);
+      } else {
+        counter.put(d[i], 1);
+      }
+    }
+    int max = Collections.max(counter.values());
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Map<Integer, Integer> counts = new HashMap<>();
+    for (int i = 0; i < a.size(); i++) {
+      int value = a.get(i);
+      counts.put(value, counts.getOrDefault(value, 0) + 1);
+      counts.put(value - 1, counts.getOrDefault(value - 1, 0) + 1);
+      counts.put(value + 1, counts.getOrDefault(value + 1, 0) + 1);
+    }
+    int maxCount = Collections.max(counts.values());
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the list of integers. The `Map` class is used to keep track of the counts of each integer, and the `Collections` class is used to find the maximum value in the map.
+
+Note that the Python code uses a `Counter` class, which is not available in Java. To achieve the same functionality, we use a `Map` to store the counts of each integer, and the `getOrDefault` method to retrieve the count of a given integer, or 0 if it has not been seen before.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    List<Integer> b = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) - 1);
+    }
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) + 1);
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < b.size(); i++) {
+      if (counter.containsKey(b.get(i))) {
+        counter.put(b.get(i), counter.get(b.get(i)) + 1);
+      } else {
+        counter.put(b.get(i), 1);
+      }
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    for (int i = 0; i < n; i++) {
+      b[i] = a[i] - 1;
+    }
+    int[] c = new int[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = a[i] + 1;
+    }
+    int[] d = new int[n * 3];
+    for (int i = 0; i < n; i++) {
+      d[i] = a[i];
+    }
+    for (int i = 0; i < n; i++) {
+      d[i + n] = b[i];
+    }
+    for (int i = 0; i < n; i++) {
+      d[i + 2 * n] = c[i];
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < d.length; i++) {
+      if (counter.containsKey(d[i])) {
+        counter.put(d[i], counter.get(d[i]) + 1);
+      } else {
+        counter.put(d[i], 1);
+      }
+    }
+    int maxValue = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxValue) {
+        maxValue = entry.getValue();
+      }
+    }
+    System.out.println(maxValue);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] b = new int[n];
+    for (int i = 0; i < n; i++) {
+      b[i] = a[i] - 1;
+    }
+    int[] c = new int[n];
+    for (int i = 0; i < n; i++) {
+      c[i] = a[i] + 1;
+    }
+    int[] d = new int[n];
+    for (int i = 0; i < n; i++) {
+      d[i] = b[i] + c[i];
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < d.length; i++) {
+      if (counter.containsKey(d[i])) {
+        counter.put(d[i], counter.get(d[i]) + 1);
+      } else {
+        counter.put(d[i], 1);
+      }
+    }
+    int max = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > max) {
+        max = entry.getValue();
+      }
+    }
+    System.out.println(max);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    List<Integer> aPlusOne = new ArrayList<>();
+    List<Integer> aMinusOne = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      aPlusOne.add(a.get(i) + 1);
+      aMinusOne.add(a.get(i) - 1);
+    }
+    List<Integer> aAndaPlusOneAndaMinusOne = new ArrayList<>();
+    aAndaPlusOneAndaMinusOne.addAll(a);
+    aAndaPlusOneAndaMinusOne.addAll(aPlusOne);
+    aAndaPlusOneAndaMinusOne.addAll(aMinusOne);
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < aAndaPlusOneAndaMinusOne.size(); i++) {
+      int value = aAndaPlusOneAndaMinusOne.get(i);
+      if (counter.containsKey(value)) {
+        counter.put(value, counter.get(value) + 1);
+      } else {
+        counter.put(value, 1);
+      }
+    }
+    int maxValue = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxValue) {
+        maxValue = entry.getValue();
+      }
+    }
+    System.out.println(maxValue);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    List<Integer> aPlusOne = new ArrayList<>();
+    List<Integer> aMinusOne = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      aPlusOne.add(a.get(i) + 1);
+      aMinusOne.add(a.get(i) - 1);
+    }
+    a.addAll(aPlusOne);
+    a.addAll(aMinusOne);
+    Collections.sort(a);
+    int maxCount = 0;
+    int currentCount = 1;
+    for (int i = 1; i < a.size(); i++) {
+      if (a.get(i) == a.get(i - 1)) {
+        currentCount++;
+      } else {
+        maxCount = Math.max(maxCount, currentCount);
+        currentCount = 1;
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    ArrayList<Integer> b = new ArrayList<>();
+    for (int i = 0; i < a.size(); i++) {
+      b.add(a.get(i) - 1);
+      b.add(a.get(i) + 1);
+    }
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int i = 0; i < b.size(); i++) {
+      if (counter.containsKey(b.get(i))) {
+        counter.put(b.get(i), counter.get(b.get(i)) + 1);
+      } else {
+        counter.put(b.get(i), 1);
+      }
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    ArrayList<Integer> b = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) - 1);
+    }
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) + 1);
+    }
+    Map<Integer, Integer> counts = new HashMap<>();
+    for (int i = 0; i < b.size(); i++) {
+      if (counts.containsKey(b.get(i))) {
+        counts.put(b.get(i), counts.get(b.get(i)) + 1);
+      } else {
+        counts.put(b.get(i), 1);
+      }
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        List<Integer> aPlusOne = new ArrayList<>();
+        List<Integer> aMinusOne = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            aPlusOne.add(a.get(i) + 1);
+            aMinusOne.add(a.get(i) - 1);
+        }
+        a.addAll(aPlusOne);
+        a.addAll(aMinusOne);
+        Map<Integer, Integer> counter = new HashMap<>();
+        for (int i = 0; i < a.size(); i++) {
+            if (counter.containsKey(a.get(i))) {
+                counter.put(a.get(i), counter.get(a.get(i)) + 1);
+            } else {
+                counter.put(a.get(i), 1);
+            }
+        }
+        List<Integer> values = new ArrayList<>(counter.values());
+        Collections.sort(values, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        System.out.println(values.get(0));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int[] aPlusOne = new int[n];
+    int[] aMinusOne = new int[n];
+    for (int i = 0; i < n; i++) {
+      aPlusOne[i] = a[i] + 1;
+      aMinusOne[i] = a[i] - 1;
+    }
+    int[] allValues = Arrays.copyOf(a, a.length + aPlusOne.length + aMinusOne.length);
+    System.arraycopy(aPlusOne, 0, allValues, a.length, aPlusOne.length);
+    System.arraycopy(aMinusOne, 0, allValues, a.length + aPlusOne.length, aMinusOne.length);
+    Map<Integer, Integer> counter = new HashMap<>();
+    for (int value : allValues) {
+      int count = counter.getOrDefault(value, 0) + 1;
+      counter.put(value, count);
+    }
+    int maxCount = Collections.max(counter.values());
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<Integer>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    ArrayList<Integer> b = new ArrayList<Integer>();
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) - 1);
+    }
+    for (int i = 0; i < n; i++) {
+      b.add(a.get(i) + 1);
+    }
+    Map<Integer, Integer> count = new HashMap<Integer, Integer>();
+    for (int i = 0; i < n * 3; i++) {
+      if (count.containsKey(b.get(i))) {
+        count.put(b.get(i), count.get(b.get(i)) + 1);
+      } else {
+        count.put(b.get(i), 1);
+      }
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    int[] b = new int[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      b[i] = a.get(i) - 1;
+    }
+    for (int i = 0; i < a.size(); i++) {
+      b[i] = a.get(i) + 1;
+    }
+    Map<Integer, Integer> countMap = new HashMap<>();
+    for (int i = 0; i < b.length; i++) {
+      countMap.put(b[i], countMap.getOrDefault(b[i], 0) + 1);
+    }
+    int maxCount = 0;
+    for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+      if (entry.getValue() > maxCount) {
+        maxCount = entry.getValue();
+      }
+    }
+    System.out.println(maxCount);
+  }
+}
+[/JAVA]
+======

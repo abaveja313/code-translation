@@ -1,0 +1,751 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.nextLine();
+        scanner.close();
+
+        Map<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o.append(entry.getKey()).append(entry.getValue() / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String S = sc.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o += entry.getKey() + "";
+            }
+            System.out.println(o * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String S = sc.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            if (d.containsKey(c)) {
+                d.put(c, d.get(c) + 1);
+            } else {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Character c : d.keySet()) {
+                o += c + (d.get(c) / k);
+            }
+            System.out.println(o * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.nextLine();
+    HashMap<Character, Integer> d = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      try {
+        d.put(c, d.get(c) + 1);
+      } catch (NullPointerException e) {
+        d.put(c, 1);
+      }
+    }
+    boolean done = false;
+    for (Character c : d.keySet()) {
+      if (d.get(c) % k != 0) {
+        System.out.println(-1);
+        done = true;
+        break;
+      }
+    }
+    if (!done) {
+      String o = "";
+      for (Character c : d.keySet()) {
+        o += c + (d.get(c) / k);
+      }
+      System.out.println(o * k);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        scanner.nextLine();
+        String S = scanner.nextLine();
+
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            String o = "";
+            for (Character c : d.keySet()) {
+                o += c + (d.get(c) / k);
+            }
+            System.out.println(o * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> d = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      try {
+        d.put(c, d.get(c) + 1);
+      } catch (Exception e) {
+        d.put(c, 1);
+      }
+    }
+    boolean done = false;
+    for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+      if (entry.getValue() % k != 0) {
+        System.out.println(-1);
+        done = true;
+        break;
+      }
+    }
+    if (!done) {
+      String o = "";
+      for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+        o += entry.getKey() + String.valueOf(entry.getValue() / k);
+      }
+      System.out.println(o * k);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Character c : d.keySet()) {
+                o.append(c).append(d.get(c) / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Character c : d.keySet()) {
+                o += c.toString() + (d.get(c) / k);
+            }
+            System.out.println(o.repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String s = sc.next();
+        sc.close();
+
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                char c = entry.getKey();
+                int count = entry.getValue() / k;
+                for (int i = 0; i < count; i++) {
+                    sb.append(c);
+                }
+            }
+            System.out.println(sb.toString() * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.next();
+        scanner.close();
+
+        Map<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            d.put(c, d.getOrDefault(c, 0) + 1);
+        }
+
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                sb.append(entry.getKey(), entry.getValue() / k);
+            }
+            System.out.println(sb.toString() * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.nextLine();
+        Map<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o += String.valueOf(entry.getKey()).repeat(entry.getValue() / k);
+            }
+            System.out.println(o.repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String S = sc.next();
+        sc.close();
+
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o.append(entry.getKey()).append(entry.getValue() / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String S = scanner.next();
+    HashMap<Character, Integer> d = new HashMap<>();
+    for (char c : S.toCharArray()) {
+      try {
+        d.put(c, d.get(c) + 1);
+      } catch (NullPointerException e) {
+        d.put(c, 1);
+      }
+    }
+    boolean done = false;
+    for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+      if (entry.getValue() % k != 0) {
+        System.out.println(-1);
+        done = true;
+        break;
+      }
+    }
+    if (!done) {
+      String o = "";
+      for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+        o += entry.getKey() + String.valueOf(entry.getValue() / k);
+      }
+      System.out.println(o * k);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    Map<Character, Integer> d = new HashMap<>();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      try {
+        d.put(c, d.get(c) + 1);
+      } catch (Exception e) {
+        d.put(c, 1);
+      }
+    }
+    boolean done = false;
+    for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+      if (entry.getValue() % k != 0) {
+        System.out.println(-1);
+        done = true;
+        break;
+      }
+    }
+    if (!done) {
+      StringBuilder sb = new StringBuilder();
+      for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+        char c = entry.getKey();
+        int count = entry.getValue();
+        for (int i = 0; i < count / k; i++) {
+          sb.append(c);
+        }
+      }
+      System.out.println(sb.toString() * k);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String S = sc.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Character c : d.keySet()) {
+                o += c + (d.get(c) / k);
+            }
+            System.out.println(o * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.nextLine();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o += entry.getKey() + (entry.getValue() / k);
+            }
+            System.out.println(o * k);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.next();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Character c : d.keySet()) {
+            if (d.get(c) % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Character c : d.keySet()) {
+                o.append(c).append(d.get(c) / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        scanner.nextLine();
+        String S = scanner.nextLine();
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (char s : S.toCharArray()) {
+            try {
+                d.put(s, d.get(s) + 1);
+            } catch (Exception e) {
+                d.put(s, 1);
+            }
+        }
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            String o = "";
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o += String.valueOf(entry.getKey()).repeat(entry.getValue() / k);
+            }
+            System.out.println(o.repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String S = scanner.next();
+        scanner.close();
+
+        HashMap<Character, Integer> d = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (NullPointerException e) {
+                d.put(c, 1);
+            }
+        }
+
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o.append(entry.getKey()).append(entry.getValue() / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        scanner.nextLine();
+        String S = scanner.nextLine();
+        Map<Character, Integer> d = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            try {
+                d.put(c, d.get(c) + 1);
+            } catch (Exception e) {
+                d.put(c, 1);
+            }
+        }
+        boolean done = false;
+        for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+            if (entry.getValue() % k != 0) {
+                System.out.println(-1);
+                done = true;
+                break;
+            }
+        }
+        if (!done) {
+            StringBuilder o = new StringBuilder();
+            for (Map.Entry<Character, Integer> entry : d.entrySet()) {
+                o.append(entry.getKey()).append(entry.getValue() / k);
+            }
+            System.out.println(o.toString().repeat(k));
+        }
+    }
+}
+[/JAVA]
+======

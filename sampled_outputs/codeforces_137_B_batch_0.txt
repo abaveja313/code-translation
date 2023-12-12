@@ -1,0 +1,766 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            count.put(i, count.getOrDefault(i, 0) + 1);
+        }
+        int c = 0;
+        for (int i = 1; i <= 5000; i++) {
+            if (count.get(i) == 0) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            count.put(i, count.getOrDefault(i, 0) + 1);
+        }
+        int c = 0;
+        for (int i = 1; i <= 5000; i++) {
+            if (count.get(i) == 0) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            if (count.containsKey(i)) {
+                count.put(i, count.get(i) + 1);
+            } else {
+                count.put(i, 1);
+            }
+        }
+        int c = 0;
+        for (int i = 1; i <= 5000; i++) {
+            if (!count.containsKey(i)) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i = 0; i < arr.size(); i++) {
+            int num = arr.get(i);
+            if (count.containsKey(num)) {
+                count.put(num, count.get(num) + 1);
+            } else {
+                count.put(num, 1);
+            }
+        }
+
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 1; i <= 5000; i++) {
+            dic.put(i, 0);
+        }
+        for (int i : count.keySet()) {
+            dic.put(i, count.get(i));
+        }
+
+        int c = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dic.get(i) == 0) {
+                c++;
+            }
+        }
+
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(scanner.nextInt());
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            if (count.containsKey(i)) {
+                count.put(i, count.get(i) + 1);
+            } else {
+                count.put(i, 1);
+            }
+        }
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 1; i <= 5000; i++) {
+            dic.put(i, 0);
+        }
+        for (int i : count.keySet()) {
+            dic.put(i, count.get(i));
+        }
+        int c = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dic.get(i) == 0) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextInt());
+    }
+    Collections.sort(arr);
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (count.containsKey(arr.get(i))) {
+        count.put(arr.get(i), count.get(arr.get(i)) + 1);
+      } else {
+        count.put(arr.get(i), 1);
+      }
+    }
+    int c = 0;
+    for (int i = 1; i <= 5000; i++) {
+      if (count.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. The code uses the `Scanner` class to read input from the user, and the `ArrayList` and `HashMap` classes to store the input and count the frequency of each number, respectively. The `Collections.sort()` method is used to sort the `ArrayList` in ascending order, and the `Map.get()` method is used to retrieve the frequency of each number. Finally, the code prints the number of numbers that have a frequency of 0.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      if (count.containsKey(arr[i])) {
+        count.put(arr[i], count.get(arr[i]) + 1);
+      } else {
+        count.put(arr[i], 1);
+      }
+    }
+
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    int c = 0;
+    for (int i = 1; i <= 5000; i++) {
+      if (count.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+
+This is a direct translation of the Python code to Java. The `from sys import stdin` and `input = stdin.readline` lines are replaced by `Scanner sc = new Scanner(System.in)` and `sc.nextInt()`, respectively. The `from collections import Counter` line is replaced by `import java.util.HashMap`. The `count = Counter(arr)` line is replaced by `Map<Integer, Integer> count = new HashMap<>();`. The `dic = dict()` line is replaced by `int c = 0`. The `for i in range(1, 5001):` line is replaced by `for (int i = 1; i <= 5000; i++) {`. The `dic[i] = 0` line is replaced by `count.put(i, 0)`. The `for i in count:` line is replaced by `for (int i : arr) {`. The `dic[i] = count[i]` line is replaced by `count.put(i, count.getOrDefault(i, 0) + 1)`. The `for i in range(1, n+1):` line is replaced by `for (int i = 1; i <= n; i++) {`. The `if dic[i] == 0:` line is replaced by `if (count.get(i) == 0) {`. The `c += 1` line is replaced by `c++`. The `print(c)` line is replaced by `System.out.println(c)`.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    int c = 0;
+    for (int i = 1; i <= 5000; i++) {
+      if (count.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+
+This is a Java implementation of the Python code. It uses the `Scanner` class to read input from the user, and the `HashMap` class to keep track of the counts of each number in the input array. The `getOrDefault` method is used to get the count of a number, and if it doesn't exist, it returns 0. The `for` loop at the end counts the number of numbers that have a count of 0.
+
+Note that the `main` method in Java is the entry point of the program, and it takes an array of strings as an argument. The `Scanner` class is used to read input from the user, and the `HashMap` class is used to keep track of the counts of each number in the input array. The `getOrDefault` method is used to get the count of a number, and if it doesn't exist, it returns 0. The `for` loop at the end counts the number of numbers that have a count of 0.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            count.put(i, count.getOrDefault(i, 0) + 1);
+        }
+        Map<Integer, Integer> dic = new HashMap<>();
+        for (int i = 1; i <= 5000; i++) {
+            dic.put(i, 0);
+        }
+        for (int i : count.keySet()) {
+            dic.put(i, count.get(i));
+        }
+        int c = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dic.get(i) == 0) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(sc.nextInt());
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    int[] dic = new int[5001];
+    for (int i = 1; i <= 5000; i++) {
+      dic[i] = 0;
+    }
+    for (int i : count.keySet()) {
+      dic[i] = count.get(i);
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic[i] == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      arr.add(scanner.nextInt());
+    }
+
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i = 0; i < arr.size(); i++) {
+      int num = arr.get(i);
+      if (count.containsKey(num)) {
+        count.put(num, count.get(num) + 1);
+      } else {
+        count.put(num, 1);
+      }
+    }
+
+    Map<Integer, Integer> dic = new HashMap<>();
+    for (int i = 1; i <= 5000; i++) {
+      dic.put(i, 0);
+    }
+    for (int i : count.keySet()) {
+      dic.put(i, count.get(i));
+    }
+
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic.get(i) == 0) {
+        c++;
+      }
+    }
+
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++) {
+      arr[i] = sc.nextInt();
+    }
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int i : arr) {
+      count.put(i, count.getOrDefault(i, 0) + 1);
+    }
+    int[] dic = new int[5001];
+    for (int i = 1; i <= 5000; i++) {
+      dic[i] = 0;
+    }
+    for (int i : count.keySet()) {
+      dic[i] = count.get(i);
+    }
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dic[i] == 0) {
+        c++;
+      }
+    }
+    System.out.println(c);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(scanner.nextInt());
+        }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i : arr) {
+            count.put(i, count.getOrDefault(i, 0) + 1);
+        }
+        Map<Integer, Integer> dic = new TreeMap<>();
+        for (int i = 1; i <= 5000; i++) {
+            dic.put(i, 0);
+        }
+        for (int i : count.keySet()) {
+            dic.put(i, count.get(i));
+        }
+        int c = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dic.get(i) == 0) {
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+[/JAVA]
+======

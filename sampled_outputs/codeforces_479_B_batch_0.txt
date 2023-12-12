@@ -1,0 +1,961 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int minIndex = 0;
+    int maxIndex = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[maxIndex]) {
+          maxIndex = j;
+        }
+        if (towers[j] < towers[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (towers[maxIndex] - 1 <= towers[minIndex]) {
+        break;
+      }
+      towers[maxIndex] -= 1;
+      towers[minIndex] += 1;
+      operations[i][0] = maxIndex + 1;
+      operations[i][1] = minIndex + 1;
+    }
+    int maxTower = 0;
+    int minTower = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[maxIndex]) {
+        maxIndex = i;
+      }
+      if (towers[i] < towers[minIndex]) {
+        minIndex = i;
+      }
+    }
+    System.out.println(towers[maxIndex] - towers[minIndex]);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_diff = towers[max_i] - towers[min_i];
+    System.out.println(max_diff + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int minIndex = 0;
+    int maxIndex = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[maxIndex]) {
+          maxIndex = j;
+        }
+        if (towers[j] < towers[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (towers[maxIndex] - 1 <= towers[minIndex]) {
+        break;
+      }
+      towers[maxIndex]--;
+      towers[minIndex]++;
+      operations[i][0] = maxIndex + 1;
+      operations[i][1] = minIndex + 1;
+    }
+    int max = towers[maxIndex];
+    int min = towers[minIndex];
+    System.out.println(max - min + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_diff = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+      max_diff = Math.max(max_diff, towers[max_i] - towers[min_i]);
+    }
+    System.out.println(max_diff + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_diff = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i] + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i]);
+    System.out.println(operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] towers = new int[n];
+        for (int i = 0; i < n; i++) {
+            towers[i] = sc.nextInt();
+        }
+        int min_i = 0;
+        int max_i = n - 1;
+        int[][] operations = new int[k][2];
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < n; j++) {
+                if (towers[j] > towers[max_i]) {
+                    max_i = j;
+                }
+                if (towers[j] < towers[min_i]) {
+                    min_i = j;
+                }
+            }
+            if (towers[max_i] - 1 <= towers[min_i]) {
+                break;
+            }
+            towers[max_i]--;
+            towers[min_i]++;
+            operations[i][0] = max_i + 1;
+            operations[i][1] = min_i + 1;
+        }
+        int max_i = 0;
+        int min_i = 0;
+        for (int i = 0; i < n; i++) {
+            if (towers[i] > towers[max_i]) {
+                max_i = i;
+            }
+            if (towers[i] < towers[min_i]) {
+                min_i = i;
+            }
+        }
+        System.out.println(towers[max_i] - towers[min_i] + " " + operations.length);
+        for (int[] op : operations) {
+            System.out.println(op[0] + " " + op[1]);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_i = 0;
+    int min_i = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i]);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int minIndex = 0;
+    int maxIndex = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[maxIndex]) {
+          maxIndex = j;
+        }
+        if (towers[j] < towers[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (towers[maxIndex] - 1 <= towers[minIndex]) {
+        break;
+      }
+      towers[maxIndex]--;
+      towers[minIndex]++;
+      operations[i][0] = maxIndex + 1;
+      operations[i][1] = minIndex + 1;
+    }
+    int max = 0;
+    int min = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max]) {
+        max = i;
+      }
+      if (towers[i] < towers[min]) {
+        min = i;
+      }
+    }
+    System.out.println(towers[max] - towers[min] + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int minIndex = 0;
+    int maxIndex = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[maxIndex]) {
+          maxIndex = j;
+        }
+        if (towers[j] < towers[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (towers[maxIndex] - 1 <= towers[minIndex]) {
+        break;
+      }
+      towers[maxIndex] -= 1;
+      towers[minIndex] += 1;
+      operations[i][0] = maxIndex + 1;
+      operations[i][1] = minIndex + 1;
+    }
+    int min = towers[maxIndex];
+    int max = towers[minIndex];
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[maxIndex]) {
+        maxIndex = i;
+      }
+      if (towers[i] < towers[minIndex]) {
+        minIndex = i;
+      }
+    }
+    System.out.println(max - min);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i]);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] towers = new int[n];
+        for (int i = 0; i < n; i++) {
+            towers[i] = scanner.nextInt();
+        }
+        int min_i = 0;
+        int max_i = n - 1;
+        int[][] operations = new int[k][2];
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < n; j++) {
+                if (towers[j] > towers[max_i]) {
+                    max_i = j;
+                }
+                if (towers[j] < towers[min_i]) {
+                    min_i = j;
+                }
+            }
+            if (towers[max_i] - 1 <= towers[min_i]) {
+                break;
+            }
+            towers[max_i]--;
+            towers[min_i]++;
+            operations[i][0] = max_i + 1;
+            operations[i][1] = min_i + 1;
+        }
+        int max_i = 0;
+        int min_i = 0;
+        for (int i = 0; i < n; i++) {
+            if (towers[i] > towers[max_i]) {
+                max_i = i;
+            }
+            if (towers[i] < towers[min_i]) {
+                min_i = i;
+            }
+        }
+        System.out.println(towers[max_i] - towers[min_i]);
+        for (int[] op : operations) {
+            System.out.println(op[0] + " " + op[1]);
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_i = 0;
+    int min_i = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i]);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] towers = new int[n];
+        for (int i = 0; i < n; i++) {
+            towers[i] = scanner.nextInt();
+        }
+        int minIndex = 0;
+        int maxIndex = n - 1;
+        int[][] operations = new int[k][2];
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < n; j++) {
+                if (towers[j] > towers[maxIndex]) {
+                    maxIndex = j;
+                }
+                if (towers[j] < towers[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            if (towers[maxIndex] - 1 <= towers[minIndex]) {
+                break;
+            }
+            towers[maxIndex]--;
+            towers[minIndex]++;
+            operations[i] = new int[] { maxIndex + 1, minIndex + 1 };
+        }
+        int max = towers[maxIndex];
+        int min = towers[minIndex];
+        System.out.println(max - min + " " + operations.length);
+        for (int[] op : operations) {
+            System.out.println(op[0] + " " + op[1]);
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i]);
+    System.out.println(operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    int max_i_new = 0;
+    int min_i_new = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i_new]) {
+        max_i_new = i;
+      }
+      if (towers[i] < towers[min_i_new]) {
+        min_i_new = i;
+      }
+    }
+    System.out.println(towers[max_i_new] - towers[min_i_new] + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int k = sc.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = sc.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    ArrayList<int[]> operations = new ArrayList<>();
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations.add(new int[] { max_i + 1, min_i + 1 });
+    }
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i] + " " + operations.size());
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int min_i = 0;
+    int max_i = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[max_i]) {
+          max_i = j;
+        }
+        if (towers[j] < towers[min_i]) {
+          min_i = j;
+        }
+      }
+      if (towers[max_i] - 1 <= towers[min_i]) {
+        break;
+      }
+      towers[max_i] -= 1;
+      towers[min_i] += 1;
+      operations[i][0] = max_i + 1;
+      operations[i][1] = min_i + 1;
+    }
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[max_i]) {
+        max_i = i;
+      }
+      if (towers[i] < towers[min_i]) {
+        min_i = i;
+      }
+    }
+    System.out.println(towers[max_i] - towers[min_i] + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int k = scanner.nextInt();
+    int[] towers = new int[n];
+    for (int i = 0; i < n; i++) {
+      towers[i] = scanner.nextInt();
+    }
+    int minIndex = 0;
+    int maxIndex = n - 1;
+    int[][] operations = new int[k][2];
+    for (int i = 0; i < k; i++) {
+      for (int j = 0; j < n; j++) {
+        if (towers[j] > towers[maxIndex]) {
+          maxIndex = j;
+        }
+        if (towers[j] < towers[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (towers[maxIndex] - 1 <= towers[minIndex]) {
+        break;
+      }
+      towers[maxIndex]--;
+      towers[minIndex]++;
+      operations[i][0] = maxIndex + 1;
+      operations[i][1] = minIndex + 1;
+    }
+    int maxTower = 0;
+    int minTower = 0;
+    for (int i = 0; i < n; i++) {
+      if (towers[i] > towers[maxTower]) {
+        maxTower = i;
+      }
+      if (towers[i] < towers[minTower]) {
+        minTower = i;
+      }
+    }
+    System.out.println(towers[maxTower] - towers[minTower] + " " + operations.length);
+    for (int[] op : operations) {
+      System.out.println(op[0] + " " + op[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] towers = new int[n];
+        for (int i = 0; i < n; i++) {
+            towers[i] = scanner.nextInt();
+        }
+        int minIndex = 0;
+        int maxIndex = n - 1;
+        int[][] operations = new int[k][2];
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < n; j++) {
+                if (towers[j] > towers[maxIndex]) {
+                    maxIndex = j;
+                }
+                if (towers[j] < towers[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            if (towers[maxIndex] - 1 <= towers[minIndex]) {
+                break;
+            }
+            towers[maxIndex] -= 1;
+            towers[minIndex] += 1;
+            operations[i][0] = maxIndex + 1;
+            operations[i][1] = minIndex + 1;
+        }
+        int max = towers[maxIndex];
+        int min = towers[minIndex];
+        System.out.println(max - min + " " + operations.length);
+        for (int[] op : operations) {
+            System.out.println(op[0] + " " + op[1]);
+        }
+    }
+}
+[/JAVA]
+======

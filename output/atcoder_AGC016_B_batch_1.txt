@@ -1,0 +1,4992 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    if (a.equals(Collections.nCopies(n, 1))) {
+      System.out.println("Yes");
+    } else if (a.equals(Collections.nCopies(n, n - 1))) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> aSet = new HashSet<>(a);
+      if (aSet.size() == 1) {
+        int aMax = a.get(0);
+        int cnt = n - aMax + 1;
+        if (n <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (aSet.size() == 2) {
+        Collections.sort(a);
+        int aMax = a.get(-1);
+        int aMin = a.get(0);
+        if (aMin + 1 != aMax) {
+          System.out.println("No");
+        } else {
+          int lower = n - aMax + 1;
+          int upper = 2 * lower - 2;
+          int c = Collections.frequency(a, aMax);
+          if (lower <= c && c <= upper) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (A == null || A.length == 0) {
+            System.out.println("No");
+            return;
+        }
+        if (A == new int[] {1} || A == new int[] {N - 1}) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            List<Integer> Alist = Arrays.stream(A).boxed().collect(Collectors.toList());
+            int cnt = Collections.frequency(Alist, Amax);
+            if (lower <= cnt && cnt <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else {
+            System.out.println("No");
+            return;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Collections.reverseOrder());
+            int Amax = A.get(0);
+            int Amin = A.get(N - 1);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Collections.sort(A);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = A.stream().collect(Collectors.toMap(e -> e, e -> 1, Integer::sum));
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(a, new int[n])) {
+            System.out.println("Yes");
+            return;
+        }
+        if (Arrays.equals(a, new int[n - 1])) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i : a) {
+            set.add(i);
+        }
+        if (set.size() == 1) {
+            int max = a[0];
+            int cnt = n - max + 1;
+            if (n <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (set.size() == 2) {
+            Arrays.sort(a);
+            int max = a[a.length - 1];
+            int min = a[0];
+            if (min + 1 != max) {
+                System.out.println("No");
+                return;
+            }
+            int lower = n - max + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> counter = new HashMap<>();
+            for (int i : a) {
+                counter.put(i, counter.getOrDefault(i, 0) + 1);
+            }
+            if (lower <= counter.get(max) && counter.get(max) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else {
+            System.out.println("No");
+            return;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Long> c = A.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    int N = in.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = in.nextInt();
+    }
+
+    if (A == [1] * N) {
+      System.out.println("Yes");
+    } else if (A == [N - 1] * N) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+      if (Aset.size() == 1) {
+        int Amax = A[0];
+        int cnt = N - Amax + 1;
+        if (N <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (Aset.size() == 2) {
+        Arrays.sort(A);
+        int Amax = A[N - 1];
+        int Amin = A[0];
+        if (Amin + 1 != Amax) {
+          System.out.println("No");
+        } else {
+          int lower = N - Amax + 1;
+          int upper = 2 * lower - 2;
+          Map<Integer, Integer> c = new HashMap<>();
+          for (int i = 0; i < N; i++) {
+            c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+          }
+          if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(N - 1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int c = Collections.frequency(A, Amax);
+                    if (lower <= c && c <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(N - 1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int[] c = new int[Amax + 1];
+                    for (int i = 0; i < N; i++) {
+                        c[A.get(i)]++;
+                    }
+                    if (lower <= c[Amax] <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        if (A == null || A.length == 0) {
+            System.out.println("No");
+            return;
+        }
+
+        if (A.length == 1) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.length == 2) {
+            if (A[0] == A[1]) {
+                System.out.println("Yes");
+                return;
+            }
+            System.out.println("No");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A.length);
+        for (int i = 0; i < A.length; i++) {
+            Aset.add(A[i]);
+        }
+
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            }
+            System.out.println("No");
+            return;
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[A.length - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < A.length; i++) {
+                if (!c.containsKey(A[i])) {
+                    c.put(A[i], 1);
+                } else {
+                    c.put
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+            }
+            if (lower <= c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int[] count = new int[N];
+                    for (int i = 0; i < N; i++) {
+                        if (A[i] == Amax) {
+                            count[i]++;
+                        }
+                    }
+                    if (lower <= count[Amax] <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[-1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        if (c.containsKey(A[i])) {
+                            c.put(A[i], c.get(A[i]) + 1);
+                        } else {
+                            c.put(A[i], 1);
+                        }
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            Aset.add(A[i]);
+        }
+
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A[-1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+            }
+
+            if (lower <= c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = in.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(in.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Integer::compareTo);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int[] counts = new int[Amax - Amin + 1];
+                    for (int i = 0; i < A.size(); i++) {
+                        counts[A.get(i) - Amin]++;
+                    }
+                    if (lower <= counts[Amax - Amin] <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+        } else if (Arrays.equals(A, new int[N - 1])) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[A.length - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < A.length; i++) {
+                        c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    if (A == [1] * N) {
+      System.out.println("Yes");
+      return;
+    }
+    if (A == [N - 1] * N) {
+      System.out.println("Yes");
+      return;
+    }
+    Set<Integer> Aset = new HashSet<>();
+    for (int i : A) {
+      Aset.add(i);
+    }
+    if (Aset.size() == 1) {
+      int Amax = A[0];
+      int cnt = N - Amax + 1;
+      if (N <= 2 * cnt - 2) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    if (Aset.size() == 2) {
+      Arrays.sort(A);
+      int Amax = A[A.length - 1];
+      int Amin = A[0];
+      if (Amin + 1 != Amax) {
+        System.out.println("No");
+        return;
+      }
+      int lower = N - Amax + 1;
+      int upper = 2 * lower - 2;
+      Map<Integer, Integer> c = new HashMap<>();
+      for (int i : A) {
+        c.put(i, c.getOrDefault(i, 0) + 1);
+      }
+      if (lower <= c.get(Amax) <= upper) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    System.out.println("No");
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(N - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                if (c.containsKey(A.get(i))) {
+                    c.put(A.get(i), c.get(A.get(i)) + 1);
+                } else {
+                    c.put(A.get(i), 1);
+                }
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i : A) {
+                        if (c.containsKey(i)) {
+                            c.put(i, c.get(i) + 1);
+                        } else {
+                            c.put(i, 1);
+                        }
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Collections.sort(A);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int c = A.stream().collect(Collectors.groupingBy(i -> i)).get(Amax).size();
+                    if (lower <= c && c <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+        } else if (Arrays.equals(A, new int[N - 1])) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>();
+            for (int a : A) {
+                Aset.add(a);
+            }
+            if (Aset.size() == 1) {
+                int Amax = Collections.max(Aset);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[A.length - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int a : A) {
+                        c.put(a, c.getOrDefault(a, 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[-1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    List<Integer> c = Arrays.stream(A).boxed().collect(Collectors.toList());
+                    if (lower <= Collections.frequency(c, Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int cnt = Collections.frequency(A, Amax);
+            if (lower <= cnt && cnt <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else if (Aset.size() == 2) {
+            Collections.sort(A);
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = Collections.frequency(A, Amax);
+            if (lower <= c && c <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        } else {
+            System.out.println("No");
+            return;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Collections.reverseOrder());
+            int Amax = A.get(0);
+            int Amin = A.get(N - 1);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = Collections.frequency(A, Amax);
+            if (lower <= c && c <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(List.of(1).repeat(N))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(List.of(N - 1).repeat(N))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Integer::compare);
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+
+    if (A.equals(Collections.nCopies(N, 1))) {
+      System.out.println("Yes");
+      return;
+    }
+    if (A.equals(Collections.nCopies(N, N - 1))) {
+      System.out.println("Yes");
+      return;
+    }
+
+    Set<Integer> Aset = new HashSet<>(A);
+    if (Aset.size() == 1) {
+      int Amax = A.get(0);
+      int cnt = N - Amax + 1;
+      if (N <= 2 * cnt - 2) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    if (Aset.size() == 2) {
+      A.sort(Integer::compareTo);
+      int Amax = A.get(N - 1);
+      int Amin = A.get(0);
+      if (Amin + 1 != Amax) {
+        System.out.println("No");
+        return;
+      }
+      int lower = N - Amax + 1;
+      int upper = 2 * lower - 2;
+      int c = Collections.frequency(A, Amax);
+      if (lower <= c && c <= upper) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    System.out.println("No");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i : A) {
+                        c.put(i, c.getOrDefault(i, 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Long> c = A.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    if (Arrays.equals(A, new int[N])) {
+      System.out.println("Yes");
+      return;
+    }
+
+    if (Arrays.equals(A, new int[N])) {
+      System.out.println("Yes");
+      return;
+    }
+
+    Set<Integer> Aset = new HashSet<>();
+    for (int i : A) {
+      Aset.add(i);
+    }
+
+    if (Aset.size() == 1) {
+      int Amax = A[0];
+      int cnt = N - Amax + 1;
+      if (N <= 2 * cnt - 2) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+
+    if (Aset.size() == 2) {
+      Arrays.sort(A);
+      int Amax = A[N - 1];
+      int Amin = A[0];
+      if (Amin + 1 != Amax) {
+        System.out.println("No");
+        return;
+      }
+
+      int lower = N - Amax + 1;
+      int upper = 2 * lower - 2;
+      Map<Integer, Integer> c = new HashMap<>();
+      for (int i : A) {
+        c.put(i, c.getOrDefault(i, 0) + 1);
+      }
+
+      if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+
+    System.out.println("No");
+  }
+}
+
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (A == null || A.length == 0) {
+            System.out.println("No");
+            return;
+        }
+
+        if (A.length == 1) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.length == 2) {
+            if (A[0] == A[1]) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<Integer>();
+        for (int i = 0; i < A.length; i++) {
+            Aset.add(A[i]);
+        }
+
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+            return;
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[A.length - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            List<Integer> c = new ArrayList<Integer>();
+            for (int i = 0; i < A.length; i++) {
+                c.add(A[i]);
+            }
+            Collections.sort(c);
+            if (lower <= c.get(Amax) <= upper) {
+                System.out.println("Yes");
+            } else {
+                System.out
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    if (Arrays.equals(A, new int[N])) {
+      System.out.println("Yes");
+    } else if (Arrays.equals(A, new int[N - 1])) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+      if (Aset.size() == 1) {
+        int Amax = A[0];
+        int cnt = N - Amax + 1;
+        if (N <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (Aset.size() == 2) {
+        Arrays.sort(A);
+        int Amax = A[A.length - 1];
+        int Amin = A[0];
+        if (Amin + 1 != Amax) {
+          System.out.println("No");
+        } else {
+          int lower = N - Amax + 1;
+          int upper = 2 * lower - 2;
+          List<Integer> B = Arrays.stream(A).boxed().collect(Collectors.toList());
+          List<Integer> C = B.subList(lower, upper);
+          if (C.size() == 0) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = Collections.frequency(Arrays.asList(A), Amax);
+            if (lower <= c <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Integer::compare);
+                int Amax = A.get(N - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Long> c = A.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+        } else if (Arrays.equals(A, new int[N - 1])) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>();
+            for (int i = 0; i < N; i++) {
+                Aset.add(A[i]);
+            }
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    List<Integer> Alist = new ArrayList<>();
+                    for (int i = 0; i < N; i++) {
+                        Alist.add(A[i]);
+                    }
+                    Collections.sort(Alist);
+                    int c = Collections.frequency(Alist, Amax);
+                    if (lower <= c && c <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[-1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new TreeSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Comparator.naturalOrder());
+                int Amax = A.get(N - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int cnt = Collections.frequency(A, Amax);
+                    if (lower <= cnt && cnt <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    if (A == [1] * N) {
+      System.out.println("Yes");
+    } else if (A == [N - 1] * N) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> Aset = new TreeSet<Integer>(Arrays.stream(A).boxed().collect(Collectors.toList()));
+      if (Aset.size() == 1) {
+        int Amax = A[0];
+        int cnt = N - Amax + 1;
+        if (N <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (Aset.size() == 2) {
+        Arrays.sort(A);
+        int Amax = A[A.length - 1];
+        int Amin = A[0];
+        if (Amin + 1 != Amax) {
+          System.out.println("No");
+        } else {
+          int lower = N - Amax + 1;
+          int upper = 2 * lower - 2;
+          int c = A.length - (int) A.stream().filter(x -> x == Amax).count();
+          if (lower <= c && c <= upper) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+
+        if (a.equals(Collections.nCopies(n, 1))) {
+            System.out.println("Yes");
+        } else if (a.equals(Collections.nCopies(n, n - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> aSet = new HashSet<>(a);
+            if (aSet.size() == 1) {
+                int aMax = a.get(0);
+                int cnt = n - aMax + 1;
+                if (n <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (aSet.size() == 2) {
+                a.sort(Integer::compare);
+                int aMax = a.get(n - 1);
+                int aMin = a.get(0);
+                if (aMin + 1 != aMax) {
+                    System.out.println("No");
+                } else {
+                    int lower = n - aMax + 1;
+                    int upper = 2 * lower - 2;
+                    int aMaxCount = Collections.frequency(a, aMax);
+                    if (lower <= aMaxCount && aMaxCount <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    if (A == [1] * N) {
+      System.out.println("Yes");
+      return;
+    }
+    if (A == [N - 1] * N) {
+      System.out.println("Yes");
+      return;
+    }
+    Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+    if (Aset.size() == 1) {
+      int Amax = A[0];
+      int cnt = N - Amax + 1;
+      if (N <= 2 * cnt - 2) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    if (Aset.size() == 2) {
+      Arrays.sort(A);
+      int Amax = A[N - 1];
+      int Amin = A[0];
+      if (Amin + 1 != Amax) {
+        System.out.println("No");
+        return;
+      }
+      int lower = N - Amax + 1;
+      int upper = 2 * lower - 2;
+      int cnt = (int) A.stream().filter(x -> x == Amax).count();
+      if (lower <= cnt && cnt <= upper) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    System.out.println("No");
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+        } else if (Arrays.equals(A, new int[N - 1])) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[A.length - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(N - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = A.stream().collect(Collectors.toList()).get(Amax);
+            if (lower <= c <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[-1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+            }
+            if (lower <= c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Collections.reverseOrder());
+            int Amax = A.get(0);
+            int Amin = A.get(1);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Integer::compare);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (A == [1] * N) {
+            return true;
+        }
+        if (A == [N - 1] * N) {
+            return true;
+        }
+
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                return false;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+            }
+            if (lower <= c.get(Amax) <= upper) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        if (A[0] == 1 && A[N - 1] == N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(N);
+        for (int i = 0; i < N; i++) {
+            Aset.add(A[i]);
+        }
+
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            List<Integer> c = new ArrayList<>();
+            for (int i = 0; i < N; i++) {
+                if (A[i] == Amax) {
+                    c.add(A[i]);
+                }
+            }
+
+            if (lower <= c.size() && c.size() <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    List<Integer> c = Arrays.stream(A).boxed().collect(Collectors.toList());
+                    if (lower <= Collections.frequency(c, Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    if (A == [1] * N) {
+      System.out.println("Yes");
+    } else if (A == [N - 1] * N) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> Aset = new HashSet<>();
+      for (int i = 0; i < N; i++) {
+        Aset.add(A[i]);
+      }
+      if (Aset.size() == 1) {
+        int Amax = A[0];
+        int cnt = N - Amax + 1;
+        if (N <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (Aset.size() == 2) {
+        Arrays.sort(A);
+        int Amax = A[N - 1];
+        int Amin = A[0];
+        if (Amin + 1 != Amax) {
+          System.out.println("No");
+        } else {
+          int lower = N - Amax + 1;
+          int upper = 2 * lower - 2;
+          List<Integer> c = new ArrayList<>();
+          for (int i = 0; i < N; i++) {
+            c.add(A[i]);
+          }
+          if (lower <= c.get(Amax) <= upper) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Comparator.naturalOrder());
+                int Amax = A.get(N - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Long> c = A.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+            }
+            if (lower <= c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+        return;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        if (A == [1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A == [N - 1] * N) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[-1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            List<Integer> c = Arrays.stream(A).boxed().collect(Collectors.toList());
+            if (lower <= Collections.frequency(c, Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(N - 1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int[] counts = new int[Amax + 1];
+                    for (int i = 0; i < N; i++) {
+                        counts[A.get(i)]++;
+                    }
+                    if (lower <= counts[Amax] <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                if (c.containsKey(A[i])) {
+                    c.put(A[i], c.get(A[i]) + 1);
+                } else {
+                    c.put(A[i], 1);
+                }
+            }
+
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+            return;
+        }
+
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+}
+[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.Iterator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            A.sort(Comparator.naturalOrder());
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("No");
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (A == null || A.length == 0) {
+            System.out.println("No");
+            return;
+        }
+        if (A.length == 1) {
+            System.out.println("Yes");
+            return;
+        }
+        if (A.length == 2) {
+            if (A[0] == A[1]) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < A.length; i++) {
+            set.add(A[i]);
+        }
+        if (set.size() == 1) {
+            int max = Collections.max(Arrays.asList(A));
+            int cnt = N - max + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (set.size() == 2) {
+            Arrays.sort(A);
+            int max = A[A.length - 1];
+            int min = A[0];
+            if (min + 1 != max) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - max + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < A.length; i++) {
+                if (map.containsKey(A[i])) {
+                    map.put(A[i],
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>();
+            for (int i : A) {
+                Aset.add(i);
+            }
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i : A) {
+                        if (c.containsKey(i)) {
+                            c.put(i, c.get(i) + 1);
+                        } else {
+                            c.put(i, 1);
+                        }
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int c = A.stream().collect(Collectors.toList()).get(Amax);
+                    if (lower <= c && c <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Comparator.naturalOrder());
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < A.size(); i++) {
+                        int count = c.getOrDefault(A.get(i), 0) + 1;
+                        c.put(A.get(i), count);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>();
+            for (int a : A) {
+                Aset.add(a);
+            }
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[-1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int a : A) {
+                        c.put(a, c.getOrDefault(a, 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (A == null || A.length == 0) {
+            System.out.println("No");
+            return;
+        }
+        if (isAllOnes(A)) {
+            System.out.println("Yes");
+            return;
+        }
+        if (isAllButOneOnes(A)) {
+            System.out.println("Yes");
+            return;
+        }
+        if (isAllSame(A)) {
+            System.out.println("Yes");
+            return;
+        }
+        if (isAllButOneSame(A)) {
+            System.out.println("Yes");
+            return;
+        }
+        System.out.println("No");
+    }
+
+    private static boolean isAllOnes(int[] A) {
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isAllButOneOnes(int[] A) {
+        int count = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] == 1) {
+                count++;
+            }
+        }
+        return count == A.length - 1;
+    }
+
+    private static boolean isAllSame(int[] A) {
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] != A[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isAllButOneSame(int[] A) {
+        int count = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] == A[0]) {
+                count++;
+            }
+       
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(IntStream.range(0, N).map(i -> 1).boxed().collect(Collectors.toList()))) {
+            System.out.println("Yes");
+        } else if (A.equals(IntStream.range(0, N).map(i -> N - 1).boxed().collect(Collectors.toList()))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Integer::compareTo);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = A.stream().collect(Collectors.toMap(i -> i, i -> 1, Integer::sum));
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        if (a == new int[] {1} || a == new int[] {n - 1}) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> aSet = new HashSet<>();
+            for (int i : a) {
+                aSet.add(i);
+            }
+            if (aSet.size() == 1) {
+                int aMax = a[0];
+                int cnt = n - aMax + 1;
+                if (n <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (aSet.size() == 2) {
+                Arrays.sort(a);
+                int aMax = a[n - 1];
+                int aMin = a[0];
+                if (aMin + 1 != aMax) {
+                    System.out.println("No");
+                } else {
+                    int lower = n - aMax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i : a) {
+                        c.put(i, c.getOrDefault(i, 0) + 1);
+                    }
+                    if (lower <= c.get(aMax) && c.get(aMax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Integer::compareTo);
+                int Amax = A.get(A.size() - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < A.size(); i++) {
+                        c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        if (A == null) {
+            return;
+        }
+        if (A.length == 1) {
+            return true;
+        }
+        if (A.length == 2) {
+            return true;
+        }
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[A.length - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                return false;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = Collections.frequency(Arrays.asList(A), Amax);
+            if (lower <= c <= upper) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(Collections.reverseOrder());
+            int Amax = A.get(0);
+            int Amin = A.get(1);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                if (c.containsKey(A.get(i))) {
+                    c.put(A.get(i), c.get(A.get(i)) + 1);
+                } else {
+                    c.put(A.get(i), 1);
+                }
+            }
+
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(a, new int[n])) {
+            System.out.println("Yes");
+        } else if (Arrays.equals(a, new int[n - 1])) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> set = new HashSet<>(n);
+            for (int i : a) {
+                set.add(i);
+            }
+            if (set.size() == 1) {
+                int max = Collections.max(Arrays.asList(a));
+                int cnt = n - max + 1;
+                if (n <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (set.size() == 2) {
+                Arrays.sort(a);
+                int max = a[n - 1];
+                int min = a[0];
+                if (min + 1 != max) {
+                    System.out.println("No");
+                } else {
+                    int lower = n - max + 1;
+                    int upper = 2 * lower - 2;
+                    List<Integer> list = new ArrayList<>();
+                    for (int i : a) {
+                        if (i == max) {
+                            list.add(i);
+                        }
+                    }
+                    if (lower <= list.size() && list.size() <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+            return;
+        }
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+            return;
+        }
+        Set<Integer> Aset = new HashSet<Integer>(N);
+        for (int i = 0; i < N; i++) {
+            Aset.add(A[i]);
+        }
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[N - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<Integer, Integer>();
+            for (int i = 0; i < N; i++) {
+                if (c.containsKey(A[i])) {
+                    c.put(A[i], c.get(A[i]) + 1);
+                } else {
+                    c.put(A[i], 1);
+                }
+            }
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    if (A.equals(Collections.nCopies(N, 1))) {
+      System.out.println("Yes");
+    } else if (A.equals(Collections.nCopies(N, N - 1))) {
+      System.out.println("Yes");
+    } else {
+      Set<Integer> Aset = new HashSet<>(A);
+      if (Aset.size() == 1) {
+        int Amax = A.get(0);
+        int cnt = N - Amax + 1;
+        if (N <= 2 * cnt - 2) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
+      } else if (Aset.size() == 2) {
+        A.sort(null);
+        int Amax = A.get(A.size() - 1);
+        int Amin = A.get(0);
+        if (Amin + 1 != Amax) {
+          System.out.println("No");
+        } else {
+          int lower = N - Amax + 1;
+          int upper = 2 * lower - 2;
+          Map<Integer, Integer> c = A.stream().collect(Collectors.toMap(x -> x, x -> 1, Integer::sum));
+          if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+            System.out.println("Yes");
+          } else {
+            System.out.println("No");
+          }
+        }
+      } else {
+        System.out.println("No");
+      }
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Collections.reverseOrder());
+                int Amax = A.get(0);
+                int Amin = A.get(N - 1);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        if (c.containsKey(A.get(i))) {
+                            c.put(A.get(i), c.get(A.get(i)) + 1);
+                        } else {
+                            c.put(A.get(i), 1);
+                        }
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        if (Arrays.equals(A, new int[N])) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (Arrays.equals(A, new int[N - 1])) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+        if (Aset.size() == 1) {
+            int Amax = A[0];
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            Arrays.sort(A);
+            int Amax = A[A.length - 1];
+            int Amin = A[0];
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int c = (int) A.stream().collect(Collectors.groupingBy(i -> i)).get(Amax).size();
+            if (lower <= c && c <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(null);
+            int Amax = A.get(N - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            Map<Integer, Integer> c = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                c.put(A.get(i), c.getOrDefault(A.get(i), 0) + 1);
+            }
+
+            if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+            return;
+        }
+
+        Set<Integer> Aset = new HashSet<>(A);
+        if (Aset.size() == 1) {
+            int Amax = A.get(0);
+            int cnt = N - Amax + 1;
+            if (N <= 2 * cnt - 2) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (Aset.size() == 2) {
+            A.sort(null);
+            int Amax = A.get(A.size() - 1);
+            int Amin = A.get(0);
+            if (Amin + 1 != Amax) {
+                System.out.println("No");
+                return;
+            }
+
+            int lower = N - Amax + 1;
+            int upper = 2 * lower - 2;
+            int cnt = (int) A.stream().collect(Collectors.counting());
+            if (lower <= cnt && cnt <= upper) {
+                System.out.println("Yes");
+                return;
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        System.out.println("No");
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Comparator.naturalOrder());
+                int Amax = A.get(N - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    int[] counts = Arrays.stream(A).collect(Collectors.groupingBy(a -> a, Collectors.counting()));
+                    if (lower <= counts[Amax] <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        if (A.equals(Collections.nCopies(N, 1))) {
+            System.out.println("Yes");
+        } else if (A.equals(Collections.nCopies(N, N - 1))) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(A);
+            if (Aset.size() == 1) {
+                int Amax = A.get(0);
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                A.sort(Comparator.naturalOrder());
+                int Amax = A.get(N - 1);
+                int Amin = A.get(0);
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        if (c.containsKey(A.get(i))) {
+                            c.put(A.get(i), c.get(A.get(i)) + 1);
+                        } else {
+                            c.put(A.get(i), 1);
+                        }
+                    }
+                    if (lower <= c.get(Amax) && c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        if (A == [1] * N) {
+            System.out.println("Yes");
+        } else if (A == [N - 1] * N) {
+            System.out.println("Yes");
+        } else {
+            Set<Integer> Aset = new HashSet<>(Arrays.asList(A));
+            if (Aset.size() == 1) {
+                int Amax = A[0];
+                int cnt = N - Amax + 1;
+                if (N <= 2 * cnt - 2) {
+                    System.out.println("Yes");
+                } else {
+                    System.out.println("No");
+                }
+            } else if (Aset.size() == 2) {
+                Arrays.sort(A);
+                int Amax = A[N - 1];
+                int Amin = A[0];
+                if (Amin + 1 != Amax) {
+                    System.out.println("No");
+                } else {
+                    int lower = N - Amax + 1;
+                    int upper = 2 * lower - 2;
+                    Map<Integer, Integer> c = new HashMap<>();
+                    for (int i = 0; i < N; i++) {
+                        c.put(A[i], c.getOrDefault(A[i], 0) + 1);
+                    }
+                    if (lower <= c.get(Amax) <= upper) {
+                        System.out.println("Yes");
+                    } else {
+                        System.out.println("No");
+                    }
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+
+    if (A.equals(Collections.nCopies(N, 1))) {
+      System.out.println("Yes");
+      return;
+    }
+    if (A.equals(Collections.nCopies(N, N - 1))) {
+      System.out.println("Yes");
+      return;
+    }
+
+    Set<Integer> Aset = new HashSet<>(A);
+    if (Aset.size() == 1) {
+      int Amax = A.get(0);
+      int cnt = N - Amax + 1;
+      if (N <= 2 * cnt - 2) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    if (Aset.size() == 2) {
+      Collections.sort(A);
+      int Amax = A.get(A.size() - 1);
+      int Amin = A.get(0);
+      if (Amin + 1 != Amax) {
+        System.out.println("No");
+        return;
+      }
+      int lower = N - Amax + 1;
+      int upper = 2 * lower - 2;
+      int cnt = Collections.frequency(A, Amax);
+      if (lower <= cnt && cnt <= upper) {
+        System.out.println("Yes");
+        return;
+      } else {
+        System.out.println("No");
+        return;
+      }
+    }
+    System.out.println("No");
+  }
+}
+[/JAVA]
+======

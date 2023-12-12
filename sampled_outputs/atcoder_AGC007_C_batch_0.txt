@@ -1,0 +1,470 @@
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+    public static void main(String[] args) {
+        MathContext mc = new MathContext(200);
+        BigDecimal n = new BigDecimal(args[0]);
+        BigDecimal d = new BigDecimal(args[1]);
+        BigDecimal x = new BigDecimal(args[2]);
+        BigDecimal ans = BigDecimal.ZERO;
+        for (int i = 1; i <= n.intValue(); i++) {
+            BigDecimal iBigDecimal = new BigDecimal(i);
+            ans = ans.add(new BigDecimal(n.subtract(iBigDecimal).add(BigDecimal.ONE).intValue()).divide(iBigDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE)).divide(new BigDecimal("2"), mc)))));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext context = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iBigDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(
+          new BigDecimal(String.valueOf(n.intValue() - i + 1))
+              .divide(iBigDecimal, context)
+              .multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), context)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0], mc);
+    BigDecimal d = new BigDecimal(args[1], mc);
+    BigDecimal x = new BigDecimal(args[2], mc);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal num = new BigDecimal(String.valueOf(i), mc);
+      BigDecimal denom = new BigDecimal(String.valueOf(i), mc);
+      BigDecimal term = num.divide(denom, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1), mc).divide(new BigDecimal("2"), mc))), mc);
+      ans = ans.add(term);
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iBig = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iBig, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It uses the `java.math.BigDecimal` class to represent the numbers with a high level of precision, and the `java.math.MathContext` class to specify the precision of the calculations. The `main` method takes the input values as command-line arguments and performs the same calculations as the Python code. The output is printed to the console.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    BigDecimal n = new BigDecimal(scanner.next());
+    BigDecimal d = new BigDecimal(scanner.next());
+    BigDecimal x = new BigDecimal(scanner.next());
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iDecimal, MathContext.DECIMAL128).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), MathContext.DECIMAL128)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+In this solution, we first import the necessary libraries for BigDecimal and MathContext. We then create a Scanner object to read input from the user.
+
+Next, we declare four BigDecimal variables: n, d, x, and ans. We initialize the first three variables with the user input, and the last variable with BigDecimal.ZERO.
+
+We then use a for loop to iterate from 1 to n, where n is the user input. Inside the loop, we declare a new BigDecimal variable iDecimal, which is initialized with the current value of i. We then use the divide and multiply methods to calculate the value of ans for the current iteration.
+
+Finally, we print the value of ans to the console.
+
+Note that we use the MathContext.DECIMAL128 constant to specify the precision of the calculations. This constant specifies that we want the calculations to be performed with a precision of 128 digits.
+
+Also, we use the String.valueOf() method to convert the integer values to strings before passing them to the BigDecimal constructor. This is necessary because the BigDecimal constructor takes a string as an argument, and we need to convert the integer values to strings before passing them to the constructor.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.subtract(new BigDecimal(String.valueOf(i))).add(BigDecimal.ONE).intValue()))
+          .divide(iDecimal, mc)
+          .multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE).intValue()))))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0], mc);
+    BigDecimal d = new BigDecimal(args[1], mc);
+    BigDecimal x = new BigDecimal(args[2], mc);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iBig = new BigDecimal(String.valueOf(i), mc);
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iBig, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1), mc).divide(new BigDecimal("2"), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code to the Python code you provided. The `MathContext` class is used to specify the precision of the calculations, and the `BigDecimal` class is used to perform the calculations with the specified precision. The `String.valueOf()` method is used to convert the `int` values to `String` values, which are then used to create `BigDecimal` objects. The `add()`, `divide()`, and `multiply()` methods are used to perform the calculations. Finally, the `System.out.println()` method is used to print the result.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0], mc);
+    BigDecimal d = new BigDecimal(args[1], mc);
+    BigDecimal x = new BigDecimal(args[2], mc);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iBig = new BigDecimal(i, mc);
+      ans = ans.add(new BigDecimal(n.subtract(iBig).add(BigDecimal.ONE).toString(), mc)
+          .divide(iBig, mc)
+          .multiply(d.add(x.multiply(new BigDecimal(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE).toString(), mc).divide(new BigDecimal("2"), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0], mc);
+    BigDecimal d = new BigDecimal(args[1], mc);
+    BigDecimal x = new BigDecimal(args[2], mc);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i), mc);
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1), mc)
+          .divide(iDecimal, mc)
+          .multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1), mc).divide(new BigDecimal("2"), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `BigDecimal` class from the `java.math` package to represent the numbers with a high precision. The `MathContext` class is used to set the precision of the calculations to 200 digits.
+
+The `main` method takes an array of strings as input, which are then converted to `BigDecimal` objects using the `new BigDecimal(String, MathContext)` constructor. The `ans` variable is initialized to 0 and then updated in the loop using the same formula as the Python code. Finally, the result is printed to the console.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+    public static void main(String[] args) {
+        MathContext mc = new MathContext(200);
+        BigDecimal n = new BigDecimal(args[0]);
+        BigDecimal d = new BigDecimal(args[1]);
+        BigDecimal x = new BigDecimal(args[2]);
+        BigDecimal ans = BigDecimal.ZERO;
+
+        for (int i = 1; i <= n.intValue(); i++) {
+            BigDecimal iBigDecimal = new BigDecimal(String.valueOf(i));
+            ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iBigDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    BigDecimal n = new BigDecimal(scanner.next());
+    BigDecimal d = new BigDecimal(scanner.next());
+    BigDecimal x = new BigDecimal(scanner.next());
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(
+          new BigDecimal(String.valueOf(n.intValue() - i + 1))
+              .divide(iDecimal, MathContext.DECIMAL128)
+              .multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), MathContext.DECIMAL128)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. It uses the `java.math.BigDecimal` class to represent the numbers with high precision, and the `java.util.Scanner` class to read the input from the user. The `MathContext` class is used to set the precision of the calculations. The `String.valueOf()` method is used to convert the `int` values to `String` values, which are then passed to the `BigDecimal` constructor to create the `BigDecimal` objects. The `add()`, `divide()`, `multiply()`, and `subtract()` methods are used to perform the calculations. Finally, the `System.out.println()` method is used to print the result.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+    public static void main(String[] args) {
+        MathContext mc = new MathContext(200);
+        BigDecimal n = new BigDecimal(args[0], mc);
+        BigDecimal d = new BigDecimal(args[1], mc);
+        BigDecimal x = new BigDecimal(args[2], mc);
+        BigDecimal ans = BigDecimal.ZERO;
+
+        for (int i = 1; i <= n.intValue(); i++) {
+            BigDecimal iBig = new BigDecimal(String.valueOf(i), mc);
+            ans = ans.add(iBig.subtract(new BigDecimal(String.valueOf(n.intValue() - i + 1), mc)).divide(iBig, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1), mc).divide(new BigDecimal("2"), mc)))));
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iBig = new BigDecimal(i);
+      ans = ans.add(new BigDecimal(n.subtract(iBig).add(BigDecimal.ONE)).divide(iBig, mc).multiply(d.add(x.multiply(new BigDecimal(n.multiply(BigDecimal.valueOf(2)).subtract(BigDecimal.ONE)).divide(BigDecimal.valueOf(2), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+
+This is a direct translation of the Python code to Java, with the following changes:
+
+* The `Decimal` class in Python is replaced with the `BigDecimal` class in Java.
+* The `getcontext` function in Python is replaced with the `MathContext` class in Java, which is used to specify the precision of the calculations.
+* The `map` function in Python is replaced with a for loop in Java, which iterates over the input array and performs the necessary calculations.
+* The `print` function in Python is replaced with a `System.out.println` statement in Java, which prints the result to the console.
+
+Note that the `BigDecimal` class in Java has a different syntax than the `Decimal` class in Python, and the `MathContext` class is used to specify the precision of the calculations. Additionally, the `for` loop in Java is used instead of the `map` function in Python.
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.subtract(new BigDecimal(String.valueOf(i))).add(BigDecimal.ONE).intValue())).divide(iDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE).intValue()))))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0], mc);
+    BigDecimal d = new BigDecimal(args[1], mc);
+    BigDecimal x = new BigDecimal(args[2], mc);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal i = new BigDecimal(i, mc);
+      ans = ans.add(n.subtract(i).add(BigDecimal.ONE).divide(i, mc).multiply(d.add(x.multiply(new BigDecimal(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE), mc).divide(new BigDecimal("2"), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.subtract(new BigDecimal(String.valueOf(i))).add(BigDecimal.ONE))).divide(iDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.multiply(new BigDecimal("2")).subtract(BigDecimal.ONE))).divide(new BigDecimal("2"), mc)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal i = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i.intValue() + 1))
+          .divide(i, mc)
+          .multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+public class Solution {
+  public static void main(String[] args) {
+    MathContext mc = new MathContext(200);
+    BigDecimal n = new BigDecimal(args[0]);
+    BigDecimal d = new BigDecimal(args[1]);
+    BigDecimal x = new BigDecimal(args[2]);
+    BigDecimal ans = BigDecimal.ZERO;
+    for (int i = 1; i <= n.intValue(); i++) {
+      BigDecimal iDecimal = new BigDecimal(String.valueOf(i));
+      ans = ans.add(new BigDecimal(String.valueOf(n.intValue() - i + 1)).divide(iDecimal, mc).multiply(d.add(x.multiply(new BigDecimal(String.valueOf(n.intValue() * 2 - 1)).divide(new BigDecimal("2"), mc)))));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `java.math.BigDecimal` class to perform arithmetic operations with high precision, and the `java.math.MathContext` class to specify the precision of the calculations. The `main` method takes an array of strings as input, which are then converted to `BigDecimal` objects using the `BigDecimal` constructor. The loop iterates from 1 to `n` and performs the calculation for each iteration, using the `BigDecimal` class to perform the arithmetic operations. Finally, the result is printed to the console using `System.out.println`.
+======

@@ -1,0 +1,577 @@
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int[] l = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+    int s = 0;
+    int count = 0;
+    while (s <= l.length) {
+      s += l[l.length - 1];
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+        int s = 0, count = 0;
+        while (s <= Arrays.stream(l).sum()) {
+            s += l[l.length - 1];
+            count++;
+            l = Arrays.copyOf(l, l.length - 1);
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+This code uses the `java.util.Arrays` class to sort the input array and convert it to an integer array. It then uses a `while` loop to iterate over the array and calculate the sum of the elements. The `Arrays.copyOf` method is used to create a new array with the last element removed, which is used to update the `l` array in each iteration. The `Arrays.stream` method is used to calculate the sum of the elements in the array. The `Integer::parseInt` method is used to convert the input string to an integer.
+
+The `main` method takes an array of strings as input, splits the first string by spaces, maps each element to an integer, sorts the resulting array, and then calculates the sum of the elements. The `count` variable is incremented in each iteration of the `while` loop, and the final value is printed to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] l = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+    int s = 0, count = 0;
+    while (s <= Arrays.stream(l).sum()) {
+      s += l[l.length - 1];
+      count++;
+      l = Arrays.copyOf(l, l.length - 1);
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code provided. It uses the `Scanner` class to read input from the user, the `Arrays` class to sort and manipulate arrays, and the `Integer` class to parse strings to integers. The `sum` method is used to calculate the sum of the elements in the array. The `while` loop iterates until the sum of the elements in the array is greater than or equal to the target sum, and the `count` variable is incremented each time the loop iterates. Finally, the `println` method is used to print the final value of the `count` variable.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    int[] list = Arrays.stream(input.split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+    int sum = Arrays.stream(list).sum();
+    int count = 0;
+    int s = 0;
+    while (s <= sum) {
+      s += list[list.length - 1];
+      count++;
+      list = Arrays.copyOf(list, list.length - 1);
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] input = sc.nextLine().split(" ");
+    int[] l = Arrays.stream(input).mapToInt(Integer::parseInt).sorted().toArray();
+    int s = 0, count = 0;
+    while (s <= Arrays.stream(l).sum()) {
+      s += l[l.length - 1];
+      l = Arrays.copyOf(l, l.length - 1);
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+Explanation:
+
+* `Scanner sc = new Scanner(System.in)`: Creates a new `Scanner` object to read input from the console.
+* `String[] input = sc.nextLine().split(" ")`: Reads a line of input from the console and splits it into an array of strings using the space character as a delimiter.
+* `int[] l = Arrays.stream(input).mapToInt(Integer::parseInt).sorted().toArray()`: Creates an array of integers from the input array, sorts it, and converts it to an array.
+* `int s = 0, count = 0`: Initializes two variables, `s` and `count`, to 0.
+* `while (s <= Arrays.stream(l).sum())`: Loops while the sum of the elements in `l` is greater than or equal to `s`.
+* `s += l[l.length - 1];`: Adds the last element of `l` to `s`.
+* `l = Arrays.copyOf(l, l.length - 1);`: Removes the last element of `l`.
+* `count++;`: Increments `count`.
+* `System.out.println(count);`: Prints the final value of `count`.
+
+Note: The `Arrays.stream(l).sum()` method is used to calculate the sum of the elements in the array `l`. The `Arrays.copyOf(l, l.length - 1)` method is used to create a new array with the last element removed.
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] tokens = input.split(" ");
+        int[] numbers = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i]);
+        }
+        Arrays.sort(numbers);
+        int sum = 0;
+        int count = 0;
+        while (sum <= numbers.length) {
+            sum += numbers[numbers.length - 1];
+            numbers = Arrays.copyOf(numbers, numbers.length - 1);
+            count++;
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code first takes input from the user using the `Scanner` class, then splits the input string into an array of strings using the `split()` method. The `map()` method is used to convert each string to an integer, and the resulting array of integers is sorted using the `Arrays.sort()` method.
+
+The code then iterates over the sorted array of integers, adding each element to a running sum and incrementing a counter variable for each element that is added. The loop continues until the sum exceeds the length of the array, at which point the loop is exited and the final value of the counter variable is printed to the console.
+
+Note that the `Arrays.copyOf()` method is used to create a new array with one fewer element than the original array, which is used to simulate the `pop()` method in Python.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int[] numbers = Arrays.stream(tokens).mapToInt(Integer::parseInt).sorted().toArray();
+    int sum = Arrays.stream(numbers).sum();
+    int count = 0;
+    while (sum > 0) {
+      sum -= numbers[count++];
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. We first create a `Scanner` object to read input from the user, and then use the `split` method to split the input string into an array of strings. We then use the `mapToInt` method to convert each string to an integer, and the `sorted` method to sort the array of integers.
+
+Next, we use the `sum` method to calculate the sum of the array of integers, and we initialize a `count` variable to 0.
+
+We then use a `while` loop to iterate over the array of integers, and for each iteration, we subtract the current integer from the `sum` variable, and increment the `count` variable. We continue this process until the `sum` variable becomes 0 or less.
+
+Finally, we print the `count` variable to the console.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    String[] tokens = input.split(" ");
+    int[] numbers = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      numbers[i] = Integer.parseInt(tokens[i]);
+    }
+    Arrays.sort(numbers);
+    int sum = 0;
+    int count = 0;
+    while (sum <= numbers.length) {
+      sum += numbers[numbers.length - 1];
+      count++;
+      numbers = Arrays.copyOf(numbers, numbers.length - 1);
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This is the Java code that achieves the same functionality as the Python code. It uses the `Scanner` class to read input from the user, the `split()` method to split the input into an array of strings, the `parseInt()` method to convert each string to an integer, the `Arrays.sort()` method to sort the array of integers, and the `Arrays.copyOf()` method to remove the last element of the array. The `while` loop iterates until the sum of the elements in the array is greater than or equal to the length of the array, and the `System.out.println()` method is used to print the final count.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    String[] tokens = input.split(" ");
+    int[] numbers = Arrays.stream(tokens).mapToInt(Integer::parseInt).sorted().toArray();
+    int sum = Arrays.stream(numbers).sum();
+    int count = 0;
+    while (sum > 0) {
+      sum -= numbers[count];
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+Explanation:
+
+1. The `import` statement is used to import the `Scanner` class from the `java.util` package, which is used to read input from the user.
+2. The `String input = sc.nextLine();` statement reads a line of input from the user and stores it in a `String` variable called `input`.
+3. The `String[] tokens = input.split(" ");` statement splits the input string into an array of strings using the space character as the delimiter.
+4. The `int[] numbers = Arrays.stream(tokens).mapToInt(Integer::parseInt).sorted().toArray();` statement converts the array of strings into an array of integers using the `Integer::parseInt` method, and then sorts the array using the `sorted()` method.
+5. The `int sum = Arrays.stream(numbers).sum();` statement calculates the sum of the elements in the `numbers` array using the `sum()` method.
+6. The `int count = 0;` statement initializes a variable called `count` to 0.
+7. The `while (sum > 0) {` statement starts a loop that runs as long as the `sum` variable is greater than 0.
+8. The `sum -= numbers[count];` statement subtracts the element at index `count` from the `sum` variable.
+9. The `count++;` statement increments the `count` variable by 1.
+10. The `System.out.println(count);` statement prints the value of the `count` variable to the console.
+
+Note: The `mapToInt()` method is used to convert the array of strings into an array of integers, and the `sorted()` method is used to sort the array. The `sum()` method is used to calculate the sum of the elements in the array.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split(" ");
+    int[] list = new int[input.length];
+    for (int i = 0; i < input.length; i++) {
+      list[i] = Integer.parseInt(input[i]);
+    }
+    Arrays.sort(list);
+    int sum = 0;
+    int count = 0;
+    while (sum <= list.length) {
+      sum += list[list.length - 1];
+      count++;
+      list = Arrays.copyOf(list, list.length - 1);
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] input = sc.nextLine().split(" ");
+    int[] l = Arrays.stream(input).mapToInt(Integer::parseInt).sorted().toArray();
+    int s = 0;
+    int count = 0;
+    while (s <= l.length) {
+      s += l[l.length - 1];
+      count++;
+      l = Arrays.copyOf(l, l.length - 1);
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It uses the `Scanner` class to read input from the user, the `Arrays` class to sort the input, and the `IntStream` class to map the input to an array of integers. The rest of the code is similar to the Python code, with the exception of the `Arrays.copyOf` method, which is used to remove the last element of the array.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+        int s = 0;
+        int count = 0;
+        while (s <= l.length) {
+            s += l[l.length - 1];
+            count++;
+            l = Arrays.copyOf(l, l.length - 1);
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+Explanation:
+
+1. The `import` statements are used to bring in the necessary classes from the Java standard library.
+2. The `Scanner` class is used to read input from the user.
+3. The `Arrays` class is used to create a sorted array from the input string. The `mapToInt` method is used to convert the input string to an array of integers.
+4. The `sorted` method is used to sort the array in ascending order.
+5. The `while` loop is used to iterate over the array and calculate the sum of the elements.
+6. The `count` variable is used to keep track of the number of elements in the array.
+7. The `System.out.println` statement is used to print the final result.
+
+Note: The `Arrays.copyOf` method is used to create a new array with the same elements as the original array, but with one fewer element at the end. This is used to simulate the `pop` method in Python, which removes the last element from the array.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int[] numbers = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      numbers[i] = Integer.parseInt(tokens[i]);
+    }
+    Arrays.sort(numbers);
+    int sum = 0;
+    int count = 0;
+    while (sum <= numbers.length) {
+      sum += numbers[numbers.length - 1];
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] tokens = input.split(" ");
+    int[] numbers = new int[tokens.length];
+    for (int i = 0; i < tokens.length; i++) {
+      numbers[i] = Integer.parseInt(tokens[i]);
+    }
+    Arrays.sort(numbers);
+    int sum = 0;
+    int count = 0;
+    while (sum <= numbers.length) {
+      sum += numbers[numbers.length - 1];
+      numbers = Arrays.copyOf(numbers, numbers.length - 1);
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+Explanation:
+
+The Python code uses the `input()` function to read a line of input from the user, and then splits the input into a list of integers using the `split()` method. The list is then sorted using the `sorted()` function, and a variable `s` is initialized to 0.
+
+The Python code then uses a `while` loop to iterate over the sorted list of integers, and for each integer `i`, it adds `i` to `s` and increments `count` by 1. The loop continues until `s` is greater than or equal to the sum of all the integers in the list.
+
+In Java, we can achieve the same functionality by using the `Scanner` class to read input from the user, and the `Arrays` class to sort the list of integers. We can then use a `while` loop to iterate over the sorted list of integers, and for each integer `i`, we can add `i` to `s` and increment `count` by 1. The loop continues until `s` is greater than or equal to the sum of all the integers in the list.
+
+The Java code also includes the necessary `import` statements for the `Scanner` and `Arrays` classes. The `Solution` class contains an executable `main()` method that takes a `String[] args` parameter, which is not used in this case.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    List<Integer> list = new ArrayList<>();
+    int sum = 0;
+    int count = 0;
+
+    String[] input = scanner.nextLine().split(" ");
+    for (String s : input) {
+      list.add(Integer.parseInt(s));
+    }
+
+    Collections.sort(list);
+
+    while (sum <= list.size()) {
+      sum += list.remove(list.size() - 1);
+      count++;
+    }
+
+    System.out.println(count);
+  }
+}
+
+[/JAVA]
+
+This is a Java implementation of the Python code. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the list of integers. The `Collections.sort()` method is used to sort the list, and the `remove()` method is used to remove the last element from the list. The `sum` variable is used to keep track of the sum of the elements in the list, and the `count` variable is used to keep track of the number of elements in the list. The `while` loop is used to iterate over the list and remove the last element until the sum of the elements in the list is greater than the size of the list. Finally, the `System.out.println()` method is used to print the result.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] l = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+        int s = 0, count = 0;
+        while (s <= Arrays.stream(l).sum()) {
+            s += l[l.length - 1];
+            count++;
+            l = Arrays.copyOf(l, l.length - 1);
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String[] tokens = input.split(" ");
+        int[] numbers = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i]);
+        }
+        Arrays.sort(numbers);
+        int s = 0;
+        int count = 0;
+        while (s <= numbers.length) {
+            s += numbers[numbers.length - 1];
+            numbers = Arrays.copyOf(numbers, numbers.length - 1);
+            count++;
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+Explanation:
+
+1. The Python code uses the `input()` function to read a line of input from the user. In Java, we can use the `Scanner` class to read input from the user.
+2. The Python code uses the `map()` function to convert each element of the input list to an integer. In Java, we can use the `Integer.parseInt()` method to convert each element of the input array to an integer.
+3. The Python code uses the `sorted()` function to sort the input list. In Java, we can use the `Arrays.sort()` method to sort the input array.
+4. The Python code uses a `while` loop to iterate over the sorted list and calculate the sum of the first `n` elements, where `n` is the length of the list. In Java, we can use a `for` loop to iterate over the sorted array and calculate the sum of the first `n` elements.
+5. The Python code uses the `pop()` method to remove the last element of the list and update the sum. In Java, we can use the `Arrays.copyOf()` method to remove the last element of the array and update the sum.
+6. The Python code uses the `print()` function to print the final sum. In Java, we can use the `System.out.println()` method to print the final sum.
+
+Note: The Java code uses the `Arrays.copyOf()` method to remove the last element of the array and update the sum. This method returns a new array with the same elements as the original array, but with the last element removed. We can then assign the new array to the `numbers` variable to update the sum.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] input = sc.nextLine().split(" ");
+        int[] arr = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
+        Arrays.sort(arr);
+        int s = 0, count = 0;
+        while (s <= arr.length) {
+            s += arr[arr.length - 1];
+            count++;
+            arr = Arrays.copyOfRange(arr, 0, arr.length - 1);
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+Explanation:
+
+1. We first create a `Scanner` object to read input from the console.
+2. We then use the `split()` method to split the input string into an array of strings, where each string represents a number.
+3. We use the `mapToInt()` method to convert the array of strings to an array of integers.
+4. We then sort the array of integers using the `Arrays.sort()` method.
+5. We initialize two variables, `s` and `count`, to keep track of the sum of the first `s` elements and the number of elements in the array, respectively.
+6. We use a `while` loop to iterate over the array of integers, starting from the last element. For each element, we add it to `s` and increment `count`. We also remove the element from the array using the `Arrays.copyOfRange()` method.
+7. We print the value of `count` at the end of the loop.
+
+Note that this code assumes that the input string is a space-separated list of integers. If the input string is a comma-separated list, you will need to modify the `split()` method accordingly.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] input = scanner.nextLine().split(" ");
+        int[] list = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
+        Arrays.sort(list);
+        int sum = 0;
+        int count = 0;
+        while (sum <= list.length) {
+            sum += list[list.length - 1];
+            count++;
+            list = Arrays.copyOf(list, list.length - 1);
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+Explanation:
+
+* `import java.util.Scanner;` - imports the `Scanner` class, which is used to read input from the user.
+* `import java.util.Arrays;` - imports the `Arrays` class, which is used to perform various array-related operations.
+* `class Solution {` - defines a class called `Solution`, which will contain the main method.
+* `public static void main(String[] args) {` - defines the main method, which is the entry point of the program.
+* `Scanner scanner = new Scanner(System.in);` - creates a new `Scanner` object, which is used to read input from the user.
+* `String[] input = scanner.nextLine().split(" ");` - reads a line of input from the user and splits it into an array of strings, using a space as the delimiter.
+* `int[] list = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();` - converts the array of strings into an array of integers, using the `mapToInt` method from the `Arrays` class.
+* `Arrays.sort(list);` - sorts the array of integers in ascending order.
+* `int sum = 0;` - initializes a variable called `sum` to 0.
+* `int count = 0;` - initializes a variable called `count` to 0.
+* `while (sum <= list.length) {` - starts a while loop that will continue until the `sum` is greater than the length of the array.
+* `sum += list[list.length - 1];` - adds the last element of the array to the `sum` variable.
+* `count++;` - increments the `count` variable.
+* `list = Arrays.copyOf(list, list.length - 1);` - creates a new array that is a copy of the original array, but with the last element removed.
+* `System.out.println(count);` - prints the value of the `count` variable to the console.
+* `}` - ends the while loop.
+* `}` - ends the main method.
+* `}` - ends the `Solution` class.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    String[] splitInput = input.split(" ");
+    ArrayList<Integer> list = new ArrayList<>();
+    for (String s : splitInput) {
+      list.add(Integer.parseInt(s));
+    }
+    Collections.sort(list);
+    int sum = 0;
+    int count = 0;
+    while (sum <= list.size()) {
+      sum += list.remove(list.size() - 1);
+      count++;
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This Java code is functionally identical to the Python code. It first prompts the user to input a list of integers separated by spaces. It then converts the input string to an array of integers, sorts the array, and uses a while loop to iterate over the array and remove the largest element while keeping track of the sum of the remaining elements. The loop continues until the sum exceeds the size of the array, at which point it prints the number of elements that were removed.
+======

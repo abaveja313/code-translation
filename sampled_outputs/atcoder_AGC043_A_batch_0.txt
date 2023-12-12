@@ -1,0 +1,913 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    String[][] S = new String[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().split("");
+    }
+    int[] dp = new int[W];
+    if (S[0][0].equals("#")) {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (!S[0][j].equals(S[0][j - 1]) && S[0][j - 1].equals(".")) {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (!S[i][0].equals(S[i - 1][0]) && S[i - 1][0].equals(".")) {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j].equals(S[i][j - 1]) && S[i][j - 1].equals(".")) {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j].equals(S[i - 1][j]) && S[i - 1][j].equals(".")) {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int H = sc.nextInt();
+        int W = sc.nextInt();
+        char[][] S = new char[H][W];
+        for (int i = 0; i < H; i++) {
+            S[i] = sc.nextLine().toCharArray();
+        }
+        int[] dp = new int[W];
+        if (S[0][0] == '#') {
+            dp[0] = 1;
+        }
+        for (int j = 1; j < W; j++) {
+            if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+                dp[j] = dp[j - 1] + 1;
+            } else {
+                dp[j] = dp[j - 1];
+            }
+        }
+        for (int i = 1; i < H; i++) {
+            if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+                dp[0] = dp[0] + 1;
+            }
+            for (int j = 1; j < W; j++) {
+                int hidari = 1;
+                if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+                    hidari = 0;
+                }
+                int ue = 1;
+                if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+                    ue = 0;
+                }
+                dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+            }
+        }
+        System.out.println(dp[W - 1]);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 1;
+        } else {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 1;
+        } else {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      String line = sc.nextLine();
+      for (int j = 0; j < W; j++) {
+        S[i][j] = line.charAt(j);
+      }
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 1;
+        } else {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 1;
+        } else {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 0;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int H = sc.nextInt();
+        int W = sc.nextInt();
+        char[][] S = new char[H][W];
+        for (int i = 0; i < H; i++) {
+            S[i] = sc.nextLine().toCharArray();
+        }
+        int[] dp = new int[W];
+        if (S[0][0] == '#') {
+            dp[0] = 1;
+        }
+        for (int j = 1; j < W; j++) {
+            if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+                dp[j] = dp[j - 1] + 1;
+            } else {
+                dp[j] = dp[j - 1];
+            }
+        }
+        for (int i = 1; i < H; i++) {
+            if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+                dp[0] = dp[0] + 1;
+            }
+            for (int j = 1; j < W; j++) {
+                int hidari = 1;
+                if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+                    hidari = 0;
+                }
+                int ue = 1;
+                if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+                    ue = 0;
+                }
+                dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+            }
+        }
+        System.out.println(dp[W - 1]);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 1;
+        } else {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 1;
+        } else {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      String line = sc.nextLine();
+      for (int j = 0; j < W; j++) {
+        S[i][j] = line.charAt(j);
+      }
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 0;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = dp[j - 1] + 1;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = dp[j] + 1;
+        }
+        dp[j] = Math.min(hidari, ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        int ue = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 0;
+        }
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int H = sc.nextInt();
+    int W = sc.nextInt();
+    char[][] S = new char[H][W];
+    for (int i = 0; i < H; i++) {
+      S[i] = sc.nextLine().toCharArray();
+    }
+    int[] dp = new int[W];
+    if (S[0][0] == '#') {
+      dp[0] = 1;
+    }
+    for (int j = 1; j < W; j++) {
+      if (S[0][j] != S[0][j - 1] && S[0][j - 1] == '.') {
+        dp[j] = dp[j - 1] + 1;
+      } else {
+        dp[j] = dp[j - 1];
+      }
+    }
+    for (int i = 1; i < H; i++) {
+      if (S[i][0] != S[i - 1][0] && S[i - 1][0] == '.') {
+        dp[0] = dp[0] + 1;
+      }
+      for (int j = 1; j < W; j++) {
+        int hidari = 1;
+        if (S[i][j] != S[i][j - 1] && S[i][j - 1] == '.') {
+          hidari = 1;
+        } else {
+          hidari = 0;
+        }
+        int ue = 1;
+        if (S[i][j] != S[i - 1][j] && S[i - 1][j] == '.') {
+          ue = 1;
+        } else {
+          ue = 0;
+        }
+        dp[j] = Math.min(dp[j - 1] + hidari, dp[j] + ue);
+      }
+    }
+    System.out.println(dp[W - 1]);
+  }
+}
+[/JAVA]
+======

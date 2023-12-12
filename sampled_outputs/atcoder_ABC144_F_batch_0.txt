@@ -1,0 +1,979 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  public static int min(int[] v) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < v.length; i++) {
+      if (v[i] < min) {
+        min = v[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = u[i].stream().max(Integer::compare).get();
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + v.stream().min(Integer::compare).get());
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N-1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s-1].add(t-1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N-1] = 0;
+    for (int x = N-1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N-1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int z : u[i]) {
+          b = Math.max(b, q[z]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  public static int min(int[] arr) {
+    int min = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] < min) {
+        min = arr[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = scanner.nextInt();
+      int t = scanner.nextInt();
+      u[s - 1].append(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y = 0; y < u[x].length; y++) {
+        p[u[x][y]] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 2; x >= 0; x--) {
+      for (int y = 0; y < u[x].length; y++) {
+        q[x] += q[u[x][y]] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = max(q[c] for c in u[i]);
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].append(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 2; x >= 0; x--) {
+      q[x] = sum(q[z] for z in u[x]) / u[x].length + 1;
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = max(q[c] for c in u[i]);
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y = 0; y < u[x].length; y++) {
+        p[u[x][y]] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y = 0; y < u[x].length; y++) {
+        q[x] += q[u[x][y]] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int j = 0; j < u[i].length; j++) {
+          if (q[u[i][j]] > b) {
+            b = q[u[i][j]];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          if (q[c] > b) {
+            b = q[c];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].append(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y = 0; y < u[x].length; y++) {
+        p[u[x][y]] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y = 0; y < u[x].length; y++) {
+        q[x] += q[u[x][y]] / u[x].length;
+      }
+      q[x] += 1;
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int j = 0; j < u[i].length; j++) {
+          if (q[u[i][j]] > b) {
+            b = q[u[i][j]];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  private static int min(int[] v) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < v.length; i++) {
+      if (v[i] < min) {
+        min = v[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].append(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y = 0; y < u[x].length; y++) {
+        p[u[x][y]] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y = 0; y < u[x].length; y++) {
+        q[x] += q[u[x][y]] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int j = 0; j < u[i].length; j++) {
+          if (q[u[i][j]] > b) {
+            b = q[u[i][j]];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 2; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int z : u[i]) {
+          if (q[z] > b) {
+            b = q[z];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+  
+  public static int min(int[] v) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < v.length; i++) {
+      if (v[i] < min) {
+        min = v[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      int sum = 0;
+      for (int y : u[x]) {
+        sum += q[y];
+      }
+      q[x] = sum / u[x].length + 1;
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int z : u[i]) {
+          b = Math.max(b, q[z]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].append(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y = 0; y < u[x].length; y++) {
+        p[u[x][y]] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          if (q[c] > b) {
+            b = q[c];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  public static int min(int[] arr) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < arr.length; i++) {
+      if (arr[i] < min) {
+        min = arr[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = Integer.MAX_VALUE;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Math.min(v));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = scanner.nextInt();
+      int t = scanner.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  private static int min(int[] v) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < v.length; i++) {
+      if (v[i] < min) {
+        min = v[i];
+      }
+    }
+    return min;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = u[i].stream().mapToInt(q::get).max().getAsInt();
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + v.stream().min(Integer::compareTo).get());
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int j = 0; j < u[i].length; j++) {
+          if (q[u[i][j]] > b) {
+            b = q[u[i][j]];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  private static int min(int[] v) {
+    int min = Integer.MAX_VALUE;
+    for (int i = 0; i < v.length; i++) {
+      if (v[i] < min) {
+        min = v[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].size();
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 1; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].size() + 1;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].size();
+      if (a > 1) {
+        int b = Integer.MAX_VALUE;
+        for (int c : u[i]) {
+          b = Math.max(b, q[c]);
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + Arrays.stream(v).min().getAsInt());
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[][] u = new int[N - 1][];
+    for (int i = 0; i < M; i++) {
+      int s = sc.nextInt();
+      int t = sc.nextInt();
+      u[s - 1].add(t - 1);
+    }
+    int[] p = new int[N];
+    p[0] = 1;
+    for (int x = 0; x < u.length; x++) {
+      for (int y : u[x]) {
+        p[y] += p[x] / u[x].length;
+      }
+    }
+    int[] q = new int[N];
+    q[N - 1] = 0;
+    for (int x = N - 2; x >= 0; x--) {
+      for (int y : u[x]) {
+        q[x] += q[y] / u[x].length;
+      }
+    }
+    int[] v = new int[N];
+    for (int i = 0; i < N - 1; i++) {
+      int a = u[i].length;
+      if (a > 1) {
+        int b = 0;
+        for (int j = 0; j < u[i].length; j++) {
+          if (q[u[i][j]] > b) {
+            b = q[u[i][j]];
+          }
+        }
+        v[i] = p[i] * (q[i] - (1 + b)) / (a - 1);
+      }
+    }
+    System.out.println(q[0] + min(v));
+  }
+
+  public static int min(int[] arr) {
+    int min = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] < min) {
+        min = arr[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======

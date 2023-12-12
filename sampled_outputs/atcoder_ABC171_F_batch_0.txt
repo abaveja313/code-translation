@@ -1,0 +1,948 @@
+  [JAVA]
+import java.util.*;
+import java.math.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String s = sc.next();
+        int n = s.length();
+        int ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) % 1000000007 * (int) Math.pow(25, k - i) % 1000000007;
+            ans %= 1000000007;
+        }
+        System.out.println(ans);
+    }
+
+    public static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % 1000000007) % 1000000007) % 1000000007;
+    }
+
+    public static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < 1000000007; i++) {
+            fac[i] = (fac[i - 1] * i % 1000000007) % 1000000007;
+            inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+            finv[i] = (finv[i - 1] * inv[i] % 1000000007) % 1000000007;
+        }
+    }
+
+    public static int[] fac = new int[1000000007];
+    public static int[] finv = new int[1000000007];
+    public static int[] inv = new int[1000000007];
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int[] fac = new int[1000001];
+        int[] finv = new int[1000001];
+        int[] inv = new int[1000001];
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < 1000001; i++) {
+            fac[i] = (fac[i - 1] * i) % 1000000007;
+            inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+            finv[i] = (finv[i - 1] * inv[i]) % 1000000007;
+        }
+        long ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += (fac[n + k - i - 1] * (finv[k] * finv[n - i] % 1000000007) % 1000000007) * (26 ^ i % 1000000007) * (25 ^ (k - i) % 1000000007);
+            ans %= 1000000007;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int ans = 0;
+        for (int i = 0; i <= k; i++) {
+            ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) * (int) Math.pow(25, k - i);
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+
+    private static int MOD = 1000000007;
+    private static int M = 1000000 * 2;
+    private static int[] fac = new int[M];
+    private static int[] finv = new int[M];
+    private static int[] inv = new int[M];
+
+    private static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+    }
+
+    private static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % MOD)) % MOD;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    static long MOD = 1000000007;
+    static long M = 1000000 * 2;
+    static long[] fac = new long[M];
+    static long[] finv = new long[M];
+    static long[] inv = new long[M];
+
+    public static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+    }
+
+    public static long COM(long n, long k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD) % MOD;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String s = sc.next();
+        int n = s.length();
+        long ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += COM(n + k - i - 1, n - 1) * Math.pow(26, i) % MOD * Math.pow(25, k - i) % MOD;
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String s = sc.next();
+        int n = s.length();
+        long ans = 0;
+        long[] fac = new long[1000000 * 2];
+        long[] finv = new long[1000000 * 2];
+        long[] inv = new long[1000000 * 2];
+        COMinit();
+        for (int i = k + 1; i <= n + k - 1; i++) {
+            ans += COM(n + k - i - 1, n - 1) * (long)Math.pow(26, i) % 1000000007 * (long)Math.pow(25, k - i) % 1000000007;
+            ans = ans % 1000000007;
+        }
+        System.out.println(ans);
+    }
+
+    public static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < 1000000 * 2; i++) {
+            fac[i] = (fac[i - 1] * i) % 1000000007;
+            inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+            finv[i] = (finv[i - 1] * inv[i]) % 1000000007;
+        }
+    }
+
+    public static long COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % 1000000007) % 1000000007) % 1000000007;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.Math;
+
+public class Solution {
+    private static final int MOD = 1000000007;
+    private static final int M = 1000000 * 2;
+    private static int[] fac = new int[M];
+    private static int[] finv = new int[M];
+    private static int[] inv = new int[M];
+
+    public static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+    }
+
+    public static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD) % MOD;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) % MOD * (int) Math.pow(25, k - i) % MOD;
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String s = sc.next();
+        int n = s.length();
+        long ans = 0;
+
+        long[] fac = new long[1000001];
+        long[] finv = new long[1000001];
+        long[] inv = new long[1000001];
+
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+
+        for (int i = 2; i < 1000001; i++) {
+            fac[i] = (fac[i - 1] * i) % 1000000;
+            inv[i] = 1000000 - inv[1000000 % i] * (1000000 / i) % 1000000;
+            finv[i] = (finv[i - 1] * inv[i]) % 1000000;
+        }
+
+        for (int i = k + 1; i > 0; i--) {
+            ans += (fac[n + k - i] * finv[n - 1] % 1000000) * pow(26, i, 1000000) * pow(25, k - i, 1000000);
+            ans %= 1000000;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long pow(long base, long exp, long mod) {
+        long result = 1;
+        while (exp > 0) {
+            if (exp % 2 == 1) {
+                result = (result * base) % mod;
+            }
+            base = (base * base) % mod;
+            exp /= 2;
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    int n = s.length();
+    int ans = 0;
+
+    List<Integer> fac = new ArrayList<>();
+    List<Integer> finv = new ArrayList<>();
+    List<Integer> inv = new ArrayList<>();
+
+    fac.add(0);
+    fac.add(1);
+    finv.add(0);
+    finv.add(1);
+    inv.add(1);
+
+    for (int i = 2; i < 1000000; i++) {
+      fac.add((fac.get(i - 1) * i) % 1000000007);
+      inv.add(1000000007 - inv.get(1000000007 % i) * (1000000007 / i) % 1000000007);
+      finv.add((finv.get(i - 1) * inv.get(i)) % 1000000007);
+    }
+
+    for (int i = k + 1; i > 0; i--) {
+      ans += (fac.get(n + k - i) * (finv.get(k) * finv.get(n - i) % 1000000007) % 1000000007) % 1000000007;
+      ans = ans % 1000000007;
+    }
+
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Collections;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int k = sc.nextInt();
+    String s = sc.next();
+    int n = s.length();
+    long ans = 0;
+    long[] fac = new long[1000001];
+    long[] finv = new long[1000001];
+    long[] inv = new long[1000001];
+
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < 1000001; i++) {
+      fac[i] = (fac[i - 1] * i % 1000000007) % 1000000007;
+      inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+      finv[i] = (finv[i - 1] * inv[i] % 1000000007) % 1000000007;
+    }
+
+    for (int i = k + 1; i <= n; i++) {
+      ans += COM(n + k - i - 1, n - 1) * Math.pow(26, i) * Math.pow(25, k - i) % 1000000007;
+      ans = ans % 1000000007;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long COM(long n, long k) {
+    if (n < k) {
+      return 0;
+    }
+    if (n < 0 || k < 0) {
+      return 0;
+    }
+    return (fac[n] * (finv[k] * finv[n - k] % 1000000007) % 1000000007) % 1000000007;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += combination(n + k - i - 1, n - 1) * (int) Math.pow(26, i) % MOD * (int) Math.pow(25, k - i) % MOD;
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+    
+    private static int combination(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (int) (factorial(n) * (factorial(k) * factorial(n - k) % MOD) % MOD);
+    }
+    
+    private static long factorial(int n) {
+        if (n < 2) {
+            return 1;
+        }
+        return (long) (factorial(n - 1) * n % MOD);
+    }
+    
+    private static long[] factorials = new long[M];
+    private static long[] inverseFactorials = new long[M];
+    private static long[] inverses = new long[M];
+    
+    private static void init() {
+        factorials[0] = factorials[1] = 1;
+        inverseFactorials[0] = inverseFactorials[1] = 1;
+        inverses[1] = 1;
+        for (int i = 2; i < M; i++) {
+            factorials[i] = (factorials[i - 1] * i) % MOD;
+            inverses[i] = MOD - inverses[MOD % i] * (MOD / i) % MOD;
+            inverseFactorials[i] = (inverseFactorials[i - 1] * inverses[i]) % MOD;
+        }
+    }
+    
+    private static final int MOD = 1000000007;
+    private static final int M = 1000000 * 2;
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int ans = 0;
+        for (int i = 0; i <= k; i++) {
+            ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) * (int) Math.pow(25, k - i);
+            ans = ans % 1000000007;
+        }
+        System.out.println(ans);
+    }
+
+    private static int[] fac = new int[1000000 * 2];
+    private static int[] finv = new int[1000000 * 2];
+    private static int[] inv = new int[1000000 * 2];
+
+    private static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < fac.length; i++) {
+            fac[i] = (fac[i - 1] * i) % 1000000007;
+            inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+            finv[i] = (finv[i - 1] * inv[i]) % 1000000007;
+        }
+    }
+
+    private static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % 1000000007) % 1000000007) % 1000000007;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.math.*;
+
+class Solution {
+  static final int M = 1000000 * 2;
+  static final int Mod = 1000000007;
+  static final int[] fac = new int[M];
+  static final int[] finv = new int[M];
+  static final int[] inv = new int[M];
+
+  static void COMinit() {
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < M; i++) {
+      fac[i] = (fac[i - 1] * i) % Mod;
+      inv[i] = Mod - inv[Mod % i] * (Mod / i) % Mod;
+      finv[i] = (finv[i - 1] * inv[i]) % Mod;
+    }
+  }
+
+  static int COM(int n, int k) {
+    if (n < k) {
+      return 0;
+    }
+    if (n < 0 || k < 0) {
+      return 0;
+    }
+    return (fac[n] * (finv[k] * finv[n - k] % Mod) % Mod) % Mod;
+  }
+
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    int n = s.length();
+    long ans = 0;
+    for (int i = k + 1; i > 0; i--) {
+      ans += COM(n + k - i - 1, n - 1) * Math.pow(26, i, Mod) % Mod * Math.pow(25, k - i, Mod) % Mod;
+      ans %= Mod;
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.math.*;
+
+class Solution {
+    static final int MOD = 1000000007;
+    static final int M = 1000000 * 2;
+    static int[] fac = new int[M];
+    static int[] finv = new int[M];
+    static int[] inv = new int[M];
+
+    static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+    }
+
+    static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD) % MOD;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        long ans = 0;
+        for (int i = 0; i <= k; i++) {
+            ans += COM(n + k - i - 1, n - 1) * (long)Math.pow(26, i) % MOD * (long)Math.pow(25, k - i) % MOD;
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    private static final int MOD = 1000000007;
+    private static final int M = 1000000 * 2;
+    private static final int[] fac = new int[M];
+    private static final int[] finv = new int[M];
+    private static final int[] inv = new int[M];
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int ans = 0;
+
+        COMinit();
+
+        for (int i = k + 1; i >= 0; i--) {
+            ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) % MOD * (int) Math.pow(25, k - i) % MOD;
+            ans = ans % MOD;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+    }
+
+    private static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD) % MOD;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    int n = s.length();
+    int ans = 0;
+    for (int i = 0; i <= k; i++) {
+      ans += COM(n + k - i - 1, n - 1) * (int) Math.pow(26, i) % MOD * (int) Math.pow(25, k - i) % MOD;
+      ans = ans % MOD;
+    }
+    System.out.println(ans);
+  }
+
+  private static final int MOD = 1000000007;
+  private static final int M = 1000000 * 2;
+  private static int[] fac = new int[M];
+  private static int[] finv = new int[M];
+  private static int[] inv = new int[M];
+
+  private static void COMinit() {
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < M; i++) {
+      fac[i] = (fac[i - 1] * i) % MOD;
+      inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+      finv[i] = (finv[i - 1] * inv[i]) % MOD;
+    }
+  }
+
+  private static int COM(int n, int k) {
+    if (n < k) {
+      return 0;
+    }
+    if (n < 0 || k < 0) {
+      return 0;
+    }
+    return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD) % MOD;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int k = sc.nextInt();
+    String s = sc.next();
+    int n = s.length();
+    int ans = 0;
+    int[] fac = new int[1000001];
+    int[] finv = new int[1000001];
+    int[] inv = new int[1000001];
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < 1000001; i++) {
+      fac[i] = (fac[i - 1] * i) % 1000000;
+      inv[i] = 1000000 - inv[1000000 % i] * (1000000 / i) % 1000000;
+      finv[i] = (finv[i - 1] * inv[i]) % 1000000;
+    }
+    for (int i = k + 1; i > 0; i--) {
+      ans += (fac[n + k - i - 1] * (finv[k] * finv[n - i] % 1000000) % 1000000) * Math.pow(26, i) * Math.pow(25, k - i) % 1000000;
+      ans = ans % 1000000;
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Solution {
+    private static final int M = 1000000 * 2;
+    private static final int Mod = 1000000007;
+    private static int[] fac = new int[M];
+    private static int[] finv = new int[M];
+    private static int[] inv = new int[M];
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        long ans = 0;
+
+        COMinit();
+
+        for (int i = 0; i <= k; i++) {
+            ans += COM(n + k - i - 1, n - 1) * (long) Math.pow(26, i) % Mod * (long) Math.pow(25, k - i) % Mod;
+            ans = ans % Mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % Mod;
+            inv[i] = Mod - inv[Mod % i] * (Mod / i) % Mod;
+            finv[i] = (finv[i - 1] * inv[i]) % Mod;
+        }
+    }
+
+    private static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % Mod) % Mod) % Mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Arrays;
+import java.math.BigInteger;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int[] fac = new int[n + k];
+        int[] finv = new int[n + k];
+        int[] inv = new int[n + k];
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < n + k; i++) {
+            fac[i] = (fac[i - 1] * i) % Mod;
+            inv[i] = Mod - inv[Mod % i] * (Mod / i) % Mod;
+            finv[i] = (finv[i - 1] * inv[i]) % Mod;
+        }
+        long ans = 0;
+        for (int i = k + 1; i <= n; i++) {
+            ans += COM(n + k - i - 1, n - 1) * pow(26, i, Mod) * pow(25, k - i, Mod);
+            ans = ans % Mod;
+        }
+        System.out.println(ans);
+    }
+
+    public static int COM(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n < 0 || k < 0) {
+            return 0;
+        }
+        return (fac[n] * (finv[k] * finv[n - k] % Mod) % Mod) % Mod;
+    }
+
+    public static void COMinit() {
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < M; i++) {
+            fac[i] = (fac[i - 1] * i) % Mod;
+            inv[i] = Mod - inv[Mod % i] * (Mod / i) % Mod;
+            finv[i] = (finv[i - 1] * inv[i]) % Mod;
+        }
+    }
+
+    public static int pow(int base, int exponent, int mod) {
+        int result = 1;
+        for (int i = 0; i < exponent; i++) {
+            result = (result * base) % mod;
+        }
+        return result;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int k = scanner.nextInt();
+    String s = scanner.next();
+    int n = s.length();
+    int ans = 0;
+    for (int i = k + 1; i > 0; i--) {
+      ans += combination(n + k - i, n - 1) * (int) Math.pow(26, i) % 1000000007 * (int) Math.pow(25, k - i) % 1000000007;
+      ans %= 1000000007;
+    }
+    System.out.println(ans);
+  }
+
+  private static int combination(int n, int k) {
+    if (n < k) {
+      return 0;
+    }
+    if (n < 0 || k < 0) {
+      return 0;
+    }
+    int[] fac = new int[n + 1];
+    int[] finv = new int[n + 1];
+    int[] inv = new int[n + 1];
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i <= n; i++) {
+      fac[i] = (fac[i - 1] * i) % 1000000007;
+      inv[i] = 1000000007 - inv[1000000007 % i] * (1000000007 / i) % 1000000007;
+      finv[i] = (finv[i - 1] * inv[i]) % 1000000007;
+    }
+    return (fac[n] * (finv[k] * finv[n - k]) % 1000000007) % 1000000007;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        String s = scanner.next();
+        int n = s.length();
+        int[] fac = new int[n + k];
+        int[] finv = new int[n + k];
+        int[] inv = new int[n + k];
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        inv[1] = 1;
+        for (int i = 2; i < n + k; i++) {
+            fac[i] = (fac[i - 1] * i) % MOD;
+            inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+            finv[i] = (finv[i - 1] * inv[i]) % MOD;
+        }
+        int ans = 0;
+        for (int i = k + 1; i > 0; i--) {
+            ans += (fac[n + k - i - 1] * (finv[k] * finv[n - i] % MOD) % MOD) * Math.pow(26, i, MOD) * Math.pow(25, k - i, MOD);
+            ans = ans % MOD;
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======

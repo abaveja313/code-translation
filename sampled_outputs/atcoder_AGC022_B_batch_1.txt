@@ -1,0 +1,993 @@
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int n = 2; n <= 30001; n++) {
+      if (n % 2 == 0 || n % 3 == 0) {
+        ls.add(n);
+      }
+    }
+
+    List<Integer> ans = new ArrayList<>();
+    if (N == 3) {
+      ans.add(2);
+      ans.add(5);
+      ans.add(63);
+    } else {
+      int q = N / 8;
+      int r = N % 8;
+      int t = q * 8;
+      ans.addAll(ls.subList(0, t));
+      if (r % 2 == 1) {
+        ans.add(ls.get(t + 3));
+      }
+      r /= 2;
+      if (r == 1) {
+        ans.add(ls.get(t));
+        ans.add(ls.get(t + 2));
+      } else if (r == 2) {
+        ans.addAll(ls.subList(t, t + 3));
+        ans.add(ls.get(t + 5));
+      } else if (r == 3) {
+        ans.addAll(ls.subList(t, t + 3));
+        ans.addAll(ls.subList(t + 4, t + 7));
+      }
+    }
+
+    System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> ls = new ArrayList<>();
+        for (int n = 2; n <= 30001; n++) {
+            if (n % 2 == 0 || n % 3 == 0) {
+                ls.add(n);
+            }
+        }
+
+        Function<Integer, Integer> gcd = (x, y) -> x == 0 ? y : gcd.apply(y, x % y);
+        BiFunction<List<Integer>, Integer, List<Integer>> solve = (ans, N) -> {
+            if (N == 3) {
+                return List.of(2, 5, 63);
+            }
+            int q = N / 8;
+            int t = q * 8;
+            List<Integer> ansList = ls.subList(0, t);
+            if (N % 2 == 1) {
+                ansList.add(ls.get(t + 3));
+            }
+            N /= 2;
+            if (N == 1) {
+                ansList.add(ls.get(t));
+                ansList.add(ls.get(t + 2));
+            } else if (N == 2) {
+                ansList.addAll(ls.subList(t, t + 3));
+                ansList.add(ls.get(t + 5));
+            } else if (N == 3) {
+                ansList.addAll(ls.subList(t, t + 3));
+                ansList.addAll(ls.subList(t + 4, t + 7));
+            }
+            return ansList;
+        };
+
+        List<Integer> ans = solve.apply(ls, N);
+        System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int i = 2; i <= 30001; i++) {
+      if (i % 2 == 0 || i % 3 == 0) {
+        ls.add(i);
+      }
+    }
+
+    List<Integer> ans = new ArrayList<>();
+    if (N == 3) {
+      ans.add(2);
+      ans.add(5);
+      ans.add(63);
+    } else {
+      int q = N / 8;
+      int r = N % 8;
+      int t = q * 8;
+      ans.addAll(ls.subList(0, t));
+      if (r % 2 == 1) {
+        ans.add(ls.get(t + 3));
+      }
+      r /= 2;
+      if (r == 1) {
+        ans.add(ls.get(t));
+        ans.add(ls.get(t + 2));
+      } else if (r == 2) {
+        ans.addAll(ls.subList(t, t + 3));
+        ans.add(ls.get(t + 5));
+      } else if (r == 3) {
+        ans.addAll(ls.subList(t, t + 3));
+        ans.addAll(ls.subList(t + 4, t + 7));
+      }
+    }
+
+    Collections.sort(ans);
+    System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> ls = new ArrayList<Integer>();
+        for (int n = 2; n <= 30001; n++) {
+            if (n % 2 == 0 || n % 3 == 0) {
+                ls.add(n);
+            }
+        }
+
+        List<Integer> ans = new ArrayList<Integer>();
+        if (N == 3) {
+            ans.add(2);
+            ans.add(5);
+            ans.add(63);
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            ans.addAll(ls.subList(0, t));
+            if (r % 2 == 1) {
+                ans.add(ls.get(t + 3));
+            }
+            r /= 2;
+            if (r == 1) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 2));
+            } else if (r == 2) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.add(ls.get(t + 5));
+            } else if (r == 3) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.addAll(ls.subList(t + 4, t + 7));
+            }
+        }
+
+        System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.math.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 2; i <= 30000; i++) {
+            if (i % 2 == 0 || i % 3 == 0) {
+                ls.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        if (N == 3) {
+            ans.add(2);
+            ans.add(5);
+            ans.add(63);
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            for (int i = 0; i < t; i++) {
+                ans.add(ls.get(i));
+            }
+            if (r % 2 == 1) {
+                ans.add(ls.get(t + 3));
+            }
+            r /= 2;
+            if (r == 1) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 2));
+            } else if (r == 2) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 1));
+                ans.add(ls.get(t + 2));
+                ans.add(ls.get(t + 5));
+            } else if (r == 3) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 1));
+                ans.add(ls.get(t + 2));
+                ans.add(ls.get(t + 3));
+                ans.add(ls.get(t + 4));
+                ans.add(ls.get(t + 5));
+                ans.add(ls.get(t + 6));
+                ans.add(ls.get(t + 7));
+            }
+        }
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.print(ans.get(i) + " ");
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int i = 2; i <= 30001; i++) {
+      if (i % 2 == 0 || i % 3 == 0) {
+        ls.add(i);
+      }
+    }
+
+    List<Integer> ans = new ArrayList<>();
+    if (N == 3) {
+      ans.add(2);
+      ans.add(5);
+      ans.add(63);
+    } else {
+      int q = N / 8;
+      int r = N % 8;
+      int t = q * 8;
+      for (int i = 0; i < t; i++) {
+        ans.add(ls.get(i));
+      }
+      if (r % 2 == 1) {
+        ans.add(ls.get(t + 3));
+      }
+      r /= 2;
+      if (r == 1) {
+        ans.add(ls.get(t));
+        ans.add(ls.get(t + 2));
+      } else if (r == 2) {
+        ans.add(ls.get(t));
+        ans.add(ls.get(t + 1));
+        ans.add(ls.get(t + 2));
+        ans.add(ls.get(t + 5));
+      } else if (r == 3) {
+        ans.add(ls.get(t));
+        ans.add(ls.get(t + 1));
+        ans.add(ls.get(t + 2));
+        ans.add(ls.get(t + 3));
+        ans.add(ls.get(t + 4));
+        ans.add(ls.get(t + 5));
+        ans.add(ls.get(t + 6));
+        ans.add(ls.get(t + 7));
+      }
+    }
+
+    System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] ls = new int[30001];
+        for (int i = 2; i <= 30000; i++) {
+            if (i % 2 == 0 || i % 3 == 0) {
+                ls[i] = i;
+            }
+        }
+
+        int[] ans = new int[N];
+        for (int i = 0; i < N; i++) {
+            ans[i] = ls[i];
+        }
+
+        System.out.println(Arrays.toString(ans));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 2; i <= 30000; i++) {
+            if (i % 2 == 0 || i % 3 == 0) {
+                ls.add(i);
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        if (N == 3) {
+            ans.add(2);
+            ans.add(5);
+            ans.add(63);
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            ans.addAll(ls.subList(0, t));
+            if (r % 2 == 1) {
+                ans.add(ls.get(t + 3));
+            }
+            r /= 2;
+            if (r == 1) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 2));
+            } else if (r == 2) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.add(ls.get(t + 5));
+            } else if (r == 3) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.addAll(ls.subList(t + 4, t + 7));
+            }
+        }
+
+        System.out.println(String.join(" ", ans.stream().map(String::valueOf).collect(Collectors.toList())));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int n = 2; n <= 30001; n++) {
+      if (n % 2 == 0 || n % 3 == 0) {
+        ls.add(n);
+      }
+    }
+
+    List<Integer> ans = solve(N, ls);
+    for (int a : ans) {
+      System.out.print(a + " ");
+    }
+  }
+
+  private static List<Integer> solve(int N, List<Integer> ls) {
+    if (N == 3) {
+      return Arrays.asList(2, 5, 63);
+    }
+
+    int q = N / 8;
+    int r = N % 8;
+    int t = q * 8;
+    List<Integer> ans = new ArrayList<>(ls.subList(0, t));
+    if (r % 2 == 1) {
+      ans.add(ls.get(t + 3));
+    }
+    r /= 2;
+    if (r == 1) {
+      ans.add(ls.get(t));
+      ans.add(ls.get(t + 2));
+    } else if (r == 2) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.add(ls.get(t + 5));
+    } else if (r == 3) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.addAll(ls.subList(t + 4, t + 7));
+    }
+    return ans;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> ls = new ArrayList<>();
+        for (int i = 2; i <= 30000; i++) {
+            if (i % 2 == 0 || i % 3 == 0) {
+                ls.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        if (N == 3) {
+            ans.add(2);
+            ans.add(5);
+            ans.add(63);
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            ans.addAll(ls.subList(0, t));
+            if (r % 2 == 1) {
+                ans.add(ls.get(t + 3));
+            }
+            r /= 2;
+            if (r == 1) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 2));
+            } else if (r == 2) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.add(ls.get(t + 5));
+            } else if (r == 3) {
+                ans.addAll(ls.subList(t, t + 3));
+                ans.addAll(ls.subList(t + 4, t + 7));
+            }
+        }
+        System.out.println(String.join(" ", ans.stream().map(Object::toString).collect(Collectors.toList())));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int n = 2; n <= 30001; n++) {
+      if (n % 2 == 0 || n % 3 == 0) {
+        ls.add(n);
+      }
+    }
+
+    List<Integer> ans = solve(N, ls);
+    for (int a : ans) {
+      System.out.print(a + " ");
+    }
+    System.out.println();
+  }
+
+  private static List<Integer> solve(int N, List<Integer> ls) {
+    if (N == 3) {
+      return Arrays.asList(2, 5, 63);
+    }
+
+    int q = N / 8;
+    int r = N % 8;
+    int t = q * 8;
+    List<Integer> ans = ls.subList(0, t);
+
+    if (r % 2 == 1) {
+      ans.add(ls.get(t + 3));
+    }
+    r /= 2;
+
+    if (r == 1) {
+      ans.add(ls.get(t));
+      ans.add(ls.get(t + 2));
+    } else if (r == 2) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.add(ls.get(t + 5));
+    } else if (r == 3) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.addAll(ls.subList(t + 4, t + 7));
+    }
+
+    return ans;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.stream.*;
+import java.math.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = IntStream.rangeClosed(2, 30001).filter(n -> n % 2 == 0 || n % 3 == 0).boxed().collect(Collectors.toList());
+    List<Integer> ans = solve(N, ls);
+    System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+  }
+
+  private static List<Integer> solve(int N, List<Integer> ls) {
+    if (N == 3) {
+      return List.of(2, 5, 63);
+    }
+    int q = N / 8;
+    int r = N % 8;
+    int t = q * 8;
+    List<Integer> ans = ls.subList(0, t);
+    if (r % 2 == 1) {
+      ans.add(ls.get(t + 3));
+    }
+    r /= 2;
+    if (r == 1) {
+      ans.add(ls.get(t));
+      ans.add(ls.get(t + 2));
+    } else if (r == 2) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.add(ls.get(t + 5));
+    } else if (r == 3) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.addAll(ls.subList(t + 4, t + 7));
+    }
+    return ans;
+  }
+
+  private static int gcd(int x, int y) {
+    return y == 0 ? x : gcd(y, x % y);
+  }
+
+  private static void check(int N, List<Integer> ans) {
+    assert ans.size() == N;
+    assert ans.stream().distinct().count() == N;
+    int S = ans.stream().mapToInt(Integer::intValue).sum();
+    assert ans.stream().mapToInt(x -> gcd(S - x, x)).allMatch(g -> g == 1);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.function.IntBinaryOperator;
+
+public class Solution {
+    private static final List<Integer> LS = IntStream.rangeClosed(2, 30001).filter(n -> n % 2 == 0 || n % 3 == 0).boxed().collect(Collectors.toList());
+
+    private static int gcd(int x, int y) {
+        return x == 0 ? y : gcd(y, x % y);
+    }
+
+    private static void check(int N, List<Integer> ans) {
+        assert ans.size() == N;
+        assert ans.size() == new HashSet<>(ans).size();
+        int S = ans.stream().mapToInt(Integer::intValue).sum();
+        assert ans.stream().mapToInt(Integer::intValue).reduce(gcd).getAsInt() == 1;
+        assert ans.stream().allMatch(a -> gcd(S - a, a) != 1);
+    }
+
+    private static List<Integer> solve(int N) {
+        if (N == 3) {
+            return List.of(2, 5, 63);
+        }
+        int q = N / 8, r = N % 8;
+        int t = q * 8;
+        List<Integer> ans = LS.subList(0, t);
+        if (r % 2 == 1) {
+            ans.add(LS.get(t + 3));
+        }
+        r /= 2;
+        if (r == 1) {
+            ans.add(LS.get(t));
+            ans.add(LS.get(t + 2));
+        } else if (r == 2) {
+            ans.addAll(LS.subList(t, t + 3));
+            ans.add(LS.get(t + 5));
+        } else if (r == 3) {
+            ans.addAll(LS.subList(t, t + 3));
+            ans.addAll(LS.subList(t + 4, t + 7));
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> ans = solve(N);
+        System.out.println(ans.stream().map(String::valueOf).collect(Collectors.joining(" ")));
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.function.*;
+
+class Solution {
+  public static void main(String[] args) {
+    List<Integer> ls = new ArrayList<>();
+    for (int n = 2; n <= 30001; n++) {
+      if (n % 2 == 0 || n % 3 == 0) {
+        ls.add(n);
+      }
+    }
+
+    int N = read();
+    List<Integer> ans = solve(N, ls);
+    System.out.println(ans.stream().map(String::valueOf).collect(Collectors.joining(" ")));
+  }
+
+  private static int read() {
+    return Integer.parseInt(new Scanner(System.in).nextLine());
+  }
+
+  private static List<Integer> solve(int N, List<Integer> ls) {
+    if (N == 3) {
+      return Arrays.asList(2, 5, 63);
+    }
+
+    int q = N / 8;
+    int r = N % 8;
+    int t = q * 8;
+    List<Integer> ans = ls.subList(0, t);
+
+    if (r % 2 == 1) {
+      ans.add(ls.get(t + 3));
+    }
+
+    r /= 2;
+    if (r == 1) {
+      ans.add(ls.get(t));
+      ans.add(ls.get(t + 2));
+    } else if (r == 2) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.add(ls.get(t + 5));
+    } else if (r == 3) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.addAll(ls.subList(t + 4, t + 7));
+    }
+
+    return ans;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.stream.IntStream;
+import java.util.function.BinaryOperator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> ls = new ArrayList<>();
+        for (int n = 2; n <= 30001; n++) {
+            if (n % 2 == 0 || n % 3 == 0) {
+                ls.add(n);
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        if (N == 3) {
+            ans.add(2);
+            ans.add(5);
+            ans.add(63);
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            for (int i = 0; i < t; i++) {
+                ans.add(ls.get(i));
+            }
+            if (r % 2 == 1) {
+                ans.add(ls.get(t + 3));
+            }
+            r /= 2;
+            if (r == 1) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 2));
+            } else if (r == 2) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 1));
+                ans.add(ls.get(t + 2));
+                ans.add(ls.get(t + 5));
+            } else if (r == 3) {
+                ans.add(ls.get(t));
+                ans.add(ls.get(t + 1));
+                ans.add(ls.get(t + 2));
+                ans.add(ls.get(t + 3));
+                ans.add(ls.get(t + 4));
+                ans.add(ls.get(t + 5));
+                ans.add(ls.get(t + 6));
+            }
+        }
+
+        Collections.sort(ans);
+        System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] ls = new int[30001];
+        for (int i = 0; i < 30001; i++) {
+            ls[i] = i;
+        }
+        ls[0] = 0;
+        ls[1] = 0;
+        ls[2] = 0;
+        for (int i = 2; i < 30001; i++) {
+            if (i % 2 == 0 || i % 3 == 0) {
+                ls[i] = i;
+            }
+        }
+        int[] ans = new int[N];
+        if (N == 3) {
+            ans[0] = 2;
+            ans[1] = 5;
+            ans[2] = 63;
+        } else {
+            int q = N / 8;
+            int r = N % 8;
+            int t = q * 8;
+            for (int i = 0; i < t; i++) {
+                ans[i] = ls[i];
+            }
+            if (r % 2 == 1) {
+                ans[t + 3] = ls[t + 3];
+            }
+            r /= 2;
+            if (r == 1) {
+                ans[t] = ls[t];
+                ans[t + 2] = ls[t + 2];
+            } else if (r == 2) {
+                ans[t] = ls[t];
+                ans[t + 1] = ls[t + 1];
+                ans[t + 2] = ls[t + 2];
+                ans[t + 5] = ls[t + 5];
+            } else if (r == 3) {
+                ans[t] = ls[t];
+                ans[t + 1] = ls[t + 1];
+                ans[t + 2] = ls[t + 2];
+                ans[t + 3] = ls[t + 3];
+                ans[t + 4] = ls[t + 4];
+                ans[t + 5] = ls[t + 5];
+                ans[t + 6] = ls[t + 6];
+                ans[t + 7] = ls[t + 7];
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            System.out.print(ans[i] + " ");
+        }
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.util.stream.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] ls = IntStream.rangeClosed(2, 30000).filter(n -> n % 2 == 0 || n % 3 == 0).toArray();
+
+        List<Integer> ans = solve(N, ls);
+        System.out.println(ans.stream().map(String::valueOf).collect(Collectors.joining(" ")));
+    }
+
+    private static List<Integer> solve(int N, int[] ls) {
+        if (N == 3) {
+            return Arrays.asList(2, 5, 63);
+        }
+
+        int q = N / 8;
+        int r = N % 8;
+        int t = q * 8;
+        List<Integer> ans = new ArrayList<>(Arrays.asList(ls).subList(0, t));
+
+        if (r % 2 == 1) {
+            ans.add(ls[t + 3]);
+        }
+
+        r /= 2;
+        if (r == 1) {
+            ans.add(ls[t]);
+            ans.add(ls[t + 2]);
+        } else if (r == 2) {
+            ans.addAll(Arrays.asList(ls).subList(t, t + 3));
+            ans.add(ls[t + 5]);
+        } else if (r == 3) {
+            ans.addAll(Arrays.asList(ls).subList(t, t + 3));
+            ans.addAll(Arrays.asList(ls).subList(t + 4, t + 7));
+        }
+
+        return ans;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<Integer> ls = IntStream.rangeClosed(2, 30001)
+                .filter(n -> n % 2 == 0 || n % 3 == 0)
+                .boxed()
+                .collect(Collectors.toList());
+
+        List<Integer> ans = solve(N, ls);
+        System.out.println(ans.stream().map(Object::toString).collect(Collectors.joining(" ")));
+    }
+
+    private static List<Integer> solve(int N, List<Integer> ls) {
+        if (N == 3) {
+            return Arrays.asList(2, 5, 63);
+        }
+
+        int q = N / 8;
+        int r = N % 8;
+        int t = q * 8;
+        List<Integer> ans = ls.subList(0, t);
+        if (r % 2 == 1) {
+            ans.add(ls.get(t + 3));
+        }
+        r /= 2;
+        if (r == 1) {
+            ans.add(ls.get(t));
+            ans.add(ls.get(t + 2));
+        } else if (r == 2) {
+            ans.addAll(ls.subList(t, t + 3));
+            ans.add(ls.get(t + 5));
+        } else if (r == 3) {
+            ans.addAll(ls.subList(t, t + 3));
+            ans.addAll(ls.subList(t + 4, t + 7));
+        }
+        return ans;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] ls = new int[30001];
+    for (int i = 2; i <= 30001; i++) {
+      if (i % 2 == 0 || i % 3 == 0) {
+        ls[i] = i;
+      }
+    }
+
+    int[] ans = new int[N];
+    for (int i = 0; i < N; i++) {
+      ans[i] = ls[i];
+    }
+
+    System.out.println(Arrays.toString(ans));
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> ls = new ArrayList<>();
+    for (int i = 2; i <= 30000; i++) {
+      if (i % 2 == 0 || i % 3 == 0) {
+        ls.add(i);
+      }
+    }
+
+    List<Integer> ans = new ArrayList<>();
+    int q = N / 8;
+    int r = N % 8;
+    int t = q * 8;
+    for (int i = 0; i < t; i++) {
+      ans.add(ls.get(i));
+    }
+    if (r % 2 == 1) {
+      ans.add(ls.get(t + 3));
+    }
+    r /= 2;
+    if (r == 1) {
+      ans.add(ls.get(t));
+      ans.add(ls.get(t + 2));
+    } else if (r == 2) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.add(ls.get(t + 5));
+    } else if (r == 3) {
+      ans.addAll(ls.subList(t, t + 3));
+      ans.addAll(ls.subList(t + 4, t + 7));
+    }
+
+    for (int a : ans) {
+      System.out.print(a + " ");
+    }
+  }
+}
+
+[/JAVA]
+======

@@ -1,0 +1,1311 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n - 1][2 * n - 1];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      for (int j = 0; j < 2 * n - 1; j++) {
+        member[i][j] = sc.nextInt();
+      }
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      high[i] = findMax(member[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+      mak_high(high, member, i);
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m] == 1) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static int findMax(int[] arr) {
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        max = arr[i];
+      }
+    }
+    return max;
+  }
+
+  public static void mak_high(int[] high, int[][] member, int i) {
+    int hi = 0;
+    for (int j = 0; j < 2 * n - 1; j++) {
+      if (ava[j + 2] == 1) {
+        int[] canb = new int[2 * n - 1];
+        for (int k = 0; k < 2 * n - 1; k++) {
+          if (ava[k + 1] == 1) {
+            canb[k] = member[i][k];
+          } else {
+            canb[k] = 0;
+          }
+        }
+        hi = findMax(canb);
+      } else {
+        hi = 0;
+      }
+    }
+    int ma = findMax(hi);
+    int A = hi.indexOf(ma);
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n + 1];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextInt();
+      high[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < n; i++) {
+      int ma = 0;
+      int A = 0;
+      int B = 0;
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (ava[j + 2]) {
+          int canb = 0;
+          for (int k = 0; k < j + 1; k++) {
+            if (ava[k + 1]) {
+              canb = Math.max(canb, member[j][k]);
+            } else {
+              canb = 0;
+            }
+          }
+          high[j] = Math.max(high[j], canb);
+        } else {
+          high[j] = 0;
+        }
+        if (high[j] > ma) {
+          ma = high[j];
+          A = j;
+          B = member[j].indexOf(ma);
+        }
+      }
+      check(A + 2, B + 1);
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = new int[n];
+      for (int j = 0; j < n; j++) {
+        member[i][j] = sc.nextInt();
+      }
+      high[i] = getMax(member[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+      makHigh();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  private static int getMax(int[] arr) {
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        max = arr[i];
+      }
+    }
+    return max;
+  }
+
+  private static void makHigh() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[2 * n - 1];
+        for (int j = 0; j < i + 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 0;
+          }
+        }
+        hi[i] = getMax(canb);
+      } else {
+        hi[i] = 0;
+      }
+    }
+    int ma = getMax(hi);
+    int A = hi.indexOf(ma);
+    int B = member[A].indexOf(ma);
+    check(A + 2, B + 1);
+  }
+
+  private static void check(int a, int b) {
+    team
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            member[i] = sc.nextInt();
+            high[i] = member[i][member[i].length - 1];
+        }
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            if (ava[i + 2]) {
+                int[] canb = new int[member[i].length - 1];
+                for (int j = 0; j < member[i].length - 1; j++) {
+                    if (ava[j + 1]) {
+                        canb[j] = member[i][j];
+                    } else {
+                        canb[j] = 0;
+                    }
+                }
+                high[i] = Math.max(canb);
+            } else {
+                high[i] = 0;
+            }
+        }
+
+        int ma = Math.max(high);
+        int A = high.indexOf(ma);
+        int B = member[A].indexOf(ma);
+        check(A + 2, B + 1);
+
+        for (int i = 0; i < n; i++) {
+            mak_high();
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    public static void check(int a, int b) {
+        team[b] = a;
+        team[a] = b;
+        ava[b] = 0;
+        ava[a] = 0;
+    }
+
+    public static void mak_high() {
+        int[] hi = new int[2 * n - 1];
+        for (int i = 0; i < 2 * n - 1; i++) {
+            if (ava[i + 2]) {
+                int[] canb = new int[member[i].length
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextInt();
+      high[i] = member[i][member[i].length - 1];
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      int a = member[i][member[i].length - 1];
+      int b = member[i].length - 1;
+      team[b] = a;
+      team[a] = b;
+      ava[b] = 0;
+      ava[a] = 0;
+    }
+
+    for (int i = 0; i < n; i++) {
+      int[] canb = new int[member[i].length - 1];
+      for (int j = 0; j < member[i].length - 1; j++) {
+        if (ava[j + 1]) {
+          canb[j] = member[i][j];
+        } else {
+          canb[j] = 0;
+        }
+      }
+      int ma = max(canb);
+      int A = canb.indexOf(ma);
+      int B = member[A].indexOf(ma);
+      check(A + 2, B + 1);
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m < 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j < 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static int max(int[] arr) {
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        max = arr[i];
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n + 1];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      int a = sc.nextInt();
+      member[i] = a;
+      high[i] = sc.nextInt();
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[2 * n - 1];
+        for (int j = 0; j < i + 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 0;
+          }
+        }
+        high[i] = Math.max(canb);
+      } else {
+        high[i] = 0;
+      }
+    }
+
+    int ma = Math.max(high);
+    int A = high.indexOf(ma);
+    int B = member[A].indexOf(ma);
+    check(A + 2, B + 1);
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static void mak_high() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[2 * n - 1];
+        for (int j = 0; j <
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextInt();
+      high[i] = member[i][member[i].length - 1];
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      int max = 0;
+      for (int j = 0; j < member[i].length; j++) {
+        if (member[i][j] > max) {
+          max = member[i][j];
+        }
+      }
+      high[i] = max;
+    }
+
+    for (int i = 0; i < n; i++) {
+      int max = 0;
+      int a = 0;
+      int b = 0;
+      for (int j = 0; j < high.length; j++) {
+        if (high[j] > max) {
+          max = high[j];
+          a = j;
+          b = member[j].length - 1;
+        }
+      }
+      team[a + 2] = b + 1;
+      team[b + 1] = a + 2;
+      ava[a + 2] = 0;
+      ava[b + 1] = 0;
+      high[a] = 0;
+      high[b] = 0;
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int i = 1; i <= 2 * n + 1; i++) {
+      if (ava[i] == 1) {
+        last[i] = i;
+      }
+    }
+
+    for (int i = 1; i <= 2 * n + 1; i++) {
+      System.out.print(team[i] + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n + 1][2 * n + 1];
+    int[] high = new int[2 * n + 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      String[] input = sc.nextLine().split(" ");
+      for (int j = 0; j < 2 * n + 1; j++) {
+        member[i][j] = Integer.parseInt(input[j]);
+      }
+      high[i] = Integer.parseInt(input[2 * n]);
+    }
+
+    for (int i = 0; i < n; i++) {
+      int hi = 0;
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (ava[j + 2]) {
+          int canb = 0;
+          for (int k = 0; k < j + 1; k++) {
+            if (ava[k + 1]) {
+              canb = Math.max(canb, member[j][k]);
+            }
+          }
+          hi = Math.max(hi, canb);
+        }
+      }
+      int A = high.indexOf(hi);
+      int B = member[A].indexOf(hi);
+      check(A + 2, B + 1);
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            member[i] = sc.nextInt();
+            high[i] = member[i][0];
+            for (int j = 1; j < member[i].length; j++) {
+                if (high[i] < member[i][j]) {
+                    high[i] = member[i][j];
+                }
+            }
+        }
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            for (int j = 0; j < member[i].length; j++) {
+                if (ava[i + 2] && ava[j + 1]) {
+                    if (member[i][j] == high[i]) {
+                        check(i + 2, j + 1);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            mak_high();
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    public static void check(int a, int b) {
+        team[b] = a;
+        team[a] = b;
+        ava[b] = 0;
+        ava[a] = 0;
+    }
+
+    public static void mak_high() {
+        int[] hi = new int[2 * n - 1];
+        for (int i = 0; i < 2 * n - 1; i++) {
+            if (ava[i + 2]) {
+                int[] canb = new int[2 * n - 1];
+                for (int j = 0; j < i + 1; j++) {
+                    if (ava[j + 1]) {
+                        canb[j] = member[i][j];
+                    } else
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][2];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      String[] input = sc.nextLine().split(" ");
+      member[i][0] = Integer.parseInt(input[0]);
+      member[i][1] = Integer.parseInt(input[1]);
+      high[i] = Math.max(member[i][0], member[i][1]);
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[i + 1];
+        for (int j = 0; j < i + 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 0;
+          }
+        }
+        high[i] = Math.max(canb);
+      } else {
+        high[i] = 0;
+      }
+    }
+
+    int ma = Math.max(high);
+    int A = high.indexOf(ma);
+    int B = member[A][high[A] == member[A][0] ? 0 : 1];
+    check(A + 2, B + 1);
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static void mak_high() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            member[i] = new int[n];
+            for (int j = 0; j < n; j++) {
+                member[i][j] = scanner.nextInt();
+            }
+            high[i] = getMax(member[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            makHigh();
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    public static int getMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    public static void makHigh() {
+        int[] hi = new int[2 * n - 1];
+        for (int i = 0; i < 2 * n - 1; i++) {
+            if (ava[i + 2]) {
+                int[] canb = new int[n];
+                for (int j = 0; j < n; j++) {
+                    if (ava[j + 1]) {
+                        canb[j] = member[i][j];
+                    } else {
+                        canb[j] = 0;
+                    }
+                }
+                hi[i] = getMax(canb);
+            } else {
+                hi[i] = 0;
+            }
+        }
+        int ma = getMax(hi);
+        int A = hi.indexOf(ma);
+        int B = member[A].indexOf(ma);
+        check(A + 2, B + 1);
+    }
+
+    public static void check(int a, int b) {
+       
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            member[i] = sc.nextInt();
+            high[i] = member[i][member[i].length - 1];
+        }
+
+        for (int i = 0; i < n; i++) {
+            int[] canb = new int[member.length];
+            for (int j = 0; j < member.length; j++) {
+                if (ava[j + 1]) {
+                    canb[j] = member[i][j];
+                } else {
+                    canb[j] = 0;
+                }
+            }
+            int ma = max(canb);
+            int A = canb.indexOf(ma);
+            int B = member[A].indexOf(ma);
+            check(A + 2, B + 1);
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    public static void check(int a, int b) {
+        team[b] = a;
+        team[a] = b;
+        ava[b] = 0;
+        ava[a] = 0;
+    }
+
+    public static int max(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            member[i] = new int[2 * n - 1];
+            for (int j = 0; j < 2 * n - 1; j++) {
+                member[i][j] = sc.nextInt();
+            }
+            high[i] = findMax(member[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            int[] hi = new int[2 * n - 1];
+            for (int j = 0; j < 2 * n - 1; j++) {
+                if (ava[j + 2]) {
+                    int[] canb = new int[2 * n - 1];
+                    for (int k = 0; k < 2 * n - 1; k++) {
+                        if (ava[k + 1]) {
+                            canb[k] = member[j][k];
+                        } else {
+                            canb[k] = 0;
+                        }
+                    }
+                    hi[j] = findMax(canb);
+                } else {
+                    hi[j] = 0;
+                }
+            }
+            int ma = findMax(hi);
+            int A = hi.indexOf(ma);
+            int B = member[A].indexOf(ma);
+            check(A + 2, B + 1);
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    private static int findMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    private static void check(int a, int
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextLine().split(" ");
+      high[i] = Integer.parseInt(member[i][0]);
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (ava[j + 2] && member[i][j] > high[j]) {
+          check(j + 2, j + 1);
+          break;
+        }
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static void mak_high() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[2 * n - 1];
+        for (int j = 0; j < i + 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 0;
+          }
+        }
+        hi[i] = Math.max(canb);
+      } else {
+        hi[i] = 0;
+      }
+    }
+    int ma = Math.max(hi);
+   
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextLine().split(" ").map(Integer::parseInt).toArray(Integer[]::new);
+      high[i] = member[i][member[i].length - 1];
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[member[i].length - 1];
+        for (int j = 0; j < member[i].length - 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 0;
+          }
+        }
+        int ma = canb[canb.length - 1];
+        int A = canb.indexOf(ma);
+        int B = member[i].indexOf(ma);
+        check(A + 2, B + 1);
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static void mak_high() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[member[i].length - 1];
+        for (int j
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ava = new int[2 * n + 1];
+        int[] team = new int[2 * n + 1];
+        int[][] member = new int[2 * n - 1][];
+        int[] high = new int[2 * n - 1];
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            String[] input = sc.nextLine().split(" ");
+            member[i] = new int[input.length];
+            for (int j = 0; j < input.length; j++) {
+                member[i][j] = Integer.parseInt(input[j]);
+            }
+            high[i] = getMax(member[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            makHigh();
+        }
+
+        int[] last = new int[2 * n + 1];
+        for (int m = 1; m <= 2 * n + 1; m++) {
+            if (ava[m]) {
+                last[m] = m;
+            }
+        }
+
+        for (int j = 1; j <= 2 * n + 1; j++) {
+            System.out.print(team[j] + " ");
+        }
+    }
+
+    public static int getMax(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    public static void makHigh() {
+        int[] hi = new int[2 * n - 1];
+        for (int i = 0; i < 2 * n - 1; i++) {
+            if (ava[i + 2]) {
+                int[] canb = new int[i + 1];
+                for (int j = 0; j < i + 1; j++) {
+                    if (ava[j + 1]) {
+                        canb[j] = member[i][j];
+                    } else {
+                        canb[j] = 0;
+                    }
+                }
+                hi[i] = getMax(canb);
+            } else {
+                hi[i] = 0;
+            }
+        }
+        int ma = getMax(hi);
+        int A = hi.indexOf(ma);
+        int B = member[A].indexOf(ma);
+        check(A + 2,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextLine().split(" ");
+      high[i] = Integer.parseInt(member[i][member[i].length - 1]);
+    }
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      int max = high[i];
+      int A = -1;
+      int B = -1;
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (high[j] > max && ava[j + 2]) {
+          max = high[j];
+          A = j;
+          B = member[j].length - 1;
+        }
+      }
+      check(A + 2, B + 1);
+    }
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+
+  public static void mak_high() {
+    int[] hi = new int[2 * n - 1];
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        int[] canb = new int[member[i].length - 1];
+        for (int j = 0; j < member[i].length - 1; j++) {
+          if (ava[j + 1]) {
+            canb[j] = member[i][j];
+          } else {
+            canb[j] = 
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[][] member = new int[2 * n - 1][];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      member[i] = sc.nextLine().split(" ").map(Integer::parseInt).toArray(new int[0]);
+      high[i] = member[i].length > 0 ? member[i][member[i].length - 1] : 0;
+    }
+
+    for (int i = 0; i < n; i++) {
+      int maxHigh = 0;
+      int maxHighIndex = 0;
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (ava[j + 2] && high[j] > maxHigh) {
+          maxHigh = high[j];
+          maxHighIndex = j;
+        }
+      }
+      if (maxHigh > 0) {
+        int a = maxHighIndex + 2;
+        int b = member[maxHighIndex].length > 0 ? member[maxHighIndex][member[maxHighIndex].length - 1] : 0;
+        team[a] = b;
+        team[b] = a;
+        ava[a] = 0;
+        ava[b] = 0;
+      }
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int i = 1; i <= 2 * n + 1; i++) {
+      if (ava[i]) {
+        last[i] = i;
+      }
+    }
+
+    for (int i = 1; i <= 2 * n + 1; i++) {
+      System.out.print(team[i] + " ");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    List<int[]> member = new ArrayList<>();
+    List<Integer> high = new ArrayList<>();
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      int[] a = new int[sc.nextInt()];
+      member.add(a);
+      high.add(Collections.max(a));
+    }
+
+    for (int i = 0; i < n; i++) {
+      mak_high();
+    }
+
+    List<Integer> last = new ArrayList<>();
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last.add(m);
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  private static void mak_high() {
+    List<Integer> hi = new ArrayList<>();
+    for (int i = 0; i < 2 * n - 1; i++) {
+      if (ava[i + 2]) {
+        List<Integer> canb = new ArrayList<>();
+        for (int j = 0; j < i + 1; j++) {
+          if (ava[j + 1]) {
+            canb.add(member[i][j]);
+          } else {
+            canb.add(0);
+          }
+        }
+        hi.add(Collections.max(canb));
+      } else {
+        hi.add(0);
+      }
+    }
+    int ma = Collections.max(hi);
+    int A = hi.indexOf(ma);
+    int B = member[A].indexOf(ma);
+    check(A + 2, B + 1);
+  }
+
+  private static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] ava = new int[2 * n + 1];
+    int[] team = new int[2 * n + 1];
+    int[] member = new int[2 * n - 1][2];
+    int[] high = new int[2 * n - 1];
+
+    for (int i = 0; i < 2 * n - 1; i++) {
+      String[] input = sc.nextLine().split(" ");
+      member[i][0] = Integer.parseInt(input[0]);
+      member[i][1] = Integer.parseInt(input[1]);
+      high[i] = Math.max(member[i][0], member[i][1]);
+    }
+
+    for (int i = 0; i < n; i++) {
+      int[] hi = new int[2 * n - 1];
+      for (int j = 0; j < 2 * n - 1; j++) {
+        if (ava[j + 2]) {
+          int[] canb = new int[2 * n - 1];
+          for (int k = 0; k < j + 1; k++) {
+            if (ava[k + 1]) {
+              canb[k] = member[j][k];
+            } else {
+              canb[k] = 0;
+            }
+          }
+          hi[j] = Math.max(canb);
+        } else {
+          hi[j] = 0;
+        }
+      }
+      int ma = Math.max(hi);
+      int A = hi.indexOf(ma);
+      int B = member[A].indexOf(ma);
+      check(A + 2, B + 1);
+    }
+
+    int[] last = new int[2 * n + 1];
+    for (int m = 1; m <= 2 * n + 1; m++) {
+      if (ava[m]) {
+        last[m - 1] = m;
+      }
+    }
+
+    for (int j = 1; j <= 2 * n + 1; j++) {
+      System.out.print(team[j] + " ");
+    }
+  }
+
+  public static void check(int a, int b) {
+    team[b] = a;
+    team[a] = b;
+    ava[b] = 0;
+    ava[a] = 0;
+  }
+}
+
+[/JAVA]
+======

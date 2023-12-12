@@ -1,0 +1,1427 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  private static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  private static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  private static int sum(int[] list, int start, int end) {
+    int
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[] S = new int[N];
+        for (int i = 0; i < N; i++) {
+            S[i] = scanner.nextInt();
+        }
+        System.out.println(measureInsect(compress(S), K));
+    }
+
+    public static int[] compress(int[] list01) {
+        int n = list01.length;
+        int[] newList = new int[n];
+        int now = 1;
+        int count0 = 0;
+        int count1 = 0;
+        list01[n - 1] = (list01[n - 1] + 1) % 2;
+        for (int i = 0; i < n + 1; i++) {
+            int nex = list01[i];
+            if (now == 0) {
+                if (nex == 0) {
+                    count0++;
+                }
+                if (nex == 1) {
+                    count1++;
+                    newList[count0] = count1;
+                    count1 = 0;
+                }
+            }
+            if (now == 1) {
+                if (nex == 0) {
+                    count0++;
+                    newList[count1] = count0;
+                    count0 = 0;
+                }
+                if (nex == 1) {
+                    count1++;
+                }
+            }
+            now = nex;
+        }
+        if (list01[n - 2] == 0) {
+            newList[n - 1] = 0;
+        }
+        return newList;
+    }
+
+    public static int measureInsect(int[] mixedList, int k) {
+        int n = (mixedList.length - 1) / 2;
+        int now = 0;
+        for (int i = 0; i < 2 * k + 1; i++) {
+            now += mixedList[i];
+        }
+        int maximum = now;
+        for (int i = 0; i < n - k; i++) {
+            now -= mixedList[2 * i];
+            now -= mixedList[2 * i + 1];
+            now += mixedList[2 * i + 2 * k + 1];
+            now += mixedList[2 * i + 2 * k + 2];
+            if (now > maximum) {
+                maximum = now;
+            }
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int[] newList = new int[n];
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    int[] newList = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  public static int sum(int[] list, int start, int end) {
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int[] newList = new int[list01.length];
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0 += 1;
+        }
+        if (nex == 1) {
+          count1 += 1;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0 += 1;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1 += 1;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+   
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    int[] compressed = compress(S);
+    int maximum = measureInsect(compressed, K);
+    System.out.println(maximum);
+  }
+
+  public static int[] compress(int[] list) {
+    int n = list.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list[n] = (list[n - 1] + 1) % 2;
+    int[] newList = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  public static int sum(int[] list, int start,
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int[] newList = new int[list01.length];
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n - 1] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  public static int sum(int[] list, int start, int end
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  public static int sum(int[] arr, int start, int end) {
+    int sum = 0;
+    for (int i = start
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int[] newList = new int[list01.length];
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[count0] = count1;
+          count1 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[count1] = count0;
+          count0 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] S = new int[N];
+        for (int i = 0; i < N; i++) {
+            S[i] = sc.nextInt();
+        }
+        int[] compressed = compress(S);
+        System.out.println(measureInsect(compressed, K));
+    }
+
+    public static int[] compress(int[] list01) {
+        int n = list01.length;
+        int now = 1;
+        int count0 = 0;
+        int count1 = 0;
+        list01[n] = (list01[n - 1] + 1) % 2;
+        for (int i = 0; i < n + 1; i++) {
+            int nex = list01[i];
+            if (now == 0) {
+                if (nex == 0) {
+                    count0++;
+                }
+                if (nex == 1) {
+                    count1++;
+                    list01[i] = count0;
+                    count0 = 0;
+                }
+            }
+            if (now == 1) {
+                if (nex == 0) {
+                    count0++;
+                    list01[i] = count1;
+                    count1 = 0;
+                }
+                if (nex == 1) {
+                    count1++;
+                }
+            }
+            now = nex;
+        }
+        if (list01[n - 2] == 0) {
+            list01[n] = 0;
+        }
+        return list01;
+    }
+
+    public static int measureInsect(int[] mixedList, int k) {
+        int n = (mixedList.length - 1) / 2;
+        int now = 0;
+        for (int i = 0; i < 2 * k + 1; i++) {
+            now += mixedList[i];
+        }
+        int maximum = now;
+        for (int i = 0; i < n - k; i++) {
+            now -= mixedList[2 * i];
+            now -= mixedList[2 * i + 1];
+            now += mixedList[2 * i + 2 * k + 1];
+            now += mixedList[2 * i + 2 * k + 2];
+            if (now > maximum) {
+                maximum = now;
+            }
+        }
+        return maximum;
+    }
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int[] newList = new int[list01.length];
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[list01.length - 1] = (list01[list01.length - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[list01.length - 2] == 0) {
+      newList[newList.length - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    int[] newList = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+ 
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    int[] newList = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[count0] = count1;
+          count1 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[count1] = count0;
+          count0 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n - 1] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+}
+
+[/
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    int result = measureInsect(compressed, K);
+    System.out.println(result);
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          list01[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          list01[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      list01[n] = 0;
+    }
+    return list01;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = sum(mixedList, 0, 2 * k + 1);
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+  }
+
+  public static int sum(int[] arr, int start, int end) {
+    int sum
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int K = sc.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = sc.nextInt();
+    }
+    int[] compressed = compress(S);
+    System.out.println(measureInsect(compressed, K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n] = (list01[n - 1] + 1) % 2;
+    int[] newList = new int[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[i] = count0;
+          count0 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[i] = count1;
+          count1 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+    return maximum;
+
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int K = scanner.nextInt();
+    int[] S = new int[N];
+    for (int i = 0; i < N; i++) {
+      S[i] = scanner.nextInt();
+    }
+    System.out.println(measureInsect(compress(S), K));
+  }
+
+  public static int[] compress(int[] list01) {
+    int[] newList = new int[list01.length];
+    int n = list01.length;
+    int now = 1;
+    int count0 = 0;
+    int count1 = 0;
+    list01[n - 1] = (list01[n - 1] + 1) % 2;
+    for (int i = 0; i < n + 1; i++) {
+      int nex = list01[i];
+      if (now == 0) {
+        if (nex == 0) {
+          count0++;
+        }
+        if (nex == 1) {
+          count1++;
+          newList[count0] = count1;
+          count1 = 0;
+        }
+      }
+      if (now == 1) {
+        if (nex == 0) {
+          count0++;
+          newList[count1] = count0;
+          count0 = 0;
+        }
+        if (nex == 1) {
+          count1++;
+        }
+      }
+      now = nex;
+    }
+    if (list01[n - 2] == 0) {
+      newList[n - 1] = 0;
+    }
+    return newList;
+  }
+
+  public static int measureInsect(int[] mixedList, int k) {
+    int n = (mixedList.length - 1) / 2;
+    int now = 0;
+    for (int i = 0; i < 2 * k + 1; i++) {
+      now += mixedList[i];
+    }
+    int maximum = now;
+    for (int i = 0; i < n - k; i++) {
+      now -= mixedList[2 * i];
+      now -= mixedList[2 * i + 1];
+      now += mixedList[2 * i + 2 * k + 1];
+      now += mixedList[2 * i + 2 * k + 2];
+      if (now > maximum) {
+        maximum = now;
+      }
+    }
+   
+======

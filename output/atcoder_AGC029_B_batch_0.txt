@@ -1,0 +1,3159 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+      if (!d.containsKey(a[i])) {
+        d.put(a[i], 0);
+      }
+      d.put(a[i], d.get(a[i]) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a, (a, b) -> b - a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a[i])) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<Integer>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<Integer, Integer>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<Integer>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<Integer, Integer>();
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+      if (!d.containsKey(a.get(i))) {
+        d.put(a.get(i), 0);
+      }
+      d.put(a.get(i), d.get(a.get(i)) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a);
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.length; i++) {
+            if (d.get(a[i]) == 0) {
+                continue;
+            }
+            d.put(a[i], d.get(a[i]) - 1);
+            int y = (int) Math.pow(2, (int) Math.log(a[i]) + 1) - a[i];
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.BitSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+      if (!d.containsKey(a.get(i))) {
+        d.put(a.get(i), 0);
+      }
+      d.put(a.get(i), d.get(a.get(i)) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a[i])) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    scanner.close();
+
+    // Sort the array in descending order
+    Arrays.sort(a, Collections.reverseOrder());
+
+    // Create a map to keep track of the counts
+    Map<Integer, Integer> counts = new HashMap<>();
+    for (int x : a) {
+      if (!counts.containsKey(x)) {
+        counts.put(x, 0);
+      }
+      counts.put(x, counts.get(x) + 1);
+    }
+
+    // Iterate through the array and increment the counts
+    for (int i = 0; i < a.length; i++) {
+      if (counts.get(a[i]) == 0) {
+        continue;
+      }
+      counts.put(a[i], counts.get(a[i]) - 1);
+      int y = (int) Math.pow(2, Math.floor(Math.log(a[i]) / Math.log(2))) - a[i];
+      if (counts.containsKey(y) && counts.get(y) > 0) {
+        counts.put(y, counts.get(y) - 1);
+      }
+    }
+
+    // Print the final count
+    System.out.println(count
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        Collections.sort(a, Collections.reverseOrder());
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        scanner.close();
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (a[i] == 0) {
+                continue;
+            }
+            int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+            if (y > 0 && a[i] > 0) {
+                count++;
+            }
+        }
+
+        System.out.println(count);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. It uses the `Scanner` class to read input from the user, and it uses the `Math.pow()` method to calculate the power of 2. The rest of the code is similar to the Python code, with the exception of the `bitLength()` method, which is not available in Java.
+
+Note that the `bitLength()` method in Python returns the number of bits necessary to represent the integer in binary, while in Java, you can use the `Integer.bitCount()` method to achieve the same result.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    ArrayList<Integer> a = new ArrayList<>();
+    String[] input = scanner.nextLine().split(" ");
+    for (String s : input) {
+      a.add(Integer.parseInt(s));
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        Collections.sort(a, Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        a.sort(Collections.reverseOrder());
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (!d.containsKey(a.get(i))) {
+                d.put(a.get(i), 0);
+            }
+            d.put(a.get(i), d.get(a.get(i)) + 1);
+        }
+        for (int i = 0; i < n; i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        a.sort(Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a[i]) + 1) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Collections.sort(a, Collections.reverseOrder());
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, Math.floor(Math.log(a.get(i)) / Math.log(2))) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/J
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, (int) Math.log(x) + 1) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    scanner.close();
+
+    // Sort the array in descending order
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+
+    // Create a map to keep track of the counts
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+
+    // Iterate through the array and check for pairs
+    int count = 0;
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String[] input = scanner.nextLine().split(" ");
+    List<Integer> a = new ArrayList<>();
+    for (String s : input) {
+      a.add(Integer.parseInt(s));
+    }
+    a.sort(Comparator.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    sc.close();
+
+    // Sort the array in descending order
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+
+    // Create a HashMap to store the counts of each element
+    Map<Integer, Integer> d = new HashMap<>();
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 1);
+      } else {
+        d.put(x, d.get(x) + 1);
+      }
+    }
+
+    // Iterate through the array and increment the count for each element
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+      int x = a[i];
+      if (d.get(x) > 0) {
+        int y = (int) Math.pow(2, x.bitLength()) - x;
+        if (d.containsKey(y) && d.get(y) > 0) {
+          count++;
+          d.put(y, d.get(y) - 1);
+        }
+      }
+    }
+
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        Collections.sort(a, Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            int x = a.get(i);
+            if (d.get(x) == 0) {
+                continue;
+            }
+            d.put(x, d.get(x) - 1);
+            int y = (int) Math.pow(2, x.bitLength()) - x;
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(scanner.nextInt());
+        }
+        a.sort(Collections.reverseOrder());
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, (int) Math.log2(a.get(i))) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a.get(i))) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        Collections.sort(a, Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+      if (!d.containsKey(a[i])) {
+        d.put(a[i], 0);
+      }
+      d.put(a[i], d.get(a[i]) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        a.sort(Collections.reverseOrder());
+        Map<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (d.get(a.get(i)) == 0) {
+                continue;
+            }
+            d.put(a.get(i), d.get(a.get(i)) - 1);
+            int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a, Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.length; i++) {
+            if (d.get(a[i]) == 0) {
+                continue;
+            }
+            d.put(a[i], d.get(a[i]) - 1);
+            int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    a = sort(a, true);
+    int count = 0;
+    HashMap<Integer, Integer> d = new HashMap<>();
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < n; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a[i])) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+
+  public static int[] sort(int[] a, boolean reverse) {
+    int[] b = new int[a.length];
+    for (int i = 0; i < a.length; i++) {
+      b[i] = a[i];
+    }
+    for (int i
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+      if (!d.containsKey(a.get(i))) {
+        d.put(a.get(i), 0);
+      }
+      d.put(a.get(i), d.get(a.get(i)) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a);
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String[] input = scanner.nextLine().split(" ");
+    List<Integer> a = new ArrayList<>();
+    for (String s : input) {
+      a.add(Integer.parseInt(s));
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a.get(i))) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        a.sort(Collections.reverseOrder());
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.size(); i++) {
+            int x = a.get(i);
+            if (d.get(x) == 0) {
+                continue;
+            }
+            d.put(x, d.get(x) - 1);
+            int y = (int) Math.pow(2, x.bitLength()) - x;
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      int x = a.get(i);
+      if (d.get(x) == 0) {
+        continue;
+      }
+      d.put(x, d.get(x) - 1);
+      int y = (int) Math.pow(2, x.bitLength()) - x;
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, (int) Math.log2(a.get(i))) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    sc.close();
+
+    // Sort the array in descending order
+    Arrays.sort(a, Collections.reverseOrder());
+
+    // Create a hash map to store the count of each number
+    Map<Integer, Integer> countMap = new HashMap<>();
+
+    // Iterate through the array and increment the count of each number
+    for (int i = 0; i < n; i++) {
+      if (!countMap.containsKey(a[i])) {
+        countMap.put(a[i], 0);
+      }
+      countMap.put(a[i], countMap.get(a[i]) + 1);
+    }
+
+    // Iterate through the array again and check if the count of each number is greater than 0
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+      if (countMap.get(a[i]) > 0) {
+        int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+        if (countMap.containsKey(y) && countMap.get(y) > 0) {
+          count++;
+          countMap.put(y, countMap.get(y) - 1);
+        }
+      }
+    }
+
+    System.out.println(count);
+  }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    scanner.nextLine();
+    String[] input = scanner.nextLine().split(" ");
+    ArrayList<Integer> a = new ArrayList<>();
+    for (String s : input) {
+      a.add(Integer.parseInt(s));
+    }
+    Collections.sort(a, Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    Map<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(scanner.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        Arrays.sort(a);
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < n; i++) {
+            if (d.get(a[i]) == 0) {
+                continue;
+            }
+            d.put(a[i], d.get(a[i]) - 1);
+            int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a, (a1, a2) -> a2 - a1);
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] == 0) {
+        continue;
+      }
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (y > 0 && a[i] > 0) {
+        count++;
+        a[i]--;
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+
+This is a straightforward conversion of the Python code to Java. The main differences are:
+
+* In Java, we use the `Scanner` class to read input from the console, rather than the `input()` function in Python.
+* In Java, we use the `Arrays.sort()` method to sort the array in descending order, rather than the `sort()` method with the `reverse` parameter in Python.
+* In Java, we use the `Math.pow()` method to calculate the power of 2, rather than the `**` operator in Python.
+* In Java, we use the `bitLength()` method to get the number of bits in an integer, rather than the `bit_length()` attribute in Python.
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    Arrays.sort(a);
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.length; i++) {
+      if (d.get(a[i]) == 0) {
+        continue;
+      }
+      d.put(a[i], d.get(a[i]) - 1);
+      int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count++;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        Arrays.sort(a, (a1, a2) -> a2 - a1);
+        HashMap<Integer, Integer> d = new HashMap<>();
+        int count = 0;
+        for (int x : a) {
+            if (!d.containsKey(x)) {
+                d.put(x, 0);
+            }
+            d.put(x, d.get(x) + 1);
+        }
+        for (int i = 0; i < a.length; i++) {
+            if (d.get(a[i]) == 0) {
+                continue;
+            }
+            d.put(a[i], d.get(a[i]) - 1);
+            int y = (int) Math.pow(2, a[i].bitLength()) - a[i];
+            if (d.containsKey(y) && d.get(y) > 0) {
+                count++;
+                d.put(y, d.get(y) - 1);
+            }
+        }
+        System.out.println(count);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> a = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      a.add(sc.nextInt());
+    }
+    a.sort(Collections.reverseOrder());
+    HashMap<Integer, Integer> d = new HashMap<>();
+    int count = 0;
+    for (int x : a) {
+      if (!d.containsKey(x)) {
+        d.put(x, 0);
+      }
+      d.put(x, d.get(x) + 1);
+    }
+    for (int i = 0; i < a.size(); i++) {
+      if (d.get(a.get(i)) == 0) {
+        continue;
+      }
+      d.put(a.get(i), d.get(a.get(i)) - 1);
+      int y = (int) Math.pow(2, a.get(i).bitLength()) - a.get(i);
+      if (d.containsKey(y) && d.get(y) > 0) {
+        count += 1;
+        d.put(y, d.get(y) - 1);
+      }
+    }
+    System.out.println(count);
+  }
+}
+[/JAVA]
+======

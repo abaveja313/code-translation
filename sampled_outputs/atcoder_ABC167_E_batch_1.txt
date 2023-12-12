@@ -1,0 +1,1020 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    long ans = 0;
+
+    long[] fact = new long[1000001];
+    long[] factinv = new long[1000001];
+    long[] inv = new long[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += (m * (long)Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod)) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long cmb(long n, long r, long p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    long val = 1;
+    for (int i = n - r + 1; i <= n; i++) {
+      val = (val * i) % p;
+    }
+    for (int i = 1; i <= r; i++) {
+      val = (val * inv[i]) % p;
+    }
+    return val;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    // Calculate factorials and their inverses
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+    for (int i = 2; i < 1000001; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    // Calculate combinations
+    for (int i = 0; i <= k; i++) {
+      ans += m * pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    // Print result
+    System.out.println(ans);
+  }
+
+  // Combinations function
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (fact[n] * factinv[r] * factinv[n - r]) % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[n + 1];
+    int[] factinv = new int[n + 1];
+    int[] inv = new int[n + 1];
+
+    for (int i = 2; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return fact[n] * factinv[r] * factinv[n - r] % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (fact[n] * factinv[r] * factinv[n - r]) % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        long ans = 0;
+
+        long[] fact = new long[1000001];
+        long[] factinv = new long[1000001];
+        long[] inv = new long[1000001];
+
+        fact[0] = 1;
+        fact[1] = 1;
+        factinv[0] = 1;
+        factinv[1] = 1;
+        inv[0] = 0;
+        inv[1] = 1;
+
+        for (int i = 2; i <= 1000000; i++) {
+            fact[i] = (fact[i - 1] * i) % mod;
+            inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+            factinv[i] = (factinv[i - 1] * inv[i]) % mod;
+        }
+
+        for (int i = 0; i <= k; i++) {
+            ans += m * (long) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long cmb(int n, int r, int p) {
+        if (r < 0 || n < r) {
+            return 0;
+        }
+        r = Math.min(r, n - r);
+        return (fact[n] * factinv[r] * factinv[n - r]) % p;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        long m = sc.nextLong();
+        long k = sc.nextLong();
+        long mod = 998244353L;
+        long ans = 0;
+
+        long[] fact = new long[1000001];
+        fact[0] = 1;
+        fact[1] = 1;
+        for (int i = 2; i <= 1000000; i++) {
+            fact[i] = (fact[i - 1] * i) % mod;
+        }
+
+        long[] factinv = new long[1000001];
+        factinv[0] = 1;
+        factinv[1] = 1;
+        for (int i = 2; i <= 1000000; i++) {
+            factinv[i] = (factinv[i - 1] * (mod - mod / i)) % mod;
+        }
+
+        long[] inv = new long[1000001];
+        inv[0] = 0;
+        inv[1] = 1;
+        for (int i = 2; i <= 1000000; i++) {
+            inv[i] = (inv[i - 1] * (mod - mod / i)) % mod;
+        }
+
+        for (int i = 0; i <= k; i++) {
+            ans += m * pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static long pow(long x, long y, long mod) {
+        if (y == 0) {
+            return 1;
+        }
+        long z = pow(x, y / 2, mod);
+        z = (z * z) % mod;
+        if (y % 2 == 1) {
+            z = (z * x) % mod;
+        }
+        return z;
+    }
+
+    private static long cmb(long n, long r, long mod) {
+        if (r < 0 || n < r) {
+            return 0;
+        }
+        r = Math.min(r, n - r);
+        return (fact[n] * factinv[r] * factinv[n - r]) % mod;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    long mod = 998244353;
+    long ans = 0;
+
+    long[] fact = new long[n + 1];
+    long[] factinv = new long[n + 1];
+    long[] inv = new long[n + 1];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i, mod) * comb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r, long p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return fact[n] * factinv[r] * factinv[n - r] % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int k = scanner.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i) % mod * comb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return fact[n] * factinv[r] * factinv[n - r] % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    // Function to calculate combination
+    int cmb(int n, int r, int p) {
+      if (r < 0 || n < r) {
+        return 0;
+      }
+      r = Math.min(r, n - r);
+      return fact[n] * factinv[r] * factinv[n - r] % p;
+    }
+
+    // Initialize variables
+    int p = mod;
+    int N = 1000000;
+    int[] fact = new int[N + 1];
+    int[] factinv = new int[N + 1];
+    int[] inv = new int[N + 1];
+
+    // Calculate factorials and inverses
+    fact[0] = 1;
+    fact[1] = 1;
+    for (int i = 2; i <= N; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+      inv[i] = (-inv[p % i] * (p / i)) % p;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % p;
+    }
+
+    // Calculate answer
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, p);
+      ans %= mod;
+    }
+
+    // Print answer
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int k = scanner.nextInt();
+        int mod = 998244353;
+        int ans = 0;
+
+        int[] fact = new int[1000001];
+        int[] factinv = new int[1000001];
+        int[] inv = new int[1000001];
+
+        fact[0] = 1;
+        fact[1] = 1;
+        factinv[0] = 1;
+        factinv[1] = 1;
+        inv[0] = 0;
+        inv[1] = 1;
+
+        for (int i = 2; i < 1000001; i++) {
+            fact[i] = (fact[i - 1] * i) % mod;
+            inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+            factinv[i] = (factinv[i - 1] * inv[i]) % mod;
+        }
+
+        for (int i = 0; i < k + 1; i++) {
+            ans += m * pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod) % mod;
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    private static int cmb(int n, int r, int p) {
+        if (r < 0 || n < r) {
+            return 0;
+        }
+        r = Math.min(r, n - r);
+        return fact[n] * factinv[r] * factinv[n - r] % p;
+    }
+
+    private static int pow(int x, int y, int p) {
+        int res = 1;
+        while (y > 0) {
+            if (y % 2 == 1) {
+                res = (res * x) % p;
+            }
+            y /= 2;
+            x = (x * x) % p;
+        }
+        return res;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return fact[n] * factinv[r] * factinv[n - r] % p;
+  }
+
+  public static int pow(int x, int y, int p) {
+    int res = 1;
+    while (y > 0) {
+      if (y % 2 == 1) {
+        res = (res * x) % p;
+      }
+      y /= 2;
+      x = (x * x) % p;
+    }
+    return res;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    int num = fact[n];
+    int den = factinv[r] * factinv[n - r] % p;
+    return (num * den) % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int k = scanner.nextInt();
+        int mod = 998244353;
+        long ans = 0;
+
+        long[] fact = new long[1000001];
+        long[] factinv = new long[1000001];
+        long[] inv = new long[1000001];
+
+        fact[0] = 1;
+        fact[1] = 1;
+        factinv[0] = 1;
+        factinv[1] = 1;
+        inv[0] = 0;
+        inv[1] = 1;
+
+        for (int i = 2; i <= 1000000; i++) {
+            fact[i] = (fact[i - 1] * i) % mod;
+            inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+            factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+        }
+
+        for (int i = 0; i <= k; i++) {
+            ans += m * (long)Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod) % mod;
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static long cmb(long n, long r, long p) {
+        if (r < 0 || n < r) {
+            return 0;
+        }
+        r = Math.min(r, n - r);
+        long result = fact[n] * factinv[r] * factinv[n - r] % p;
+        return result;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    long ans = 0;
+
+    long[] fact = new long[1000001];
+    long[] factinv = new long[1000001];
+    long[] inv = new long[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i, mod) * comb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static long comb(int n, int r, int mod) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (fact[n] * factinv[r] * factinv[n - r]) % mod;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return fact[n] * factinv[r] * factinv[n - r] % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int k = sc.nextInt();
+        int mod = 998244353;
+        int ans = 0;
+
+        int[] fact = new int[n + 1];
+        int[] factinv = new int[n + 1];
+        int[] inv = new int[n + 1];
+
+        fact[0] = 1;
+        fact[1] = 1;
+        factinv[0] = 1;
+        factinv[1] = 1;
+        inv[0] = 0;
+        inv[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % mod;
+            inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+            factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+        }
+
+        for (int i = 0; i <= k; i++) {
+            ans += m * pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+            ans %= mod;
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int cmb(int n, int r, int p) {
+        if (r < 0 || n < r) {
+            return 0;
+        }
+        r = Math.min(r, n - r);
+        return fact[n] * factinv[r] * factinv[n - r] % p;
+    }
+
+    public static int pow(int a, int b, int p) {
+        int res = 1;
+        while (b > 0) {
+            if (b % 2 == 1) {
+                res = (res * a) % p;
+            }
+            a = (a * a) % p;
+            b /= 2;
+        }
+        return res;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i < 1000001; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int)Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (int)((fact[n] * factinv[r] * factinv[n - r]) % p);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int m = scanner.nextInt();
+    int k = scanner.nextInt();
+    int mod = 998244353;
+    long ans = 0;
+
+    long[] fact = new long[1000001];
+    long[] factinv = new long[1000001];
+    long[] inv = new long[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i) * comb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static long comb(long n, long r, long mod) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (fact[n] * factinv[r] * factinv[n - r]) % mod;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * (int) Math.pow(m - 1, n - 1 - i, mod) * cmb(n - 1, i, mod);
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int cmb(int n, int r, int p) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    int numerator = fact[n];
+    int denominator = factinv[r] * factinv[n - r];
+    return (numerator * denominator) % p;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int k = sc.nextInt();
+    int mod = 998244353;
+    int ans = 0;
+
+    int[] fact = new int[1000001];
+    int[] factinv = new int[1000001];
+    int[] inv = new int[1000001];
+
+    fact[0] = 1;
+    fact[1] = 1;
+    factinv[0] = 1;
+    factinv[1] = 1;
+    inv[0] = 0;
+    inv[1] = 1;
+
+    for (int i = 2; i <= 1000000; i++) {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = (-inv[mod % i] * (mod / i)) % mod;
+      factinv[i] = (factinv[i - 1] * inv[i - 1]) % mod;
+    }
+
+    for (int i = 0; i <= k; i++) {
+      ans += m * Math.pow(m - 1, n - 1 - i) * comb(n - 1, i, mod) % mod;
+      ans %= mod;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int comb(int n, int r, int mod) {
+    if (r < 0 || n < r) {
+      return 0;
+    }
+    r = Math.min(r, n - r);
+    return (fact[n] * factinv[r] * factinv[n - r]) % mod;
+  }
+}
+
+[/JAVA]
+======

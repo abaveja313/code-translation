@@ -1,0 +1,3091 @@
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+
+        Arrays.sort(red, (a, b) -> (b[1] - a[1]));
+        Arrays.sort(blue, (a, b) -> (a[0] - b[0]));
+
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, Comparator.comparingInt(a -> a[1]).reversed());
+    Arrays.sort(blue, Comparator.comparingInt(a -> a[0]));
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o2[1] - o1[1];
+      }
+    });
+
+    Arrays.sort(blue, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0] - o2[0];
+      }
+    });
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> red = new ArrayList<>();
+    ArrayList<Integer> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(sc.nextInt());
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(sc.nextInt());
+    }
+    Collections.sort(red, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+      }
+    });
+    Collections.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue.get(j) > red.get(i)) {
+          ans++;
+          red.set(i, Integer.MAX_VALUE);
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i] = new int[] {sc.nextInt(), sc.nextInt()};
+            blue[i] = new int[] {sc.nextInt(), sc.nextInt()};
+        }
+        Arrays.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[1] - b[1];
+            }
+        });
+        Arrays.sort(blue, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
+            }
+        });
+        int ans = 0;
+        for (int[] b : blue) {
+            for (int i = 0; i < N; i++) {
+                if (b[0] > red[i][0] && b[1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<List<Integer>> red = new ArrayList<>();
+    List<List<Integer>> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(Arrays.asList(sc.nextInt(), sc.nextInt()));
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(Arrays.asList(sc.nextInt(), sc.nextInt()));
+    }
+    Collections.sort(red, (a, b) -> b[1] - a[1]);
+    Collections.sort(blue, (a, b) -> a[1] - b[1]);
+    int ans = 0;
+    for (List<Integer> b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b.get(0) > red.get(i).get(0) && b.get(1) > red.get(i).get(1)) {
+          ans++;
+          red.get(i).set(0, Integer.MAX_VALUE);
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return a[1] - b[1];
+      }
+    });
+
+    Arrays.sort(blue, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return a[0] - b[0];
+      }
+    });
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red[i][0] && b[1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+        Arrays.sort(blue, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, Comparator.comparingInt(a -> a[1]));
+    Arrays.sort(blue, Comparator.comparingInt(a -> a[0]));
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      red.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    Collections.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return Integer.compare(a[1], b[1]);
+      }
+    });
+
+    Collections.sort(blue, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return Integer.compare(a[0], b[0]);
+      }
+    });
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+        Arrays.sort(blue, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, Comparator.comparingInt(a -> a[1]).reversed());
+    Arrays.sort(blue);
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red[i][0] && b[1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i] = new int[] {sc.nextInt(), sc.nextInt()};
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i] = new int[] {sc.nextInt(), sc.nextInt()};
+    }
+
+    Arrays.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return a[1] - b[1];
+      }
+    });
+
+    Arrays.sort(blue, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return a[0] - b[0];
+      }
+    });
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i] = sc.nextInt();
+        }
+        Arrays.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+        Arrays.sort(blue, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[i][0] > red[j][0] && blue[i][1] > red[j][1]) {
+                    ans++;
+                    red[j][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      int[] redCoord = new int[2];
+      redCoord[0] = sc.nextInt();
+      redCoord[1] = sc.nextInt();
+      red.add(redCoord);
+    }
+
+    for (int i = 0; i < N; i++) {
+      int[] blueCoord = new int[2];
+      blueCoord[0] = sc.nextInt();
+      blueCoord[1] = sc.nextInt();
+      blue.add(blueCoord);
+    }
+
+    Collections.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o2[1] - o1[1];
+      }
+    });
+
+    Collections.sort(blue, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0] - o2[0];
+      }
+    });
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, Comparator.comparingInt(a -> a[1]));
+    Arrays.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      int[] redCoord = {sc.nextInt(), sc.nextInt()};
+      red.add(redCoord);
+    }
+
+    for (int i = 0; i < N; i++) {
+      int[] blueCoord = {sc.nextInt(), sc.nextInt()};
+      blue.add(blueCoord);
+    }
+
+    Collections.sort(red, (a, b) -> b[1] - a[1]);
+    Collections.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int[] blueCoord : blue) {
+      for (int i = 0; i < N; i++) {
+        if (blueCoord[0] > red.get(i)[0] && blueCoord[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            red[i][0] = scanner.nextInt();
+            red[i][1] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = scanner.nextInt();
+            blue[i][1] = scanner.nextInt();
+        }
+
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i] = new int[] {sc.nextInt(), sc.nextInt()};
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i] = new int[] {sc.nextInt(), sc.nextInt()};
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> red = new ArrayList<>();
+    ArrayList<Integer> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(sc.nextInt());
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(sc.nextInt());
+    }
+    Collections.sort(red, Collections.reverseOrder());
+    Collections.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < blue.size(); i++) {
+      int bx = blue.get(i);
+      int by = blue.get(i + 1);
+      for (int j = 0; j < red.size(); j++) {
+        int rx = red.get(j);
+        int ry = red.get(j + 1);
+        if (bx > rx && by > ry) {
+          ans++;
+          red.set(j, Integer.MAX_VALUE);
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<Integer> red = new ArrayList<>();
+        ArrayList<Integer> blue = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            red.add(sc.nextInt());
+        }
+        for (int i = 0; i < N; i++) {
+            blue.add(sc.nextInt());
+        }
+        Collections.sort(red, (a, b) -> b.compareTo(a));
+        Collections.sort(blue);
+        int ans = 0;
+        for (int i = 0; i < blue.size(); i++) {
+            for (int j = 0; j < red.size(); j++) {
+                if (blue.get(i) > red.get(j)) {
+                    ans++;
+                    red.set(j, Integer.MAX_VALUE);
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      red.add(temp);
+    }
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      blue.add(temp);
+    }
+    Collections.sort(red, (o1, o2) -> o2[1] - o1[1]);
+    Collections.sort(blue);
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+    Collections.sort(red, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o2[1] - o1[1];
+      }
+    });
+    Collections.sort(blue);
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.set(i, new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE});
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> Integer.compare(b[1], a[1]));
+        Arrays.sort(blue, (a, b) -> Integer.compare(a[0], b[0]));
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> red = new ArrayList<>();
+    ArrayList<Integer> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(sc.nextInt());
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(sc.nextInt());
+    }
+    Collections.sort(red, Collections.reverseOrder());
+    Collections.sort(blue);
+    int ans = 0;
+    for (int i = 0; i < blue.size(); i++) {
+      for (int j = 0; j < red.size(); j++) {
+        if (blue.get(i) > red.get(j)) {
+          ans++;
+          red.set(j, Integer.MAX_VALUE);
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<int[]> red = new ArrayList<>();
+    List<int[]> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      red.add(temp);
+    }
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      blue.add(temp);
+    }
+    red.sort(Comparator.comparing(a -> a[1]).reversed());
+    blue.sort(Comparator.comparing(a -> a[0]));
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.set(i, new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE});
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<int[]> red = new ArrayList<>();
+    List<int[]> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      red.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+    for (int i = 0; i < N; i++) {
+      blue.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+    Collections.sort(red, (a, b) -> b[1] - a[1]);
+    Collections.sort(blue);
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      red.add(temp);
+    }
+
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      blue.add(temp);
+    }
+
+    red.sort(Comparator.comparing(a -> a[1]).reversed());
+    blue.sort(Comparator.comparing(a -> a[0]));
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<int[]> red = new ArrayList<>();
+        ArrayList<int[]> blue = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int[] r = new int[2];
+            r[0] = sc.nextInt();
+            r[1] = sc.nextInt();
+            red.add(r);
+        }
+        for (int i = 0; i < N; i++) {
+            int[] b = new int[2];
+            b[0] = sc.nextInt();
+            b[1] = sc.nextInt();
+            blue.add(b);
+        }
+        Collections.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+        Collections.sort(blue);
+        int ans = 0;
+        for (int[] b : blue) {
+            for (int i = 0; i < N; i++) {
+                if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+                    ans++;
+                    red.get(i)[0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<int[]> red = new ArrayList<int[]>();
+        ArrayList<int[]> blue = new ArrayList<int[]>();
+        for (int i = 0; i < N; i++) {
+            int[] temp = new int[2];
+            temp[0] = sc.nextInt();
+            temp[1] = sc.nextInt();
+            red.add(temp);
+        }
+        for (int i = 0; i < N; i++) {
+            int[] temp = new int[2];
+            temp[0] = sc.nextInt();
+            temp[1] = sc.nextInt();
+            blue.add(temp);
+        }
+        Collections.sort(red, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[1] - b[1];
+            }
+        });
+        Collections.sort(blue);
+        int ans = 0;
+        for (int[] b : blue) {
+            for (int i = 0; i < N; i++) {
+                if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+                    ans++;
+                    red.get(i)[0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      int[] r = new int[2];
+      r[0] = sc.nextInt();
+      r[1] = sc.nextInt();
+      red.add(r);
+    }
+
+    for (int i = 0; i < N; i++) {
+      int[] b = new int[2];
+      b[0] = sc.nextInt();
+      b[1] = sc.nextInt();
+      blue.add(b);
+    }
+
+    red.sort(Comparator.comparing(r -> r[1]).reversed());
+    blue.sort(Comparator.comparing(b -> b[0]));
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+
+        Arrays.sort(red, Comparator.comparingInt(a -> a[1]).reversed());
+        Arrays.sort(blue, Comparator.comparingInt(a -> a[0]));
+
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, Comparator.comparingInt(a -> a[1]));
+        Arrays.sort(blue, Comparator.comparingInt(a -> a[0]));
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, Comparator.comparingInt(a -> a[1]).reversed());
+    Arrays.sort(blue);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+
+This is the equivalent Java code for the given Python code. The code uses the `java.util` package for input and output operations, and the `Arrays` class for sorting the arrays. The `lambda` function is replaced with a method reference, and the `INF` and `MOD` constants are replaced with the `Integer.MAX_VALUE` and `1000000007` constants, respectively. The `LI` and `NI` functions are replaced with the `Scanner` class, and the `range` function is replaced with a `for` loop. The `bisect` and `collections` modules are not needed in Java, as the `Arrays` class provides similar functionality. The `heapq` module is
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<int[]> red = new ArrayList<>();
+        List<int[]> blue = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int[] arr = new int[2];
+            arr[0] = sc.nextInt();
+            arr[1] = sc.nextInt();
+            red.add(arr);
+        }
+        for (int i = 0; i < N; i++) {
+            int[] arr = new int[2];
+            arr[0] = sc.nextInt();
+            arr[1] = sc.nextInt();
+            blue.add(arr);
+        }
+        Collections.sort(red, (a, b) -> b[1] - a[1]);
+        Collections.sort(blue);
+        int ans = 0;
+        for (int[] b : blue) {
+            for (int i = 0; i < N; i++) {
+                if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+                    ans++;
+                    red.get(i)[0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[1] - b[1]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i] = new int[] {sc.nextInt(), sc.nextInt()};
+            blue[i] = new int[] {sc.nextInt(), sc.nextInt()};
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i] = new int[] {sc.nextInt(), sc.nextInt()};
+      blue[i] = new int[] {sc.nextInt(), sc.nextInt()};
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[1] - b[1]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[i][0] > red[j][0] && blue[i][1] > red[j][1]) {
+          ans++;
+          red[j][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> red = new ArrayList<>();
+    ArrayList<Integer> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      red.add(sc.nextInt());
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue.add(sc.nextInt());
+    }
+
+    Collections.sort(red, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+
+    Collections.sort(blue, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+      }
+    });
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue.get(j) > red.get(i)) {
+          ans++;
+          red.set(i, Integer.MAX_VALUE);
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        ArrayList<Integer> red = new ArrayList<>();
+        ArrayList<Integer> blue = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            red.add(sc.nextInt());
+        }
+        for (int i = 0; i < N; i++) {
+            blue.add(sc.nextInt());
+        }
+        Collections.sort(red, (a, b) -> b.compareTo(a));
+        Collections.sort(blue);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue.get(j) > red.get(i) && blue.get(j) > red.get(i)) {
+                    ans++;
+                    red.set(i, Integer.MAX_VALUE);
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is a basic implementation of the Python code in Java. It uses the `Scanner` class to read input from the user, and the `ArrayList` class to store the red and blue points. The `Collections` class is used to sort the red and blue points. The `Integer` class is used to represent the infinity value.
+
+The main method first reads the number of points `N` from the user, and then reads `N` red and `N` blue points into two `ArrayList`s. It then sorts the red and blue points using the `Collections.sort` method, with the red points sorted in descending order and the blue points sorted in ascending order.
+
+The next step is to iterate through the blue points and check if they are greater than the red points. If a blue point is greater than a red point, we increment the answer and set the red point to infinity. This is done using
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[1] - b[1]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      red.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    red.sort((a, b) -> b[1] - a[1]);
+    blue.sort((a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.set(i, new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE});
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      red.add(new int[]{sc.nextInt(), sc.nextInt()});
+      blue.add(new int[]{sc.nextInt(), sc.nextInt()});
+    }
+
+    Collections.sort(red, (a, b) -> a[1] - b[1]);
+    Collections.sort(blue);
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      int[] redCoord = new int[2];
+      redCoord[0] = sc.nextInt();
+      redCoord[1] = sc.nextInt();
+      red.add(redCoord);
+    }
+    for (int i = 0; i < N; i++) {
+      int[] blueCoord = new int[2];
+      blueCoord[0] = sc.nextInt();
+      blueCoord[1] = sc.nextInt();
+      blue.add(blueCoord);
+    }
+    Collections.sort(red, (a, b) -> b[1] - a[1]);
+    Collections.sort(blue, (a, b) -> a[0] - b[0]);
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue);
+        int ans = 0;
+        for (int[] b : blue) {
+            for (int i = 0; i < N; i++) {
+                if (b[0] > red[i][0] && b[1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      red.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue.add(new int[] {sc.nextInt(), sc.nextInt()});
+    }
+
+    Collections.sort(red, (a, b) -> b[1] - a[1]);
+    Collections.sort(blue);
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.set(i, new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE});
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i][0] = sc.nextInt();
+            red[i][1] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i][0] = sc.nextInt();
+            blue[i][1] = sc.nextInt();
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[][] red = new int[N][2];
+    int[][] blue = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      red[i][0] = sc.nextInt();
+      red[i][1] = sc.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      blue[i][0] = sc.nextInt();
+      blue[i][1] = sc.nextInt();
+    }
+
+    Arrays.sort(red, (a, b) -> b[1] - a[1]);
+    Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+          ans++;
+          red[i][0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] red = new int[N][2];
+        int[][] blue = new int[N][2];
+        for (int i = 0; i < N; i++) {
+            red[i] = new int[]{sc.nextInt(), sc.nextInt()};
+        }
+        for (int i = 0; i < N; i++) {
+            blue[i] = new int[]{sc.nextInt(), sc.nextInt()};
+        }
+        Arrays.sort(red, (a, b) -> b[1] - a[1]);
+        Arrays.sort(blue, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blue[j][0] > red[i][0] && blue[j][1] > red[i][1]) {
+                    ans++;
+                    red[i][0] = Integer.MAX_VALUE;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<int[]> red = new ArrayList<>();
+    ArrayList<int[]> blue = new ArrayList<>();
+
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      red.add(temp);
+    }
+
+    for (int i = 0; i < N; i++) {
+      int[] temp = new int[2];
+      temp[0] = sc.nextInt();
+      temp[1] = sc.nextInt();
+      blue.add(temp);
+    }
+
+    red.sort(Comparator.comparingInt(a -> a[1]).reversed());
+    blue.sort(Comparator.comparingInt(a -> a[0]));
+
+    int ans = 0;
+    for (int[] b : blue) {
+      for (int i = 0; i < N; i++) {
+        if (b[0] > red.get(i)[0] && b[1] > red.get(i)[1]) {
+          ans++;
+          red.get(i)[0] = Integer.MAX_VALUE;
+          break;
+        }
+      }
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

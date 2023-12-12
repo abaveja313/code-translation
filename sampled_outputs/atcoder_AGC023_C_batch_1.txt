@@ -1,0 +1,773 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n];
+        int[] invFact = new int[n];
+        int[] rf = new int[n];
+
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+
+        invFact[n - 1] = (int) Math.pow(fact[n - 1], p - 2) % p;
+        for (int i = n - 2; i >= 0; i--) {
+            invFact[i] = (invFact[i + 1] * (i + 1)) % p;
+        }
+
+        rf[n - 1] = invFact[0];
+        for (int i = n - 2; i >= 0; i--) {
+            rf[i] = (rf[i + 1] * (i + 1)) % p;
+        }
+
+        int ans = 0;
+        int perm = 0;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm_ = (fact[k - 1] * rf[2 * k - n] % p) * fact[k] % p;
+            ans += (perm_ - perm) % p * k % p;
+            ans %= p;
+            perm = perm_;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n];
+    int[] invFact = new int[n];
+    int[] rf = new int[n];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invFact[n - 1] = (int) Math.pow(fact[n - 1], p - 2) % p;
+    for (int i = n - 2; i >= 0; i--) {
+      invFact[i] = (invFact[i + 1] * (i + 1)) % p;
+    }
+
+    int ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invFact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n];
+        int[] invfact = new int[n];
+        int m = n - 1;
+        fact[0] = 1;
+        for (int i = 1; i <= m; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+        invfact[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            invfact[i] = invfact[i + 1] * (i + 1) % p;
+        }
+
+        int ans = 0;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+            ans += (perm - ans) % p * k % p;
+            ans %= p;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n + 1];
+    int[] invfact = new int[n + 1];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invfact[n] = pow(fact[n], p - 2, p);
+    for (int i = n - 1; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * i % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    int perm = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm_ = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm_ - perm) % p * k % p;
+      ans %= p;
+      perm = perm_;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int x, int y, int p) {
+    int result = 1;
+    for (int i = 0; i < y; i++) {
+      result = (result * x) % p;
+    }
+    return result;
+  }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. I have used the `java.util.Scanner` class to read input from the user, and the `Math.pow` method to calculate the power of a number.
+
+Note that I have added a `pow` method to the `Solution` class to calculate the power of a number, as the `Math.pow` method is not available in Java.
+
+Also, I have used the `java.lang.System.out.println` method to print the result to the console.
+
+Please let me know if you have any questions or concerns.
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = (int) 1e9 + 7;
+
+    int[] fact = new int[n + 1];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invfact = new int[n + 1];
+    invfact[n] = (int) Math.pow(fact[n], p - 2);
+    for (int i = n - 1; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n + 1];
+    int[] invFact = new int[n + 1];
+    int[] rf = new int[n + 1];
+    int[] perm = new int[n + 1];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invFact[n] = 1;
+    for (int i = n - 1; i >= 0; i--) {
+      invFact[i] = (invFact[i + 1] * (i + 1)) % p;
+    }
+
+    for (int i = 0; i < n; i++) {
+      rf[i] = (fact[i] * invFact[i]) % p;
+    }
+
+    for (int k = (n + 1) / 2; k < n; k++) {
+      perm[k] = (rf[k - 1] * rf[2 * k - n]) % p;
+    }
+
+    int ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      ans += (perm[k] - perm[k - 1]) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n + 1];
+        int[] invfact = new int[n + 1];
+
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+
+        invfact[n] = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+        }
+
+        int ans = 0;
+        int m = n - 1;
+        int perm = 0;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm_ = (fact[k - 1] * invfact[2 * k - n] % p) * fact[k] % p;
+            ans += (perm_ - perm) % p * k % p;
+            ans %= p;
+            perm = perm_;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int p = 1000000007;
+
+        int[] f = new int[n + 1];
+        f[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            f[i] = (f[i - 1] * i) % p;
+        }
+
+        int[] rf = new int[n + 1];
+        rf[n] = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            rf[i] = rf[i + 1] * (i + 1) % p;
+        }
+
+        int ans = 0;
+        int m = n - 1;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm = f[k - 1] * rf[2 * k - n] % p * f[k] % p;
+            ans += (perm - ans) % p * k % p;
+            ans %= p;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int p = (int) (Math.pow(10, 9) + 7);
+
+    int[] fact = new int[n];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invfact = new int[n];
+    invfact[n - 1] = (int) (Math.pow(fact[n - 1], p - 2) % p);
+    for (int i = n - 2; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    int[] rf = new int[m];
+    for (int i = 0; i < m; i++) {
+      rf[i] = invfact[i + 1] * fact[i] % p;
+    }
+
+    int perm = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm_ = fact[k - 1] * rf[2 * k - n] % p * fact[k] % p;
+      ans += (perm_ - perm) % p * k % p;
+      ans %= p;
+      perm = perm_;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invfact = new int[n];
+    invfact[n - 1] = pow(fact[n - 1], p - 2, p);
+    for (int i = n - 2; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    int ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - perm) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int a, int b, int p) {
+    int result = 1;
+    for (int i = 0; i < b; i++) {
+      result = (result * a) % p;
+    }
+    return result;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n];
+        int[] invfact = new int[n];
+        int[] rf = new int[n];
+
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+
+        invfact[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+        }
+
+        rf[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            rf[i] = (rf[i + 1] * (i + 1)) % p;
+        }
+
+        int ans = 0;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm = fact[k - 1] * rf[2 * k - n] % p * fact[k] % p;
+            ans = (ans + (perm - perm % p) % p * k % p) % p;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n];
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+
+        int[] invfact = new int[n];
+        invfact[n - 1] = (int) Math.pow(fact[n - 1], p - 2, p);
+        for (int i = n - 2; i >= 0; i--) {
+            invfact[i] = invfact[i + 1] * (i + 1) % p;
+        }
+
+        int ans = 0;
+        int m = n - 1;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+            ans += (perm - ans) % p * k % p;
+            ans %= p;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invfact = new int[n];
+    invfact[n - 1] = pow(fact[n - 1], p - 2, p);
+    for (int i = n - 2; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    int ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+
+  public static int pow(int base, int exp, int mod) {
+    int result = 1;
+    for (int i = 0; i < exp; i++) {
+      result = (result * base) % mod;
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n];
+    int[] invfact = new int[n];
+    int m = n - 1;
+    int perm = 0;
+
+    fact[0] = 1;
+    for (int i = 1; i <= m; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invfact[m] = pow(fact[m], p - 2, p);
+    for (int i = m - 1; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm_ = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm_ - perm) % p * k % p;
+      ans %= p;
+      perm = perm_;
+    }
+
+    System.out.println(ans);
+  }
+
+  private static int pow(int x, int y, int p) {
+    int result = 1;
+    for (int i = 0; i < y; i++) {
+      result = (result * x) % p;
+    }
+    return result;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n + 1];
+    int[] invfact = new int[n + 1];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invfact[n] = 1;
+    for (int i = n - 1; i >= 0; i--) {
+      invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+    }
+
+    int ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n + 1];
+    int[] invfact = new int[n + 1];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invfact[n] = 1;
+    for (int i = n - 1; i >= 0; i--) {
+      invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invfact = new int[n];
+    invfact[n - 1] = (int) Math.pow(fact[n - 1], p - 2);
+    for (int i = n - 2; i >= 0; i--) {
+      invfact[i] = invfact[i + 1] * (i + 1) % p;
+    }
+
+    long ans = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      long perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = 1000000007;
+
+    int[] fact = new int[n + 1];
+    int[] invfact = new int[n + 1];
+    int[] rf = new int[n + 1];
+    int[] rinvfact = new int[n + 1];
+
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    invfact[n] = (int) Math.pow(fact[n], p - 2);
+    for (int i = n - 1; i >= 0; i--) {
+      invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+    }
+
+    rf[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      rf[i] = (rf[i - 1] * i) % p;
+    }
+
+    rinvfact[n] = (int) Math.pow(rf[n], p - 2);
+    for (int i = n - 1; i >= 0; i--) {
+      rinvfact[i] = (rinvfact[i + 1] * (i + 1)) % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm = fact[k - 1] * rf[2 * k - n] % p * fact[k] % p;
+      ans += (perm - ans) % p * k % p;
+      ans %= p;
+    }
+
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int p = 1000000007;
+
+        int[] fact = new int[n];
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i - 1] * i) % p;
+        }
+
+        int[] invfact = new int[n];
+        invfact[n - 1] = (int) Math.pow(fact[n - 1], p - 2) % p;
+        for (int i = n - 2; i >= 0; i--) {
+            invfact[i] = (invfact[i + 1] * (i + 1)) % p;
+        }
+
+        int ans = 0;
+        int m = n - 1;
+        for (int k = (n + 1) / 2; k < n; k++) {
+            int perm = fact[k - 1] * invfact[2 * k - n] % p * fact[k] % p;
+            ans += (perm - ans) % p * k % p;
+            ans %= p;
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int p = (int) Math.pow(10, 9) + 7;
+
+    int[] fact = new int[n + 1];
+    fact[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fact[i] = (fact[i - 1] * i) % p;
+    }
+
+    int[] invFact = new int[n + 1];
+    invFact[n] = (int) Math.pow(fact[n], p - 2, p);
+    for (int i = n - 1; i >= 0; i--) {
+      invFact[i] = invFact[i + 1] * (i + 1) % p;
+    }
+
+    int ans = 0;
+    int m = n - 1;
+    int perm = 0;
+    for (int k = (n + 1) / 2; k < n; k++) {
+      int perm_ = (fact[k - 1] * invFact[2 * k - n] % p) * fact[k] % p;
+      ans += (perm_ - perm) % p * k % p;
+      ans %= p;
+      perm = perm_;
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,1054 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    int flag = 0;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+          int counter = 0;
+          for (int dx : dxy[y]) {
+            int nx = x + dx;
+            int ny = y + dx;
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dy].charAt(dx)) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = 1;
+          }
+        }
+      }
+    }
+    if (flag == 1) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    String[] B = new String[M];
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    int flag = 0;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            if (flag == 0) {
+              int nx = x + dxdy[0];
+              int ny = y + dxdy[1];
+              if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                break;
+              }
+              if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = 1;
+          }
+        }
+      }
+    }
+    if (flag == 1) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % 2;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = scanner.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            if (!flag) {
+              int nx = (x + dxdy[0]) % N;
+              int ny = (y + dxdy[1]) % N;
+              if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                break;
+              }
+              if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+            break;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.next();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = sc.next();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % M;
+            }
+        }
+        boolean flag = false;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+                    int counter = 0;
+                    for (int[] dxdy : dxy) {
+                        int nx = x + dxdy[0];
+                        int ny = y + dxdy[1];
+                        if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                            break;
+                        }
+                        if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                            counter++;
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+        if (flag) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextLine();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = scanner.nextLine();
+        }
+        boolean flag = false;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+                    int counter = 0;
+                    for (int dx = 0; dx < M; dx++) {
+                        for (int dy = 0; dy < M; dy++) {
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                                break;
+                            }
+                            if (A[ny].charAt(nx) == B[dy].charAt(dx)) {
+                                counter++;
+                            }
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+        if (flag) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.next();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = sc.next();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % 2;
+            }
+        }
+        int flag = 0;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+                    int counter = 0;
+                    for (int[] dxdy : dxy) {
+                        int nx = x + dxdy[0];
+                        int ny = y + dxdy[1];
+                        if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                            break;
+                        }
+                        if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                            counter++;
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = 1;
+                    }
+                }
+            }
+        }
+        if (flag == 1) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % 2;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = scanner.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+            break;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = scanner.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % 2;
+      }
+    }
+    int flag = 0;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+          int counter = 0;
+          for (int dx : dxy[0]) {
+            for (int dy : dxy[1]) {
+              int nx = x + dx;
+              int ny = y + dy;
+              if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                break;
+              }
+              if (A[ny].charAt(nx) == B[dy][dx]) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = 1;
+          }
+        }
+      }
+    }
+    if (flag == 1) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextLine();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = scanner.nextLine();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % 2;
+            }
+        }
+        int flag = 0;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+                    int counter = 0;
+                    for (int dx = 0; dx < M; dx++) {
+                        for (int dy = 0; dy < M; dy++) {
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                                break;
+                            }
+                            if (A[ny].charAt(nx) == B[dy].charAt(dx)) {
+                                counter++;
+                            }
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = 1;
+                    }
+                }
+            }
+        }
+        if (flag == 1) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % 2;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx >= 0 && nx < N && ny >= 0 && ny < N) {
+              if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = (x + dxdy[0]) % N;
+            int ny = (y + dxdy[1]) % N;
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+            break;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.next();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = scanner.next();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % M;
+            }
+        }
+        int flag = 0;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+                    int counter = 0;
+                    for (int[] dxdy : dxy) {
+                        if (flag == 0) {
+                            int nx = x + dxdy[0];
+                            int ny = y + dxdy[1];
+                            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                                break;
+                            }
+                            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                                counter++;
+                            }
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = 1;
+                    }
+                }
+            }
+        }
+        if (flag == 1) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.next();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = scanner.next();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % M;
+            }
+        }
+        boolean flag = false;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+                    int counter = 0;
+                    for (int[] dxdy : dxy) {
+                        int nx = x + dxdy[0];
+                        int ny = y + dxdy[1];
+                        if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                            break;
+                        }
+                        if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                            counter++;
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+        if (flag) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = sc.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % 2;
+      }
+    }
+    int flag = 0;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && flag == 0) {
+          int counter = 0;
+          for (int dx = 0; dx < M; dx++) {
+            for (int dy = 0; dy < M; dy++) {
+              int nx = x + dx;
+              int ny = y + dy;
+              if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                break;
+              }
+              if (A[ny].charAt(nx) == B[dy].charAt(dx)) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = 1;
+          }
+        }
+      }
+    }
+    if (flag == 1) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    String[] A = new String[N];
+    String[] B = new String[M];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.next();
+    }
+    for (int i = 0; i < M; i++) {
+      B[i] = scanner.next();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x + y) % M;
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            int nx = x + dxdy[0];
+            int ny = y + dxdy[1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+              break;
+            }
+            if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+              counter++;
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+            break;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    scanner.nextLine();
+    String[] A = new String[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextLine();
+    }
+    String[] B = new String[M];
+    for (int i = 0; i < M; i++) {
+      B[i] = scanner.nextLine();
+    }
+    int[][] dxy = new int[M][M];
+    for (int y = 0; y < M; y++) {
+      for (int x = 0; x < M; x++) {
+        dxy[y][x] = (x, y);
+      }
+    }
+    boolean flag = false;
+    for (int y = 0; y < N; y++) {
+      for (int x = 0; x < N; x++) {
+        if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+          int counter = 0;
+          for (int[] dxdy : dxy) {
+            if (!flag) {
+              int nx = x + dxdy[0];
+              int ny = y + dxdy[1];
+              if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                break;
+              }
+              if (A[ny].charAt(nx) == B[dxdy[1]][dxdy[0]]) {
+                counter++;
+              }
+            }
+          }
+          if (counter == M * M) {
+            flag = true;
+          }
+        }
+      }
+    }
+    if (flag) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        String[] A = new String[N];
+        String[] B = new String[M];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.next();
+        }
+        for (int i = 0; i < M; i++) {
+            B[i] = sc.next();
+        }
+        int[][] dxy = new int[M][M];
+        for (int y = 0; y < M; y++) {
+            for (int x = 0; x < M; x++) {
+                dxy[y][x] = (x + y) % 2;
+            }
+        }
+        boolean flag = false;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                if (A[y].charAt(x) == B[0].charAt(0) && !flag) {
+                    int counter = 0;
+                    for (int dx : dxy[y]) {
+                        int nx = x + dx;
+                        int ny = y + dy;
+                        if (nx < 0 || nx >= N || ny < 0 || ny >= N) {
+                            break;
+                        }
+                        if (A[ny].charAt(nx) == B[dy][dx]) {
+                            counter++;
+                        }
+                    }
+                    if (counter == M * M) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+        if (flag) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+[/JAVA]
+======

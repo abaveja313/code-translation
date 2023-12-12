@@ -1,0 +1,2732 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 1; i <= N; i++) {
+      a_to_i[i] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        HashMap<Integer, Integer> aToI = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            aToI.put(A[i], i + 1);
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int i = N - 1; i >= 0; i--) {
+            int a = A[i];
+            int idx = aToI.get(a);
+            ans += a * (R[idx] - idx) * (idx - L[idx]);
+            L[R[idx]] = L[idx];
+            R[L[idx]] = R[idx];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A.get(i), i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += (long)a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A.get(i), i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[i] = i;
+    }
+
+    int[] L = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+    }
+
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      R[i] = i + 1;
+    }
+
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      a_to_i[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N + 1; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i + 1);
+    }
+
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int idx = aToI[a];
+      ans += a * (R[idx] - idx) * (idx - L[idx]);
+      L[R[idx]] = L[idx];
+      R[L[idx]] = R[idx];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        int[] aToI = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            aToI[i] = i;
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 1; i <= N + 1; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = aToI[a];
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N + 1; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N; i >= 1; i--) {
+      int a = A[i - 1];
+      int j = i - 1;
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 1; i--) {
+      int a = A[i];
+      int j = aToI.get(a);
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[A[i]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N - 1; a >= 1; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A.get(i), i);
+    }
+    List<Integer> L = new ArrayList<>();
+    List<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A.get(i);
+      int j = aToI.get(a);
+      ans += a * (R.get(j) - j) * (j - L.get(j));
+      L.set(R.get(j), L.get(j));
+      R.set(L.get(j), R.get(j));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    ArrayList<Integer> L = new ArrayList<>();
+    ArrayList<Integer> R = new ArrayList<>();
+    int ans = 0;
+
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i);
+    }
+
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      aToI.put(A[i - 1], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[A[i]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int index = a_to_i[a];
+      ans += a * (R[index] - index) * (index - L[index]);
+      L[R[index]] = L[index];
+      R[L[index]] = R[index];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      aToI.put(A.get(i - 1), i);
+    }
+    List<Integer> L = new ArrayList<>();
+    List<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        Map<Integer, Integer> aToI = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+            aToI.put(A[i], i);
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 1; i <= N + 1; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int i = N; i > 0; i--) {
+            int a = A[i - 1];
+            int j = aToI.get(a);
+            ans += a * (R[j] - j) * (j - L[j]);
+            L[R[j]] = L[j];
+            R[L[j]] = R[j];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      aToI.put(A.get(i - 1), i);
+    }
+    ArrayList<Integer> L = new ArrayList<>();
+    ArrayList<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int i = N; i > 0; i--) {
+      int a = A.get(i - 1);
+      int j = aToI.get(a);
+      ans += a * (R.get(j) - j) * (j - L.get(j));
+      L.set(R.get(j), L.get(j));
+      R.set(L.get(j), R.get(j));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 1; i <= N; i++) {
+      aToI.put(A[i - 1], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N; i > 0; i--) {
+      int a = A[i - 1];
+      int j = aToI[a];
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] a_to_i = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            a_to_i[A[i - 1]] = i;
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 1; i <= N; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        long ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = a_to_i[a];
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int index = i + 1;
+      ans += a * (R[index] - index) * (index - L[index]);
+      L[R[index]] = L[index];
+      R[L[index]] = R[index];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    scanner.nextLine();
+    String[] A = scanner.nextLine().split(" ");
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < A.length; i++) {
+      aToI.put(Integer.parseInt(A[i]), i + 1);
+    }
+    ArrayList<Integer> L = new ArrayList<>(N + 2);
+    ArrayList<Integer> R = new ArrayList<>(N + 2);
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = aToI.get(a);
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+        int[] aToI = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            aToI[A[i - 1]] = i;
+        }
+
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+
+        long ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = aToI[a];
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] aToI = new int[N];
+        for (int i = 0; i < N; i++) {
+            aToI[i] = i + 1;
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = aToI[a];
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is the Java code equivalent to the Python code you provided. The code uses a `Scanner` to read the input from the user, and then it creates an array `A` of integers, an array `aToI` that maps each element of `A` to its index, and two arrays `L` and `R` that are used to calculate the answer. The code then loops through the elements of `A` and updates
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        Map<Integer, Integer> aToI = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+            aToI.put(A[i], i);
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = aToI.get(a);
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i);
+    }
+
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    HashMap<Integer, Integer> a_to_i = new HashMap<>();
+    for (int i = 0; i < A.size(); i++) {
+      a_to_i.put(A.get(i), i);
+    }
+    ArrayList<Integer> L = new ArrayList<>();
+    ArrayList<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = i + 1;
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int index = aToI.get(a);
+      ans += a * (R[index] - index) * (index - L[index]);
+      L[R[index]] = L[index];
+      R[L[index]] = R[index];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N + 1; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    ArrayList<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    HashMap<Integer, Integer> a_to_i = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      a_to_i.put(A.get(i), i + 1);
+    }
+    ArrayList<Integer> L = new ArrayList<>();
+    ArrayList<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int i = N; i > 0; i--) {
+      int a = A.get(i - 1);
+      int i = a_to_i.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      a_to_i[i] = i;
+    }
+    int[] L = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+    }
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(sc.nextInt());
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A.get(i), i);
+    }
+    List<Integer> L = new ArrayList<>();
+    List<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+    }
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] a_to_i = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      a_to_i[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    List<Integer> A = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      A.add(scanner.nextInt());
+    }
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A.get(i), i + 1);
+    }
+    List<Integer> L = new ArrayList<>();
+    List<Integer> R = new ArrayList<>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R.get(i) - i) * (i - L.get(i));
+      L.set(R.get(i), L.get(i));
+      R.set(L.get(i), R.get(i));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[] a_to_i = new int[N + 1];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i);
+    }
+
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    String[] input = scanner.nextLine().split(" ");
+    List<Integer> A = new ArrayList<Integer>();
+    Map<Integer, Integer> aToI = new HashMap<Integer, Integer>();
+    for (int i = 0; i < N; i++) {
+      A.add(Integer.parseInt(input[i]));
+      aToI.put(A.get(i), i + 1);
+    }
+    List<Integer> L = new ArrayList<Integer>();
+    List<Integer> R = new ArrayList<Integer>();
+    for (int i = 0; i < N + 2; i++) {
+      L.add(i - 1);
+      R.add(i + 1);
+    }
+    int ans = 0;
+    for (int i = N; i > 0; i--) {
+      int index = aToI.get(A.get(i - 1));
+      ans += A.get(i - 1) * (R.get(index) - index) * (index - L.get(index));
+      L.set(R.get(index), L.get(index));
+      R.set(L.get(index), R.get(index));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      a_to_i[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N; i > 0; i--) {
+      int a = A[i - 1];
+      int j = a_to_i[a];
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+        }
+        int[] a_to_i = new int[N];
+        for (int i = 0; i < N; i++) {
+            a_to_i[A[i]] = i + 1;
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        long ans = 0;
+        for (int a = N; a > 0; a--) {
+            int i = a_to_i[a];
+            ans += a * (R[i] - i) * (i - L[i]);
+            L[R[i]] = L[i];
+            R[L[i]] = R[i];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N; i >= 1; i--) {
+      int a = A[i - 1];
+      int index = aToI[a];
+      ans += a * (R[index] - index) * (index - L[index]);
+      L[R[index]] = L[index];
+      R[L[index]] = R[index];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    HashMap<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = aToI.get(a);
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[A[i]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = aToI[a];
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] A = new int[N];
+        Map<Integer, Integer> aToI = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            A[i] = scanner.nextInt();
+            aToI.put(A[i], i);
+        }
+        int[] L = new int[N + 2];
+        int[] R = new int[N + 2];
+        for (int i = 0; i < N + 2; i++) {
+            L[i] = i - 1;
+            R[i] = i + 1;
+        }
+        int ans = 0;
+        for (int i = N - 1; i >= 0; i--) {
+            int a = A[i];
+            int j = aToI.get(a);
+            ans += a * (R[j] - j) * (j - L[j]);
+            L[R[j]] = L[j];
+            R[L[j]] = R[j];
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N + 1; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N];
+    for (int i = 0; i < N; i++) {
+      aToI[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      aToI.put(A[i], i + 1);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N + 1; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI.get(a);
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = a_to_i[a];
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[i] = i + 1;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N - 1; a >= 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    Map<Integer, Integer> aToI = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+      aToI.put(A[i], i);
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int i = N - 1; i >= 0; i--) {
+      int a = A[i];
+      int j = aToI.get(a);
+      ans += a * (R[j] - j) * (j - L[j]);
+      L[R[j]] = L[j];
+      R[L[j]] = R[j];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = sc.nextInt();
+    }
+    int[] a_to_i = new int[N];
+    for (int i = 0; i < N; i++) {
+      a_to_i[A[i]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 0; i < N + 2; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    int ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = a_to_i[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int[] A = new int[N];
+    for (int i = 0; i < N; i++) {
+      A[i] = scanner.nextInt();
+    }
+    int[] aToI = new int[N + 1];
+    for (int i = 1; i <= N; i++) {
+      aToI[A[i - 1]] = i;
+    }
+    int[] L = new int[N + 2];
+    int[] R = new int[N + 2];
+    for (int i = 1; i <= N; i++) {
+      L[i] = i - 1;
+      R[i] = i + 1;
+    }
+    long ans = 0;
+    for (int a = N; a > 0; a--) {
+      int i = aToI[a];
+      ans += a * (R[i] - i) * (i - L[i]);
+      L[R[i]] = L[i];
+      R[L[i]] = R[i];
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

@@ -1,0 +1,3069 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    Arrays.sort(p, Comparator.reverseOrder());
+    int[] s = new int[n + 2];
+    s[0] = -1;
+    s[n + 1] = n;
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, p[i]);
+      s.insert(t, p[i]);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      int ans = (p[i] + 1) * ((p[i] - l1) * (r2 - r1) + (r1 - p[i]) * (l1 - l2));
+      System.out.println(ans);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        ArrayList<Integer> p2 = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p2.add(i);
+        }
+        Collections.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return p[o2] - p[o1];
+            }
+        });
+        int[] s = new int[4];
+        s[0] = -1;
+        s[1] = -1;
+        s[2] = n;
+        s[3] = n;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int idx = p2.get(i);
+            int t = bisect_left(s, idx);
+            s.insert(t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+
+    public static int bisect_left(int[] a, int x) {
+        int lo = 0;
+        int hi = a.length - 1;
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      public int compare(Integer a, Integer b) {
+        return p[b] - p[a];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      if (t < 0) {
+        t = -t - 1;
+      }
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        ArrayList<Integer> p2 = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p2.add(i);
+        }
+        Collections.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return p[o2] - p[o1];
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2.get(i);
+            int t = Collections.binarySearch(s, idx);
+            s = insert(s, t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+    
+    public static int[] insert(int[] s, int t, int idx) {
+        int[] newS = new int[s.length + 1];
+        for (int i = 0; i < t; i++) {
+            newS[i] = s[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[][] p2 = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            p2[i][0] = i;
+            p2[i][1] = p[i];
+        }
+        Arrays.sort(p2, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i][0];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p2[i][1] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(scanner.nextInt() - 1);
+    }
+    Collections.sort(p, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int[] s = new int[] { -1, -1, n, n };
+    long ans = 0;
+    for (int i = 0; i < p.size(); i++) {
+      int idx = i;
+      int p = p.get(i);
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, (a, b) -> b - a);
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+        int ans = 0;
+        int[] s = new int[4];
+        s[0] = -1;
+        s[1] = -1;
+        s[2] = n;
+        s[3] = n;
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2);
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s.insert(t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, (a, b) -> (b - a));
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(s, p2[i]);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = p2[i];
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(sc.nextInt() - 1);
+    }
+    Collections.sort(p, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    ArrayList<Integer> s = new ArrayList<>();
+    s.add(-1);
+    s.add(-1);
+    s.add(n);
+    s.add(n);
+    for (int i = 0; i < p.size(); i++) {
+      int t = Collections.binarySearch(s, i);
+      s.add(t, i);
+      int l1 = s.get(t - 1);
+      int l2 = s.get(t - 2);
+      int r1 = s.get(t + 1);
+      int r2 = s.get(t + 2);
+      ans += (p.get(i) + 1) * ((i - l1) * (r2 - r1) + (r1 - i) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> p = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p.add(sc.nextInt() - 1);
+        }
+        Collections.sort(p, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        int[] s = new int[] {-1, -1, n, n};
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int idx = p.get(i);
+            int t = Arrays.binarySearch(s, idx);
+            s = insert(s, t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+
+    public static int[] insert(int[] s, int t, int idx) {
+        int[] newS = new int[s.length + 1];
+        System.arraycopy(s, 0, newS, 0, t);
+        newS[t] = idx;
+        System.arraycopy(s, t, newS, t + 1, s.length - t);
+        return newS;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer a, Integer b) {
+        return p[b] - p[a];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return p[o2] - p[o1];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> p = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p.add(sc.nextInt() - 1);
+        }
+        ArrayList<Integer> p2 = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p2.add(i);
+        }
+        Collections.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return p.get(o2) - p.get(o1);
+            }
+        });
+        int ans = 0;
+        ArrayList<Integer> s = new ArrayList<>();
+        s.add(-1);
+        s.add(-1);
+        s.add(n);
+        s.add(n);
+        for (int i = 0; i < n; i++) {
+            int idx = p2.get(i);
+            int t = Collections.binarySearch(s, idx);
+            s.add(t, idx);
+            int l1 = s.get(t - 1);
+            int l2 = s.get(t - 2);
+            int r1 = s.get(t + 1);
+            int r2 = s.get(t + 2);
+            ans += (p.get(idx) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, p2[i]);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = p2[i];
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(p[o2], p[o1]);
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = insert(s, t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+
+    public static int[] insert(int[] arr, int index, int value) {
+        int[] newArr = new int[arr.length + 1];
+        for (int i = 0; i < index; i++) {
+            newArr[
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, Comparator.comparingInt(p2[i]::get));
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i].get();
+      int t = Arrays.binarySearch(s, idx);
+      s.insert(t, idx);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] p = new int[n];
+		for (int i = 0; i < n; i++) {
+			p[i] = sc.nextInt() - 1;
+		}
+		int[] p2 = new int[n];
+		for (int i = 0; i < n; i++) {
+			p2[i] = i;
+		}
+		Arrays.sort(p2, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return Integer.compare(p[o2], p[o1]);
+			}
+		});
+		int ans = 0;
+		int[] s = new int[] { -1, -1, n, n };
+		for (int i = 0; i < n; i++) {
+			int idx = p2[i];
+			int t = Collections.binarySearch(s, idx);
+			s.add(t, idx);
+			int l1 = s[t - 1];
+			int l2 = s[t - 2];
+			int r1 = s[t + 1];
+			int r2 = s[t + 2];
+			ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+		}
+		System.out.println(ans);
+	}
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    int[] p2 = Arrays.stream(p).boxed().collect(Collectors.toList()).stream().sorted((a, b) -> b[1].compareTo(a[1])).mapToInt(a -> a[0]).toArray();
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < p2.length; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    List<Integer> p2 = Arrays.stream(p).boxed().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2.get(i);
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, (a, b) -> Integer.compare(b, a));
+        long ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int t = Arrays.binarySearch(s, p2[i]);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = p2[i];
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p2[i] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+
+        Arrays.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(scanner.nextInt() - 1);
+    }
+    Collections.sort(p, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    ArrayList<Integer> s = new ArrayList<>();
+    s.add(-1);
+    s.add(-1);
+    s.add(n);
+    s.add(n);
+    for (int i = 0; i < n; i++) {
+      int idx = p.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s.get(t - 1);
+      int l2 = s.get(t - 2);
+      int r1 = s.get(t + 1);
+      int r2 = s.get(t + 2);
+      ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    ArrayList<Integer> p2 = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p2.add(i);
+    }
+    Collections.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return p[o2] - p[o1];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(sc.nextInt() - 1);
+    }
+    Collections.sort(p, Collections.reverseOrder());
+    int ans = 0;
+    ArrayList<Integer> s = new ArrayList<>();
+    s.add(-1);
+    s.add(-1);
+    s.add(n);
+    s.add(n);
+    for (int i = 0; i < p.size(); i++) {
+      int idx = p.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s.get(t - 1);
+      int l2 = s.get(t - 2);
+      int r1 = s.get(t + 1);
+      int r2 = s.get(t + 2);
+      ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, new Comparator<Integer>() {
+            public int compare(Integer a, Integer b) {
+                return b.compareTo(a);
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, Comparator.comparingInt(i -> i));
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+        int ans = 0;
+        int[] s = new int[4];
+        s[0] = -1;
+        s[1] = -1;
+        s[2] = n;
+        s[3] = n;
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    Arrays.sort(p);
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, p2[i]);
+      s = insert(s, t, p2[i]);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p2[i] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+
+  private static int[] insert(int[] s, int t, int idx) {
+    int[] newS = new int[s.length + 1];
+    System.arraycopy(s, 0, newS, 0, t);
+    newS[t] = idx;
+    System.arraycopy(s, t, newS, t + 1, s.length - t);
+    return newS;
+  }
+======
+  [JAVA]
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        Arrays.sort(p);
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+
+This is a line-by-line conversion of the Python code to Java. The `import` statements are the same, and the `main` method is also the same. The only difference is that in Java, we need to use `Arrays.binarySearch` instead of `bisect.bisect_left` to find the index of the first element in the array that is greater than or equal to a given value. We also need to use `Arrays.copyOf` to create a new array with a size one greater than the original array, and `Arrays.sort` to sort the array.
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(scanner.nextInt() - 1);
+    }
+    ArrayList<Integer> p2 = new ArrayList<>(p);
+    Collections.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    ArrayList<Integer> s = new ArrayList<>();
+    s.add(-1);
+    s.add(-1);
+    s.add(n);
+    s.add(n);
+    for (int i = 0; i < p2.size(); i++) {
+      int idx = p2.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s.get(t - 1);
+      int l2 = s.get(t - 2);
+      int r1 = s.get(t + 1);
+      int r2 = s.get(t + 2);
+      ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, p2[i]);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = p2[i];
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[p2[i]] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return p[o2] - p[o1];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+    int[] s = new int[] { -1, -1, n, n };
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, (a, b) -> b - a);
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt();
+    }
+    int[][] p2 = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      p2[i] = new int[] {i, p[i]};
+    }
+    Arrays.sort(p2, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o2[1] - o1[1];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i][0];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p2[i][1] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return p[o2] - p[o1];
+            }
+        });
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] p = new int[n];
+		for (int i = 0; i < n; i++) {
+			p[i] = sc.nextInt() - 1;
+		}
+		ArrayList<Integer> p2 = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			p2.add(i);
+		}
+		Collections.sort(p2, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return p[o2] - p[o1];
+			}
+		});
+		int ans = 0;
+		int[] s = new int[] { -1, -1, n, n };
+		for (int i = 0; i < n; i++) {
+			int idx = p2.get(i);
+			int t = Collections.binarySearch(s, idx);
+			s = insert(s, t, idx);
+			int l1 = s[t - 1];
+			int l2 = s[t - 2];
+			int r1 = s[t + 1];
+			int r2 = s[t + 2];
+			ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+		}
+		System.out.println(ans);
+	}
+
+	public static int[] insert(int[] s, int t, int idx) {
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        ArrayList<Integer> p2 = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+            p2.add(i, p[i]);
+        }
+        Collections.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        int ans = 0;
+        int[] s = new int[n + 2];
+        for (int i = 0; i < n; i++) {
+            int idx = p2.get(i);
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    Arrays.sort(p);
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return p[o2] - p[o1];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[][] p2 = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      p2[i][0] = i;
+      p2[i][1] = p[i];
+    }
+    Arrays.sort(p2, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return Integer.compare(b[1], a[1]);
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i][0];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2);
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> Integer.compare(p[b], p[a]));
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    long ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[][] p2 = IntStream.range(0, p.length).mapToObj(i -> new int[] {i, p[i]}).toArray(int[][]::new);
+        Arrays.sort(p2, (a, b) -> Integer.compare(b[1], a[1]));
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < p2.length; i++) {
+            int idx = p2[i][0];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p2[i][1] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> p = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p.add(sc.nextInt() - 1);
+        }
+        Collections.sort(p, Comparator.reverseOrder());
+        int[] s = new int[] { -1, -1, n, n };
+        int ans = 0;
+        for (int i = 0; i < p.size(); i++) {
+            int idx = p.get(i);
+            int t = Collections.binarySearch(s, idx);
+            s.add(t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> Integer.compare(p[b], p[a]));
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> Integer.compare(p[b], p[a]));
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    long ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = (int) p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    long ans = 0;
+    int[] s = new int[4];
+    s[0] = -1;
+    s[1] = -1;
+    s[2] = n;
+    s[3] = n;
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    List<Integer> p2 = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p2.add(i, p[i]);
+    }
+    Collections.sort(p2, (a, b) -> b.compareTo(a));
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int t = Collections.binarySearch(s, p2.get(i));
+      s.insert(t, p2.get(i));
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p2.get(i) + 1) * ((p2.get(i) - l1) * (r2 - r1) + (r1 - p2.get(i)) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> p[b] - p[a]);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<Integer> p = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      p.add(sc.nextInt() - 1);
+    }
+    Collections.sort(p, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    ArrayList<Integer> s = new ArrayList<>();
+    s.add(-1);
+    s.add(-1);
+    s.add(n);
+    s.add(n);
+    for (int i = 0; i < p.size(); i++) {
+      int idx = p.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s.get(t - 1);
+      int l2 = s.get(t - 2);
+      int r1 = s.get(t + 1);
+      int r2 = s.get(t + 2);
+      ans += (p.get(i) + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, Collections.reverseOrder());
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = (int) p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = insert(s, t, idx);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+
+  public static int[] insert(int[] s, int t, int idx) {
+    int[] newS = new int[s.length + 1];
+    for (int i = 0; i < t; i++) {
+      newS[i] = s[i];
+    }
+    newS[t] = idx;
+    for (int i = t + 1; i < s.length + 1; i++) {
+     
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, (a, b) -> b - a);
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, Collections.reverseOrder());
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        ArrayList<Integer> p2 = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+            p2.add(i);
+        }
+        Collections.sort(p2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return p[o2] - p[o1];
+            }
+        });
+        int ans = 0;
+        int[] s = new int[4];
+        s[0] = -1;
+        s[1] = -1;
+        s[2] = n;
+        s[3] = n;
+        for (int i = 0; i < n; i++) {
+            int idx = p2.get(i);
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.insert(s, t, idx);
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = IntStream.of(scanner.next().split(" ")).map(Integer::parseInt).toArray();
+    int[] p2 = IntStream.range(0, p.length).map(i -> new int[] { i, p[i] }).sorted((a, b) -> Integer.compare(b[1], a[1])).toArray();
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < p2.length; i++) {
+      int t = Arrays.binarySearch(s, p2[i][0]);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = p2[i][0];
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p2[i][1] + 1) * ((p2[i][0] - l1) * (r2 - r1) + (r1 - p2[i][0]) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, (a, b) -> b - a);
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[][] p2 = new int[n][2];
+    for (int i = 0; i < n; i++) {
+      p2[i] = new int[] {i, p[i]};
+    }
+    Arrays.sort(p2, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] a, int[] b) {
+        return Integer.compare(b[1], a[1]);
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i][0];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, Collections.reverseOrder());
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, i);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = i;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((i - l1) * (r2 - r1) + (r1 - i) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = scanner.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = i;
+        }
+        Arrays.sort(p2, (a, b) -> Integer.compare(p[b], p[a]));
+        int ans = 0;
+        int[] s = new int[] {-1, -1, n, n};
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer a, Integer b) {
+        return p[b] - p[a];
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int t = Arrays.binarySearch(s, p2[i]);
+      s = Arrays.copyOf(s, t + 1);
+      s[t] = p2[i];
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[p2[i]] + 1) * ((p2[i] - l1) * (r2 - r1) + (r1 - p2[i]) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+
+    ArrayList<Integer> p2 = new ArrayList<Integer>();
+    for (int i = 0; i < n; i++) {
+      p2.add(i);
+    }
+
+    Collections.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer a, Integer b) {
+        return p[b] - p[a];
+      }
+    });
+
+    int[] s = new int[n + 2];
+    s[0] = -1;
+    s[1] = -1;
+    s[n + 1] = n;
+    s[n + 2] = n;
+
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      int idx = p2.get(i);
+      int t = Collections.binarySearch(s, idx);
+      s.add(t, idx);
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt() - 1;
+        }
+        int[] p2 = new int[n];
+        for (int i = 0; i < n; i++) {
+            p2[i] = p[i];
+        }
+        Arrays.sort(p2, Collections.reverseOrder());
+        int ans = 0;
+        int[] s = new int[] { -1, -1, n, n };
+        for (int i = 0; i < n; i++) {
+            int idx = p2[i];
+            int t = Arrays.binarySearch(s, idx);
+            s = Arrays.copyOf(s, s.length + 1);
+            s[t] = idx;
+            int l1 = s[t - 1];
+            int l2 = s[t - 2];
+            int r1 = s[t + 1];
+            int r2 = s[t + 2];
+            ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+        }
+        System.out.println(ans);
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = sc.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = p[i];
+    }
+    Arrays.sort(p2, new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    int ans = 0;
+    int[] s = new int[] { -1, -1, n, n };
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[i] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] p = new int[n];
+    for (int i = 0; i < n; i++) {
+      p[i] = scanner.nextInt() - 1;
+    }
+    int[] p2 = new int[n];
+    for (int i = 0; i < n; i++) {
+      p2[i] = i;
+    }
+    Arrays.sort(p2, (a, b) -> b - a);
+    int ans = 0;
+    int[] s = new int[] {-1, -1, n, n};
+    for (int i = 0; i < n; i++) {
+      int idx = p2[i];
+      int t = Arrays.binarySearch(s, idx);
+      s = Arrays.copyOf(s, s.length + 1);
+      s[t] = idx;
+      int l1 = s[t - 1];
+      int l2 = s[t - 2];
+      int r1 = s[t + 1];
+      int r2 = s[t + 2];
+      ans += (p[idx] + 1) * ((idx - l1) * (r2 - r1) + (r1 - idx) * (l1 - l2));
+    }
+    System.out.println(ans);
+  }
+}
+[/JAVA]
+======

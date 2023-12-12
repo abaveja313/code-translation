@@ -1,0 +1,1229 @@
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int ma = max(a);
+        int mai = a.indexOf(ma);
+        int mi = min(a);
+        int mii = a.indexOf(mi);
+        int[] ans = new int[n];
+        if (Math.abs(ma) >= Math.abs(mi)) {
+            for (int i = 0; i < n; i++) {
+                a[i] += ma;
+                ans[i] = (mai + 1) * (i + 1);
+            }
+            for (int i = 1; i < n; i++) {
+                a[i] += a[i - 1];
+                ans[i] = (i + 1) * (i + 2);
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                a[i] += mi;
+                ans[i] = (mii + 1) * (i + 1);
+            }
+            for (int i = n - 2; i >= 0; i--) {
+                a[i] += a[i + 1];
+                ans[i] = (i + 2) * (i + 1);
+            }
+        }
+        System.out.println(ans.length);
+        for (int i : ans) {
+            System.out.println(i);
+        }
+    }
+
+    private static int max(int[] a) {
+        int max = Integer.MIN_VALUE;
+        for (int i : a) {
+            if (i > max) {
+                max = i;
+            }
+        }
+        return max;
+    }
+
+    private static int min(int[] a) {
+        int min = Integer.MAX_VALUE;
+        for (int i : a) {
+            if (i < min) {
+                min = i;
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = a[0];
+    int mai = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+    }
+    int mi = a[0];
+    int mii = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1) * 100 + (i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i + 1) * 100 + (i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1) * 100 + (i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2) * 100 + (i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i / 100 + " " + i % 100);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = mai + 1;
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = i + 1;
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = mii + 1;
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = i + 2;
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+
+  public static int max(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i : a) {
+      if (i > max) {
+        max = i;
+      }
+    }
+    return max;
+  }
+
+  public static int min(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i : a) {
+      if (i < min) {
+        min = i;
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+
+This is the Java code equivalent to the Python code. It follows the same logic and uses the same data structures. The only difference is that the Java code uses the `Scanner` class to read input from the user, and the `Math.abs()` method to calculate the absolute value of the integers.
+
+The `max()` and `min()` methods are used to find the maximum and minimum values in the array, respectively. The `indexOf()` method is used to find the index of the maximum and minimum values in the array.
+
+The rest of the code is similar to the Python code, with the only difference being the use of the `println()` method to print the output.
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = a[0];
+    int mai = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+    }
+    int mi = a[n - 1];
+    int mii = n - 1;
+    for (int i = n - 2; i >= 0; i--) {
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = i + 1;
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = i + 1;
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = i + 1;
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = i + 1;
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int[] i : ans) {
+      System.out.println(i[0] + " " + i[1]);
+    }
+  }
+
+  private static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i = 0; i < n; i++) {
+      System.out.println(ans[i][0] + " " + ans[i][1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int ma = max(a);
+        int mai = a.indexOf(ma);
+        int mi = min(a);
+        int mii = a.indexOf(mi);
+        int[] ans = new int[n];
+        if (Math.abs(ma) >= Math.abs(mi)) {
+            for (int i = 0; i < n; i++) {
+                a[i] += ma;
+                ans[i] = (mai + 1) * (i + 1);
+            }
+            for (int i = 1; i < n; i++) {
+                a[i] += a[i - 1];
+                ans[i] = (i + 1) * (i + 2);
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                a[i] += mi;
+                ans[i] = (mii + 1) * (i + 1);
+            }
+            for (int i = n - 2; i >= 0; i--) {
+                a[i] += a[i + 1];
+                ans[i] = (i + 2) * (i + 1);
+            }
+        }
+        System.out.println(ans.length);
+        for (int i : ans) {
+            System.out.println(i);
+        }
+    }
+
+    public static int max(int[] a) {
+        int max = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > max) {
+                max = a[i];
+            }
+        }
+        return max;
+    }
+
+    public static int min(int[] a) {
+        int min = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < min) {
+                min = a[i];
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+
+  private static int max(int[] a) {
+    int max = Integer.MIN_VALUE;
+    for (int i : a) {
+      if (i > max) {
+        max = i;
+      }
+    }
+    return max;
+  }
+
+  private static int min(int[] a) {
+    int min = Integer.MAX_VALUE;
+    for (int i : a) {
+      if (i < min) {
+        min = i;
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int ma = a[0];
+    int mai = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+    }
+    int mi = a[n - 1];
+    int mii = n - 1;
+    for (int i = n - 2; i >= 0; i--) {
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[][] ans = new int[n][2];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i][0] = mai + 1;
+        ans[i][1] = i + 1;
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i][0] = i;
+        ans[i][1] = i + 1;
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i][0] = mii + 1;
+        ans[i][1] = i + 1;
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i][0] = i + 2;
+        ans[i][1] = i + 1;
+      }
+    }
+    System.out.println(ans.length);
+    for (int[] pair : ans) {
+      System.out.println(pair[0] + " " + pair[1]);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int ma = max(a);
+        int mai = indexOf(a, ma);
+        int mi = min(a);
+        int mii = indexOf(a, mi);
+        int[] ans = new int[n];
+        if (Math.abs(ma) >= Math.abs(mi)) {
+            for (int i = 0; i < n; i++) {
+                a[i] += ma;
+                ans[i] = (mai + 1, i + 1);
+            }
+            for (int i = 1; i < n; i++) {
+                a[i] += a[i - 1];
+                ans[i] = (i, i + 1);
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                a[i] += mi;
+                ans[i] = (mii + 1, i + 1);
+            }
+            for (int i = n - 2; i >= 0; i--) {
+                a[i] += a[i + 1];
+                ans[i] = (i + 2, i + 1);
+            }
+        }
+        System.out.println(ans.length);
+        for (int i : ans) {
+            System.out.println(i);
+        }
+    }
+
+    public static int max(int[] a) {
+        int max = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > max) {
+                max = a[i];
+            }
+        }
+        return max;
+    }
+
+    public static int indexOf(int[] a, int x) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == x) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int min(int[] a) {
+        int min = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < min) {
+                min = a[i];
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = a[0];
+    int mai = 0;
+    int mi = a[0];
+    int mii = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1) * (i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i + 1) * (i + 2);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1) * (i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2) * (i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = Integer.MIN_VALUE;
+    int mai = 0;
+    int mi = Integer.MAX_VALUE;
+    int mii = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1) * (i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i + 1) * (i + 2);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1) * (i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2) * (i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int ma = a[0];
+    int mai = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] > ma) {
+        ma = a[i];
+        mai = i;
+      }
+    }
+    int mi = a[0];
+    int mii = 0;
+    for (int i = 1; i < n; i++) {
+      if (a[i] < mi) {
+        mi = a[i];
+        mii = i;
+      }
+    }
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1) * (i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i + 1) * (i + 2);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1) * (i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2) * (i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+
+  public static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  public static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+
+  public static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  public static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    ArrayList<Integer[]> ans = new ArrayList<>();
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans.add(new Integer[] { mai + 1, i + 1 });
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans.add(new Integer[] { i, i + 1 });
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans.add(new Integer[] { mii + 1, i + 1 });
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans.add(new Integer[] { i + 2, i + 1 });
+      }
+    }
+    System.out.println(ans.size());
+    for (Integer[] pair : ans) {
+      System.out.println(pair[0] + " " + pair[1]);
+    }
+  }
+
+  private static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    int[] ans = new int[n];
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans[i] = (mai + 1, i + 1);
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans[i] = (i, i + 1);
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans[i] = (mii + 1, i + 1);
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans[i] = (i + 2, i + 1);
+      }
+    }
+    System.out.println(ans.length);
+    for (int i : ans) {
+      System.out.println(i);
+    }
+  }
+
+  private static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  private static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int ma = max(a);
+        int mai = a.indexOf(ma);
+        int mi = min(a);
+        int mii = a.indexOf(mi);
+        int[] ans = new int[n];
+        if (Math.abs(ma) >= Math.abs(mi)) {
+            for (int i = 0; i < n; i++) {
+                a[i] += ma;
+                ans[i] = (mai + 1, i + 1);
+            }
+            for (int i = 1; i < n; i++) {
+                a[i] += a[i - 1];
+                ans[i] = (i, i + 1);
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                a[i] += mi;
+                ans[i] = (mii + 1, i + 1);
+            }
+            for (int i = n - 2; i >= 0; i--) {
+                a[i] += a[i + 1];
+                ans[i] = (i + 2, i + 1);
+            }
+        }
+        System.out.println(ans.length);
+        for (int i : ans) {
+            System.out.println(i);
+        }
+    }
+
+    public static int max(int[] a) {
+        int max = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > max) {
+                max = a[i];
+            }
+        }
+        return max;
+    }
+
+    public static int min(int[] a) {
+        int min = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < min) {
+                min = a[i];
+            }
+        }
+        return min;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = scanner.nextInt();
+    }
+    int ma = max(a);
+    int mai = a.indexOf(ma);
+    int mi = min(a);
+    int mii = a.indexOf(mi);
+    List<Integer> ans = new ArrayList<>();
+    if (Math.abs(ma) >= Math.abs(mi)) {
+      for (int i = 0; i < n; i++) {
+        a[i] += ma;
+        ans.add(new Integer(mai + 1));
+        ans.add(new Integer(i + 1));
+      }
+      for (int i = 1; i < n; i++) {
+        a[i] += a[i - 1];
+        ans.add(new Integer(i));
+        ans.add(new Integer(i + 1));
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        a[i] += mi;
+        ans.add(new Integer(mii + 1));
+        ans.add(new Integer(i + 1));
+      }
+      for (int i = n - 2; i >= 0; i--) {
+        a[i] += a[i + 1];
+        ans.add(new Integer(i + 2));
+        ans.add(new Integer(i + 1));
+      }
+    }
+    System.out.println(ans.size());
+    for (int i = 0; i < ans.size(); i++) {
+      System.out.println(ans.get(i));
+    }
+  }
+
+  public static int max(int[] a) {
+    int max = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] > max) {
+        max = a[i];
+      }
+    }
+    return max;
+  }
+
+  public static int min(int[] a) {
+    int min = a[0];
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] < min) {
+        min = a[i];
+      }
+    }
+    return min;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int ma = getMax(a);
+        int mai = getIndex(a, ma);
+        int mi = getMin(a);
+        int mii = getIndex(a, mi);
+        int[] ans = new int[n];
+        if (Math.abs(ma) >= Math.abs(mi)) {
+            for (int i = 0; i < n; i++) {
+                a[i] += ma;
+                ans[i] = mai + 1;
+            }
+            for (int i = 1; i < n; i++) {
+                a[i] += a[i - 1];
+                ans[i] = i + 1;
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                a[i] += mi;
+                ans[i] = mii + 1;
+            }
+            for (int i = n - 2; i >= 0; i--) {
+                a[i] += a[i + 1];
+                ans[i] = i + 2;
+            }
+        }
+        System.out.println(ans.length);
+        for (int i : ans) {
+            System.out.println(i);
+        }
+    }
+
+    private static int getMax(int[] a) {
+        int max = Integer.MIN_VALUE;
+        for (int i : a) {
+            if (i > max) {
+                max = i;
+            }
+        }
+        return max;
+    }
+
+    private static int getMin(int[] a) {
+        int min = Integer.MAX_VALUE;
+        for (int i : a) {
+            if (i < min) {
+                min = i;
+            }
+        }
+        return min;
+    }
+
+    private static int getIndex(int[] a, int value) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+[/JAVA]
+======

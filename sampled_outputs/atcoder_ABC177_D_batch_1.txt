@@ -1,0 +1,1025 @@
+  [JAVA]
+import java.util.Scanner;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.iterator().next();
+      reach.remove(_from);
+      for (int _to : edge[_from]) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count++;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.iterator().next();
+      reach.remove(_from);
+      for (int _to : edge[_from]) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count++;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] hito = new int[N];
+        Set<Integer>[] edge = new HashSet[N];
+        for (int i = 0; i < N; i++) {
+            edge[i] = new HashSet<>();
+        }
+        for (int i = 0; i < M; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            edge[a - 1].add(b - 1);
+            edge[b - 1].add(a - 1);
+        }
+        Set<Integer> ans = new HashSet<>();
+        for (int h = 0; h < N; h++) {
+            if (hito[h] == 0) {
+                ans.add(dfs(h, edge));
+            }
+        }
+        System.out.println(Collections.max(ans));
+    }
+
+    public static int dfs(int start, Set<Integer>[] edge) {
+        int count = 1;
+        Set<Integer> reach = new HashSet<>();
+        reach.add(start);
+        hito[start] = 1;
+        while (!reach.isEmpty()) {
+            int _from = reach.iterator().next();
+            reach.remove(_from);
+            for (int _to : edge[_from]) {
+                if (!reach.contains(_to) && hito[_to] == 0) {
+                    reach.add(_to);
+                    count++;
+                    hito[_to] = 1;
+                }
+            }
+        }
+        return count;
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.pop();
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] hito = new int[N];
+        Set<Integer>[] edge = new HashSet[N];
+        for (int i = 0; i < N; i++) {
+            edge[i] = new HashSet<>();
+        }
+        for (int i = 0; i < M; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            edge[a - 1].add(b - 1);
+            edge[b - 1].add(a - 1);
+        }
+        Set<Integer> ans = new HashSet<>();
+        for (int h = 0; h < N; h++) {
+            if (hito[h] == 0) {
+                ans.add(dfs(h, edge));
+            }
+        }
+        System.out.println(Collections.max(ans));
+    }
+
+    private static int dfs(int start, Set<Integer>[] edge) {
+        int count = 1;
+        Set<Integer> reach = new HashSet<>();
+        reach.add(start);
+        hito[start] = 1;
+        while (!reach.isEmpty()) {
+            int from = reach.iterator().next();
+            reach.remove(from);
+            for (int to : edge[from]) {
+                if (!reach.contains(to) && hito[to] == 0) {
+                    reach.add(to);
+                    count++;
+                    hito[to] = 1;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  public static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    ArrayList<Set<Integer>> edge = new ArrayList<Set<Integer>>();
+    for (int i = 0; i < N; i++) {
+      edge.add(new HashSet<Integer>());
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge.get(a - 1).add(b - 1);
+      edge.get(b - 1).add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<Integer>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge, hito));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  public static int dfs(int start, ArrayList<Set<Integer>> edge, int[] hito) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<Integer>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.iterator().next();
+      reach.remove(_from);
+      for (int _to : edge.get(_from)) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count++;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.pop();
+      for (int _to : edge[_from]) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count++;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  public static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.iterator().next();
+      reach.remove(_from);
+      for (int _to : edge[_from]) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count++;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int _from = reach.iterator().next();
+      reach.remove(_from);
+      for (int _to : edge[_from]) {
+        if (!reach.contains(_to) && hito[_to] == 0) {
+          reach.add(_to);
+          count += 1;
+          hito[_to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = scanner.nextInt();
+      int b = scanner.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+    int[] hito = new int[N];
+    Set<Integer>[] edge = new HashSet[N];
+    for (int i = 0; i < N; i++) {
+      edge[i] = new HashSet<>();
+    }
+    for (int i = 0; i < M; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      edge[a - 1].add(b - 1);
+      edge[b - 1].add(a - 1);
+    }
+    Set<Integer> ans = new HashSet<>();
+    for (int h = 0; h < N; h++) {
+      if (hito[h] == 0) {
+        ans.add(dfs(h, edge, hito));
+      }
+    }
+    System.out.println(Collections.max(ans));
+  }
+
+  private static int dfs(int start, Set<Integer>[] edge, int[] hito) {
+    int count = 1;
+    Set<Integer> reach = new HashSet<>();
+    reach.add(start);
+    hito[start] = 1;
+    while (!reach.isEmpty()) {
+      int from = reach.iterator().next();
+      reach.remove(from);
+      for (int to : edge[from]) {
+        if (!reach.contains(to) && hito[to] == 0) {
+          reach.add(to);
+          count++;
+          hito[to] = 1;
+        }
+      }
+    }
+    return count;
+  }
+}
+[/JAVA]
+======

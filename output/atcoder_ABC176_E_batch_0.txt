@@ -1,0 +1,5157 @@
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int i = 0; i < w; i++) {
+      col[i] = new HashSet<>();
+    }
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.clear();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.clear();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+
+        for (int j = 0; j < w; j++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] hwm = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(hwm[0]);
+    int w = Integer.parseInt(hwm[1]);
+    int m = Integer.parseInt(hwm[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] xy = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(xy[0]) - 1;
+      int y = Integer.parseInt(xy[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < row.size(); i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < col.size(); j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : j
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt();
+      int y = sc.nextInt();
+      row.get(x - 1).add(y);
+      col.get(y - 1).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>(List.of(i));
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>(List.of(j));
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+    scanner.nextLine();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] input = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(input[0]) - 1;
+      int y = Integer.parseInt(input[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+         
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          break;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        Set<Integer>[] row = new Set[h];
+        Set<Integer>[] col = new Set[w];
+        for (int i = 0; i < h; i++) {
+            row[i] = new HashSet<>();
+        }
+        for (int j = 0; j < w; j++) {
+            col[j] = new HashSet<>();
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] indices = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(indices[0]) - 1;
+            int y = Integer.parseInt(indices[1]) - 1;
+            row[x].add(y);
+            col[y].add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row[i].size()) {
+                crow = row[i].size();
+                ic.add(i);
+            } else if (crow == row[i].size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col[j].size()) {
+                ccol = col[j].size();
+                jc.add(j);
+            } else if (ccol == col[j].size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row[i].contains(j)) {
+                    System.out.println(ans);
+                   
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+       
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] indices = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(indices[0]) - 1;
+      int y = Integer.parseInt(indices[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+         
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>(h);
+    List<Set<Integer>> cols = new ArrayList<>(w);
+
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] hwm = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(hwm[0]);
+        int w = Integer.parseInt(hwm[1]);
+        int m = Integer.parseInt(hwm[2]);
+
+        Set<Integer>[] row = new HashSet[h];
+        Set<Integer>[] col = new HashSet[w];
+        for (int i = 0; i < h; i++) {
+            row[i] = new HashSet<>();
+        }
+        for (int j = 0; j < w; j++) {
+            col[j] = new HashSet<>();
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] xy = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(xy[0]) - 1;
+            int y = Integer.parseInt(xy[1]) - 1;
+            row[x].add(y);
+            col[y].add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row[i].size()) {
+                crow = row[i].size();
+                ic.add(i);
+            } else if (crow == row[i].size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col[j].size()) {
+                ccol = col[j].size();
+                jc.add(j);
+            } else if (ccol == col[j].size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row[i].contains(j)) {
+                    System.out.println(ans);
+                    return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>(h);
+    List<Set<Integer>> col = new ArrayList<>(w);
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int i = 0; i < w; i++) {
+      col[i] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < rows.size(); i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < cols.size(); j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out.println
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out.println(ans);
+          return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] hwm = sc.nextLine().split(" ");
+        int h = Integer.parseInt(hwm[0]);
+        int w = Integer.parseInt(hwm[1]);
+        int m = Integer.parseInt(hwm[2]);
+
+        List<Set<Integer>> row = new ArrayList<>(h);
+        List<Set<Integer>> col = new ArrayList<>(w);
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] xy = sc.nextLine().split(" ");
+            int x = Integer.parseInt(xy[0]) - 1;
+            int y = Integer.parseInt(xy[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.clear();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.clear();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        sc.nextLine();
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] input = sc.nextLine().split(" ");
+            int x = Integer.parseInt(input[0]) - 1;
+            int y = Integer.parseInt(input[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.clear();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.clear();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+
+        System.out.println(ans
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> rows = new ArrayList<>();
+        List<Set<Integer>> cols = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            rows.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            cols.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            rows.get(x).add(y);
+            cols.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < rows.get(i).size()) {
+                crow = rows.get(i).size();
+                ic.add(i);
+            } else if (crow == rows.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < cols.get(j).size()) {
+                ccol = cols.get(j).size();
+                jc.add(j);
+            } else if (ccol == cols.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!rows.get(i).contains(j)) {
+                
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+         
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            int x = scanner.nextInt() - 1;
+            int y = scanner.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic = new ArrayList<>(List.of(i));
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc = new ArrayList<>(List.of(j));
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+       
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+    scanner.nextLine();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] input = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(input[0]) - 1;
+      int y = Integer.parseInt(input[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Integer>[] row = new ArrayList[h];
+    List<Integer>[] col = new ArrayList[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new ArrayList<>();
+    }
+    for (int j = 0; j < w; j++) {
+      col[j] = new ArrayList<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+   
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> rows = new ArrayList<>();
+        List<Set<Integer>> cols = new ArrayList<>();
+
+        for (int i = 0; i < h; i++) {
+            rows.add(new HashSet<>());
+        }
+
+        for (int j = 0; j < w; j++) {
+            cols.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            rows.get(x).add(y);
+            cols.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < rows.get(i).size()) {
+                crow = rows.get(i).size();
+                ic.add(i);
+            } else if (crow == rows.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < cols.get(j).size()) {
+                ccol = cols.get(j).size();
+                jc.add(j);
+            } else if (ccol == cols.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!rows.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+
+       
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] indices = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(indices[0]) - 1;
+      int y = Integer.parseInt(indices[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+    int[][] row = new int[h][w];
+    int[][] col = new int[h][w];
+    for (int i = 0; i < m; i++) {
+      int x = scanner.nextInt() - 1;
+      int y = scanner.nextInt() - 1;
+      row[x][y] = 1;
+      col[y][x] = 1;
+    }
+    int crow = 0;
+    int[] ic = new int[h];
+    for (int i = 0; i < h; i++) {
+      int x = 0;
+      for (int j = 0; j < w; j++) {
+        x += row[i][j];
+      }
+      if (crow < x) {
+        crow = x;
+        ic[0] = i;
+      } else if (crow == x) {
+        ic[ic.length - 1] = i;
+      }
+    }
+    int ccol = 0;
+    int[] jc = new int[w];
+    for (int j = 0; j < w; j++) {
+      int y = 0;
+      for (int i = 0; i < h; i++) {
+        y += col[j][i];
+      }
+      if (ccol < y) {
+        ccol = y;
+        jc[0] = j;
+      } else if (ccol == y) {
+        jc[jc.length - 1] = j;
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (row[i][j] == 0) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < rows.size(); i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < cols.size(); j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j))
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>(h);
+    List<Set<Integer>> col = new ArrayList<>(w);
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int k = 0; k < m; k++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>(h);
+    List<Set<Integer>> col = new ArrayList<>(w);
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < row.size(); i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < col.size(); j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic = new ArrayList<>();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc = new ArrayList<>();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+
+        ArrayList<HashSet<Integer>> row = new ArrayList<>();
+        ArrayList<HashSet<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        ArrayList<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < row.size(); i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        ArrayList<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < col.size(); j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    Set<Integer>[] rows = new HashSet[h];
+    Set<Integer>[] cols = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      rows[i] = new HashSet<>();
+    }
+
+    for (int j = 0; j < w; j++) {
+      cols[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      rows[x].add(y);
+      cols[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows[i].size()) {
+        crow = rows[i].size();
+        ic.clear();
+        ic.add(i);
+      } else if (crow == rows[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols[j].size()) {
+        ccol = cols[j].size();
+        jc.clear();
+        jc.add(j);
+      } else if (ccol == cols[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < row.size(); i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < col.size(); j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j))
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        ArrayList<HashSet<Integer>> row = new ArrayList<>();
+        ArrayList<HashSet<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+        int crow = 0;
+        ArrayList<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+        int ccol = 0;
+        ArrayList<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int j = 0; j < w; j++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.clear();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.clear();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] dimensions = sc.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coords = sc.nextLine().split(" ");
+      int x = Integer.parseInt(coords[0]) - 1;
+      int y = Integer.parseInt(coords[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+   
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+    int crow = 0;
+    int[] ic = new int[h];
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic[0] = i;
+      } else if (crow == row[i].size()) {
+        ic[ic.length - 1] = i;
+      }
+    }
+    int ccol = 0;
+    int[] jc = new int[w];
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc[0] = j;
+      } else if (ccol == col[j].size()) {
+        jc[jc.length - 1] = j;
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+         
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+    for (int j = 0; j < w; j++) {
+      col[j] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+       
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+         
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] dimensions = scanner.nextLine().split(" ");
+        int h = Integer.parseInt(dimensions[0]);
+        int w = Integer.parseInt(dimensions[1]);
+        int m = Integer.parseInt(dimensions[2]);
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int j = 0; j < w; j++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] coordinates = scanner.nextLine().split(" ");
+            int x = Integer.parseInt(coordinates[0]) - 1;
+            int y = Integer.parseInt(coordinates[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.clear();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.clear();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+    scanner.nextLine();
+
+    int[][] row = new int[h][w];
+    int[][] col = new int[w][h];
+
+    for (int i = 0; i < m; i++) {
+      String[] tokens = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(tokens[0]) - 1;
+      int y = Integer.parseInt(tokens[1]) - 1;
+      row[x][y] = 1;
+      col[y][x] = 1;
+    }
+
+    int crow = 0;
+    int[] ic = new int[h];
+    for (int i = 0; i < h; i++) {
+      int count = 0;
+      for (int j = 0; j < w; j++) {
+        if (row[i][j] == 1) {
+          count++;
+        }
+      }
+      if (crow < count) {
+        crow = count;
+        ic[0] = i;
+      } else if (crow == count) {
+        ic[ic.length - 1] = i;
+      }
+    }
+
+    int ccol = 0;
+    int[] jc = new int[w];
+    for (int j = 0; j < w; j++) {
+      int count = 0;
+      for (int i = 0; i < h; i++) {
+        if (col[j][i] == 1) {
+          count++;
+        }
+      }
+      if (ccol < count) {
+        ccol = count;
+        jc[0] = j;
+      } else if (ccol == count) {
+        jc[jc.length - 1] = j;
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (row[i][j] == 0) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = scanner.nextInt() - 1;
+      int y = scanner.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < row.size(); i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < col.size(); j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j))
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
+        int m = scanner.nextInt();
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int i = 0; i < w; i++) {
+            col.add(new HashSet<>());
+        }
+        for (int i = 0; i < m; i++) {
+            int x = scanner.nextInt() - 1;
+            int y = scanner.nextInt() - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    break;
+                }
+            }
+        }
+        System.out.println(ans - 1);
+
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        sc.nextLine();
+
+        List<Set<Integer>> row = new ArrayList<>();
+        List<Set<Integer>> col = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            row.add(new HashSet<>());
+        }
+        for (int j = 0; j < w; j++) {
+            col.add(new HashSet<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            String[] input = sc.nextLine().split(" ");
+            int x = Integer.parseInt(input[0]) - 1;
+            int y = Integer.parseInt(input[1]) - 1;
+            row.get(x).add(y);
+            col.get(y).add(x);
+        }
+
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row.get(i).size()) {
+                crow = row.get(i).size();
+                ic.add(i);
+            } else if (crow == row.get(i).size()) {
+                ic.add(i);
+            }
+        }
+
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col.get(j).size()) {
+                ccol = col.get(j).size();
+                jc.add(j);
+            } else if (ccol == col.get(j).size()) {
+                jc.add(j);
+            }
+        }
+
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row.get(i).contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+        System.out.println(ans - 1
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int h = scanner.nextInt();
+    int w = scanner.nextInt();
+    int m = scanner.nextInt();
+
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = scanner.nextInt() - 1;
+      int y = scanner.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+    List<Set<Integer>> row = new ArrayList<>();
+    List<Set<Integer>> col = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      col.add(new HashSet<>());
+    }
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<>();
+    }
+
+    for (int i = 0; i < w; i++) {
+      col[i] = new HashSet<>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coords = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coords[0]) - 1;
+      int y = Integer.parseInt(coords[1]) - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic.add(i);
+      } else if (crow == row[i].size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc.add(j);
+      } else if (ccol == col[j].size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    int m = sc.nextInt();
+
+    Set<Integer>[] row = new HashSet[h];
+    Set<Integer>[] col = new HashSet[w];
+
+    for (int i = 0; i < h; i++) {
+      row[i] = new HashSet<Integer>();
+    }
+
+    for (int i = 0; i < w; i++) {
+      col[i] = new HashSet<Integer>();
+    }
+
+    for (int i = 0; i < m; i++) {
+      int x = sc.nextInt() - 1;
+      int y = sc.nextInt() - 1;
+      row[x].add(y);
+      col[y].add(x);
+    }
+
+    int crow = 0;
+    int[] ic = new int[h];
+    for (int i = 0; i < h; i++) {
+      if (crow < row[i].size()) {
+        crow = row[i].size();
+        ic[i] = 1;
+      } else if (crow == row[i].size()) {
+        ic[i] = 1;
+      }
+    }
+
+    int ccol = 0;
+    int[] jc = new int[w];
+    for (int j = 0; j < w; j++) {
+      if (ccol < col[j].size()) {
+        ccol = col[j].size();
+        jc[j] = 1;
+      } else if (ccol == col[j].size()) {
+        jc[j] = 1;
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!row[i].contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+
+    System.out.println(ans - 1);
+  }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> rows = new ArrayList<>();
+    List<Set<Integer>> cols = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      rows.add(new HashSet<>());
+    }
+    for (int i = 0; i < w; i++) {
+      cols.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      rows.get(x).add(y);
+      cols.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < rows.get(i).size()) {
+        crow = rows.get(i).size();
+        ic.add(i);
+      } else if (crow == rows.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < cols.get(j).size()) {
+        ccol = cols.get(j).size();
+        jc.add(j);
+      } else if (ccol == cols.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc) {
+        if (!rows.get(i).contains(j)) {
+          System.out.println(ans);
+          return;
+        }
+      }
+    }
+    System.out.println(ans - 1);
+  }
+}
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int m = sc.nextInt();
+        Set<Integer>[] row = new HashSet[h];
+        Set<Integer>[] col = new HashSet[w];
+        for (int i = 0; i < h; i++) {
+            row[i] = new HashSet<>();
+        }
+        for (int i = 0; i < w; i++) {
+            col[i] = new HashSet<>();
+        }
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            row[x].add(y);
+            col[y].add(x);
+        }
+        int crow = 0;
+        List<Integer> ic = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            if (crow < row[i].size()) {
+                crow = row[i].size();
+                ic.add(i);
+            } else if (crow == row[i].size()) {
+                ic.add(i);
+            }
+        }
+        int ccol = 0;
+        List<Integer> jc = new ArrayList<>();
+        for (int j = 0; j < w; j++) {
+            if (ccol < col[j].size()) {
+                ccol = col[j].size();
+                jc.add(j);
+            } else if (ccol == col[j].size()) {
+                jc.add(j);
+            }
+        }
+        int ans = crow + ccol;
+        for (int i : ic) {
+            for (int j : jc) {
+                if (!row[i].contains(j)) {
+                    System.out.println(ans);
+                    return;
+                }
+            }
+        }
+        System.out.println(ans - 1);
+    }
+}
+[/JAVA]
+======
+  [JAVA]
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] dimensions = scanner.nextLine().split(" ");
+    int h = Integer.parseInt(dimensions[0]);
+    int w = Integer.parseInt(dimensions[1]);
+    int m = Integer.parseInt(dimensions[2]);
+
+    List<Set<Integer>> row = new ArrayList<>(h);
+    List<Set<Integer>> col = new ArrayList<>(w);
+    for (int i = 0; i < h; i++) {
+      row.add(new HashSet<>());
+    }
+    for (int j = 0; j < w; j++) {
+      col.add(new HashSet<>());
+    }
+
+    for (int i = 0; i < m; i++) {
+      String[] coordinates = scanner.nextLine().split(" ");
+      int x = Integer.parseInt(coordinates[0]) - 1;
+      int y = Integer.parseInt(coordinates[1]) - 1;
+      row.get(x).add(y);
+      col.get(y).add(x);
+    }
+
+    int crow = 0;
+    List<Integer> ic = new ArrayList<>();
+    for (int i = 0; i < h; i++) {
+      if (crow < row.get(i).size()) {
+        crow = row.get(i).size();
+        ic.clear();
+        ic.add(i);
+      } else if (crow == row.get(i).size()) {
+        ic.add(i);
+      }
+    }
+
+    int ccol = 0;
+    List<Integer> jc = new ArrayList<>();
+    for (int j = 0; j < w; j++) {
+      if (ccol < col.get(j).size()) {
+        ccol = col.get(j).size();
+        jc.clear();
+        jc.add(j);
+      } else if (ccol == col.get(j).size()) {
+        jc.add(j);
+      }
+    }
+
+    int ans = crow + ccol;
+    for (int i : ic) {
+      for (int j : jc)
+======
