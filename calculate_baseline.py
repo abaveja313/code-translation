@@ -76,30 +76,6 @@ def split_dataframe(df: pd.DataFrame, num_splits: int) -> List[pd.DataFrame]:
 
     return splits
 
-
-def distribute_gpus_evenly(num_splits: int, num_gpus: int = 8) -> Dict[int, List[int]]:
-    if num_splits == 0:
-        raise ValueError("Number of splits must be at least 1.")
-
-    split_to_gpus = {}
-    gpus_assigned = 0
-
-    for split in range(num_splits):
-        # Calculate the number of GPUs to assign to this split
-        gpus_for_this_split = (num_gpus - gpus_assigned) // (num_splits - split)
-        split_to_gpus[split] = [gpus_assigned + i for i in range(gpus_for_this_split)]
-        gpus_assigned += gpus_for_this_split
-
-    return split_to_gpus
-
-
-def encode_base64(text: str) -> str:
-    # Ensure text is a string and encode it to bytes
-    text_bytes = str(text).encode("utf-8")
-    # Encode to Base64 and decode back to string
-    return base64.b64encode(text_bytes).decode("utf-8")
-
-
 def pass_at_k(n, c, k):
     """
     :param n: total number of samples
@@ -193,8 +169,6 @@ class GenerateUtils:
         top_k: int,
         top_p: float,
     ):
-        dataset["b64"] = dataset["python_code"].apply(encode_base64)
-
         splits: List[pd.DataFrame] = split_dataframe(dataset, num_instances)
         cuda_assignments: Dict[int, List[int]] = distribute_gpus_evenly(num_instances)
         print(f"CUDA Assigments: {cuda_assignments}")
@@ -438,19 +412,9 @@ def generate_samples(
         test_path=str(test_path.absolute()), testcase_path=str(testcase_path.absolute())
     )
 
-    GenerateUtils.generate_from_dataframe(
-        dataset=dataset,
-        model_path=model_path,
-        output_path=output_path,
-        codellama_executable=codellama_executable,
-        batch_size=batch_size,
-        num_instances=num_instances,
-        max_tokens=max_tokens,
-        n_samples=n_samples,
-        temp=temp,
-        top_k=top_k,
-        top_p=top_p,
-    )
+    samples = 
+
+
 
 
 @app.command()

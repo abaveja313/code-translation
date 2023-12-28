@@ -39,39 +39,44 @@ def build_dataset_gen(
     testcases_file: Path,
     samples_dir: Path,
     eval_debug_file: Path,
-    unique_pairs: int
+    unique_pairs: int,
 ) -> Generator[Dict[str, str]]:
     dataset = create_train_set(
         train_path=str(train_file.absolute()),
-        testcase_path=str(testcases_file.absolute())
+        testcase_path=str(testcases_file.absolute()),
     )
 
     eval_results = {}
-    with open(eval_debug_file, 'r') as edf:
-        lines = [json.loads(line) for line in edf.read().split('\n\n')[:-1]]
+    with open(eval_debug_file, "r") as edf:
+        lines = [json.loads(line) for line in edf.read().split("\n\n")[:-1]]
         for parsed_line in lines:
-            eval_results[parsed_line['id']] = parsed_line
+            eval_results[parsed_line["id"]] = parsed_line
 
     for problem_id in eval_results:
-        samples_file = samples_dir.joinpath(problem_id + '.txt')
-        parsed = parse_samples(str(samples_file.absolute()), '======')
-        samples = {f'sample_{i}': preprocess_sample(s) for i, s in enumerate(parsed)}
-        sample_evals = eval_results['problem_id']
+        samples_file = samples_dir.joinpath(problem_id + ".txt")
+        parsed = parse_samples(str(samples_file.absolute()), "======")
+        samples = {f"sample_{i}": preprocess_sample(s) for i, s in enumerate(parsed)}
+        sample_evals = eval_results["problem_id"]
 
         candidates = set()
         while len(candidates) < unique_pairs:
             i = random.randint(0, len(parsed) - 1)
             j = random.randint(0, len(parsed) - 1)
-            missed_i = sample_evals[f'sample_{i}']['missed']
-            missed_j = sample_evals[f'sample_{j}']['missed']
+            missed_i = sample_evals[f"sample_{i}"]["missed"]
+            missed_j = sample_evals[f"sample_{j}"]["missed"]
 
             if missed_i < missed_j:
-                candidates.add((f'sample_{i}', f'sample_{j}'))
+                candidates.add((f"sample_{i}", f"sample_{j}"))
 
         for better_id, worse_id in candidates:
-            record = {'python': dataset.loc[problem_id]['python_code'],
-                      'python_tokenized': dataset.loc[problem_id]['python_code_tokenized'], 'sample_i': better_id,
-                      'sample_j': worse_id, 'sample_i_code': samples[better_id], 'sample_j_code': samples[worse_id]}
+            record = {
+                "python": dataset.loc[problem_id]["python_code"],
+                "python_tokenized": dataset.loc[problem_id]["python_code_tokenized"],
+                "sample_i": better_id,
+                "sample_j": worse_id,
+                "sample_i_code": samples[better_id],
+                "sample_j_code": samples[worse_id],
+            }
             yield record
 
 
@@ -82,15 +87,19 @@ def build_dataset(
     samples_dir: Annotated[Optional[Path], typer.Option()],
     eval_debug_file: Annotated[Optional[Path], typer.Option()],
     unique_pairs: Annotated[int, typer.Option()] = 10,
-    hf_dataset_name: str = 'abaveja313/trl_java_pairs'
+    hf_dataset_name: str = "abaveja313/trl_java_pairs",
 ):
-    gen = partial(build_dataset_gen, train_file, testcases_file, samples_dir, eval_debug_file, unique_pairs)
+    gen = partial(
+        build_dataset_gen,
+        train_file,
+        testcases_file,
+        samples_dir,
+        eval_debug_file,
+        unique_pairs,
+    )
     ds = Dataset.from_generator(gen)
     partitioned = ds.train_test_split(train_size=0.6, test_size=0.4)
-    final = DatasetDict({
-        'rl': partitioned['train'],
-        'ft': partitioned['test']
-    })
+    final = DatasetDict({"rl": partitioned["train"], "ft": partitioned["test"]})
     final.push_to_hub(hf_dataset_name)
 
 

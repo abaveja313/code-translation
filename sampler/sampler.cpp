@@ -37,7 +37,7 @@ Sampler::runBatch(std::string model_file, std::string b64_program, int batch_siz
     int n_parallel = batch_size;
 
 
-    const int n_gpu_layers = 100; // Added command line argument parsing for n_gpu_layers
+    const int n_gpu_layers = 25; // Added command line argument parsing for n_gpu_layers
     params.model = model_file;
 
     params.main_gpu = main_gpu;
@@ -45,7 +45,7 @@ Sampler::runBatch(std::string model_file, std::string b64_program, int batch_siz
     std::string program = base64_decode(b64_program);
 
     params.prompt =
-            "[INST] Your task is to convert Python to Java, obeying by the following constraints. The Java code should be your only output, and must be between the [JAVA] and [/JAVA] tags. The Java code should contain all necessary imports and be within a driver class called Solution, with an executable main(string[] args) method. The code should be functionally identical to the Python code.\n\n"
+            "[INST] Your task is to convert Python to functionally equivalent Java, obeying by the following constraints. (1) The Java code should be your only output, (2) it must be between the [JAVA] and [/JAVA] tags, (3) it should contain all necessary imports, (4) should be inside a class named Solution with a main(string[] args) method.\n\n"
             "[PYTHON]\n" + program + "\n[/PYTHON]"
                                      "[/INST]";
 
@@ -68,7 +68,7 @@ Sampler::runBatch(std::string model_file, std::string b64_program, int batch_siz
 
     std::vector<llama_token> tokens_list;
     tokens_list = ::llama_tokenize(model, params.prompt, true);
-    int n_len = max_tokens == -1 ? std::min(static_cast<int>(tokens_list.size() * 2.5), 1200) : max_tokens;
+    int n_len = max_tokens == -1 ? std::min(static_cast<int>(tokens_list.size() * 2), 1200) : max_tokens;
     std::cout << "\nMax Tokens: " << n_len << std::endl;
 
     const int n_kv_req = tokens_list.size() + (n_len - tokens_list.size()) * n_parallel;
@@ -77,7 +77,7 @@ Sampler::runBatch(std::string model_file, std::string b64_program, int batch_siz
 
     llama_context_params ctx_params = llama_context_default_params();
 
-    // ctx_params.seed  = 1234;
+    ctx_params.seed  = 42;
     ctx_params.n_ctx = n_kv_req;
     ctx_params.n_batch = std::max(n_len, n_parallel);
     ctx_params.n_threads = params.n_threads;

@@ -23,7 +23,9 @@ from transformers.utils import PaddingStrategy
 # Define and parse arguments.
 @dataclass
 class ScriptArguments:
-    local_rank: Optional[int] = field(default=-1, metadata={"help": "Used for multi-gpu"})
+    local_rank: Optional[int] = field(
+        default=-1, metadata={"help": "Used for multi-gpu"}
+    )
     resume_from_checkpoint: Optional[bool] = field(
         default=False,
         metadata={"help": "If you want to resume training where it left off."},
@@ -93,9 +95,11 @@ parser = HfArgumentParser(ScriptArguments)
 script_args = parser.parse_args_into_dataclasses()[0]
 
 # Load the human stack-exchange-paired dataset for tuning the reward model.
-dataset = load_dataset("abaveja313/trl-java-pairs", split='rl').train_test_split(test_size=0.2)
-train_dataset = dataset['train']
-eval_dataset = dataset['test']
+dataset = load_dataset("abaveja313/trl-java-pairs", split="rl").train_test_split(
+    test_size=0.2
+)
+train_dataset = dataset["train"]
+eval_dataset = dataset["test"]
 
 # Define the training args. Needs to be done before the model is loaded if you are using deepspeed.
 model_name_split = script_args.model_name.split("/")[-1]
@@ -127,7 +131,11 @@ training_args = TrainingArguments(
     lr_scheduler_type=script_args.lr_scheduler_type,
 )
 # Load the value-head model and tokenizer.
-tokenizer_name = script_args.tokenizer_name if script_args.tokenizer_name is not None else script_args.model_name
+tokenizer_name = (
+    script_args.tokenizer_name
+    if script_args.tokenizer_name is not None
+    else script_args.model_name
+)
 tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, use_auth_token=True)
 tokenizer.pad_token = tokenizer.eos_token
 
@@ -156,6 +164,7 @@ original_columns = train_dataset.column_names
 # Turn the dataset into pairs of post + summaries, where text_j is the preferred question + answer and text_k is the other.
 # Then tokenize the dataset.
 
+
 def fill_prompt(python: str, java: str = None):
     prompt = f"""[INST]Your task is to convert Python to Java, obeying by the following constraints. The Java code should be your only output, and must be between the [JAVA] and [/JAVA] tags. The Java code should contain all necessary imports and be within a driver class called Solution, with an executable main(string[] args) method. The code should be functionally identical to the Python code.
 [PYTHON]{python}[/PYTHON]
@@ -174,7 +183,9 @@ def preprocess_function(examples):
         "input_ids_k": [],
         "attention_mask_k": [],
     }
-    for py, java_i, java_j in zip(examples['python_code'], examples['sample_i_code'], examples['sample_j_code']):
+    for py, java_i, java_j in zip(
+        examples["python_code"], examples["sample_i_code"], examples["sample_j_code"]
+    ):
         tokenized_j = tokenizer(fill_prompt(py, java_i), truncation=True)
         tokenized_k = tokenizer(fill_prompt(py, java_j), truncation=True)
 
@@ -194,7 +205,8 @@ train_dataset = train_dataset.map(
     remove_columns=original_columns,
 )
 train_dataset = train_dataset.filter(
-    lambda x: len(x["input_ids_j"]) <= script_args.max_length and len(x["input_ids_k"]) <= script_args.max_length
+    lambda x: len(x["input_ids_j"]) <= script_args.max_length
+    and len(x["input_ids_k"]) <= script_args.max_length
 )
 
 eval_dataset = eval_dataset.map(
@@ -204,7 +216,8 @@ eval_dataset = eval_dataset.map(
     remove_columns=original_columns,
 )
 eval_dataset = eval_dataset.filter(
-    lambda x: len(x["input_ids_j"]) <= script_args.max_length and len(x["input_ids_k"]) <= script_args.max_length
+    lambda x: len(x["input_ids_j"]) <= script_args.max_length
+    and len(x["input_ids_k"]) <= script_args.max_length
 )
 
 
@@ -273,8 +286,12 @@ def compute_metrics(eval_pred):
 class RewardTrainer(Trainer):
     # Define how to compute the reward loss. We use the InstructGPT pairwise logloss: https://arxiv.org/abs/2203.02155
     def compute_loss(self, model, inputs, return_outputs=False):
-        rewards_j = model(input_ids=inputs["input_ids_j"], attention_mask=inputs["attention_mask_j"])[0]
-        rewards_k = model(input_ids=inputs["input_ids_k"], attention_mask=inputs["attention_mask_k"])[0]
+        rewards_j = model(
+            input_ids=inputs["input_ids_j"], attention_mask=inputs["attention_mask_j"]
+        )[0]
+        rewards_k = model(
+            input_ids=inputs["input_ids_k"], attention_mask=inputs["attention_mask_k"]
+        )[0]
         loss = -nn.functional.logsigmoid(rewards_j - rewards_k).mean()
         if return_outputs:
             return loss, {"rewards_j": rewards_j, "rewards_k": rewards_k}
@@ -288,7 +305,9 @@ trainer = RewardTrainer(
     train_dataset=train_dataset,
     eval_dataset=eval_dataset,
     compute_metrics=compute_metrics,
-    data_collator=RewardDataCollatorWithPadding(tokenizer=tokenizer, max_length=script_args.max_length),
+    data_collator=RewardDataCollatorWithPadding(
+        tokenizer=tokenizer, max_length=script_args.max_length
+    ),
 )
 
 if script_args.eval_first_step:
@@ -297,7 +316,6 @@ if script_args.eval_first_step:
         def on_step_end(self, args, state, control, **kwargs):
             if state.global_step == 1:
                 control.should_evaluate = True
-
 
     trainer.add_callback(EvaluateFirstStepCallback())
 
