@@ -1,4 +1,5 @@
 from typing import List
+from loguru import logger
 
 import pandas as pd
 
@@ -8,20 +9,20 @@ def create_test_set(*, test_path: str, testcase_path: str) -> pd.DataFrame:
     # Use vectorized string concatenation
     test_df["sample_id"] = test_df["id"].astype(str) + "_" + test_df["sol"].astype(str)
 
-    print(f"Test Dataset has {len(test_df)} entries")
+    logger.debug(f"Test Dataset has {len(test_df)} entries")
 
     testcase_df = pd.read_json(testcase_path, lines=True).set_index("avatar_id")
     test_filtered = test_df[test_df.id.isin(testcase_df.index)]
 
-    print(f"Testcase Dataset has {len(testcase_df)} entries")
+    logger.debug(f"Testcase Dataset has {len(testcase_df)} entries")
 
     # Perform a left merge on the 'id' column of test_df and the index of testcase_df
     merged_df = pd.merge(
         test_filtered, testcase_df, left_on="id", right_index=True, how="left"
     )
 
-    print(f"Merged dataset has {len(merged_df)} entries")
-    print(merged_df.head(20))
+    logger.info(f"Merged dataset has {len(merged_df)} entries")
+    logger.debug(merged_df.head(2))
     return merged_df.set_index("sample_id")
 
 

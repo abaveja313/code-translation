@@ -4,14 +4,13 @@ from typing import Annotated, Optional
 
 import typer as typer
 from prefect import flow
-from prefect_dask import DaskTaskRunner
 from prefect.filesystems import S3
+from prefect_dask import DaskTaskRunner
 
+from sampler import sample
 from utils import create_test_set
-from sampler import Sampler
 
 app = typer.Typer()
-
 N_THREADS: int = multiprocessing.cpu_count()
 
 
@@ -19,7 +18,7 @@ N_THREADS: int = multiprocessing.cpu_count()
 def generate_flow(
     *,
     experiment_id: str,
-    model_path: str,
+    llama_model_path: str,
     test_path: str,
     testcase_path: str,
     num_gpu_layers: int,
@@ -33,13 +32,13 @@ def generate_flow(
     seed: int = 42,
 ):
     dataset = create_test_set(test_path=test_path, testcase_path=testcase_path)
-    sampler: Sampler = Sampler(gpu_layers=num_gpu_layers, model_path=model_path)
     samples = {}
-
-    for index, row in dataset.iterrows():
-        samples[index] = sampler.sample_async.submit(
+    for index, row in dataset.head(10).iterrows():
+        samples[index] = sample(
             experiment_id=experiment_id,
-            submission_id=index,
+            submission_id=str(index),
+            model_path=llama_model_path,
+            gpu_layers=num_gpu_layers,
             python_code=row["python_code"],
             num_threads_batch=num_threads_batch,
             num_samples=num_samples,
@@ -89,16 +88,21 @@ def main(
     prompt_context_size: Annotated[
         int, typer.Option(help="prompt_context_size")
     ] = 1024,
+    s3_bucket_name: Annotated[
+        str, typer.Option(help="S3 Bucket to store results")
+    ] = "llmsemantics",
 ):
     experiment_flow = generate_flow.with_options(
         retries=task_retries,
         retry_delay_seconds=task_backoff_secs,
-        result_storage=S3(bucket_path=f"results/samples/{experiment_name}"),
+        result_storage=S3(
+            bucket_path=f"{s3_bucket_name}/results/samples/{experiment_name}"
+        ),
     )
 
     experiment_flow(
         experiment_id=experiment_name,
-        model_path=str(llama_model_path.absolute()),
+        llama_model_path=str(llama_model_path.absolute()),
         test_path=str(test_path.absolute()),
         testcase_path=str(testcase_path.absolute()),
         num_gpu_layers=gpu_layers,
