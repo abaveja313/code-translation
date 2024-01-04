@@ -1,7 +1,26 @@
 from typing import List
-from loguru import logger
+import re
 
 import pandas as pd
+from loguru import logger
+
+
+def compress_code(code):
+    # Remove spaces around parentheses and operators
+    compressed = re.sub(r'\s*([(),=+\-*/<>%&|^])\s*', r'\1', code)
+
+    # Remove spaces after '[' and before ']'
+    compressed = re.sub(r'\[\s+', '[', compressed)
+    compressed = re.sub(r'\s+\]', ']', compressed)
+
+    # Handle spaces around curly braces if needed
+    # compressed = re.sub(r'\{\s+', '{', compressed)
+    # compressed = re.sub(r'\s+\}', '}', compressed)
+
+    # Remove unnecessary spaces at the beginning of lines
+    compressed = re.sub(r'^\s+', '', compressed, flags=re.MULTILINE)
+
+    return compressed
 
 
 def create_test_set(*, test_path: str, testcase_path: str) -> pd.DataFrame:
